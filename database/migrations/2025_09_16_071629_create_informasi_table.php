@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('informasis', function (Blueprint $table) {
-            $table->id();
-            $table->string('judul');
-            $table->string('gambar');
-            $table->string('link')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('informasis')) {
+            Schema::create('informasis', function (Blueprint $table) {
+                $table->id();
+                $table->string('judul');
+                $table->string('gambar');
+                $table->string('link')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

@@ -52,10 +52,12 @@
         {{-- Kolom 2: Kontak --}}
         <div class="text-sm text-gray-200 space-y-1">
             <div class="font-semibold mb-2">Kontak</div>
-            <div>Alamat</div>
-            <div>Telpon</div>
-            <div>Email</div>
-            <div>WhatsApp</div>
+            <div class="mb-2 text-justify">Gedung Graha Widya Bhakti Stiesia, Jl. Menur Pumpungan No.30, Menur
+                Pumpungan, Kec. Sukolilo, Surabaya,
+                Jawa Timur 60118</div>
+            <div>(031) 5913334</div>
+            <div>korda.jatim@iapi.or.id</div>
+            <div>WhatsApp Only: 083-8331-53212</div>
         </div>
 
         {{-- Kolom 3: Tentang Kami --}}

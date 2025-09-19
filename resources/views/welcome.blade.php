@@ -57,65 +57,64 @@
     </section>
 
     {{-- Hubungi Kami --}}
-    <section class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
-        <h2 class="text-3xl font-bold text-center mb-8">Hubungi Kami</h2>
+    <section class="max-w-7xl mx-auto px-6 lg:px-8 py-16 bg-gray-50">
+        <h2 class="text-3xl font-bold text-center mb-4">Hubungi Kami</h2>
+        <div class="w-24 h-1 bg-blue-600 mx-auto mb-10 rounded-full"></div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-            {{-- Map Section (2 columns on large screens) --}}
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+            {{-- Map Section --}}
             <div class="lg:col-span-2">
-                <div class="rounded-lg overflow-hidden h-56 lg:h-72">
+                <div class="rounded-xl overflow-hidden h-80 lg:h-[28rem] shadow-lg hover:shadow-xl transition">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.5678032036744!2d112.7663188!3d-7.2899137000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa4b9b86e0ad%3A0x5a374e985c610881!2sGraha%20Widya%20Bhakti!5e0!3m2!1sid!2sid!4v1758182495300!5m2!1sid!2sid"
                         class="w-full h-full border-0" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
 
-            {{-- Contact card --}}
-            <div class="bg-gray-100 rounded-lg p-6">
-                <div class="text-sm text-gray-600 space-y-3">
-                    <div class="flex items-start gap-3">
-                        <svg class="w-5 h-5 shrink-0 text-gray-500" viewBox="0 0 24 24" fill="none">
-                            <path d="M3 6h18" stroke="currentColor" />
+            {{-- Contact Card --}}
+            <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition">
+                <div class="text-sm text-gray-600 space-y-6">
+                    <div class="flex items-start gap-4">
+                        <svg class="w-6 h-6 shrink-0 text-blue-600" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 6h18" stroke="currentColor" stroke-width="2" />
                         </svg>
                         <div>
-                            <div class="text-xs font-semibold">Phone</div>
-                            <div class="text-sm text-gray-700">13456789</div>
+                            <div class="text-xs font-semibold uppercase text-gray-500">Telephone</div>
+                            <div class="text-base font-medium text-gray-800">(031) 5913334</div>
                         </div>
                     </div>
 
-                    <div class="flex items-start gap-3">
-                        <svg class="w-5 h-5 shrink-0 text-gray-500" viewBox="0 0 24 24" fill="none">
-                            <path d="M3 6h18" stroke="currentColor" />
+                    <div class="flex items-start gap-4">
+                        <svg class="w-6 h-6 shrink-0 text-blue-600" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 6h18" stroke="currentColor" stroke-width="2" />
                         </svg>
                         <div>
-                            <div class="text-xs font-semibold">Email</div>
-                            <div class="text-sm text-gray-700">contoh@blabla.com</div>
+                            <div class="text-xs font-semibold uppercase text-gray-500">Email</div>
+                            <div class="text-base font-medium text-gray-800">korda.jatim@iapi.or.id</div>
                         </div>
                     </div>
 
-                    <div class="flex items-start gap-3">
-                        <svg class="w-5 h-5 shrink-0 text-gray-500" viewBox="0 0 24 24" fill="none">
-                            <path d="M3 6h18" stroke="currentColor" />
+                    <div class="flex items-start gap-4">
+                        <svg class="w-6 h-6 shrink-0 text-blue-600" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 6h18" stroke="currentColor" stroke-width="2" />
                         </svg>
                         <div>
-                            <div class="text-xs font-semibold">Alamat</div>
-                            <div class="text-sm text-gray-700">
-                                jl. bla bla<br>
-                                Surabaya<br>
-                                Jawa Timur
+                            <div class="text-xs font-semibold uppercase text-gray-500">Alamat</div>
+                            <div class="text-base font-medium text-gray-800 leading-relaxed text-justify">
+                                Gedung Graha Widya Bhakti Stiesia, Jl. Menur Pumpungan No.30, Menur Pumpungan, Kec.
+                                Sukolilo, Surabaya, Jawa Timur 60118
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex items-start gap-3">
-                        <svg class="w-5 h-5 shrink-0 text-gray-500" viewBox="0 0 24 24" fill="none">
-                            <path d="M3 6h18" stroke="currentColor" />
+                    <div class="flex items-start gap-4">
+                        <svg class="w-6 h-6 shrink-0 text-blue-600" viewBox="0 0 24 24" fill="none">
+                            <path d="M3 6h18" stroke="currentColor" stroke-width="2" />
                         </svg>
                         <div>
-                            <div class="text-xs font-semibold">Jam Operasional</div>
-                            <div class="text-sm text-gray-700">00.00 - 00.00</div>
+                            <div class="text-xs font-semibold uppercase text-gray-500">Jam Operasional</div>
+                            <div class="text-base font-medium text-gray-800">08.00 - 17.00</div>
                         </div>
                     </div>
                 </div>
@@ -128,7 +127,6 @@
         <h2 class="text-2xl font-bold text-center mb-6">Mitra</h2>
 
         <div class="flex gap-4 items-center justify-center flex-wrap">
-            {{-- contoh logo; taruh file logo di public/images/mitra/ --}}
             @php
                 $partners = ['mitra-ifac.png', 'mitra-bi.png', 'mitra-kemenkeu.png', 'mitra-ojk.png'];
             @endphp

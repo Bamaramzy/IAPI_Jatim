@@ -29,7 +29,7 @@
                     <a href="{{ url('/tentang/sejarah') }}"
                         class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">Sejarah
                         IAPI</a>
-                    <a href="{{ url('/tentang/visi-misi') }}"
+                    <a href="{{ url('/tentang/visimisi') }}"
                         class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">Visi dan
                         Misi</a>
                     <a href="{{ url('/tentang/profil') }}"
@@ -196,9 +196,32 @@
                     </div>
                 </div>
             </div>
-            <a href="#" class="hover:text-gray-900">Peraturan</a>
+            <div class="relative group">
+                <a href="#" class="hover:text-gray-900 flex items-center">
+                    Peraturan
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        class="h-4 w-4 ml-1 text-gray-500 group-hover:text-gray-700" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </a>
+                <div
+                    class="absolute left-0 mt-0 w-72 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
+                    <a href="{{ url('/peraturan/profesi') }}"
+                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+                        Peraturan Terkait Profesi Akuntan Publik
+                    </a>
+                    <a href="{{ url('/peraturan/spap') }}"
+                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+                        Standar Profesional Akuntan Publik
+                    </a>
+                    <a href="{{ url('/peraturan/kode-etik') }}"
+                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+                        Kode Etik Profesi Akuntan Publik
+                    </a>
+                </div>
+            </div>
         </nav>
-
         {{-- Login / Dashboard --}}
         <div>
             @if (Route::has('login'))

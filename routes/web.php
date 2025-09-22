@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\DewanPengurusController;
 use App\Http\Controllers\DewanPengawasController;
+use App\Http\Controllers\StrukturController;
+use App\Http\Controllers\AnggotaController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Informasi;
 
@@ -26,13 +28,21 @@ Route::get('/tentang/visimisi', function () {
     return view('tentang.visimisi');
 })->name('tentang.visimisi');
 
+Route::get('/tentang/struktur', [StrukturController::class, 'index'])->name('tentang.struktur');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
     Route::resource('informasi', InformasiController::class);
     Route::resource('dewan_pengurus', DewanPengurusController::class);
     Route::resource('dewan_pengawas', DewanPengawasController::class);
+    Route::resource('anggota', AnggotaController::class)
+        ->parameters(['anggota' => 'anggota']);
+
+    Route::get('anggota/import', [AnggotaController::class, 'showImportForm'])->name('anggota.import.form');
+    Route::post('anggota/import', [AnggotaController::class, 'import'])->name('anggota.import');
 });
 
 require __DIR__ . '/auth.php';

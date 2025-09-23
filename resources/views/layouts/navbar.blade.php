@@ -52,7 +52,7 @@
                     <a href="{{ url('/keanggotaan/ad-art') }}"
                         class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">AD dan ART
                         IAPI</a>
-                    <a href="{{ url('/keanggotaan/daftar-anggota') }}"
+                    <a href="{{ url('/keanggotaan/anggota') }}"
                         class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">Daftar
                         Anggota</a>
                     <a href="{{ url('/keanggotaan/info') }}"

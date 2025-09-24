@@ -7,10 +7,15 @@ use App\Http\Controllers\DewanPengawasController;
 use App\Http\Controllers\StrukturController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\DirektoriController;
+use App\Http\Controllers\AdArtController;
+use App\Http\Controllers\TataCaraController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Informasi;
 use App\Models\Anggota;
+use App\Models\Direktori;
+use App\Models\AdArt;
+use App\Models\TataCara;
 
 Route::get('/', function () {
     $informasis = Informasi::latest()->take(3)->get();
@@ -54,6 +59,57 @@ Route::get('/keanggotaan/anggota', function (Request $request) {
     return view('keanggotaan.anggota.indexvisitor', compact('anggota'));
 })->name('visitor.anggota');
 
+Route::get('/keanggotaan/direktori', function (Request $request) {
+    $query = Direktori::query();
+
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
+    }
+
+    if ($request->filled('search')) {
+        $query->where(function ($q) use ($request) {
+            $q->where('judul', 'like', "%{$request->search}%")
+                ->orWhere('deskripsi', 'like', "%{$request->search}%");
+        });
+    }
+
+    $direktoris = $query->orderBy('created_at', 'desc')->paginate(9);
+
+    return view('keanggotaan.direktori.indexvisitor', compact('direktoris'));
+})->name('visitor.direktori');
+
+Route::get('/keanggotaan/ad-art', function (Request $request) {
+    $query = AdArt::query()->where('status', 'aktif');
+
+    if ($request->filled('search')) {
+        $query->where('judul', 'like', "%{$request->search}%");
+    }
+
+    $adarts = $query->orderBy('created_at', 'desc')->paginate(9);
+
+    return view('keanggotaan.adart.indexvisitor', compact('adarts'));
+})->name('visitor.adart');
+
+Route::get('/keanggotaan/tata-cara', function (Request $request) {
+    $query = TataCara::query();
+
+    if ($request->filled('status')) {
+        $query->where('status', $request->status);
+    }
+
+    if ($request->filled('search')) {
+        $query->where('judul', 'like', "%{$request->search}%");
+    }
+
+    $tatacaras = $query->orderBy('created_at', 'desc')->paginate(9);
+
+    return view('keanggotaan.tatacara.indexvisitor', compact('tatacaras'));
+})->name('visitor.tatacara');
+
+Route::get('/keanggotaan/info', function () {
+    return view('keanggotaan.info.info');
+})->name('keanggotaan.info');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -68,6 +124,8 @@ Route::middleware('auth')->group(function () {
     Route::get('anggota/import', [AnggotaController::class, 'showImportForm'])->name('anggota.import.form');
     Route::post('anggota/import', [AnggotaController::class, 'import'])->name('anggota.import');
     Route::resource('direktori', DirektoriController::class);
+    Route::resource('adart', AdArtController::class);
+    Route::resource('tatacara', TataCaraController::class);
 });
 
 require __DIR__ . '/auth.php';

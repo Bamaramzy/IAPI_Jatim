@@ -11,18 +11,23 @@ class DirektoriController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $direktoris = Direktori::latest()->paginate(10);
+        $direktoris = Direktori::latest()->paginate(9);
+
+        if ($request->routeIs('visitor.direktori')) {
+            return view('keanggotaan.direktori.indexvisitor', compact('direktoris'));
+        }
+
         return view('keanggotaan.direktori.index', compact('direktoris'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource. (Admin)
      */
     public function create()
     {
-        return view('keanggotaan.direktori.create');
+        return view('direktori.create');
     }
 
     /**
@@ -55,7 +60,7 @@ class DirektoriController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource (Visitor bisa akses detail).
      */
     public function show(Direktori $direktori)
     {
@@ -63,7 +68,7 @@ class DirektoriController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource. (Admin)
      */
     public function edit(Direktori $direktori)
     {

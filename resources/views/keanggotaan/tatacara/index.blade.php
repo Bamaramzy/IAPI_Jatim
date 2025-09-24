@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            📂 Daftar Direktori
+            Tata Cara
         </h2>
     </x-slot>
 
@@ -16,9 +16,9 @@
 
             {{-- ✅ Tombol Tambah --}}
             <div class="mb-4">
-                <a href="{{ route('direktori.create') }}"
+                <a href="{{ route('tatacara.create') }}"
                     class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-                    + Tambah Direktori
+                    + Tambah Tata Cara
                 </a>
             </div>
 
@@ -27,9 +27,8 @@
                 <table class="min-w-full border border-gray-200 dark:border-gray-700">
                     <thead class="bg-gray-100 dark:bg-gray-700">
                         <tr>
-                            <th class="px-4 py-2 border dark:border-gray-600">ID</th>
+                            <th class="px-4 py-2 border dark:border-gray-600">#</th>
                             <th class="px-4 py-2 border dark:border-gray-600">Judul</th>
-                            <th class="px-4 py-2 border dark:border-gray-600">Deskripsi</th>
                             <th class="px-4 py-2 border dark:border-gray-600">File PDF</th>
                             <th class="px-4 py-2 border dark:border-gray-600">Link Drive</th>
                             <th class="px-4 py-2 border dark:border-gray-600">Cover</th>
@@ -38,31 +37,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($direktoris as $d)
+                        @forelse ($tatacaras as $a)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
                                 <td class="px-4 py-2 border dark:border-gray-600">{{ $loop->iteration }}</td>
-                                <td class="px-4 py-2 border dark:border-gray-600 font-semibold">{{ $d->judul }}</td>
-                                <td class="px-4 py-2 border dark:border-gray-600">{{ Str::limit($d->deskripsi, 50) }}
-                                </td>
+                                <td class="px-4 py-2 border dark:border-gray-600 font-semibold">{{ $a->judul }}</td>
                                 <td class="px-4 py-2 border dark:border-gray-600">
-                                    @if ($d->file_pdf)
-                                        <a href="{{ asset('storage/' . $d->file_pdf) }}" target="_blank"
+                                    @if ($a->file_pdf)
+                                        <a href="{{ asset('storage/' . $a->file_pdf) }}" target="_blank"
                                             class="text-blue-500 hover:underline">Lihat PDF</a>
                                     @else
                                         <span class="text-gray-400">-</span>
                                     @endif
                                 </td>
                                 <td class="px-4 py-2 border dark:border-gray-600">
-                                    @if ($d->link_drive)
-                                        <a href="{{ $d->link_drive }}" target="_blank"
+                                    @if ($a->link_drive)
+                                        <a href="{{ $a->link_drive }}" target="_blank"
                                             class="text-blue-500 hover:underline">Lihat Drive</a>
                                     @else
                                         <span class="text-gray-400">-</span>
                                     @endif
                                 </td>
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
-                                    @if ($d->cover)
-                                        <img src="{{ asset('storage/' . $d->cover) }}" alt="Cover"
+                                    @if ($a->cover)
+                                        <img src="{{ asset('storage/' . $a->cover) }}" alt="Cover"
                                             class="w-16 h-16 object-cover mx-auto rounded">
                                     @else
                                         <span class="text-gray-400">-</span>
@@ -71,16 +68,16 @@
                                 <td class="px-4 py-2 border dark:border-gray-600">
                                     <span
                                         class="px-2 py-1 rounded text-white
-                                        {{ $d->status == 'aktif' ? 'bg-green-500' : 'bg-red-500' }}">
-                                        {{ ucfirst($d->status) }}
+                                        {{ $a->status == 'aktif' ? 'bg-green-500' : 'bg-red-500' }}">
+                                        {{ ucfirst($a->status) }}
                                     </span>
                                 </td>
                                 <td class="px-4 py-2 border dark:border-gray-600">
                                     <div class="flex space-x-2">
-                                        <a href="{{ route('direktori.edit', $d->id) }}"
+                                        <a href="{{ route('tatacara.edit', $a->id) }}"
                                             class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded">Edit</a>
 
-                                        <form action="{{ route('direktori.destroy', $d->id) }}" method="POST"
+                                        <form action="{{ route('tatacara.destroy', $a->id) }}" method="POST"
                                             onsubmit="return confirm('Yakin ingin menghapus?')">
                                             @csrf
                                             @method('DELETE')
@@ -94,8 +91,8 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="8" class="px-4 py-4 text-center text-gray-500">
-                                    Tidak ada data direktori.
+                                <td colspan="7" class="px-4 py-4 text-center text-gray-500">
+                                    Tidak ada data Tata Cara.
                                 </td>
                             </tr>
                         @endforelse
@@ -105,7 +102,7 @@
 
             {{-- ✅ Pagination --}}
             <div class="mt-4">
-                {{ $direktoris->links('vendor.pagination.tailwind') }}
+                {{ $tatacaras->links('vendor.pagination.tailwind') }}
             </div>
         </div>
     </div>

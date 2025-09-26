@@ -28,6 +28,16 @@
                             <th class="px-4 py-2 text-left">Link Drive</th>
                             <th class="px-4 py-2 text-left">Cover</th>
                             <th class="px-4 py-2 text-left">Status</th>
+                        @elseif ($type === 'pelatihan')
+                            <th class="px-4 py-2 text-left">Judul</th>
+                            <th class="px-4 py-2 text-left">Tanggal Mulai</th>
+                            <th class="px-4 py-2 text-left">Tanggal Selesai</th>
+                            <th class="px-4 py-2 text-left">Jam Mulai</th>
+                            <th class="px-4 py-2 text-left">Jam Selesai</th>
+                            <th class="px-4 py-2 text-left">Kategori</th>
+                            <th class="px-4 py-2 text-left">Lokasi</th>
+                            <th class="px-4 py-2 text-left">Brosur</th>
+                            <th class="px-4 py-2 text-left">Status</th>
                         @endif
                     </tr>
                 </thead>
@@ -71,6 +81,19 @@
                                 <td class="px-4 py-2">
                                     <img src="{{ asset('storage/' . $item->cover) }}" alt="cover"
                                         class="h-12 rounded">
+                                </td>
+                                <td class="px-4 py-2">{{ $item->status }}</td>
+                            @elseif ($type === 'pelatihan')
+                                <td class="px-4 py-2">{{ $item->judul }}</td>
+                                <td class="px-4 py-2">{{ $item->tanggal_mulai }}</td>
+                                <td class="px-4 py-2">{{ $item->tanggal_selesai }}</td>
+                                <td class="px-4 py-2">{{ $item->waktu_mulai }}</td>
+                                <td class="px-4 py-2">{{ $item->waktu_selesai }}</td>
+                                <td class="px-4 py-2">{{ $item->kategori }}</td>
+                                <td class="px-4 py-2">{{ $item->lokasi }}</td>
+                                <td class="px-4 py-2">
+                                    <img src="{{ asset('storage/' . $item->brosur) }}" alt="brosur"
+                                        class="h-22 rounded">
                                 </td>
                                 <td class="px-4 py-2">{{ $item->status }}</td>
                             @endif

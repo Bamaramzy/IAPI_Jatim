@@ -27,6 +27,8 @@
 
                 <x-dashboard-card title="Total AD-ART" value="{{ \App\Models\AdArt::count() }}" color="blue"
                     link="{{ route('adart.index') }}" />
+                <x-dashboard-card title="Total Jadwal Pelatihan" value="{{ \App\Models\Pelatihan::count() }}"
+                    color="blue" link="{{ route('pelatihan.index') }}" />
             </div>
 
             <!-- Informasi Terbaru -->
@@ -46,6 +48,9 @@
                 type="direktori" />
             <!-- Ad-Art Terbaru -->
             <x-dashboard-table title="Ad-Art Terbaru" :items="\App\Models\AdArt::latest()->take(10)->get()" empty="Belum ada data ad-art." type="adart" />
+            <!-- Ad-Art Terbaru -->
+            <x-dashboard-table title="Jadwal Terbaru" :items="\App\Models\Pelatihan::latest()->take(10)->get()" empty="Belum ada data ad-art."
+                type="pelatihan" />
         </div>
     </div>
 </x-app-layout>

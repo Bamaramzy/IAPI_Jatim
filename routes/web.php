@@ -9,6 +9,9 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\DirektoriController;
 use App\Http\Controllers\AdArtController;
 use App\Http\Controllers\TataCaraController;
+use App\Http\Controllers\PelatihanController;
+use App\Http\Controllers\PplController;
+use App\Http\Controllers\BrevetController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Informasi;
@@ -20,112 +23,116 @@ use App\Models\TataCara;
 Route::get('/', function () {
     $informasis = Informasi::latest()->take(3)->get();
     return view('welcome', compact('informasis'));
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->name('home');
 
 Route::get('/beranda', [InformasiController::class, 'index'])->name('beranda');
 
-Route::get('/tentang/sejarah', function () {
-    return view('tentang.sejarah');
-})->name('tentang.sejarah');
+Route::prefix('tentang')->group(function () {
+    Route::view('/sejarah', 'tentang.sejarah')->name('tentang.sejarah');
+    Route::view('/visimisi', 'tentang.visimisi')->name('tentang.visimisi');
+    Route::get('/struktur', [StrukturController::class, 'index'])->name('tentang.struktur');
+});
 
-Route::get('/tentang/visimisi', function () {
-    return view('tentang.visimisi');
-})->name('tentang.visimisi');
+Route::prefix('keanggotaan')->group(function () {
+    Route::get('/anggota', function (Request $request) {
+        $query = Anggota::query();
 
-Route::get('/tentang/struktur', [StrukturController::class, 'index'])->name('tentang.struktur');
+        if ($request->filled('kategori')) {
+            $query->where('kategori', $request->kategori);
+        }
+        if ($request->filled('status')) {
+            $query->where('status_id', $request->status);
+        }
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('nama_anggota', 'like', "%{$request->search}%")
+                    ->orWhere('nama_kap', 'like', "%{$request->search}%");
+            });
+        }
 
-Route::get('/keanggotaan/anggota', function (Request $request) {
-    $query = Anggota::query();
+        $anggota = $query->orderBy('nama_anggota')->paginate(10);
 
-    if ($request->filled('kategori')) {
-        $query->where('kategori', $request->kategori);
-    }
-    if ($request->filled('status')) {
-        $query->where('status_id', $request->status);
-    }
-    if ($request->filled('search')) {
-        $query->where(function ($q) use ($request) {
-            $q->where('nama_anggota', 'like', "%{$request->search}%")
-                ->orWhere('nama_kap', 'like', "%{$request->search}%");
-        });
-    }
+        return view('keanggotaan.anggota.indexvisitor', compact('anggota'));
+    })->name('visitor.anggota');
 
-    $anggota = $query->orderBy('nama_anggota')->paginate(10);
+    Route::get('/direktori', function (Request $request) {
+        $query = Direktori::query();
 
-    return view('keanggotaan.anggota.indexvisitor', compact('anggota'));
-})->name('visitor.anggota');
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
 
-Route::get('/keanggotaan/direktori', function (Request $request) {
-    $query = Direktori::query();
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('judul', 'like', "%{$request->search}%")
+                    ->orWhere('deskripsi', 'like', "%{$request->search}%");
+            });
+        }
 
-    if ($request->filled('status')) {
-        $query->where('status', $request->status);
-    }
+        $direktoris = $query->orderBy('created_at', 'desc')->paginate(9);
 
-    if ($request->filled('search')) {
-        $query->where(function ($q) use ($request) {
-            $q->where('judul', 'like', "%{$request->search}%")
-                ->orWhere('deskripsi', 'like', "%{$request->search}%");
-        });
-    }
+        return view('keanggotaan.direktori.indexvisitor', compact('direktoris'));
+    })->name('visitor.direktori');
 
-    $direktoris = $query->orderBy('created_at', 'desc')->paginate(9);
+    Route::get('/ad-art', function (Request $request) {
+        $query = AdArt::query()->where('status', 'aktif');
 
-    return view('keanggotaan.direktori.indexvisitor', compact('direktoris'));
-})->name('visitor.direktori');
+        if ($request->filled('search')) {
+            $query->where('judul', 'like', "%{$request->search}%");
+        }
 
-Route::get('/keanggotaan/ad-art', function (Request $request) {
-    $query = AdArt::query()->where('status', 'aktif');
+        $adarts = $query->orderBy('created_at', 'desc')->paginate(9);
 
-    if ($request->filled('search')) {
-        $query->where('judul', 'like', "%{$request->search}%");
-    }
+        return view('keanggotaan.adart.indexvisitor', compact('adarts'));
+    })->name('visitor.adart');
 
-    $adarts = $query->orderBy('created_at', 'desc')->paginate(9);
+    Route::get('/tata-cara', function (Request $request) {
+        $query = TataCara::query();
 
-    return view('keanggotaan.adart.indexvisitor', compact('adarts'));
-})->name('visitor.adart');
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
 
-Route::get('/keanggotaan/tata-cara', function (Request $request) {
-    $query = TataCara::query();
+        if ($request->filled('search')) {
+            $query->where('judul', 'like', "%{$request->search}%");
+        }
 
-    if ($request->filled('status')) {
-        $query->where('status', $request->status);
-    }
+        $tatacaras = $query->orderBy('created_at', 'desc')->paginate(9);
 
-    if ($request->filled('search')) {
-        $query->where('judul', 'like', "%{$request->search}%");
-    }
+        return view('keanggotaan.tatacara.indexvisitor', compact('tatacaras'));
+    })->name('visitor.tatacara');
 
-    $tatacaras = $query->orderBy('created_at', 'desc')->paginate(9);
+    Route::view('/info', 'keanggotaan.info.info')->name('visitor.info');
+});
 
-    return view('keanggotaan.tatacara.indexvisitor', compact('tatacaras'));
-})->name('visitor.tatacara');
-
-Route::get('/keanggotaan/info', function () {
-    return view('keanggotaan.info.info');
-})->name('keanggotaan.info');
+Route::get('/pelatihan/jadwal', [PelatihanController::class, 'indexVisitor'])->name('visitor.pelatihan');
+Route::get('/pelatihan/panduan-ppl', [\App\Http\Controllers\PplController::class, 'indexvisitor'])->name('ppl.visitor');
+Route::get('/pelatihan/brevet/a-b', [BrevetController::class, 'indexvisitor'])->name('visitor.brevet');
+Route::get('/pelatihan/brevet/c', [BrevetController::class, 'indexVisitorC'])->name('visitor.brevet_c');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('informasi', InformasiController::class);
-    Route::resource('dewan_pengurus', DewanPengurusController::class);
-    Route::resource('dewan_pengawas', DewanPengawasController::class);
-    Route::resource('anggota', AnggotaController::class)
-        ->parameters(['anggota' => 'anggota']);
+    Route::resources([
+        'informasi'      => InformasiController::class,
+        'dewan_pengurus' => DewanPengurusController::class,
+        'dewan_pengawas' => DewanPengawasController::class,
+        'anggota'        => AnggotaController::class,
+        'direktori'      => DirektoriController::class,
+        'adart'         => AdArtController::class,
+        'tatacara'       => TataCaraController::class,
+        'pelatihan'      => PelatihanController::class,
+        'ppl'            => PplController::class,
+        'brevets'       => BrevetController::class
+    ]);
 
     Route::get('anggota/import', [AnggotaController::class, 'showImportForm'])->name('anggota.import.form');
     Route::post('anggota/import', [AnggotaController::class, 'import'])->name('anggota.import');
-    Route::resource('direktori', DirektoriController::class);
-    Route::resource('adart', AdArtController::class);
-    Route::resource('tatacara', TataCaraController::class);
 });
 
 require __DIR__ . '/auth.php';

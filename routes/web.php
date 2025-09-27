@@ -1,26 +1,24 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\InformasiController;
-use App\Http\Controllers\DewanPengurusController;
-use App\Http\Controllers\DewanPengawasController;
-use App\Http\Controllers\StrukturController;
-use App\Http\Controllers\AnggotaController;
-use App\Http\Controllers\DirektoriController;
-use App\Http\Controllers\AdArtController;
-use App\Http\Controllers\TataCaraController;
-use App\Http\Controllers\PelatihanController;
-use App\Http\Controllers\PplController;
-use App\Http\Controllers\BrevetController;
-use App\Http\Controllers\BrevetCController;
-use App\Http\Controllers\BrevetKuasaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
-use App\Models\Informasi;
-use App\Models\Anggota;
-use App\Models\Direktori;
-use App\Models\AdArt;
-use App\Models\TataCara;
+use App\Http\Controllers\{
+    ProfileController,
+    InformasiController,
+    DewanPengurusController,
+    DewanPengawasController,
+    StrukturController,
+    AnggotaController,
+    DirektoriController,
+    AdArtController,
+    TataCaraController,
+    PelatihanController,
+    PplController,
+    BrevetController,
+    BrevetCController,
+    BrevetKuasaController
+};
+use App\Models\{Informasi, Anggota, Direktori, AdArt, TataCara};
 
 Route::get('/', function () {
     $informasis = Informasi::latest()->take(3)->get();
@@ -53,7 +51,6 @@ Route::prefix('keanggotaan')->group(function () {
         }
 
         $anggota = $query->orderBy('nama_anggota')->paginate(10);
-
         return view('keanggotaan.anggota.indexvisitor', compact('anggota'));
     })->name('visitor.anggota');
 
@@ -63,7 +60,6 @@ Route::prefix('keanggotaan')->group(function () {
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
-
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('judul', 'like', "%{$request->search}%")
@@ -72,7 +68,6 @@ Route::prefix('keanggotaan')->group(function () {
         }
 
         $direktoris = $query->orderBy('created_at', 'desc')->paginate(9);
-
         return view('keanggotaan.direktori.indexvisitor', compact('direktoris'));
     })->name('visitor.direktori');
 
@@ -84,7 +79,6 @@ Route::prefix('keanggotaan')->group(function () {
         }
 
         $adarts = $query->orderBy('created_at', 'desc')->paginate(9);
-
         return view('keanggotaan.adart.indexvisitor', compact('adarts'));
     })->name('visitor.adart');
 
@@ -94,28 +88,33 @@ Route::prefix('keanggotaan')->group(function () {
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
-
         if ($request->filled('search')) {
             $query->where('judul', 'like', "%{$request->search}%");
         }
 
         $tatacaras = $query->orderBy('created_at', 'desc')->paginate(9);
-
         return view('keanggotaan.tatacara.indexvisitor', compact('tatacaras'));
     })->name('visitor.tatacara');
 
     Route::view('/info', 'keanggotaan.info.info')->name('visitor.info');
 });
 
-Route::get('/pelatihan/jadwal', [PelatihanController::class, 'indexVisitor'])->name('visitor.pelatihan');
-Route::get('/pelatihan/panduan-ppl', [PplController::class, 'indexvisitor'])->name('ppl.visitor');
-Route::get('/pelatihan/brevet/a-b', [BrevetController::class, 'indexvisitor'])->name('visitor.brevet');
-Route::get('/pelatihan/brevet/c', [BrevetCController::class, 'indexVisitor'])->name('visitor.brevet_c');
-Route::get('/pelatihan/brevet/kuasa', [BrevetKuasaController::class, 'indexVisitor'])->name('visitor.brevet_kuasa');
+Route::prefix('pelatihan')->group(function () {
+    Route::get('/tentang', fn() => view('pelatihan.tentang_pelatihan.tentang'))->name('visitor.pelatihan');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/jadwal', [PelatihanController::class, 'indexVisitor'])->name('visitor.pelatihan.jadwal');
+    Route::get('/panduan-ppl', [PplController::class, 'indexVisitor'])->name('visitor.ppl');
+
+    Route::prefix('brevet')->group(function () {
+        Route::get('/a-b', [BrevetController::class, 'indexVisitor'])->name('visitor.brevet_a_b');
+        Route::get('/c', [BrevetCController::class, 'indexVisitor'])->name('visitor.brevet_c');
+        Route::get('/kuasa', [BrevetKuasaController::class, 'indexVisitor'])->name('visitor.brevet_kuasa');
+    });
+});
+
+Route::get('/dashboard', fn() => view('dashboard'))
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -128,13 +127,13 @@ Route::middleware('auth')->group(function () {
         'dewan_pengawas' => DewanPengawasController::class,
         'anggota'        => AnggotaController::class,
         'direktori'      => DirektoriController::class,
-        'adart'         => AdArtController::class,
+        'adart'          => AdArtController::class,
         'tatacara'       => TataCaraController::class,
         'pelatihan'      => PelatihanController::class,
         'ppl'            => PplController::class,
-        'brevets'       => BrevetController::class,
-        'brevets_c'     => BrevetCController::class,
-        'brevets_kuasa'       => BrevetKuasaController::class
+        'brevets'        => BrevetController::class,
+        'brevets_c'      => BrevetCController::class,
+        'brevets_kuasa'  => BrevetKuasaController::class,
     ]);
 
     Route::get('anggota/import', [AnggotaController::class, 'showImportForm'])->name('anggota.import.form');

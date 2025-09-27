@@ -12,6 +12,8 @@ use App\Http\Controllers\TataCaraController;
 use App\Http\Controllers\PelatihanController;
 use App\Http\Controllers\PplController;
 use App\Http\Controllers\BrevetController;
+use App\Http\Controllers\BrevetCController;
+use App\Http\Controllers\BrevetKuasaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Models\Informasi;
@@ -106,9 +108,11 @@ Route::prefix('keanggotaan')->group(function () {
 });
 
 Route::get('/pelatihan/jadwal', [PelatihanController::class, 'indexVisitor'])->name('visitor.pelatihan');
-Route::get('/pelatihan/panduan-ppl', [\App\Http\Controllers\PplController::class, 'indexvisitor'])->name('ppl.visitor');
+Route::get('/pelatihan/panduan-ppl', [PplController::class, 'indexvisitor'])->name('ppl.visitor');
 Route::get('/pelatihan/brevet/a-b', [BrevetController::class, 'indexvisitor'])->name('visitor.brevet');
-Route::get('/pelatihan/brevet/c', [BrevetController::class, 'indexVisitorC'])->name('visitor.brevet_c');
+Route::get('/pelatihan/brevet/c', [BrevetCController::class, 'indexVisitor'])->name('visitor.brevet_c');
+Route::get('/pelatihan/brevet/kuasa', [BrevetKuasaController::class, 'indexVisitor'])->name('visitor.brevet_kuasa');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -128,7 +132,9 @@ Route::middleware('auth')->group(function () {
         'tatacara'       => TataCaraController::class,
         'pelatihan'      => PelatihanController::class,
         'ppl'            => PplController::class,
-        'brevets'       => BrevetController::class
+        'brevets'       => BrevetController::class,
+        'brevets_c'     => BrevetCController::class,
+        'brevets_kuasa'       => BrevetKuasaController::class
     ]);
 
     Route::get('anggota/import', [AnggotaController::class, 'showImportForm'])->name('anggota.import.form');

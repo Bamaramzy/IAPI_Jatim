@@ -17,7 +17,9 @@ use App\Http\Controllers\{
     BrevetController,
     BrevetCController,
     BrevetKuasaController,
-    TestCenterController
+    TestCenterController,
+    JalurRegulerController,
+    JalurWorkshopController
 };
 use App\Models\{Informasi, Anggota, Direktori, AdArt, TataCara};
 
@@ -114,6 +116,8 @@ Route::prefix('pelatihan')->group(function () {
 });
 
 Route::get('/sertifikasi/test-center', [TestCenterController::class, 'indexVisitor'])->name('visitor.test_center');
+Route::get('/sertifikasi/ujian/jalur-reguler', [JalurRegulerController::class, 'indexVisitor'])->name('visitor.jalur_reguler');
+Route::get('/sertifikasi/ujian/jalur-workshop-penyetaraan', [JalurWorkshopController::class, 'index'])->name('visitor.jalur_workshop');
 
 Route::get('/dashboard', fn() => view('dashboard'))
     ->middleware(['auth', 'verified'])
@@ -137,7 +141,8 @@ Route::middleware('auth')->group(function () {
         'brevets'        => BrevetController::class,
         'brevets_c'      => BrevetCController::class,
         'brevets_kuasa'  => BrevetKuasaController::class,
-        'test_center'   => TestCenterController::class
+        'test_center'   => TestCenterController::class,
+        'jalur_reguler'  => JalurRegulerController::class
     ]);
 
     Route::get('anggota/import', [AnggotaController::class, 'showImportForm'])->name('anggota.import.form');

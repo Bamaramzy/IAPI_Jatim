@@ -24,7 +24,8 @@ use App\Http\Controllers\{
     WorkshopPenyetaraanController,
     JalurRegulerController,
     JalurWorkshopController,
-    SilabusController
+    SilabusController,
+    PeraturanProfesiController
 };
 use App\Models\{Informasi, Anggota, Direktori, AdArt, TataCara};
 
@@ -128,7 +129,9 @@ Route::get('/sertifikasi/ujian/jalur-workshop-penyetaraan', [JalurWorkshopContro
 Route::get('/sertifikasi/ujian/silabus', [SilabusController::class, 'indexVisitor'])->name('visitor.silabus_ujian');
 Route::get('/sertifikasi/ujian/proses-penerbitan', fn() => view('sertifikasi.ujian.proses_penerbitan.proses'))->name('visitor.proses_penerbitan');
 Route::get('/sertifikasi/ujian/tutorial/workshop-penyetaraan', [WorkshopPenyetaraanController::class, 'indexVisitor'])->name('visitor.workshop_penyetaraan');
+Route::get('/sertifikasi/ujian/tutorial/tata-tertib', fn() => view('sertifikasi.ujian.tutorial.tata_tertib.tatatertib'))->name('visitor.tata_tertib');
 
+Route::get('/peraturan/profesi', [PeraturanProfesiController::class, 'indexVisitor'])->name('visitor.peraturan_profesi');
 
 Route::get('/dashboard', fn() => view('dashboard'))
     ->middleware(['auth', 'verified'])
@@ -159,6 +162,7 @@ Route::middleware('auth')->group(function () {
         'workshop_penyetaraan'  => WorkshopPenyetaraanController::class,
         'jalur_reguler'         => JalurRegulerController::class,
         'silabus_ujian'         => SilabusController::class,
+        'peraturan_profesi'     => PeraturanProfesiController::class
     ]);
 
     Route::prefix('workshop_penyetaraan')->group(function () {

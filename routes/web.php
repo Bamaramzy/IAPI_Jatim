@@ -18,8 +18,13 @@ use App\Http\Controllers\{
     BrevetCController,
     BrevetKuasaController,
     TestCenterController,
+    WaiverPpakController,
+    CFIController,
+    WorkshopABController,
+    WorkshopPenyetaraanController,
     JalurRegulerController,
-    JalurWorkshopController
+    JalurWorkshopController,
+    SilabusController
 };
 use App\Models\{Informasi, Anggota, Direktori, AdArt, TataCara};
 
@@ -104,7 +109,6 @@ Route::prefix('keanggotaan')->group(function () {
 
 Route::prefix('pelatihan')->group(function () {
     Route::get('/tentang', fn() => view('pelatihan.tentang_pelatihan.tentang'))->name('visitor.pelatihan');
-
     Route::get('/jadwal', [PelatihanController::class, 'indexVisitor'])->name('visitor.pelatihan.jadwal');
     Route::get('/panduan-ppl', [PplController::class, 'indexVisitor'])->name('visitor.ppl');
 
@@ -116,8 +120,15 @@ Route::prefix('pelatihan')->group(function () {
 });
 
 Route::get('/sertifikasi/test-center', [TestCenterController::class, 'indexVisitor'])->name('visitor.test_center');
+Route::get('/sertifikasi/waiver-ppak', [WaiverPpakController::class, 'indexVisitor'])->name('visitor.waiver_ppak');
+Route::get('/sertifikasi/cfi', [CFIController::class, 'indexVisitor'])->name('visitor.cfi');
+Route::get('/sertifikasi/workshop-a-b', [WorkshopABController::class, 'indexVisitor'])->name('visitor.workshop_ab');
 Route::get('/sertifikasi/ujian/jalur-reguler', [JalurRegulerController::class, 'indexVisitor'])->name('visitor.jalur_reguler');
 Route::get('/sertifikasi/ujian/jalur-workshop-penyetaraan', [JalurWorkshopController::class, 'index'])->name('visitor.jalur_workshop');
+Route::get('/sertifikasi/ujian/silabus', [SilabusController::class, 'indexVisitor'])->name('visitor.silabus_ujian');
+Route::get('/sertifikasi/ujian/proses-penerbitan', fn() => view('sertifikasi.ujian.proses_penerbitan.proses'))->name('visitor.proses_penerbitan');
+Route::get('/sertifikasi/ujian/tutorial/workshop-penyetaraan', [WorkshopPenyetaraanController::class, 'indexVisitor'])->name('visitor.workshop_penyetaraan');
+
 
 Route::get('/dashboard', fn() => view('dashboard'))
     ->middleware(['auth', 'verified'])
@@ -129,21 +140,33 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resources([
-        'informasi'      => InformasiController::class,
-        'dewan_pengurus' => DewanPengurusController::class,
-        'dewan_pengawas' => DewanPengawasController::class,
-        'anggota'        => AnggotaController::class,
-        'direktori'      => DirektoriController::class,
-        'adart'          => AdArtController::class,
-        'tatacara'       => TataCaraController::class,
-        'pelatihan'      => PelatihanController::class,
-        'ppl'            => PplController::class,
-        'brevets'        => BrevetController::class,
-        'brevets_c'      => BrevetCController::class,
-        'brevets_kuasa'  => BrevetKuasaController::class,
-        'test_center'   => TestCenterController::class,
-        'jalur_reguler'  => JalurRegulerController::class
+        'informasi'             => InformasiController::class,
+        'dewan_pengurus'        => DewanPengurusController::class,
+        'dewan_pengawas'        => DewanPengawasController::class,
+        'anggota'               => AnggotaController::class,
+        'direktori'             => DirektoriController::class,
+        'adart'                 => AdArtController::class,
+        'tatacara'              => TataCaraController::class,
+        'pelatihan'             => PelatihanController::class,
+        'ppl'                   => PplController::class,
+        'brevets'               => BrevetController::class,
+        'brevets_c'             => BrevetCController::class,
+        'brevets_kuasa'         => BrevetKuasaController::class,
+        'test_center'           => TestCenterController::class,
+        'waiver_ppak'           => WaiverPpakController::class,
+        'cfi'                   => CFIController::class,
+        'workshop_ab'           => WorkshopABController::class,
+        'workshop_penyetaraan'  => WorkshopPenyetaraanController::class,
+        'jalur_reguler'         => JalurRegulerController::class,
+        'silabus_ujian'         => SilabusController::class,
     ]);
+
+    Route::prefix('workshop_penyetaraan')->group(function () {
+        Route::post('{kategori}/pdf', [WorkshopPenyetaraanController::class, 'storePdf'])->name('workshop_penyetaraan.storePdf');
+        Route::post('{kategori}/video', [WorkshopPenyetaraanController::class, 'storeVideo'])->name('workshop_penyetaraan.storeVideo');
+        Route::delete('pdf/{pdf}', [WorkshopPenyetaraanController::class, 'destroyPdf'])->name('workshop_penyetaraan.destroyPdf');
+        Route::delete('video/{video}', [WorkshopPenyetaraanController::class, 'destroyVideo'])->name('workshop_penyetaraan.destroyVideo');
+    });
 
     Route::get('anggota/import', [AnggotaController::class, 'showImportForm'])->name('anggota.import.form');
     Route::post('anggota/import', [AnggotaController::class, 'import'])->name('anggota.import');

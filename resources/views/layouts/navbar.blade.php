@@ -161,10 +161,8 @@
                                 class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Jalur Workshop &
                                 Penyetaraan</a>
                             <a href="{{ url('/sertifikasi/ujian/silabus') }}"
-                                class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Silabus Ujian</a>
-                            <a href="{{ url('/sertifikasi/ujian/modul') }}"
-                                class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Modul & Ilustrasi
-                                Soal</a>
+                                class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Silabus Ujian, Modul,
+                                dan Ilustrasi Soal</a>
                             <a href="{{ url('/sertifikasi/ujian/proses-penerbitan') }}"
                                 class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Proses Penerbitan
                                 Sertifikasi & Gelar</a>

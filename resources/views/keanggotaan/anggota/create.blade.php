@@ -11,16 +11,13 @@
             <form action="{{ route('anggota.store') }}" method="POST">
                 @csrf
 
-                <!-- No Urut -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">No Urut</label>
-                    <input type="number" name="no_urut"
+                    <input type="number" name="no_urut" value="{{ $nextNoUrut }}" readonly
                         class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-900 
-                               dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                        required>
+               dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                 </div>
 
-                <!-- No Reg IAPI -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">No Reg IAPI</label>
                     <input type="text" name="no_reg_iapi"
@@ -29,7 +26,6 @@
                         required>
                 </div>
 
-                <!-- Nama Anggota -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama Anggota</label>
                     <input type="text" name="nama_anggota"
@@ -38,7 +34,6 @@
                         required>
                 </div>
 
-                <!-- Izin AP -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Izin AP</label>
                     <input type="text" name="izin_ap"
@@ -46,7 +41,6 @@
                                dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                 </div>
 
-                <!-- Kategori -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Kategori</label>
                     <select name="kategori"
@@ -62,7 +56,6 @@
                     </select>
                 </div>
 
-                <!-- Nama KAP -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama KAP</label>
                     <input type="text" name="nama_kap"
@@ -70,7 +63,6 @@
                                dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                 </div>
 
-                <!-- Status -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
                     <select name="status_id"
@@ -83,15 +75,16 @@
                     </select>
                 </div>
 
-                <!-- Korwil -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Korwil</label>
-                    <input type="text" name="korwil"
+                    <select name="korwil"
                         class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-900 
-                               dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+               dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        <option value="">-- Pilih Korwil --</option>
+                        <option value="JAWA TIMUR">JAWA TIMUR</option>
+                    </select>
                 </div>
 
-                <!-- Tombol -->
                 <div class="flex items-center space-x-2">
                     <button type="submit"
                         class="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-md hover:bg-green-700">

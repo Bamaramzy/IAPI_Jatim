@@ -4,41 +4,37 @@
     <section class="max-w-7xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg">
         <h1 class="text-3xl font-bold mb-6 text-center">📂 Daftar Direktori</h1>
 
-        {{-- 📚 List Direktori --}}
         <div class="grid md:grid-cols-3 gap-6">
             @forelse ($direktoris as $direktori)
+                @php
+                    $driveId = null;
+                    if ($direktori->link_drive && preg_match('/[-\w]{25,}/', $direktori->link_drive, $matches)) {
+                        $driveId = $matches[0];
+                    }
+                @endphp
+
                 <div class="border rounded-lg shadow hover:shadow-lg overflow-hidden bg-white">
-                    {{-- Cover --}}
-                    @if ($direktori->cover)
+                    {{-- ✅ Preview PDF / Drive / Cover --}}
+                    @if ($driveId)
+                        <iframe src="https://drive.google.com/file/d/{{ $driveId }}/preview" class="w-full h-64 border-0"
+                            allow="autoplay"></iframe>
+                    @elseif ($direktori->file_pdf)
+                        <iframe src="{{ asset('storage/' . $direktori->file_pdf) }}" class="w-full h-64 border-0"></iframe>
+                    @elseif ($direktori->cover)
                         <img src="{{ asset('storage/' . $direktori->cover) }}" alt="Cover {{ $direktori->judul }}"
-                            class="w-full h-48 object-cover">
+                            class="w-full h-64 object-cover">
                     @else
-                        <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500">
-                            No Cover
+                        <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
+                            Tidak ada file tersedia
                         </div>
                     @endif
 
-                    {{-- Content --}}
+                    {{-- ✅ Informasi Direktori --}}
                     <div class="p-4">
-                        <h2 class="font-bold text-lg mb-2">{{ $direktori->judul }}</h2>
-                        <p class="text-sm text-gray-600 mb-4 line-clamp-3">{{ $direktori->deskripsi }}</p>
-
-                        {{-- Links --}}
-                        <div class="flex gap-2">
-                            @if ($direktori->file_pdf)
-                                <a href="{{ asset('storage/' . $direktori->file_pdf) }}" target="_blank"
-                                    class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
-                                    📖 Lihat PDF
-                                </a>
-                            @endif
-
-                            @if ($direktori->link_drive)
-                                <a href="{{ $direktori->link_drive }}" target="_blank"
-                                    class="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700">
-                                    🔗 Google Drive
-                                </a>
-                            @endif
-                        </div>
+                        <h2 class="font-bold text-lg mb-2 text-gray-800">{{ $direktori->judul }}</h2>
+                        @if ($direktori->deskripsi)
+                            <p class="text-sm text-gray-600 line-clamp-3">{{ $direktori->deskripsi }}</p>
+                        @endif
                     </div>
                 </div>
             @empty
@@ -46,9 +42,8 @@
             @endforelse
         </div>
 
-        {{-- 📌 Pagination --}}
         <div class="mt-8">
-            {{ $direktoris->links() }}
+            {{ $direktoris->links('vendor.pagination.tailwind') }}
         </div>
     </section>
 @endsection

@@ -2,13 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
     protected $table = 'workshop_penyetaraan_video';
-    protected $fillable = ['kategori_id', 'judul', 'file_path', 'link'];
+    protected $fillable =
+    [
+        'kategori_id',
+        'judul',
+        'video_url',
+        'thumbnail_url'
+    ];
 
     public function kategori()
     {

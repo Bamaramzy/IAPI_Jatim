@@ -9,16 +9,40 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class AnggotaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // Data ditampilkan per 10 (pagination)
-        $anggota = Anggota::paginate(10);
-        return view('keanggotaan.anggota.index', compact('anggota'));
+        $query = Anggota::query();
+
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('nama_anggota', 'like', "%{$search}%")
+                    ->orWhere('no_reg_iapi', 'like', "%{$search}%")
+                    ->orWhere('nama_kap', 'like', "%{$search}%");
+            });
+        }
+
+        if ($kategori = $request->input('kategori')) {
+            $query->where('kategori', $kategori);
+        }
+
+        if ($korwil = $request->input('korwil')) {
+            $query->where('korwil', $korwil);
+        }
+
+        $anggota = $query->orderBy('nama_anggota', 'asc')->paginate(10);
+
+        $kategoriList = Anggota::select('kategori')->distinct()->pluck('kategori')->filter()->values();
+        $korwilList = Anggota::select('korwil')->distinct()->pluck('korwil')->filter()->values();
+
+        return view('keanggotaan.anggota.index', compact('anggota', 'kategoriList', 'korwilList'));
     }
 
     public function create()
     {
-        return view('keanggotaan.anggota.create');
+        $lastNoUrut = Anggota::max('no_urut') ?? 0;
+        $nextNoUrut = $lastNoUrut + 1;
+
+        return view('keanggotaan.anggota.create', compact('nextNoUrut'));
     }
 
     public function store(Request $request)
@@ -68,21 +92,31 @@ class AnggotaController extends Controller
         return redirect()->route('anggota.index')->with('success', 'Anggota berhasil dihapus');
     }
 
-    // ✅ Form untuk upload Excel
     public function showImportForm()
     {
         return view('keanggotaan.anggota.import');
     }
 
-    // ✅ Proses Import Excel
     public function import(Request $request)
     {
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv'
         ]);
 
-        Excel::import(new AnggotaImport, $request->file('file'));
+        $import = new AnggotaImport();
+        Excel::import($import, $request->file('file'));
 
-        return redirect()->route('anggota.index')->with('success', 'Data anggota berhasil diimport!');
+        $inserted = method_exists($import, 'getInsertedCount') ? $import->getInsertedCount() : 0;
+        $updated = method_exists($import, 'getUpdatedCount') ? $import->getUpdatedCount() : 0;
+
+        return redirect()->route('anggota.index')->with(
+            'success',
+            "Import selesai! {$inserted} data baru ditambahkan dan {$updated} data diperbarui."
+        );
+    }
+
+    public function reset()
+    {
+        return redirect()->route('anggota.index');
     }
 }

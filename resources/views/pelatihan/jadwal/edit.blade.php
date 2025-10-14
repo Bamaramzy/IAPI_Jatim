@@ -9,7 +9,6 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
 
-                {{-- ✅ Error Message --}}
                 @if ($errors->any())
                     <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
                         <ul class="list-disc list-inside text-sm">
@@ -25,7 +24,6 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- Judul --}}
                     <div class="mb-4">
                         <label for="judul" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Judul <span class="text-red-500">*</span>
@@ -36,7 +34,6 @@
                             value="{{ old('judul', $pelatihan->judul) }}" required>
                     </div>
 
-                    {{-- Kategori --}}
                     <div class="mb-4">
                         <label for="kategori" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Kategori <span class="text-red-500">*</span>
@@ -57,7 +54,6 @@
                         </select>
                     </div>
 
-                    {{-- Tanggal Mulai & Selesai --}}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div>
                             <label for="tanggal_mulai"
@@ -81,7 +77,6 @@
                         </div>
                     </div>
 
-                    {{-- Waktu Mulai & Selesai --}}
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                         <div>
                             <label for="waktu_mulai" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -104,7 +99,6 @@
                         </div>
                     </div>
 
-                    {{-- Lokasi --}}
                     <div class="mb-4">
                         <label for="lokasi" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Lokasi <span class="text-red-500">*</span>
@@ -115,7 +109,6 @@
                             value="{{ old('lokasi', $pelatihan->lokasi) }}" required>
                     </div>
 
-                    {{-- Upload Brosur --}}
                     <div class="mb-4">
                         <label for="brosur" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Upload Brosur (Opsional)
@@ -124,7 +117,6 @@
                             class="mt-1 block w-full text-sm text-gray-700 dark:text-gray-300">
                         <p class="text-xs text-gray-500 mt-1">Kosongkan jika tidak ingin mengganti brosur</p>
 
-                        {{-- Preview Brosur Lama --}}
                         @if ($pelatihan->brosur)
                             <div class="mt-2">
                                 <p class="text-sm text-gray-600 dark:text-gray-400">Brosur saat ini:</p>
@@ -134,7 +126,6 @@
                         @endif
                     </div>
 
-                    {{-- Status --}}
                     <div class="mb-4">
                         <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Status <span class="text-red-500">*</span>
@@ -150,7 +141,6 @@
                         </select>
                     </div>
 
-                    {{-- Tombol --}}
                     <div class="flex justify-end space-x-2">
                         <a href="{{ route('pelatihan.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Batal</a>

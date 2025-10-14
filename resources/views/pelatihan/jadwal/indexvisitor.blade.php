@@ -4,12 +4,10 @@
     <section x-data="{ show: false, imgSrc: '' }" class="max-w-7xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg">
         <h1 class="text-3xl font-bold mb-6 text-center">📅 Daftar Jadwal Pelatihan</h1>
 
-        {{-- 📚 List Jadwal --}}
         <div class="space-y-6">
             @forelse ($jadwals as $jadwal)
                 <div class="border rounded-lg shadow hover:shadow-lg overflow-hidden bg-white p-4 flex gap-4">
 
-                    {{-- 📄 Brosur --}}
                     @if ($jadwal->brosur)
                         <img src="{{ asset('storage/' . $jadwal->brosur) }}" alt="Poster {{ $jadwal->judul }}"
                             class="w-40 h-40 object-cover rounded cursor-pointer hover:opacity-80 transition"
@@ -20,7 +18,6 @@
                         </div>
                     @endif
 
-                    {{-- 📑 Konten --}}
                     <div class="flex-1">
                         <h2 class="font-bold text-lg mb-2">{{ $jadwal->judul }} [{{ $jadwal->kategori }}]</h2>
                         <p class="text-sm text-gray-600 mb-1">
@@ -33,7 +30,6 @@
                             WIB</p>
                         <p class="text-sm text-gray-600 mb-3">📍 {{ $jadwal->lokasi }}</p>
 
-                        {{-- 🔗 Tombol --}}
                         <div class="flex gap-2">
                             <button @click="imgSrc='{{ asset('storage/' . $jadwal->brosur) }}'; show = true"
                                 class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
@@ -52,12 +48,10 @@
             @endforelse
         </div>
 
-        {{-- 📌 Pagination --}}
         <div class="mt-8">
             {{ $jadwals->links() }}
         </div>
 
-        {{-- 📜 Modal Detail Brosur --}}
         <div x-show="show" x-transition.opacity.duration.300ms
             class="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-md flex items-center justify-center z-50"
             @keydown.escape.window="show = false" @click.self="show = false">

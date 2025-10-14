@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class DirektoriController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $direktoris = Direktori::latest()->paginate(9);
@@ -22,17 +19,11 @@ class DirektoriController extends Controller
         return view('keanggotaan.direktori.index', compact('direktoris'));
     }
 
-    /**
-     * Show the form for creating a new resource. (Admin)
-     */
     public function create()
     {
-        return view('direktori.create');
+        return view('keanggotaan.direktori.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -59,25 +50,16 @@ class DirektoriController extends Controller
         return redirect()->route('direktori.index')->with('success', 'Direktori berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource (Visitor bisa akses detail).
-     */
     public function show(Direktori $direktori)
     {
         return view('keanggotaan.direktori.show', compact('direktori'));
     }
 
-    /**
-     * Show the form for editing the specified resource. (Admin)
-     */
     public function edit(Direktori $direktori)
     {
         return view('keanggotaan.direktori.edit', compact('direktori'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, Direktori $direktori)
     {
         $request->validate([
@@ -92,17 +74,19 @@ class DirektoriController extends Controller
         $data = $request->only(['judul', 'deskripsi', 'link_drive', 'status']);
 
         if ($request->hasFile('file_pdf')) {
-            if ($direktori->file_pdf && Storage::disk('public')->exists($direktori->file_pdf)) {
-                Storage::disk('public')->delete($direktori->file_pdf);
+            if ($direktori->file_pdf && Storage::exists('public/' . $direktori->file_pdf)) {
+                Storage::delete('public/' . $direktori->file_pdf);
             }
-            $data['file_pdf'] = $request->file('file_pdf')->store('direktori/pdf', 'public');
+            $path = $request->file('file_pdf')->store('direktori/pdf', 'public');
+            $direktori->file_pdf = $path;
         }
 
         if ($request->hasFile('cover')) {
-            if ($direktori->cover && Storage::disk('public')->exists($direktori->cover)) {
-                Storage::disk('public')->delete($direktori->cover);
+            if ($direktori->cover && Storage::exists('public/' . $direktori->cover)) {
+                Storage::delete('public/' . $direktori->cover);
             }
-            $data['cover'] = $request->file('cover')->store('direktori/cover', 'public');
+            $coverPath = $request->file('cover')->store('direktori/cover', 'public');
+            $direktori->cover = $coverPath;
         }
 
         $direktori->update($data);
@@ -110,9 +94,6 @@ class DirektoriController extends Controller
         return redirect()->route('direktori.index')->with('success', 'Direktori berhasil diperbarui');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Direktori $direktori)
     {
         if ($direktori->file_pdf && Storage::disk('public')->exists($direktori->file_pdf)) {

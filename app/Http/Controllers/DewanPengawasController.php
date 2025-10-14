@@ -21,58 +21,57 @@ class DewanPengawasController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
+            'gambar' => 'nullable|image|max:2048',
         ]);
 
-        $data = $request->only('nama', 'jabatan');
-
         if ($request->hasFile('gambar')) {
-            $data['gambar'] = $request->file('gambar')->store('dewan', 'public');
+            $validated['gambar'] = $request->file('gambar')->store('dewan_pengawas', 'public');
         }
 
-        DewanPengawas::create($data);
+        DewanPengawas::create($validated);
 
-        return redirect()->route('dewan_pengawas.index')->with('success', 'Data berhasil ditambahkan');
+        return redirect()->route('dewan_pengawas.index')
+            ->with('success', 'Data berhasil ditambahkan.');
     }
 
-    public function edit(DewanPengawas $dewanPengawas)
+    public function edit(DewanPengawas $dewan_pengawa)
     {
-        return view('dewan_pengawas.edit', compact('dewanPengawas'));
+        return view('dewan_pengawas.edit', ['dewan_pengawas' => $dewan_pengawa]);
     }
 
-    public function update(Request $request, DewanPengawas $dewanPengawas)
+    public function update(Request $request, DewanPengawas $dewan_pengawa)
     {
-        $request->validate([
+        $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'jabatan' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpg,png,jpeg|max:2048'
+            'gambar' => 'nullable|image|max:2048',
         ]);
 
-        $data = $request->only('nama', 'jabatan');
-
         if ($request->hasFile('gambar')) {
-            if ($dewanPengawas->gambar) {
-                Storage::disk('public')->delete($dewanPengawas->gambar);
+            if ($dewan_pengawa->gambar) {
+                Storage::disk('public')->delete($dewan_pengawa->gambar);
             }
-            $data['gambar'] = $request->file('gambar')->store('dewan', 'public');
+            $validated['gambar'] = $request->file('gambar')->store('dewan_pengawas', 'public');
         }
 
-        $dewanPengawas->update($data);
+        $dewan_pengawa->update($validated);
 
-        return redirect()->route('dewan_pengawas.index')->with('success', 'Data berhasil diperbarui');
+        return redirect()->route('dewan_pengawas.index')
+            ->with('success', 'Data berhasil diperbarui.');
     }
 
-    public function destroy(DewanPengawas $dewanPengawas)
+    public function destroy(DewanPengawas $dewan_pengawa)
     {
-        if ($dewanPengawas->gambar) {
-            Storage::disk('public')->delete($dewanPengawas->gambar);
+        if ($dewan_pengawa->gambar) {
+            Storage::disk('public')->delete($dewan_pengawa->gambar);
         }
 
-        $dewanPengawas->delete();
+        $dewan_pengawa->delete();
 
-        return redirect()->route('dewan_pengawas.index')->with('success', 'Data berhasil dihapus');
+        return redirect()->route('dewan_pengawas.index')
+            ->with('success', 'Data berhasil dihapus.');
     }
 }

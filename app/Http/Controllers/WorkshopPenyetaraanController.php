@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class WorkshopPenyetaraanController extends Controller
 {
-    /** =======================
-     * INDEX
-     * ======================= */
     public function index()
     {
         $kategoris = Kategori::with(['pdfs', 'videos'])
@@ -22,190 +19,254 @@ class WorkshopPenyetaraanController extends Controller
         return view('sertifikasi.ujian.tutorial.workshop_penyetaraan.index', compact('kategoris'));
     }
 
-    /** =======================
-     * CREATE
-     * ======================= */
+    public function indexVisitor(Request $request)
+    {
+        $kategoriList = Kategori::orderBy('nama_kategori')->get();
+
+        $kategoriAktif = $request->query('kategori');
+        if (!$kategoriAktif && $kategoriList->isNotEmpty()) {
+            $kategoriAktif = $kategoriList->first()->id;
+        }
+
+        $pdfList = Pdf::query()
+            ->when($kategoriAktif, fn($q) => $q->where('kategori_id', $kategoriAktif))
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $videoList = Video::query()
+            ->when($kategoriAktif, fn($q) => $q->where('kategori_id', $kategoriAktif))
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return view('sertifikasi.ujian.tutorial.workshop_penyetaraan.indexvisitor', compact(
+            'kategoriList',
+            'kategoriAktif',
+            'pdfList',
+            'videoList'
+        ));
+    }
+
     public function create()
     {
         $kategoris = Kategori::all();
         return view('sertifikasi.ujian.tutorial.workshop_penyetaraan.create', compact('kategoris'));
     }
 
-    /** =======================
-     * STORE
-     * ======================= */
     public function store(Request $request)
     {
-        $type = $request->input('type');
+        $validated = $request->validate([
+            'kategori_id'        => 'nullable|exists:workshop_penyetaraan_kategori,id',
+            'nama_kategori'      => 'nullable|string|max:255',
+            'judul'              => 'required|string|max:255',
 
-        if ($type === 'kategori') {
-            $validated = $request->validate([
-                'nama' => 'required|string|max:255',
-            ]);
-            Kategori::create($validated);
+            // PDF
+            'file_path'          => 'nullable|mimes:pdf|max:5120',
+            'link_url'           => 'nullable|url',
+            'preview_thumbnail'  => 'nullable|image|max:2048',
 
-            return back()->with('success', 'Kategori berhasil ditambahkan.');
-        }
+            // Video
+            'video_file'         => 'nullable|mimetypes:video/mp4,video/x-msvideo,video/quicktime|max:51200',
+            'video_url'          => 'nullable|url',
+            'thumbnail_url'      => 'nullable|image|max:2048',
+        ]);
 
-        if ($type === 'pdf') {
-            $validated = $request->validate([
-                'kategori_id' => 'required|exists:workshop_penyetaraan_kategori,id',
-                'judul'       => 'required|string|max:255',
-                'pdf'         => 'nullable|mimes:pdf|max:5120|required_without:link_pdf',
-                'link_pdf'    => 'nullable|url|required_without:pdf',
-            ]);
+        // ✅ Buat / temukan kategori
+        $kategori = $request->filled('kategori_id')
+            ? Kategori::find($request->kategori_id)
+            : Kategori::create(['nama_kategori' => $request->nama_kategori ?? $request->judul]);
 
-            $filePath = null;
-            if ($request->hasFile('pdf')) {
-                $filePath = $request->file('pdf')->store('workshop_penyetaraan/pdf', 'public');
-            } else {
-                $filePath = $validated['link_pdf'];
-            }
+        /**
+         * ✅ Simpan PDF
+         */
+        if ($request->hasFile('file_path') || $request->filled('link_url')) {
+            $filePath = $request->hasFile('file_path')
+                ? $request->file('file_path')->store('workshop_penyetaraan/pdf', 'public')
+                : null;
+
+            $thumbPath = $request->hasFile('preview_thumbnail')
+                ? $request->file('preview_thumbnail')->store('workshop_penyetaraan/thumbnails', 'public')
+                : null;
 
             Pdf::create([
-                'kategori_id' => $validated['kategori_id'],
-                'judul'       => $validated['judul'],
-                'file_path'   => $filePath,
+                'kategori_id'       => $kategori->id,
+                'judul'             => $request->judul,
+                'file_path'         => $filePath,
+                'link_url'          => $request->link_url,
+                'preview_thumbnail' => $thumbPath,
             ]);
-
-            return back()->with('success', 'PDF berhasil ditambahkan.');
         }
 
-        if ($type === 'video') {
-            $validated = $request->validate([
-                'kategori_id' => 'required|exists:workshop_penyetaraan_kategori,id',
-                'judul'       => 'required|string|max:255',
-                'link_url'    => 'required|url',
+        /**
+         * ✅ Simpan Video
+         */
+        if ($request->hasFile('video_file') || $request->filled('video_url')) {
+            $videoPath = $request->hasFile('video_file')
+                ? $request->file('video_file')->store('workshop_penyetaraan/video', 'public')
+                : null;
+
+            $thumbPath = $request->hasFile('thumbnail_url')
+                ? $request->file('thumbnail_url')->store('workshop_penyetaraan/thumbnails', 'public')
+                : null;
+
+            Video::create([
+                'kategori_id'  => $kategori->id,
+                'judul'        => $request->judul,
+                'video_url'    => $request->video_url ?? $videoPath,
+                'thumbnail_url' => $thumbPath,
             ]);
-
-            Video::create($validated);
-
-            return back()->with('success', 'Video berhasil ditambahkan.');
         }
 
-        return back()->with('error', 'Tipe data tidak dikenali.');
+        return redirect()->route('workshop_penyetaraan.index')
+            ->with('success', 'Workshop Penyetaraan berhasil ditambahkan.');
     }
 
-    /** =======================
-     * EDIT
-     * ======================= */
-    public function edit(Request $request, $id)
+    public function edit($id, Request $request)
     {
         $type = $request->query('type', 'kategori');
         $kategoris = Kategori::all();
 
-        if ($type === 'kategori') {
-            $workshop = Kategori::findOrFail($id);
-        } elseif ($type === 'pdf') {
-            $workshop = Pdf::findOrFail($id);
-        } elseif ($type === 'video') {
-            $workshop = Video::findOrFail($id);
-        } else {
-            return back()->with('error', 'Tipe untuk edit tidak dikenali.');
-        }
+        $workshop = match ($type) {
+            'kategori' => Kategori::findOrFail($id),
+            'pdf' => Pdf::findOrFail($id),
+            'video' => Video::findOrFail($id),
+            default => null,
+        };
 
         return view('sertifikasi.ujian.tutorial.workshop_penyetaraan.edit', compact('workshop', 'kategoris', 'type'));
     }
 
-    /** =======================
-     * UPDATE
-     * ======================= */
     public function update(Request $request, $id)
     {
         $type = $request->input('type');
 
-        if ($type === 'kategori') {
-            $workshop = Kategori::findOrFail($id);
-            $validated = $request->validate([
-                'nama' => 'required|string|max:255',
-            ]);
-            $workshop->update($validated);
+        switch ($type) {
+            case 'kategori':
+                $validated = $request->validate(['nama_kategori' => 'required|string|max:255']);
+                Kategori::findOrFail($id)->update($validated);
+                break;
 
-            return back()->with('success', 'Kategori berhasil diperbarui.');
-        }
+            case 'pdf':
+                $pdf = Pdf::findOrFail($id);
+                $validated = $request->validate([
+                    'judul'             => 'required|string|max:255',
+                    'file_path'         => 'nullable|mimes:pdf|max:5120',
+                    'link_url'          => 'nullable|url',
+                    'preview_thumbnail' => 'nullable|image|max:2048',
+                ]);
 
-        if ($type === 'pdf') {
-            $workshop = Pdf::findOrFail($id);
-            $validated = $request->validate([
-                'judul'    => 'required|string|max:255',
-                'pdf'      => 'nullable|mimes:pdf|max:5120',
-                'link_pdf' => 'nullable|url',
-            ]);
-
-            if ($request->hasFile('pdf')) {
-                if ($workshop->file_path && Storage::disk('public')->exists($workshop->file_path)) {
-                    Storage::disk('public')->delete($workshop->file_path);
+                if ($request->hasFile('file_path')) {
+                    if ($pdf->file_path && Storage::disk('public')->exists($pdf->file_path)) {
+                        Storage::disk('public')->delete($pdf->file_path);
+                    }
+                    $pdfFile = $request->file('file_path')->store('workshop_penyetaraan/pdf', 'public');
+                } else {
+                    $pdfFile = $pdf->file_path;
                 }
-                $filePath = $request->file('pdf')->store('workshop_penyetaraan/pdf', 'public');
-            } elseif ($request->filled('link_pdf')) {
-                $filePath = $validated['link_pdf'];
-            } else {
-                $filePath = $workshop->file_path;
-            }
 
-            $workshop->update([
-                'judul'     => $validated['judul'],
-                'file_path' => $filePath,
-            ]);
+                if ($request->hasFile('preview_thumbnail')) {
+                    if ($pdf->preview_thumbnail && Storage::disk('public')->exists($pdf->preview_thumbnail)) {
+                        Storage::disk('public')->delete($pdf->preview_thumbnail);
+                    }
+                    $thumb = $request->file('preview_thumbnail')->store('workshop_penyetaraan/thumbnails', 'public');
+                } else {
+                    $thumb = $pdf->preview_thumbnail;
+                }
 
-            return back()->with('success', 'PDF berhasil diperbarui.');
+                $pdf->update([
+                    'judul'             => $validated['judul'],
+                    'file_path'         => $pdfFile,
+                    'link_url'          => $request->link_url ?? $pdf->link_url,
+                    'preview_thumbnail' => $thumb,
+                ]);
+                break;
+
+            case 'video':
+                $video = Video::findOrFail($id);
+                $validated = $request->validate([
+                    'judul'         => 'required|string|max:255',
+                    'video_file'    => 'nullable|mimetypes:video/mp4,video/x-msvideo,video/quicktime|max:51200',
+                    'video_url'     => 'nullable|url',
+                    'thumbnail_url' => 'nullable|image|max:2048',
+                ]);
+
+                if ($request->hasFile('video_file')) {
+                    if ($video->video_url && Storage::disk('public')->exists($video->video_url)) {
+                        Storage::disk('public')->delete($video->video_url);
+                    }
+                    $videoPath = $request->file('video_file')->store('workshop_penyetaraan/video', 'public');
+                } else {
+                    $videoPath = $video->video_url;
+                }
+
+                if ($request->hasFile('thumbnail_url')) {
+                    if ($video->thumbnail_url && Storage::disk('public')->exists($video->thumbnail_url)) {
+                        Storage::disk('public')->delete($video->thumbnail_url);
+                    }
+                    $thumbPath = $request->file('thumbnail_url')->store('workshop_penyetaraan/thumbnails', 'public');
+                } else {
+                    $thumbPath = $video->thumbnail_url;
+                }
+
+                $video->update([
+                    'judul'         => $validated['judul'],
+                    'video_url'     => $request->video_url ?? $videoPath,
+                    'thumbnail_url' => $thumbPath,
+                ]);
+                break;
         }
 
-        if ($type === 'video') {
-            $workshop = Video::findOrFail($id);
-            $validated = $request->validate([
-                'judul'    => 'required|string|max:255',
-                'link_url' => 'required|url',
-            ]);
-
-            $workshop->update($validated);
-
-            return back()->with('success', 'Video berhasil diperbarui.');
-        }
-
-        return back()->with('error', 'Tipe untuk update tidak dikenali.');
+        return redirect()->route('workshop_penyetaraan.index')
+            ->with('success', ucfirst($type) . ' berhasil diperbarui.');
     }
 
-    /** =======================
-     * DESTROY
-     * ======================= */
-    public function destroy(Request $request, $id)
+    public function destroyPdf($id)
     {
-        $type = $request->input('type');
+        $pdf = Pdf::findOrFail($id);
+        if ($pdf->file_path && Storage::disk('public')->exists($pdf->file_path)) {
+            Storage::disk('public')->delete($pdf->file_path);
+        }
+        if ($pdf->preview_thumbnail && Storage::disk('public')->exists($pdf->preview_thumbnail)) {
+            Storage::disk('public')->delete($pdf->preview_thumbnail);
+        }
+        $pdf->delete();
 
-        if ($type === 'pdf') {
-            $workshop = Pdf::findOrFail($id);
-            if ($workshop->file_path && Storage::disk('public')->exists($workshop->file_path)) {
-                Storage::disk('public')->delete($workshop->file_path);
+        return back()->with('success', 'PDF berhasil dihapus.');
+    }
+
+    public function destroyVideo($id)
+    {
+        $video = Video::findOrFail($id);
+        if ($video->thumbnail_url && Storage::disk('public')->exists($video->thumbnail_url)) {
+            Storage::disk('public')->delete($video->thumbnail_url);
+        }
+        $video->delete();
+
+        return back()->with('success', 'Video berhasil dihapus.');
+    }
+
+    public function destroy($id)
+    {
+        $kategori = Kategori::with(['pdfs', 'videos'])->findOrFail($id);
+
+        foreach ($kategori->pdfs as $pdf) {
+            if ($pdf->file_path && Storage::disk('public')->exists($pdf->file_path)) {
+                Storage::disk('public')->delete($pdf->file_path);
             }
-            $workshop->delete();
-
-            return back()->with('success', 'PDF berhasil dihapus.');
-        }
-
-        if ($type === 'video') {
-            $workshop = Video::findOrFail($id);
-            $workshop->delete();
-
-            return back()->with('success', 'Video berhasil dihapus.');
-        }
-
-        if ($type === 'kategori') {
-            $workshop = Kategori::findOrFail($id);
-
-            foreach ($workshop->pdfs as $pdf) {
-                if ($pdf->file_path && Storage::disk('public')->exists($pdf->file_path)) {
-                    Storage::disk('public')->delete($pdf->file_path);
-                }
-                $pdf->delete();
+            if ($pdf->preview_thumbnail && Storage::disk('public')->exists($pdf->preview_thumbnail)) {
+                Storage::disk('public')->delete($pdf->preview_thumbnail);
             }
-
-            $workshop->videos()->delete();
-            $workshop->delete();
-
-            return back()->with('success', 'Kategori dan seluruh isinya berhasil dihapus.');
+            $pdf->delete();
         }
 
-        return back()->with('error', 'Tipe untuk delete tidak dikenali.');
+        foreach ($kategori->videos as $video) {
+            if ($video->thumbnail_url && Storage::disk('public')->exists($video->thumbnail_url)) {
+                Storage::disk('public')->delete($video->thumbnail_url);
+            }
+            $video->delete();
+        }
+
+        $kategori->delete();
+
+        return back()->with('success', 'Kategori dan seluruh isinya berhasil dihapus.');
     }
 }

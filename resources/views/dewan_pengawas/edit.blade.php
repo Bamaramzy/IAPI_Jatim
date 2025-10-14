@@ -8,22 +8,20 @@
     <div class="max-w-4xl mx-auto sm:px-6 lg:px-8 mt-6">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
 
-            <form action="{{ route('dewan_pengawas.update', $dewan_pengawa->id) }}" method="POST"
+            <form action="{{ route('dewan_pengawas.update', $dewan_pengawas->id) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
-                <!-- Nama -->
                 <div class="mb-4">
                     <label for="nama" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama</label>
                     <input type="text" name="nama" id="nama"
                         class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 
                                dark:bg-gray-900 dark:text-gray-200 focus:border-indigo-500 
                                focus:ring-indigo-500 sm:text-sm"
-                        value="{{ $dewan_pengawa->nama }}" required>
+                        value="{{ $dewan_pengawas->nama }}" required>
                 </div>
 
-                <!-- Jabatan -->
                 <div class="mb-4">
                     <label for="jabatan"
                         class="block text-sm font-medium text-gray-700 dark:text-gray-300">Jabatan</label>
@@ -31,10 +29,9 @@
                         class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 
                                dark:bg-gray-900 dark:text-gray-200 focus:border-indigo-500 
                                focus:ring-indigo-500 sm:text-sm"
-                        value="{{ $dewan_pengawa->jabatan }}" required>
+                        value="{{ $dewan_pengawas->jabatan }}" required>
                 </div>
 
-                <!-- Foto -->
                 <div class="mb-4">
                     <label for="gambar"
                         class="block text-sm font-medium text-gray-700 dark:text-gray-300">Foto</label>
@@ -47,15 +44,8 @@
                                hover:file:bg-indigo-100
                                dark:file:bg-gray-700 dark:file:text-gray-200
                                dark:hover:file:bg-gray-600">
-                    @if ($dewan_pengawa->gambar)
-                        <div class="mt-2">
-                            <img src="{{ asset('storage/' . $dewan_pengawa->gambar) }}" width="120"
-                                class="rounded shadow">
-                        </div>
-                    @endif
                 </div>
 
-                <!-- Tombol -->
                 <div class="flex items-center space-x-2">
                     <button type="submit"
                         class="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-md hover:bg-green-700">

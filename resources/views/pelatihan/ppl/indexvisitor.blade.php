@@ -1,40 +1,33 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section x-data="{ show: false, pdfSrc: '' }" class="max-w-7xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg">
-        <h1 class="text-3xl font-bold mb-6 text-center">📚 Panduan PPL</h1>
+    <section class="max-w-5xl mx-auto px-4 py-12 bg-white shadow-md rounded-lg">
+        <h1 class="text-3xl font-bold mb-10 text-center">📚 Panduan PPL</h1>
 
-        {{-- 📚 List PPL --}}
-        <div class="space-y-6">
+        <div class="space-y-16">
             @forelse ($ppls as $ppl)
-                <div class="border rounded-lg shadow hover:shadow-lg overflow-hidden bg-white p-4 flex gap-4">
-                    {{-- 🎥 Video --}}
-                    <div class="w-64">
+                <div class="bg-white rounded-lg shadow overflow-hidden border p-6">
+
+                    <div class="w-full bg-black rounded-lg overflow-hidden">
                         @if ($ppl->video_url)
-                            <iframe src="{{ $ppl->video_url }}" class="w-full h-40 rounded" frameborder="0"
+                            <iframe src="{{ $ppl->video_url }}" class="w-full h-[420px]" frameborder="0"
                                 allowfullscreen></iframe>
                         @else
-                            <div class="w-full h-40 bg-gray-200 flex items-center justify-center text-gray-500">
-                                No Video
+                            <div class="w-full h-[420px] bg-gray-200 flex items-center justify-center text-gray-500">
+                                🎞️ Video tidak tersedia
                             </div>
                         @endif
                     </div>
+                    <div class="my-8"></div>
 
-                    {{-- 📑 Konten --}}
-                    <div class="flex-1">
-                        <h2 class="font-bold text-lg mb-2">Panduan PPL</h2>
-
-                        {{-- 🔗 Tombol --}}
-                        <div class="flex gap-2 mt-2">
-                            @if ($ppl->pdf_url)
-                                <button @click="pdfSrc='{{ $ppl->pdf_url }}'; show = true"
-                                    class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
-                                    📄 Lihat PDF
-                                </button>
-                            @else
-                                <span class="text-gray-400">PDF tidak tersedia</span>
-                            @endif
-                        </div>
+                    <div class="w-full bg-gray-100 rounded-lg overflow-hidden">
+                        @if ($ppl->pdf_url)
+                            <iframe src="{{ $ppl->pdf_url }}" class="w-full h-[850px]" frameborder="0"></iframe>
+                        @else
+                            <div class="w-full h-[850px] bg-gray-200 flex items-center justify-center text-gray-500">
+                                📄 PDF tidak tersedia
+                            </div>
+                        @endif
                     </div>
                 </div>
             @empty
@@ -42,26 +35,5 @@
             @endforelse
         </div>
 
-        {{-- 📌 Pagination --}}
-        <div class="mt-8">
-            {{ $ppls->links() }}
-        </div>
-
-        {{-- 📜 Modal Preview PDF --}}
-        <div x-show="show" x-transition.opacity.duration.300ms
-            class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-md flex items-center justify-center z-50"
-            @keydown.escape.window="show = false" @click.self="show = false">
-
-            <div x-transition.scale.duration.300ms
-                class="bg-white rounded-lg overflow-hidden shadow-lg max-w-4xl w-full relative">
-
-                <button class="absolute top-3 right-3 text-gray-700 text-2xl hover:text-red-600"
-                    @click="show = false">&times;</button>
-
-                <iframe :src="pdfSrc" width="100%" height="600" class="border-0"></iframe>
-            </div>
-        </div>
     </section>
-
-    <script src="//unpkg.com/alpinejs" defer></script>
 @endsection

@@ -9,7 +9,6 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
 
-                {{-- ✅ Error Message --}}
                 @if ($errors->any())
                     <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
                         <ul class="list-disc list-inside text-sm">
@@ -25,7 +24,6 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- Judul --}}
                     <div>
                         <label class="block mb-1 font-medium">Judul <span class="text-red-500">*</span></label>
                         <input type="text" name="judul" value="{{ old('judul', $adart->judul) }}"
@@ -35,7 +33,6 @@
                         @enderror
                     </div>
 
-                    {{-- File PDF (Opsional) --}}
                     <div>
                         <label class="block mb-1 font-medium">File PDF</label>
                         @if ($adart->file_pdf)
@@ -51,7 +48,6 @@
                         @enderror
                     </div>
 
-                    {{-- Link Google Drive --}}
                     <div>
                         <label class="block mb-1 font-medium">Link Google Drive</label>
                         <input type="url" name="link_drive" value="{{ old('link_drive', $adart->link_drive) }}"
@@ -62,7 +58,6 @@
                         @enderror
                     </div>
 
-                    {{-- Cover --}}
                     <div>
                         <label class="block mb-1 font-medium">Cover (Opsional)</label>
                         @if ($adart->cover)
@@ -78,7 +73,6 @@
                         @enderror
                     </div>
 
-                    {{-- Status --}}
                     <div>
                         <label class="block mb-1 font-medium">Status <span class="text-red-500">*</span></label>
                         <select name="status" class="block w-full border rounded-md p-2 text-sm">
@@ -93,7 +87,6 @@
                         @enderror
                     </div>
 
-                    {{-- Tombol --}}
                     <div class="flex gap-3">
                         <button type="submit"
                             class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">

@@ -11,7 +11,6 @@
             <form action="{{ route('dewan_pengawas.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <!-- Nama -->
                 <div class="mb-4">
                     <label for="nama" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama</label>
                     <input type="text" name="nama" id="nama"
@@ -21,7 +20,6 @@
                         required>
                 </div>
 
-                <!-- Jabatan -->
                 <div class="mb-4">
                     <label for="jabatan"
                         class="block text-sm font-medium text-gray-700 dark:text-gray-300">Jabatan</label>
@@ -32,7 +30,6 @@
                         required>
                 </div>
 
-                <!-- Foto -->
                 <div class="mb-4">
                     <label for="gambar"
                         class="block text-sm font-medium text-gray-700 dark:text-gray-300">Foto</label>
@@ -48,7 +45,6 @@
                         required>
                 </div>
 
-                <!-- Tombol -->
                 <div class="flex items-center space-x-2">
                     <button type="submit"
                         class="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-md hover:bg-green-700">

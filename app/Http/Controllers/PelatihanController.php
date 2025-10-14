@@ -8,15 +8,24 @@ use Illuminate\Support\Facades\Storage;
 
 class PelatihanController extends Controller
 {
-
-    public function index()
+    public function index(Request $request)
     {
-        $pelatihans = Pelatihan::orderBy('tanggal_mulai', 'asc')
-            ->paginate(10);
+        $query = Pelatihan::query();
+        if ($request->filled('search')) {
+            $query->where('judul', 'like', '%' . $request->search . '%');
+        }
+        if ($request->filled('kategori')) {
+            $query->where('kategori', $request->kategori);
+        }
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
 
-        return view('pelatihan.jadwal.index', compact('pelatihans'));
+        $pelatihans = $query->orderBy('tanggal_mulai', 'asc')->paginate(10);
+        $kategoriList = Pelatihan::select('kategori')->distinct()->pluck('kategori');
+
+        return view('pelatihan.jadwal.index', compact('pelatihans', 'kategoriList'));
     }
-
 
     public function indexVisitor()
     {
@@ -59,6 +68,7 @@ class PelatihanController extends Controller
     {
         return view('pelatihan.jadwal.edit', compact('pelatihan'));
     }
+
     public function update(Request $request, Pelatihan $pelatihan)
     {
         $data = $request->validate([
@@ -74,7 +84,6 @@ class PelatihanController extends Controller
         ]);
 
         if ($request->hasFile('brosur')) {
-            // hapus brosur lama jika ada
             if ($pelatihan->brosur && Storage::disk('public')->exists($pelatihan->brosur)) {
                 Storage::disk('public')->delete($pelatihan->brosur);
             }

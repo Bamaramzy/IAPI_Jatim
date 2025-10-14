@@ -4,9 +4,7 @@
     <section class="max-w-7xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg">
         <h1 class="text-3xl font-bold mb-6 text-center">Daftar Anggota</h1>
 
-        {{-- 🔎 Filter & Search --}}
         <form method="GET" action="{{ route('visitor.anggota') }}" class="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
-            {{-- Filter Kategori --}}
             <select name="kategori" class="border rounded-lg px-3 py-2 w-full">
                 <option value="">-- Semua Kategori --</option>
                 <option value="anggota biasa" {{ request('kategori') == 'anggota biasa' ? 'selected' : '' }}>Anggota Biasa
@@ -22,7 +20,6 @@
                 </option>
             </select>
 
-            {{-- Filter Status --}}
             <select name="status" class="border rounded-lg px-3 py-2 w-full">
                 <option value="">-- Semua Status --</option>
                 <option value="aktif" {{ request('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
@@ -30,7 +27,6 @@
                 </option>
             </select>
 
-            {{-- Search --}}
             <input type="text" name="search" placeholder="Cari Nama Anggota / KAP" value="{{ request('search') }}"
                 class="border rounded-lg px-3 py-2 w-full">
 
@@ -39,7 +35,6 @@
             </button>
         </form>
 
-        {{-- 📋 Tabel Anggota --}}
         <div class="overflow-x-auto">
             <table class="w-full border border-gray-200 rounded-lg shadow-sm">
                 <thead class="bg-gray-100">
@@ -83,7 +78,6 @@
             </table>
         </div>
 
-        {{-- 📌 Pagination --}}
         <div class="mt-6">
             {{ $anggota->appends(request()->query())->links() }}
         </div>

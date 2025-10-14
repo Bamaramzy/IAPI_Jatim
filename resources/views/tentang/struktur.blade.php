@@ -6,52 +6,307 @@
             Struktur Organisasi
         </h1>
 
-        <!-- Ketua -->
-        @if ($ketua)
-            <div class="text-center mb-12">
-                <img src="{{ asset('storage/' . $ketua->gambar) }}" alt="{{ $ketua->nama }}"
-                    class="w-40 h-40 object-cover mx-auto rounded-full shadow-lg mb-4">
-                <h2 class="text-xl font-semibold text-gray-900">{{ $ketua->nama }}</h2>
-                <p class="text-gray-700">{{ $ketua->jabatan }}</p>
-            </div>
-        @endif
+        <section class="mb-16">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-8 text-center border-b pb-3">
+                Dewan Pengurus
+            </h2>
 
-        <!-- Dewan Pengurus -->
-        <section class="mb-12">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Dewan Pengurus</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                @forelse ($pengurus as $item)
-                    <div class="bg-gray-50 p-4 rounded-lg shadow text-center">
-                        @if ($item->gambar)
-                            <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->nama }}"
-                                class="w-28 h-28 object-cover mx-auto rounded-full shadow mb-3">
-                        @endif
-                        <h3 class="text-lg font-medium text-gray-900">{{ $item->nama }}</h3>
-                        <p class="text-gray-700">{{ $item->jabatan }}</p>
+            @if ($pengurus->isNotEmpty())
+                <div id="carousel-pengurus" class="relative w-full mb-10">
+                    <div class="relative h-80 overflow-hidden rounded-lg">
+
+                        @foreach ($pengurus->chunk(3) as $index => $group)
+                            <div class="absolute inset-0 flex justify-center items-center transition-all duration-500 ease-in-out 
+                                {{ $index === 0 ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none' }}"
+                                data-carousel-item>
+                                <div
+                                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center w-full px-4">
+                                    @foreach ($group as $item)
+                                        <div class="flex flex-col items-center text-center">
+                                            @if ($item->gambar)
+                                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->nama }}"
+                                                    class="w-32 h-32 object-cover mx-auto rounded-full shadow mb-4">
+                                            @endif
+                                            <h3 class="text-lg font-semibold text-gray-900">{{ $item->nama }}</h3>
+                                            <p class="text-gray-600">{{ $item->jabatan }}</p>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @empty
-                    <p class="text-center text-gray-500 italic col-span-3">Belum ada data pengurus.</p>
-                @endforelse
+
+                    <button type="button"
+                        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        data-carousel-prev>
+                        <span
+                            class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60">
+                            <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 1 1 5l4 4" />
+                            </svg>
+                        </span>
+                    </button>
+                    <button type="button"
+                        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        data-carousel-next>
+                        <span
+                            class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60">
+                            <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m1 9 4-4-4-4" />
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+            @else
+                <p class="text-center text-gray-500 italic mb-10">
+                    Belum ada data pengurus.
+                </p>
+            @endif
+
+            <div id="accordion-pengurus" data-accordion="collapse" class="mt-10">
+                <h2 id="accordion-pengurus-heading-1">
+                    <button type="button"
+                        class="flex items-center justify-between w-full p-5 font-medium text-gray-800 border border-b-0 border-gray-200 rounded-t-xl hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 gap-3"
+                        data-accordion-target="#accordion-pengurus-body-1" aria-expanded="false"
+                        aria-controls="accordion-pengurus-body-1">
+                        <span>Fungsi</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5 5 1 1 5" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-pengurus-body-1" class="hidden" aria-labelledby="accordion-pengurus-heading-1">
+                    <div class="p-5 border border-b-0 border-gray-200 bg-gray-50 text-gray-700 leading-relaxed">
+                        Melaksanakan kegiatan untuk mencapai tujuan yang tertuang dalam Anggaran Dasar, Anggaran Rumah
+                        Tangga, keputusan Rapat Umum Anggota (RUA) atau Rapat Umum Anggota Luar Biasa (RUALB), dan semua
+                        peraturan Asosiasi yang berlaku.
+                    </div>
+                </div>
+
+                <h2 id="accordion-pengurus-heading-2">
+                    <button type="button"
+                        class="flex items-center justify-between w-full p-5 font-medium text-gray-800 border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 gap-3"
+                        data-accordion-target="#accordion-pengurus-body-2" aria-expanded="false"
+                        aria-controls="accordion-pengurus-body-2">
+                        <span>Wewenang dan Tanggung Jawab</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5 5 1 1 5" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-pengurus-body-2" class="hidden" aria-labelledby="accordion-pengurus-heading-2">
+                    <div
+                        class="p-5 border border-t-0 border-gray-200 bg-gray-50 text-gray-700 text-justify leading-relaxed space-y-2">
+                        <ul class="list-decimal pl-6 space-y-1">
+                            <li>Menetapkan dan mengesahkan peraturan Asosiasi.</li>
+                            <li>Membentuk Perangkat Kepengurusan.</li>
+                            <li>Menetapkan Peraturan Asosiasi mengenai rencana kegiatan dan anggaran tahunan setelah
+                                mendapatkan pertimbangan dari Dewan Pengawas.</li>
+                            <li>Menyetujui laporan kegiatan tahunan, termasuk laporan keuangan dan mengesahkannya setelah
+                                mendapatkan pertimbangan dari Dewan Pengawas yang dituangkan dalam Peraturan Asosiasi.</li>
+                            <li>Menetapkan usulan calon anggota Komite Profesi Akuntan Publik.</li>
+                            <li>Menetapkan perwakilan dari Asosiasi pada badan atau instansi lain yang relevan.</li>
+                            <li>
+                                Melakukan segala tindakan dengan persetujuan RUA dan/atau RUALB untuk:
+                                <ul class="list-[lower-alpha] pl-6 space-y-1">
+                                    <li>membeli, menjual atau dengan cara lain mendapatkan/melepaskan hak atas barang tidak
+                                        bergerak;</li>
+                                    <li>mengagunkan harta kekayaan milik Asosiasi;</li>
+                                    <li>memperoleh dan memberikan pinjaman;</li>
+                                    <li>mendirikan suatu usaha baru atau turut serta pada perusahaan baik di dalam maupun di
+                                        luar negeri;</li>
+                                </ul>
+                                sesuai ketentuan Anggaran Dasar dan Anggaran Rumah Tangga.
+                            </li>
+                            <li>Memberikan kuasa kepada pihak lain untuk mewakili dan bertindak atas nama Asosiasi, dengan
+                                cakupan dan jangka waktu tidak lebih dari 12 (dua belas) bulan dengan persetujuan rapat
+                                Dewan Pengurus.</li>
+                            <li>Menetapkan peraturan kepegawaian Asosiasi termasuk keputusan pengangkatan dan pemberhentian
+                                pegawai, penetapan gaji dan fasilitas lainnya termasuk pemberian penghargaan maupun sanksi.
+                            </li>
+                            <li>Membentuk dan menetapkan Komite Nominasi dan Pemilihan untuk menyelenggarakan Pemilihan
+                                Raya.</li>
+                            <li>Membentuk dan menetapkan Komite Pelaksana Referendum untuk menyelenggarakan Referendum.</li>
+                            <li>Mengangkat dan menetapkan Direktur Eksekutif dan/atau Direktur.</li>
+                            <li>Menerima atau menolak permohonan keberatan dari calon Anggota atas keputusan penolakan
+                                Komite Keanggotan dan Advokasi untuk menjadi Anggota.</li>
+                            <li>Meminta pertimbangan atas suatu kebijakan kepada Dewan Pengawas dalam hal diperlukan.</li>
+                            <li>Mengupayakan pendanaan guna membiayai kegiatan Asosiasi.</li>
+                            <li>Menetapkan dan mengesahkan hal-hal lain yang menurut Dewan Pengurus perlu dilakukan.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- Dewan Pengawas -->
-        <section>
-            <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Dewan Pengawas</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-                @forelse ($pengawas as $item)
-                    <div class="bg-gray-50 p-4 rounded-lg shadow text-center">
-                        @if ($item->gambar)
-                            <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->nama }}"
-                                class="w-28 h-28 object-cover mx-auto rounded-full shadow mb-3">
-                        @endif
-                        <h3 class="text-lg font-medium text-gray-900">{{ $item->nama }}</h3>
-                        <p class="text-gray-700">{{ $item->jabatan }}</p>
+        <section class="mb-16">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-8 text-center border-b pb-3">
+                Dewan Pengawas
+            </h2>
+
+            @if ($pengawas->isNotEmpty())
+                <div id="carousel-pengawas" class="relative w-full mb-10">
+                    <div class="relative h-80 overflow-hidden rounded-lg">
+
+                        @foreach ($pengawas->chunk(3) as $index => $group)
+                            <div class="absolute inset-0 flex justify-center items-center transition-all duration-500 ease-in-out 
+                                {{ $index === 0 ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none' }}"
+                                data-carousel-item>
+                                <div
+                                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center w-full px-4">
+                                    @foreach ($group as $item)
+                                        <div class="flex flex-col items-center text-center">
+                                            @if ($item->gambar)
+                                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->nama }}"
+                                                    class="w-32 h-32 object-cover mx-auto rounded-full shadow mb-4">
+                                            @endif
+                                            <h3 class="text-lg font-semibold text-gray-900">{{ $item->nama }}</h3>
+                                            <p class="text-gray-600">{{ $item->jabatan }}</p>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
-                @empty
-                    <p class="text-center text-gray-500 italic col-span-3">Belum ada data pengawas.</p>
-                @endforelse
+
+                    <button type="button"
+                        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        data-carousel-prev>
+                        <span
+                            class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60">
+                            <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M5 1 1 5l4 4" />
+                            </svg>
+                        </span>
+                    </button>
+                    <button type="button"
+                        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                        data-carousel-next>
+                        <span
+                            class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60">
+                            <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+            @else
+                <p class="text-center text-gray-500 italic mb-10">
+                    Belum ada data pengawas.
+                </p>
+            @endif
+
+            <div id="accordion-pengawas" data-accordion="collapse" class="mt-10">
+                <h2 id="accordion-pengawas-heading-1">
+                    <button type="button"
+                        class="flex items-center justify-between w-full p-5 font-medium text-gray-800 border border-b-0 border-gray-200 rounded-t-xl hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 gap-3"
+                        data-accordion-target="#accordion-pengawas-body-1" aria-expanded="false"
+                        aria-controls="accordion-pengawas-body-1">
+                        <span>Fungsi</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5 5 1 1 5" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-pengawas-body-1" class="hidden" aria-labelledby="accordion-pengawas-heading-1">
+                    <div class="p-5 border border-b-0 border-gray-200 bg-gray-50 text-gray-700 leading-relaxed">
+                        Melakukan pengawasan dan memberikan nasihat kepada Dewan Pengurus Asosiasi dalam menjalankan
+                        kegiatan kepengurusan.
+                    </div>
+                </div>
+
+                <h2 id="accordion-pengawas-heading-2">
+                    <button type="button"
+                        class="flex items-center justify-between w-full p-5 font-medium text-gray-800 border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 gap-3"
+                        data-accordion-target="#accordion-pengawas-body-2" aria-expanded="false"
+                        aria-controls="accordion-pengawas-body-2">
+                        <span>Wewenang dan Tanggung Jawab</span>
+                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5 5 1 1 5" />
+                        </svg>
+                    </button>
+                </h2>
+                <div id="accordion-pengawas-body-2" class="hidden" aria-labelledby="accordion-pengawas-heading-2">
+                    <div
+                        class="p-5 border border-t-0 border-gray-200 bg-gray-50 text-gray-700 text-justify leading-relaxed space-y-2">
+                        <ul class="list-decimal pl-6 space-y-1">
+                            <li>Mengawasi pelaksanaan keputusan RUA dan/atau RUALB yang
+                                dilaksanakan oleh Dewan Pengurus;</li>
+                            <li>Memberikan persetujuan terhadap usulan pembubaran Asosiasi yang
+                                akan diajukan ke RUA atau RUALB;</li>
+                            <li>Mengusulkan kepada Dewan Pengurus untuk menyelenggarakan
+                                RUALB, disertai dengan agenda yang akan dibahas.</li>
+                            <li>Memberikan persetujuan terhadap pemberhentian individu anggota
+                                Dewan Pengurus atau anggota Dewan Pengawas dalam rapat
+                                koordinasi Dewan Pengurus dan Dewan Pengawas, dan paling lambat
+                                dalam RUA atau RUALB berikutnya dilaporkan untuk
+                                mempertanggungjawabkan;</li>
+                            <li>Menerima atau menolak permohonan keberatan dari Anggota yang
+                                dikenakan sanksi oleh Komite Disiplin dan Investigasi;</li>
+                            <li>Memberikan saran dan pertimbangan atas suatu kebijakan yang
+                                diminta oleh Dewan Pengurus; dan</li>
+                            <li>Menetapkan Kantor Akuntan Publik untuk melakukan audit atas
+                                laporan keuangan Asosiasi.</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const carousels = document.querySelectorAll('[id^="carousel-"]');
+
+            carousels.forEach(carousel => {
+                const items = carousel.querySelectorAll('[data-carousel-item]');
+                let current = 0;
+
+                const prevBtn = carousel.querySelector('[data-carousel-prev]');
+                const nextBtn = carousel.querySelector('[data-carousel-next]');
+
+                function show(index) {
+                    items.forEach((item, i) => {
+                        if (i === index) {
+                            item.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
+                            item.classList.add('opacity-100', 'visible');
+                        } else {
+                            item.classList.remove('opacity-100', 'visible');
+                            item.classList.add('opacity-0', 'invisible', 'pointer-events-none');
+                        }
+                    });
+                }
+
+                prevBtn?.addEventListener('click', e => {
+                    e.preventDefault();
+                    current = (current - 1 + items.length) % items.length;
+                    show(current);
+                });
+
+                nextBtn?.addEventListener('click', e => {
+                    e.preventDefault();
+                    current = (current + 1) % items.length;
+                    show(current);
+                });
+
+                show(0);
+            });
+        });
+    </script>
 @endsection

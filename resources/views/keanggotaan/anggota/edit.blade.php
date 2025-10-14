@@ -12,7 +12,6 @@
                 @csrf
                 @method('PUT')
 
-                <!-- No Urut -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">No Urut</label>
                     <input type="number" name="no_urut" value="{{ old('no_urut', $anggota->no_urut) }}"
@@ -21,7 +20,6 @@
                         required>
                 </div>
 
-                <!-- No Reg IAPI -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">No Reg IAPI</label>
                     <input type="text" name="no_reg_iapi" value="{{ old('no_reg_iapi', $anggota->no_reg_iapi) }}"
@@ -30,7 +28,6 @@
                         required>
                 </div>
 
-                <!-- Nama Anggota -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama Anggota</label>
                     <input type="text" name="nama_anggota" value="{{ old('nama_anggota', $anggota->nama_anggota) }}"
@@ -39,7 +36,6 @@
                         required>
                 </div>
 
-                <!-- Izin AP -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Izin AP</label>
                     <input type="text" name="izin_ap" value="{{ old('izin_ap', $anggota->izin_ap) }}"
@@ -47,7 +43,6 @@
                                dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                 </div>
 
-                <!-- Kategori -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Kategori</label>
                     <select name="kategori"
@@ -63,7 +58,6 @@
                     </select>
                 </div>
 
-                <!-- Nama KAP -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama KAP</label>
                     <input type="text" name="nama_kap" value="{{ old('nama_kap', $anggota->nama_kap) }}"
@@ -71,7 +65,6 @@
                                dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                 </div>
 
-                <!-- Status -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Status</label>
                     <select name="status_id"
@@ -87,7 +80,6 @@
                     </select>
                 </div>
 
-                <!-- Korwil -->
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Korwil</label>
                     <input type="text" name="korwil" value="{{ old('korwil', $anggota->korwil) }}"
@@ -95,7 +87,6 @@
                                dark:text-gray-200 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
                 </div>
 
-                <!-- Tombol -->
                 <div class="flex items-center space-x-2">
                     <button type="submit"
                         class="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-md hover:bg-green-700">

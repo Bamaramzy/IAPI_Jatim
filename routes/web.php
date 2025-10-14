@@ -25,7 +25,8 @@ use App\Http\Controllers\{
     JalurRegulerController,
     JalurWorkshopController,
     SilabusController,
-    PeraturanProfesiController
+    PeraturanProfesiController,
+    PeraturanSpapController
 };
 use App\Models\{Informasi, Anggota, Direktori, AdArt, TataCara};
 
@@ -48,9 +49,6 @@ Route::prefix('keanggotaan')->group(function () {
 
         if ($request->filled('kategori')) {
             $query->where('kategori', $request->kategori);
-        }
-        if ($request->filled('status')) {
-            $query->where('status_id', $request->status);
         }
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
@@ -132,6 +130,8 @@ Route::get('/sertifikasi/ujian/tutorial/workshop-penyetaraan', [WorkshopPenyetar
 Route::get('/sertifikasi/ujian/tutorial/tata-tertib', fn() => view('sertifikasi.ujian.tutorial.tata_tertib.tatatertib'))->name('visitor.tata_tertib');
 
 Route::get('/peraturan/profesi', [PeraturanProfesiController::class, 'indexVisitor'])->name('visitor.peraturan_profesi');
+Route::get('/peraturan/spap', [PeraturanSpapController::class, 'indexVisitor'])->name('visitor.peraturan_spap');
+Route::get('/peraturan/kode-etik', fn() => view('peraturan.kode_etik.kode_etik'))->name('visitor.kode_etik');
 
 Route::get('/dashboard', fn() => view('dashboard'))
     ->middleware(['auth', 'verified'])
@@ -146,7 +146,6 @@ Route::middleware('auth')->group(function () {
         'informasi'             => InformasiController::class,
         'dewan_pengurus'        => DewanPengurusController::class,
         'dewan_pengawas'        => DewanPengawasController::class,
-        'anggota'               => AnggotaController::class,
         'direktori'             => DirektoriController::class,
         'adart'                 => AdArtController::class,
         'tatacara'              => TataCaraController::class,
@@ -162,10 +161,14 @@ Route::middleware('auth')->group(function () {
         'workshop_penyetaraan'  => WorkshopPenyetaraanController::class,
         'jalur_reguler'         => JalurRegulerController::class,
         'silabus_ujian'         => SilabusController::class,
-        'peraturan_profesi'     => PeraturanProfesiController::class
+        'peraturan_profesi'     => PeraturanProfesiController::class,
+        'peraturan_spap'        => PeraturanSpapController::class,
     ]);
+    Route::resource('anggota', AnggotaController::class)->parameters(['anggota' => 'anggota']);
 
     Route::prefix('workshop_penyetaraan')->group(function () {
+        Route::get('{kategori}/pdf/create', [WorkshopPenyetaraanController::class, 'createPdf'])->name('workshop_penyetaraan.createPdf');
+        Route::get('{kategori}/video/create', [WorkshopPenyetaraanController::class, 'createVideo'])->name('workshop_penyetaraan.createVideo');
         Route::post('{kategori}/pdf', [WorkshopPenyetaraanController::class, 'storePdf'])->name('workshop_penyetaraan.storePdf');
         Route::post('{kategori}/video', [WorkshopPenyetaraanController::class, 'storeVideo'])->name('workshop_penyetaraan.storeVideo');
         Route::delete('pdf/{pdf}', [WorkshopPenyetaraanController::class, 'destroyPdf'])->name('workshop_penyetaraan.destroyPdf');

@@ -9,7 +9,6 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
 
-                {{-- ✅ Error Message --}}
                 @if ($errors->any())
                     <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
                         <ul class="list-disc list-inside text-sm">
@@ -23,7 +22,6 @@
                 <form action="{{ route('pelatihan.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    {{-- Judul --}}
                     <div class="mb-4">
                         <label for="judul" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Judul <span class="text-red-500">*</span>
@@ -34,7 +32,6 @@
                             value="{{ old('judul') }}" required>
                     </div>
 
-                    {{-- Kategori --}}
                     <div class="mb-4">
                         <label for="kategori" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Kategori <span class="text-red-500">*</span>
@@ -52,7 +49,6 @@
                         </select>
                     </div>
 
-                    {{-- Tanggal Mulai --}}
                     <div class="mb-4">
                         <label for="tanggal_mulai" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Tanggal Mulai <span class="text-red-500">*</span>
@@ -63,7 +59,6 @@
                             value="{{ old('tanggal_mulai') }}" required>
                     </div>
 
-                    {{-- Tanggal Selesai --}}
                     <div class="mb-4">
                         <label for="tanggal_selesai" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Tanggal Selesai
@@ -74,7 +69,6 @@
                             value="{{ old('tanggal_selesai') }}">
                     </div>
 
-                    {{-- Waktu Mulai --}}
                     <div class="mb-4">
                         <label for="waktu_mulai" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Jam Mulai <span class="text-red-500">*</span>
@@ -85,7 +79,6 @@
                             value="{{ old('waktu_mulai') }}" required>
                     </div>
 
-                    {{-- Waktu Selesai --}}
                     <div class="mb-4">
                         <label for="waktu_selesai" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Jam Selesai <span class="text-red-500">*</span>
@@ -96,7 +89,6 @@
                             value="{{ old('waktu_selesai') }}" required>
                     </div>
 
-                    {{-- Lokasi --}}
                     <div class="mb-4">
                         <label for="lokasi" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Lokasi <span class="text-red-500">*</span>
@@ -107,7 +99,6 @@
                             value="{{ old('lokasi') }}" required>
                     </div>
 
-                    {{-- Upload Brosur --}}
                     <div class="mb-4">
                         <label for="brosur" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Upload Brosur (Opsional)
@@ -117,7 +108,6 @@
                         <p class="text-xs text-gray-500 mt-1">Opsional — maksimal 2MB</p>
                     </div>
 
-                    {{-- Status --}}
                     <div class="mb-4">
                         <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Status <span class="text-red-500">*</span>
@@ -131,7 +121,6 @@
                         </select>
                     </div>
 
-                    {{-- Tombol --}}
                     <div class="flex justify-end space-x-2">
                         <a href="{{ route('pelatihan.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Batal</a>

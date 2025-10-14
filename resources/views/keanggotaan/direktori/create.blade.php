@@ -9,7 +9,6 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
 
-                {{-- ✅ Error Message --}}
                 @if ($errors->any())
                     <div class="mb-4 p-3 bg-red-100 text-red-700 rounded">
                         <ul class="list-disc list-inside text-sm">
@@ -23,7 +22,6 @@
                 <form action="{{ route('direktori.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    {{-- Judul --}}
                     <div class="mb-4">
                         <label for="judul" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Judul <span class="text-red-500">*</span>
@@ -33,7 +31,6 @@
                             value="{{ old('judul') }}" required>
                     </div>
 
-                    {{-- Deskripsi --}}
                     <div class="mb-4">
                         <label for="deskripsi" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Deskripsi
@@ -42,7 +39,6 @@
                             class="mt-1 block w-full border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">{{ old('deskripsi') }}</textarea>
                     </div>
 
-                    {{-- Upload File PDF --}}
                     <div class="mb-4">
                         <label for="file_pdf" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Upload File PDF
@@ -52,7 +48,6 @@
                         <p class="text-xs text-gray-500 mt-1">Opsional — Maksimal 20MB</p>
                     </div>
 
-                    {{-- Link Google Drive --}}
                     <div class="mb-4">
                         <label for="link_drive" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Link Google Drive
@@ -64,7 +59,6 @@
                         <p class="text-xs text-gray-500 mt-1">Opsional — jika file sudah diunggah ke Google Drive</p>
                     </div>
 
-                    {{-- Upload Cover --}}
                     <div class="mb-4">
                         <label for="cover" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Upload Cover (Opsional)
@@ -74,7 +68,6 @@
                         <p class="text-xs text-gray-500 mt-1">Opsional — Maksimal 2MB</p>
                     </div>
 
-                    {{-- Status --}}
                     <div class="mb-4">
                         <label for="status" class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                             Status <span class="text-red-500">*</span>
@@ -88,7 +81,6 @@
                         </select>
                     </div>
 
-                    {{-- Tombol --}}
                     <div class="flex justify-end space-x-2">
                         <a href="{{ route('direktori.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Batal</a>

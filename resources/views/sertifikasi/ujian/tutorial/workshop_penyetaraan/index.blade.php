@@ -18,8 +18,8 @@
             {{-- ✅ Tombol Tambah --}}
             <div class="mb-4 text-right">
                 <a href="{{ route('workshop_penyetaraan.create') }}"
-                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
-                    + Tambah Data
+                    class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded shadow">
+                    + Tambah Workshop
                 </a>
             </div>
 
@@ -30,103 +30,128 @@
                         <tr>
                             <th class="px-4 py-2 border dark:border-gray-600 w-12">No</th>
                             <th class="px-4 py-2 border dark:border-gray-600">Kategori</th>
-                            <th class="px-4 py-2 border dark:border-gray-600">PDF</th>
-                            <th class="px-4 py-2 border dark:border-gray-600">Video</th>
-                            <th class="px-4 py-2 border dark:border-gray-600 w-40">Aksi</th>
+                            <th class="px-4 py-2 border dark:border-gray-600 w-1/3">PDF</th>
+                            <th class="px-4 py-2 border dark:border-gray-600 w-1/3">Video</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($kategoris as $kategori)
-                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
+                            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition">
                                 {{-- ✅ No --}}
-                                <td class="px-4 py-2 border dark:border-gray-600 text-center">
+                                <td class="px-4 py-2 border dark:border-gray-600 text-center align-top">
                                     {{ $loop->iteration }}
                                 </td>
 
                                 {{-- ✅ Nama Kategori --}}
-                                <td class="px-4 py-2 border dark:border-gray-600 font-semibold">
+                                <td class="px-4 py-2 border dark:border-gray-600 font-semibold align-top">
                                     {{ $kategori->nama_kategori }}
                                 </td>
 
-                                {{-- ✅ PDF --}}
-                                <td class="px-4 py-2 border dark:border-gray-600">
+                                {{-- ✅ Daftar PDF --}}
+                                <td class="px-4 py-2 border dark:border-gray-600 align-top">
                                     @forelse ($kategori->pdfs as $pdf)
-                                        <div class="flex justify-between items-center">
-                                            <a href="{{ Str::startsWith($pdf->file_path, 'http') ? $pdf->file_path : Storage::url($pdf->file_path) }}"
-                                                target="_blank" class="text-blue-500 hover:underline">
-                                                📄 {{ $pdf->judul }}
-                                            </a>
+                                        @php
+                                            $pdfUrl = $pdf->link_url
+                                                ? $pdf->link_url
+                                                : ($pdf->file_path
+                                                    ? Storage::url($pdf->file_path)
+                                                    : null);
+                                            $thumb = $pdf->preview_thumbnail
+                                                ? Storage::url($pdf->preview_thumbnail)
+                                                : null;
+                                        @endphp
+
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center space-x-2">
+                                                @if ($thumb)
+                                                    <img src="{{ $thumb }}" alt="thumb"
+                                                        class="w-10 h-10 object-cover rounded">
+                                                @endif
+
+                                                @if ($pdfUrl)
+                                                    <a href="{{ $pdfUrl }}" target="_blank"
+                                                        class="text-blue-500 hover:underline truncate max-w-xs">
+                                                        📄 {{ $pdf->judul }}
+                                                    </a>
+                                                @else
+                                                    <span class="text-gray-400 italic">Tidak ada file</span>
+                                                @endif
+                                            </div>
+
                                             <div class="flex space-x-1">
-                                                <a href="{{ route('workshop_penyetaraan.edit', $pdf->id) }}"
-                                                    class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded text-xs">
+                                                <a href="{{ route('workshop_penyetaraan.edit', ['workshop_penyetaraan' => $pdf->id, 'type' => 'pdf']) }}"
+                                                    class="text-xs bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded">
                                                     Edit
                                                 </a>
-                                                <form action="{{ route('workshop_penyetaraan.destroy', $pdf->id) }}"
+                                                <form action="{{ route('workshop_penyetaraan.destroyPdf', $pdf->id) }}"
                                                     method="POST"
                                                     onsubmit="return confirm('Yakin ingin menghapus PDF ini?')">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
-                                                        class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs">
+                                                        class="text-xs bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded">
                                                         Hapus
                                                     </button>
                                                 </form>
                                             </div>
                                         </div>
                                     @empty
-                                        <span class="text-gray-400">-</span>
+                                        <span class="text-gray-400 italic">-</span>
                                     @endforelse
                                 </td>
 
-                                {{-- ✅ Video --}}
-                                <td class="px-4 py-2 border dark:border-gray-600">
+                                {{-- ✅ Daftar Video --}}
+                                <td class="px-4 py-2 border dark:border-gray-600 align-top">
                                     @forelse ($kategori->videos as $video)
-                                        <div class="flex justify-between items-center">
-                                            <a href="{{ $video->video_url }}" target="_blank"
-                                                class="text-blue-500 hover:underline">
-                                                ▶ {{ $video->judul }}
-                                            </a>
+                                        @php
+                                            $videoUrl = $video->video_url
+                                                ? (Str::startsWith($video->video_url, 'http')
+                                                    ? $video->video_url
+                                                    : Storage::url($video->video_url))
+                                                : null;
+                                            $thumb = $video->thumbnail_url ? Storage::url($video->thumbnail_url) : null;
+                                        @endphp
+
+                                        <div class="flex items-center justify-between mb-2">
+                                            <div class="flex items-center space-x-2">
+                                                @if ($thumb)
+                                                    <img src="{{ $thumb }}" alt="thumb"
+                                                        class="w-10 h-10 object-cover rounded">
+                                                @endif
+
+                                                @if ($videoUrl)
+                                                    <a href="{{ $videoUrl }}" target="_blank"
+                                                        class="text-blue-500 hover:underline truncate max-w-xs">
+                                                        ▶ {{ $video->judul }}
+                                                    </a>
+                                                @else
+                                                    <span class="text-gray-400 italic">Tidak ada video</span>
+                                                @endif
+                                            </div>
+
                                             <div class="flex space-x-1">
-                                                <a href="{{ route('workshop_penyetaraan.edit', $video->id) }}"
-                                                    class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded text-xs">
+                                                <a href="{{ route('workshop_penyetaraan.edit', ['workshop_penyetaraan' => $video->id, 'type' => 'video']) }}"
+                                                    class="text-xs bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded">
                                                     Edit
                                                 </a>
-                                                <form action="{{ route('workshop_penyetaraan.destroy', $video->id) }}"
+                                                <form
+                                                    action="{{ route('workshop_penyetaraan.destroyVideo', $video->id) }}"
                                                     method="POST"
-                                                    onsubmit="return confirm('Yakin ingin menghapus Video ini?')">
+                                                    onsubmit="return confirm('Yakin ingin menghapus video ini?')">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
-                                                        class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs">
+                                                        class="text-xs bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded">
                                                         Hapus
                                                     </button>
                                                 </form>
                                             </div>
                                         </div>
                                     @empty
-                                        <span class="text-gray-400">-</span>
+                                        <span class="text-gray-400 italic">-</span>
                                     @endforelse
                                 </td>
 
-                                {{-- ✅ Aksi Kategori --}}
-                                <td class="px-4 py-2 border dark:border-gray-600 text-center">
-                                    <div class="flex justify-center space-x-2">
-                                        <a href="{{ route('workshop_penyetaraan.edit', $kategori->id) }}"
-                                            class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded text-sm">
-                                            Edit
-                                        </a>
-                                        <form action="{{ route('workshop_penyetaraan.destroy', $kategori->id) }}"
-                                            method="POST"
-                                            onsubmit="return confirm('Yakin ingin menghapus kategori ini beserta semua PDF & Video terkait?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-sm">
-                                                Hapus
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
                             </tr>
                         @empty
                             <tr>
@@ -138,6 +163,7 @@
                     </tbody>
                 </table>
             </div>
+
         </div>
     </div>
 </x-app-layout>

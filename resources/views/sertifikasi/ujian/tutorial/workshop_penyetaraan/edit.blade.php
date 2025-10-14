@@ -13,7 +13,7 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- ✅ Dropdown Kategori --}}
+                    {{-- ✅ Pilih Kategori --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Kategori</label>
                         <select name="kategori_id"
@@ -31,9 +31,9 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Judul --}}
+                    {{-- ✅ Judul Materi --}}
                     <div class="mb-4">
-                        <label class="block font-medium text-gray-700 dark:text-gray-300">Judul</label>
+                        <label class="block font-medium text-gray-700 dark:text-gray-300">Judul Materi</label>
                         <input type="text" name="judul" value="{{ old('judul', $workshop->judul) }}"
                             class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white"
                             placeholder="Masukkan judul materi">
@@ -42,66 +42,103 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Upload PDF --}}
-                    <div class="mb-4">
-                        <label class="block font-medium text-gray-700 dark:text-gray-300">Upload PDF (opsional)</label>
-                        <input type="file" name="pdf"
-                            class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
+                    {{-- 📄 Bagian PDF --}}
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 border-b pb-1">📘 Materi PDF
+                    </h3>
 
+                    <div class="mb-4">
+                        <label class="block font-medium text-gray-700 dark:text-gray-300">Upload File PDF
+                            (opsional)</label>
+                        <input type="file" name="file_path"
+                            class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
                         @if ($workshop->file_path)
-                            <p class="text-sm mt-1">
+                            <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
                                 📄 File saat ini:
-                                <a href="{{ Storage::url($workshop->file_path) }}" target="_blank"
-                                    class="text-blue-500 underline">Lihat PDF</a>
+                                <a href="{{ asset('storage/' . $workshop->file_path) }}" target="_blank"
+                                    class="text-blue-600 hover:underline">Lihat PDF</a>
                             </p>
                         @endif
-
-                        @error('pdf')
+                        @error('file_path')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    {{-- ✅ Link PDF --}}
                     <div class="mb-4">
-                        <label class="block font-medium text-gray-700 dark:text-gray-300">Link PDF</label>
-                        <input type="url" name="link" value="{{ old('link', $workshop->link) }}"
+                        <label class="block font-medium text-gray-700 dark:text-gray-300">Link PDF (opsional)</label>
+                        <input type="url" name="link_url" value="{{ old('link_url', $workshop->link_url) }}"
                             class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white"
                             placeholder="https://contoh.com/file.pdf">
-                        @error('link')
+                        @error('link_url')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    {{-- ✅ Upload Video --}}
+                    <div class="mb-6">
+                        <label class="block font-medium text-gray-700 dark:text-gray-300">Thumbnail Preview PDF
+                            (opsional)</label>
+                        <input type="file" name="preview_thumbnail"
+                            class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
+                        @if ($workshop->preview_thumbnail)
+                            <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                🖼️ Thumbnail saat ini:
+                                <img src="{{ asset('storage/' . $workshop->preview_thumbnail) }}" alt="Thumbnail"
+                                    class="h-24 mt-1 rounded border">
+                            </p>
+                        @endif
+                        @error('preview_thumbnail')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- 🎥 Bagian Video --}}
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 border-b pb-1">🎬 Tutorial -
+                        Video</h3>
+
                     <div class="mb-4">
-                        <label class="block font-medium text-gray-700 dark:text-gray-300">Upload Video
+                        <label class="block font-medium text-gray-700 dark:text-gray-300">Upload File Video
                             (opsional)</label>
                         <input type="file" name="video_file"
                             class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
-
-                        @if ($workshop->file_path && $workshop->table == 'workshop_penyetaraan_video')
-                            <p class="text-sm mt-1">🎥 Video saat ini:
-                                <span class="text-gray-400">{{ $workshop->file_path }}</span>
+                        @if ($workshop->video_file)
+                            <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                🎞️ File saat ini:
+                                <a href="{{ asset('storage/' . $workshop->video_file) }}" target="_blank"
+                                    class="text-blue-600 hover:underline">Lihat Video</a>
                             </p>
                         @endif
-
                         @error('video_file')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    {{-- ✅ Link Video --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Link Video (opsional)</label>
-                        <input type="url" name="video_url" value="{{ old('video_url', $workshop->video_url) }}"
+                        <input type="url" name="video_link" value="{{ old('video_link', $workshop->video_link) }}"
                             class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white"
                             placeholder="https://youtube.com/...">
-                        @error('video_url')
+                        @error('video_link')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Update --}}
+                    <div class="mb-6">
+                        <label class="block font-medium text-gray-700 dark:text-gray-300">Thumbnail Video
+                            (opsional)</label>
+                        <input type="file" name="thumbnail_url"
+                            class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
+                        @if ($workshop->thumbnail_url)
+                            <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
+                                🖼️ Thumbnail saat ini:
+                                <img src="{{ asset('storage/' . $workshop->thumbnail_url) }}" alt="Video Thumbnail"
+                                    class="h-24 mt-1 rounded border">
+                            </p>
+                        @endif
+                        @error('thumbnail_url')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- ✅ Tombol Aksi --}}
                     <div class="flex justify-end">
                         <a href="{{ route('workshop_penyetaraan.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>

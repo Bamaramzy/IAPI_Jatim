@@ -6,37 +6,30 @@
 
         <div class="grid md:grid-cols-3 gap-6">
             @forelse ($tatacaras as $tatacara)
+                @php
+                    $driveId = null;
+                    if ($tatacara->link_drive && preg_match('/[-\w]{25,}/', $tatacara->link_drive, $matches)) {
+                        $driveId = $matches[0];
+                    }
+                @endphp
+
                 <div class="border rounded-lg shadow hover:shadow-lg overflow-hidden bg-white">
-                    {{-- Cover --}}
-                    @if ($tatacara->cover)
+                    @if ($driveId)
+                        <iframe src="https://drive.google.com/file/d/{{ $driveId }}/preview" class="w-full h-64 border-0"
+                            allow="autoplay"></iframe>
+                    @elseif ($tatacara->file_pdf)
+                        <iframe src="{{ asset('storage/' . $tatacara->file_pdf) }}" class="w-full h-64 border-0"></iframe>
+                    @elseif ($tatacara->cover)
                         <img src="{{ asset('storage/' . $tatacara->cover) }}" alt="Cover {{ $tatacara->judul }}"
-                            class="w-full h-48 object-cover">
+                            class="w-full h-64 object-cover">
                     @else
-                        <div class="w-full h-48 bg-gray-200 flex items-center justify-center text-gray-500">
-                            No Cover
+                        <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
+                            Tidak ada file tersedia
                         </div>
                     @endif
 
-                    {{-- Content --}}
                     <div class="p-4">
-                        <h2 class="font-bold text-lg mb-4">{{ $tatacara->judul }}</h2>
-
-                        {{-- Links --}}
-                        <div class="flex gap-2">
-                            @if ($tatacara->file_pdf)
-                                <a href="{{ asset('storage/' . $tatacara->file_pdf) }}" target="_blank"
-                                    class="px-3 py-1 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
-                                    📖 Lihat PDF
-                                </a>
-                            @endif
-
-                            @if ($tatacara->link_drive)
-                                <a href="{{ $tatacara->link_drive }}" target="_blank"
-                                    class="px-3 py-1 bg-green-600 text-white text-sm rounded hover:bg-green-700">
-                                    🔗 Google Drive
-                                </a>
-                            @endif
-                        </div>
+                        <h2 class="font-bold text-lg mb-2 text-gray-800">{{ $tatacara->judul }}</h2>
                     </div>
                 </div>
             @empty
@@ -44,9 +37,8 @@
             @endforelse
         </div>
 
-        {{-- 📌 Pagination --}}
         <div class="mt-8">
-            {{ $tatacaras->links() }}
+            {{ $tatacaras->links('vendor.pagination.tailwind') }}
         </div>
     </section>
 @endsection

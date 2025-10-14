@@ -12,7 +12,6 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- ✅ Video URL --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Video URL</label>
                         <input type="text" name="video_url" value="{{ old('video_url', $ppl->video_url) }}"
@@ -22,7 +21,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ PDF URL --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">PDF URL</label>
                         <input type="text" name="pdf_url" value="{{ old('pdf_url', $ppl->pdf_url) }}"
@@ -32,7 +30,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Status --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Status</label>
                         <select name="status"
@@ -47,7 +44,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Update --}}
                     <div class="flex justify-end">
                         <a href="{{ route('ppl.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>

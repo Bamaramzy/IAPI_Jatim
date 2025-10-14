@@ -11,9 +11,6 @@
                 <form action="{{ route('workshop_penyetaraan.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    {{-- Hidden type --}}
-                    <input type="hidden" name="type" value="pdf">
-
                     {{-- ✅ Pilih Kategori --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Kategori</label>
@@ -32,9 +29,9 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Judul --}}
+                    {{-- ✅ Judul Materi --}}
                     <div class="mb-4">
-                        <label class="block font-medium text-gray-700 dark:text-gray-300">Judul</label>
+                        <label class="block font-medium text-gray-700 dark:text-gray-300">Judul Materi</label>
                         <input type="text" name="judul" value="{{ old('judul') }}"
                             class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white"
                             placeholder="Masukkan judul materi">
@@ -43,30 +40,46 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Upload PDF --}}
+                    {{-- 📄 Bagian PDF --}}
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 border-b pb-1">📘 Materi PDF
+                    </h3>
+
                     <div class="mb-4">
-                        <label class="block font-medium text-gray-700 dark:text-gray-300">Upload PDF (opsional)</label>
-                        <input type="file" name="pdf"
+                        <label class="block font-medium text-gray-700 dark:text-gray-300">Upload File PDF
+                            (opsional)</label>
+                        <input type="file" name="file_path"
                             class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
-                        @error('pdf')
+                        @error('file_path')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    {{-- ✅ Link PDF --}}
                     <div class="mb-4">
-                        <label class="block font-medium text-gray-700 dark:text-gray-300">Link PDF</label>
-                        <input type="url" name="link_pdf" value="{{ old('link_pdf') }}"
+                        <label class="block font-medium text-gray-700 dark:text-gray-300">Link PDF (opsional)</label>
+                        <input type="url" name="link_url" value="{{ old('link_url') }}"
                             class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white"
                             placeholder="https://contoh.com/file.pdf">
-                        @error('link_pdf')
+                        @error('link_url')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
 
-                    {{-- ✅ Upload Video --}}
+                    <div class="mb-6">
+                        <label class="block font-medium text-gray-700 dark:text-gray-300">Thumbnail Preview PDF
+                            (opsional)</label>
+                        <input type="file" name="preview_thumbnail"
+                            class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
+                        @error('preview_thumbnail')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- 🎥 Bagian Video --}}
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 border-b pb-1">🎬 Tutorial -
+                        Video</h3>
+
                     <div class="mb-4">
-                        <label class="block font-medium text-gray-700 dark:text-gray-300">Upload Video
+                        <label class="block font-medium text-gray-700 dark:text-gray-300">Upload File Video
                             (opsional)</label>
                         <input type="file" name="video_file"
                             class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
@@ -75,7 +88,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Link Video --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Link Video (opsional)</label>
                         <input type="url" name="video_link" value="{{ old('video_link') }}"
@@ -86,7 +98,17 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Simpan --}}
+                    <div class="mb-6">
+                        <label class="block font-medium text-gray-700 dark:text-gray-300">Thumbnail Video
+                            (opsional)</label>
+                        <input type="file" name="thumbnail_url"
+                            class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
+                        @error('thumbnail_url')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    {{-- ✅ Tombol Aksi --}}
                     <div class="flex justify-end">
                         <a href="{{ route('workshop_penyetaraan.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>

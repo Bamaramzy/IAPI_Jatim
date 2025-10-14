@@ -3,9 +3,11 @@
         display: none !important;
     }
 </style>
+
 <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-<header class="border-b bg-white">
-    <div class="max-w-7xl mx-auto px-2 lg:px-8 flex items-center justify-between py-3">
+
+<header class="border-b bg-white" x-data="{ mobileOpen: false }">
+    <div class="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between py-3">
         {{-- Logo --}}
         <div class="flex items-center gap-4">
             <a href="{{ url('/') }}" class="block">
@@ -13,59 +15,60 @@
             </a>
         </div>
 
+        {{-- Desktop Menu --}}
         <nav class="hidden md:flex gap-6 text-sm text-gray-600">
             <a href="{{ url('/') }}" class="hover:text-gray-900">Beranda</a>
 
+            {{-- Tentang Kami --}}
             <div class="relative group">
                 <a href="#" class="hover:text-gray-900 flex items-center">
                     Tentang Kami
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 text-gray-500 group-hover:text-gray-700"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="h-4 w-4 ml-1 text-gray-500 group-hover:text-gray-700" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </a>
                 <div
                     class="absolute left-0 mt-0 w-48 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
                     <a href="{{ url('/tentang/sejarah') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">Sejarah
-                        IAPI</a>
+                        class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">Sejarah IAPI</a>
                     <a href="{{ url('/tentang/visimisi') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">Visi dan
-                        Misi</a>
+                        class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">Visi & Misi</a>
                     <a href="{{ url('/tentang/profil') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">Profil</a>
+                        class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">Profil</a>
                     <a href="{{ url('/tentang/struktur') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">Struktur
+                        class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">Struktur
                         Organisasi</a>
                 </div>
             </div>
+
+            {{-- Keanggotaan --}}
             <div class="relative group">
                 <a href="#" class="hover:text-gray-900 flex items-center">
                     Keanggotaan
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 text-gray-500 group-hover:text-gray-700"
-                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="h-4 w-4 ml-1 text-gray-500 group-hover:text-gray-700" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </a>
                 <div
                     class="absolute left-0 mt-0 w-64 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
                     <a href="{{ url('/keanggotaan/ad-art') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">AD dan ART
-                        IAPI</a>
+                        class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">AD & ART IAPI</a>
                     <a href="{{ url('/keanggotaan/anggota') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">Daftar
-                        Anggota</a>
+                        class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">Daftar Anggota</a>
                     <a href="{{ url('/keanggotaan/info') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">Info
-                        Keanggotaan</a>
+                        class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">Info Keanggotaan</a>
                     <a href="{{ url('/keanggotaan/tata-cara') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">Tata Cara
-                        Pendaftaran Anggota</a>
+                        class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">Tata Cara
+                        Pendaftaran</a>
                     <a href="{{ url('/keanggotaan/direktori') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">Direktori
-                        Kantor Akuntan Publik & Akuntan Publik</a>
+                        class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">Direktori Kantor
+                        Akuntan Publik dan Akuntan Publik </a>
                 </div>
             </div>
+
+            {{-- Pelatihan --}}
             <div class="relative" x-data="{ open: false }">
                 <a href="#" @mouseenter="open = true" @mouseleave="open = false"
                     class="hover:text-gray-900 flex items-center">
@@ -112,9 +115,9 @@
                             </a>
                             <a href="{{ url('/pelatihan/brevet/kuasa') }}"
                                 class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
-                                Brevet Kuasa Khusus & Kuasa Hukum
+                                Brevet Kuasa Khusus dan Kuasa Hukum Perpajakan
                             </a>
-                            <a href="{{ url('/pelatihan/brevet/uskp-reviu-a') }}"
+                            <a href="{{ url('#') }}"
                                 class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
                                 USKP REVIU A
                             </a>
@@ -122,6 +125,8 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Sertifikasi --}}
             <div x-data="{ openCert: false }" @mouseenter="openCert = true" @mouseleave="openCert = false"
                 class="relative">
                 <button type="button" class="flex items-center gap-1 hover:text-gray-900">
@@ -194,34 +199,33 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Peraturan --}}
             <div class="relative group">
                 <a href="#" class="hover:text-gray-900 flex items-center">
                     Peraturan
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                        class="h-4 w-4 ml-1 text-gray-500 group-hover:text-gray-700" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="h-4 w-4 ml-1 text-gray-500 group-hover:text-gray-700" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </a>
                 <div
                     class="absolute left-0 mt-0 w-72 bg-white shadow-lg rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition">
                     <a href="{{ url('/peraturan/profesi') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
-                        Peraturan Terkait Profesi Akuntan Publik
-                    </a>
+                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Peraturan Profesi Akuntan
+                        Publik</a>
                     <a href="{{ url('/peraturan/spap') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
-                        Standar Profesional Akuntan Publik
-                    </a>
+                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Standar Profesional Akuntan
+                        Publik</a>
                     <a href="{{ url('/peraturan/kode-etik') }}"
-                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
-                        Kode Etik Profesi Akuntan Publik
-                    </a>
+                        class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Kode Etik Profesi Akuntan
+                        Publik</a>
                 </div>
             </div>
         </nav>
+
         {{-- Login / Dashboard --}}
-        <div>
+        <div class="hidden md:block">
             @if (Route::has('login'))
                 @auth
                     <a href="{{ url('/dashboard') }}"
@@ -231,5 +235,36 @@
                 @endauth
             @endif
         </div>
+
+        {{-- Hamburger Menu --}}
+        <button @click="mobileOpen = !mobileOpen" class="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100">
+            <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            <svg x-show="mobileOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
+    {{-- Mobile Menu --}}
+    <div x-show="mobileOpen" x-transition x-cloak class="md:hidden bg-white border-t shadow-md">
+        <nav class="flex flex-col p-4 text-gray-700 space-y-2">
+            <a href="{{ url('/') }}" class="py-2 border-b hover:text-gray-900">Beranda</a>
+            <a href="{{ url('/tentang/sejarah') }}" class="py-2 border-b hover:text-gray-900">Tentang Kami</a>
+            <a href="{{ url('/keanggotaan/ad-art') }}" class="py-2 border-b hover:text-gray-900">Keanggotaan</a>
+            <a href="{{ url('/pelatihan/tentang') }}" class="py-2 border-b hover:text-gray-900">Pelatihan</a>
+            <a href="{{ url('/sertifikasi/test-center') }}" class="py-2 border-b hover:text-gray-900">Sertifikasi</a>
+            <a href="{{ url('/peraturan/kode-etik') }}" class="py-2 border-b hover:text-gray-900">Peraturan</a>
+            @if (Route::has('login'))
+                @auth
+                    <a href="{{ url('/dashboard') }}" class="py-2 text-gray-800 font-medium">Dashboard</a>
+                @else
+                    <a href="{{ route('login') }}" class="py-2 text-gray-800 font-medium">Login</a>
+                @endauth
+            @endif
+        </nav>
     </div>
 </header>

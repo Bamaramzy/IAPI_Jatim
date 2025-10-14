@@ -36,12 +36,12 @@ class DewanPengurusController extends Controller
         return redirect()->route('dewan_pengurus.index')->with('success', 'Data berhasil ditambahkan.');
     }
 
-    public function edit(DewanPengurus $dewanPengurus)
+    public function edit(DewanPengurus $dewan_penguru)
     {
-        return view('dewan_pengurus.edit', compact('dewanPengurus'));
+        return view('dewan_pengurus.edit', ['dewan_pengurus' => $dewan_penguru]);
     }
 
-    public function update(Request $request, DewanPengurus $dewanPengurus)
+    public function update(Request $request, DewanPengurus $dewan_penguru)
     {
         $validated = $request->validate([
             'nama' => 'required|string|max:255',
@@ -50,24 +50,24 @@ class DewanPengurusController extends Controller
         ]);
 
         if ($request->hasFile('gambar')) {
-            if ($dewanPengurus->gambar) {
-                Storage::disk('public')->delete($dewanPengurus->gambar);
+            if ($dewan_penguru->gambar) {
+                Storage::disk('public')->delete($dewan_penguru->gambar);
             }
             $validated['gambar'] = $request->file('gambar')->store('dewan_pengurus', 'public');
         }
 
-        $dewanPengurus->update($validated);
+        $dewan_penguru->update($validated);
 
         return redirect()->route('dewan_pengurus.index')->with('success', 'Data berhasil diperbarui.');
     }
 
-    public function destroy(DewanPengurus $dewanPengurus)
+    public function destroy(DewanPengurus $dewan_penguru)
     {
-        if ($dewanPengurus->gambar) {
-            Storage::disk('public')->delete($dewanPengurus->gambar);
+        if ($dewan_penguru->gambar) {
+            Storage::disk('public')->delete($dewan_penguru->gambar);
         }
 
-        $dewanPengurus->delete();
+        $dewan_penguru->delete();
 
         return redirect()->route('dewan_pengurus.index')->with('success', 'Data berhasil dihapus.');
     }

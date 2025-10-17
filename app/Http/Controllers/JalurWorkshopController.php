@@ -8,7 +8,6 @@ class JalurWorkshopController extends Controller
 {
     public function index(Request $request)
     {
-        // daftar kategori
         $kategoriList = [
             'INFORMASI',
             'RPL ACPA',
@@ -18,16 +17,15 @@ class JalurWorkshopController extends Controller
             'SERTIFIKASI BPK',
         ];
 
-        $selectedKategori = $request->get('kategori', 'Informasi');
+        $selectedKategori = $request->get('kategori', 'INFORMASI');
 
         $data = [
-            'Informasi' => [
+            'INFORMASI' => [
                 'gambar' => '',
                 'konten' => '
                     <p>
                     Program UPAP juga dapat ditempuh melalui Recognition of Prior Learning (RPL). RPL merupakan salah satu jalur yang dapat ditempuh oleh seseorang untuk mengikuti program sertifikasi dengan melalui program pengakuan atas kompetensi tertentu baik yang berasal dari pendidikan/pengalaman kerja yang telah diperoleh sebelumnya. Para peserta diminta untuk mendemonstrasikan atau menunjukkan kompetensi tertentu tersebut dengan cara mengikuti program RPL dan dinyatakan lulus dalam post-test. Dengan demikian peserta dibebaskan dari ketentuan keharusan mengikuti ujian tertulis atas mata ujian tertentu (waiver).
                     </p>
-                    <br></br>
                     <p>
                     Tujuan RPL adalah untuk memberikan jalur khusus bagi seseorang yang secara substansi telah memiliki kompetensi yang setara dengan mata ujian tingkat dasar atau ujian tingkat profesional sehingga seseorang tersebut dapat diberikan pengakuan. IAPI menyelenggarakan beberapa kegiatan RPL dengan basis pesertanya adalah staf yang bekerja pada KAP atau bagian keuangan dan/atau akuntansi, lulusan Program Pendidikan Profesi Akuntansi (PPAK), pemegang Register Negara Akuntan (RNA).
                     </p>
@@ -411,7 +409,7 @@ class JalurWorkshopController extends Controller
                 </ul>
             ',
             ],
-            'Sertifikasi BPK' => [
+            'SERTIFIKASI BPK' => [
                 'gambar' => '/images/SERTIFIKASI_BPK.png',
                 'konten' => '
                 <p><strong>Informasi Tentang Sertifikasi BPK</strong></p>
@@ -506,7 +504,7 @@ class JalurWorkshopController extends Controller
             ],
         ];
 
-        $content = $data[$selectedKategori] ?? $data['Informasi'];
+        $content = $data[$selectedKategori] ?? $data['INFORMASI'];
 
         return view('sertifikasi.ujian.jalur_workshop.jalur_workshop', compact('kategoriList', 'selectedKategori', 'content'));
     }

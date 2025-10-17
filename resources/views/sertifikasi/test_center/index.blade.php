@@ -7,23 +7,38 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            {{-- ✅ Pesan Sukses --}}
             @if (session('success'))
                 <div class="mb-4 bg-green-100 text-green-700 px-4 py-2 rounded">
                     {{ session('success') }}
                 </div>
             @endif
 
-            {{-- ✅ Tombol Tambah --}}
             <div class="mb-4 text-right">
                 <a href="{{ route('test_center.create') }}"
                     class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
                     + Tambah Test Center
                 </a>
             </div>
+            <form action="{{ route('test_center.index') }}" method="GET"
+                class="mb-6 flex flex-col sm:flex-row sm:items-center gap-3">
+                <input type="text" name="search" value="{{ request('search') }}"
+                    placeholder="Cari berdasarkan nama, kode, atau kota..."
+                    class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/2 focus:ring focus:ring-blue-300 focus:outline-none">
 
-            {{-- ✅ Tabel Data --}}
+                <div class="flex gap-3">
+                    <button type="submit"
+                        class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+                        Cari
+                    </button>
+
+                    @if (request('search'))
+                        <a href="{{ route('test_center.index') }}"
+                            class="bg-gray-200 text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-300 transition">
+                            Reset
+                        </a>
+                    @endif
+                </div>
+            </form>
             <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow rounded">
                 <table class="min-w-full border border-gray-200 dark:border-gray-700">
                     <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
@@ -40,37 +55,24 @@
                     <tbody>
                         @forelse ($testcenters as $t)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                                {{-- No --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     {{ $loop->iteration }}
                                 </td>
-
-                                {{-- ✅ Kode --}}
                                 <td class="px-4 py-2 border dark:border-gray-600">
                                     {{ $t->kode }}
                                 </td>
-
-                                {{-- ✅ Nama --}}
                                 <td class="px-4 py-2 border dark:border-gray-600">
                                     {{ $t->nama }}
                                 </td>
-
-                                {{-- ✅ Alamat --}}
                                 <td class="px-4 py-2 border dark:border-gray-600">
                                     {{ $t->alamat }}
                                 </td>
-
-                                {{-- ✅ Kota --}}
                                 <td class="px-4 py-2 border dark:border-gray-600">
                                     {{ $t->kota }}
                                 </td>
-
-                                {{-- ✅ Telp --}}
                                 <td class="px-4 py-2 border dark:border-gray-600">
                                     {{ $t->telepon ?? '-' }}
                                 </td>
-
-                                {{-- ✅ Aksi --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     <div class="flex justify-center space-x-2">
                                         <a href="{{ route('test_center.edit', $t->id) }}"
@@ -100,7 +102,7 @@
                 </table>
             </div>
             <div class="mt-4">
-                {{ $testcenters->links() }}
+                {{ $testcenters->links('vendor.pagination.tailwind') }}
             </div>
         </div>
     </div>

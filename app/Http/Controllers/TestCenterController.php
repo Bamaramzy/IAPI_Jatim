@@ -7,18 +7,41 @@ use Illuminate\Http\Request;
 
 class TestCenterController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $testcenters = TestCenter::latest()->paginate(10);
+        $query = TestCenter::query();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama', 'like', "%{$search}%")
+                    ->orWhere('kode', 'like', "%{$search}%")
+                    ->orWhere('kota', 'like', "%{$search}%");
+            });
+        }
+
+        $testcenters = $query->latest()->paginate(10);
         return view('sertifikasi.test_center.index', compact('testcenters'));
     }
 
-    public function indexVisitor()
+    public function indexVisitor(Request $request)
     {
-        $testcenters = TestCenter::latest()->paginate(10);
+        $query = TestCenter::query();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nama', 'like', "%{$search}%")
+                    ->orWhere('kode', 'like', "%{$search}%")
+                    ->orWhere('kota', 'like', "%{$search}%");
+            });
+        }
+
+        $testcenters = $query->latest()->paginate(10);
 
         return view('sertifikasi.test_center.indexvisitor', compact('testcenters'));
     }
+
     public function create()
     {
         return view('sertifikasi.test_center.create');

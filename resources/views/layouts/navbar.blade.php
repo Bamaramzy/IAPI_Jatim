@@ -6,7 +6,7 @@
 
 <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
-<header class="border-b bg-white" x-data="{ mobileOpen: false }">
+<header class="sticky top-0 z-50 border-b bg-white shadow-sm" x-data="{ mobileOpen: false }">
     <div class="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between py-3">
         {{-- Logo --}}
         <div class="flex items-center gap-4">
@@ -34,7 +34,7 @@
                         class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">Sejarah IAPI</a>
                     <a href="{{ url('/tentang/visimisi') }}"
                         class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">Visi & Misi</a>
-                    <a href="{{ url('/tentang/profil') }}"
+                    <a href="{{ url('#') }}"
                         class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">Profil</a>
                     <a href="{{ url('/tentang/struktur') }}"
                         class="block px-4 py-2 hover:bg-gray-100 text-gray-600 hover:text-gray-900">Struktur
@@ -184,7 +184,7 @@
                                 </button>
                                 <div x-cloak x-show="openTutorial" x-transition
                                     class="absolute left-0 top-full mt-1 w-full bg-white shadow-lg rounded-md z-50">
-                                    <a href="{{ url('/sertifikasi/ujian/tutorial/reguler') }}"
+                                    <a href="{{ url('#') }}"
                                         class="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">Tutorial Jalur
                                         Reguler</a>
                                     <a href="{{ url('/sertifikasi/ujian/tutorial/workshop-penyetaraan') }}"
@@ -250,21 +250,222 @@
     </div>
 
     {{-- Mobile Menu --}}
-    <div x-show="mobileOpen" x-transition x-cloak class="md:hidden bg-white border-t shadow-md">
+    <div x-show="mobileOpen" x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
+        x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100 translate-y-0"
+        x-transition:leave-end="opacity-0 -translate-y-2" x-cloak
+        class="fixed inset-x-0 top-[64px] md:hidden bg-white border-t shadow-lg z-50
+           max-h-[80vh] overflow-y-auto overscroll-contain rounded-b-xl">
         <nav class="flex flex-col p-4 text-gray-700 space-y-2">
-            <a href="{{ url('/') }}" class="py-2 border-b hover:text-gray-900">Beranda</a>
-            <a href="{{ url('/tentang/sejarah') }}" class="py-2 border-b hover:text-gray-900">Tentang Kami</a>
-            <a href="{{ url('/keanggotaan/ad-art') }}" class="py-2 border-b hover:text-gray-900">Keanggotaan</a>
-            <a href="{{ url('/pelatihan/tentang') }}" class="py-2 border-b hover:text-gray-900">Pelatihan</a>
-            <a href="{{ url('/sertifikasi/test-center') }}" class="py-2 border-b hover:text-gray-900">Sertifikasi</a>
-            <a href="{{ url('/peraturan/kode-etik') }}" class="py-2 border-b hover:text-gray-900">Peraturan</a>
-            @if (Route::has('login'))
-                @auth
-                    <a href="{{ url('/dashboard') }}" class="py-2 text-gray-800 font-medium">Dashboard</a>
-                @else
-                    <a href="{{ route('login') }}" class="py-2 text-gray-800 font-medium">Login</a>
-                @endauth
-            @endif
+
+            <!-- Beranda -->
+            <a href="{{ url('/') }}" class="py-2 border-b hover:text-gray-900 font-medium">Beranda</a>
+
+            <!-- Tentang Kami -->
+            <div x-data="{ open: false }">
+                <button @click="open = !open" class="flex justify-between w-full py-2 border-b hover:text-gray-900">
+                    Tentang Kami
+                    <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }"
+                        class="h-4 w-4 text-gray-500 transition-transform duration-200" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div x-show="open" x-collapse class="ml-4 border-l pl-4 text-sm space-y-2">
+                    <a href="{{ url('/tentang/sejarah') }}" class="block py-1 hover:text-gray-900">Sejarah IAPI</a>
+                    <a href="{{ url('/tentang/visimisi') }}" class="block py-1 hover:text-gray-900">Visi & Misi</a>
+                    <a href="{{ url('#') }}" class="block py-1 hover:text-gray-900">Profil</a>
+                    <a href="{{ url('/tentang/struktur') }}" class="block py-1 hover:text-gray-900">Struktur
+                        Organisasi</a>
+                </div>
+            </div>
+
+            <!-- Keanggotaan -->
+            <div x-data="{ open: false }">
+                <button @click="open = !open" class="flex justify-between w-full py-2 border-b hover:text-gray-900">
+                    Keanggotaan
+                    <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }"
+                        class="h-4 w-4 text-gray-500 transition-transform duration-200" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div x-show="open" x-collapse class="ml-4 border-l pl-4 text-sm space-y-2">
+                    <a href="{{ url('/keanggotaan/ad-art') }}" class="block py-1 hover:text-gray-900">AD & ART
+                        IAPI</a>
+                    <a href="{{ url('/keanggotaan/anggota') }}" class="block py-1 hover:text-gray-900">Daftar
+                        Anggota</a>
+                    <a href="{{ url('/keanggotaan/info') }}" class="block py-1 hover:text-gray-900">Info
+                        Keanggotaan</a>
+                    <a href="{{ url('/keanggotaan/tata-cara') }}" class="block py-1 hover:text-gray-900">Tata Cara
+                        Pendaftaran</a>
+                    <a href="{{ url('/keanggotaan/direktori') }}" class="block py-1 hover:text-gray-900">Direktori
+                        Kantor & Akuntan Publik</a>
+                </div>
+            </div>
+
+            <!-- Pelatihan -->
+            <div x-data="{ open: false }">
+                <button @click="open = !open" class="flex justify-between w-full py-2 border-b hover:text-gray-900">
+                    Pelatihan
+                    <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }"
+                        class="h-4 w-4 text-gray-500 transition-transform duration-200" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                <!-- Level 1 -->
+                <div x-show="open" x-collapse class="ml-4 border-l pl-4 text-sm space-y-2">
+                    <a href="{{ url('/pelatihan/tentang') }}" class="block py-1 hover:text-gray-900">
+                        Tentang Pelatihan IAPI
+                    </a>
+                    <a href="{{ url('/pelatihan/jadwal') }}" class="block py-1 hover:text-gray-900">
+                        Jadwal Pelatihan
+                    </a>
+                    <a href="{{ url('/pelatihan/panduan-ppl') }}" class="block py-1 hover:text-gray-900">
+                        Panduan PPL
+                    </a>
+
+                    <!-- Brevet Perpajakan -->
+                    <div x-data="{ openBrevet: false }">
+                        <button @click="openBrevet = !openBrevet"
+                            class="flex justify-between w-full py-1 hover:text-gray-900">
+                            Brevet Perpajakan
+                            <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': openBrevet }"
+                                class="h-3 w-3 text-gray-500 transition-transform duration-200" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <!-- Level 2 -->
+                        <div x-show="openBrevet" x-collapse class="ml-4 border-l pl-4 space-y-1">
+                            <a href="{{ url('/pelatihan/brevet/a-b') }}" class="block py-1 hover:text-gray-900">
+                                Brevet A dan B
+                            </a>
+                            <a href="{{ url('/pelatihan/brevet/c') }}" class="block py-1 hover:text-gray-900">
+                                Brevet C
+                            </a>
+                            <a href="{{ url('/pelatihan/brevet/kuasa') }}" class="block py-1 hover:text-gray-900">
+                                Brevet Kuasa Khusus & Kuasa Hukum Perpajakan
+                            </a>
+                            <a href="{{ url('#') }}" class="block py-1 hover:text-gray-900">
+                                USKP Reviu A
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sertifikasi -->
+            <div x-data="{ open: false }">
+                <button @click="open = !open" class="flex justify-between w-full py-2 border-b hover:text-gray-900">
+                    Sertifikasi
+                    <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }"
+                        class="h-4 w-4 text-gray-500 transition-transform duration-200" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                <!-- Isi submenu Sertifikasi -->
+                <div x-show="open" x-collapse class="ml-4 border-l pl-4 text-sm space-y-2">
+
+                    <a href="{{ url('/sertifikasi/waiver-ppak') }}" class="block py-1 hover:text-gray-900">
+                        Jumlah Mata Uji Yang Diwaiver
+                    </a>
+                    <a href="{{ url('/sertifikasi/test-center') }}" class="block py-1 hover:text-gray-900">
+                        Test Center
+                    </a>
+                    <a href="{{ url('/sertifikasi/workshop-a-b') }}" class="block py-1 hover:text-gray-900">
+                        Workshop A & B
+                    </a>
+
+                    <!-- Ujian Profesi Akuntan Publik -->
+                    <div x-data="{ openUjian: false }">
+                        <button @click="openUjian = !openUjian"
+                            class="flex justify-between w-full py-1 hover:text-gray-900">
+                            Ujian Profesi Akuntan Publik
+                            <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': openUjian }"
+                                class="h-3 w-3 text-gray-500 transition-transform duration-200" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+
+                        <!-- Submenu Ujian -->
+                        <div x-show="openUjian" x-collapse class="ml-4 border-l pl-4 space-y-1">
+                            <a href="{{ url('/sertifikasi/ujian/jalur-reguler') }}"
+                                class="block py-1 hover:text-gray-900">
+                                Jalur Reguler
+                            </a>
+                            <a href="{{ url('/sertifikasi/ujian/jalur-workshop-penyetaraan') }}"
+                                class="block py-1 hover:text-gray-900">
+                                Jalur Workshop & Penyetaraan
+                            </a>
+                            <a href="{{ url('/sertifikasi/ujian/silabus') }}" class="block py-1 hover:text-gray-900">
+                                Silabus Ujian, Modul, dan Ilustrasi Soal
+                            </a>
+                            <a href="{{ url('/sertifikasi/ujian/proses-penerbitan') }}"
+                                class="block py-1 hover:text-gray-900">
+                                Proses Penerbitan Sertifikasi & Gelar
+                            </a>
+
+                            <!-- Tutorial Pendaftaran -->
+                            <div x-data="{ openTutorial: false }">
+                                <button @click="openTutorial = !openTutorial"
+                                    class="flex justify-between w-full py-1 hover:text-gray-900">
+                                    Tutorial Pendaftaran
+                                    <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': openTutorial }"
+                                        class="h-3 w-3 text-gray-500 transition-transform duration-200" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </button>
+
+                                <div x-show="openTutorial" x-collapse class="ml-4 border-l pl-4 space-y-1">
+                                    <a href="{{ url('#') }}" class="block py-1 hover:text-gray-900">
+                                        Tutorial Jalur Reguler
+                                    </a>
+                                    <a href="{{ url('/sertifikasi/ujian/tutorial/workshop-penyetaraan') }}"
+                                        class="block py-1 hover:text-gray-900">
+                                        Tutorial Jalur Workshop & Penyetaraan
+                                    </a>
+                                    <a href="{{ url('/sertifikasi/ujian/tutorial/tata-tertib') }}"
+                                        class="block py-1 hover:text-gray-900">
+                                        Tata Tertib Pelaksanaan Ujian
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peraturan -->
+            <div x-data="{ open: false }">
+                <button @click="open = !open" class="flex justify-between w-full py-2 border-b hover:text-gray-900">
+                    Peraturan
+                    <svg xmlns="http://www.w3.org/2000/svg" :class="{ 'rotate-180': open }"
+                        class="h-4 w-4 text-gray-500 transition-transform duration-200" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div x-show="open" x-collapse class="ml-4 border-l pl-4 text-sm space-y-2">
+                    <a href="{{ url('/peraturan/profesi') }}" class="block py-1 hover:text-gray-900">Peraturan
+                        Profesi</a>
+                    <a href="{{ url('/peraturan/spap') }}" class="block py-1 hover:text-gray-900">SPAP</a>
+                    <a href="{{ url('/peraturan/kode-etik') }}" class="block py-1 hover:text-gray-900">Kode Etik
+                        Profesi</a>
+                </div>
+            </div>
+
         </nav>
     </div>
+
 </header>

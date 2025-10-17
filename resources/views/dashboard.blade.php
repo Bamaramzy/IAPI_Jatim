@@ -8,7 +8,6 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <!-- Statistik Card -->
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
                 <x-dashboard-card title="Total Informasi" value="{{ \App\Models\Informasi::count() }}" color="green"
                     link="{{ route('informasi.index') }}" />
@@ -58,12 +57,21 @@
                 <x-dashboard-card title="Total Workshop A dan B" value="{{ \App\Models\WorkshopAB::count() }}"
                     color="yellow" link="{{ route('workshop_ab.index') }}" />
 
-                <x-dashboard-card title="Total Jalur Workshop"
-                    value="{{ \App\Models\Kategori::count() + \App\Models\Pdf::count() + \App\Models\Video::count() }}"color="yellow"
-                    link="{{ route('workshop_penyetaraan.index') }}" />
+                <x-dashboard-card title="Total Jalur Reguler" value="{{ \App\Models\JalurReguler::count() }}"
+                    color="yellow" link="{{ route('jalur_reguler.index') }}" />
 
                 <x-dashboard-card title="Total Silabus UJian" value="{{ \App\Models\Silabus::count() }}" color="yellow"
                     link="{{ route('silabus_ujian.index') }}" />
+
+                <x-dashboard-card title="Total Jalur Workshop Penyetaraan"
+                    value="{{ \App\Models\Kategori::count() + \App\Models\Pdf::count() + \App\Models\Video::count() }}"
+                    color="yellow" link="{{ route('workshop_penyetaraan.index') }}" />
+
+                <x-dashboard-card title="Total Peraturan Profesi" value="{{ \App\Models\PeraturanProfesi::count() }}"
+                    color="blue" link="{{ route('peraturan_profesi.index') }}" />
+
+                <x-dashboard-card title="Total SPAP" value="{{ \App\Models\PeraturanSpap::count() }}" color="blue"
+                    link="{{ route('peraturan_spap.index') }}" />
             </div>
 
             <x-dashboard-list title="Informasi Terbaru" :items="\App\Models\Informasi::latest()->take(5)->get()" empty="Belum ada informasi."
@@ -76,7 +84,8 @@
                 type="anggota" />
             <x-dashboard-table title="Direktori Terbaru" :items="\App\Models\Direktori::latest()->take(10)->get()" empty="Belum ada data direktori."
                 type="direktori" />
-            <x-dashboard-table title="Ad-Art Terbaru" :items="\App\Models\AdArt::latest()->take(10)->get()" empty="Belum ada data ad-art." type="adart" />
+            <x-dashboard-table title="Ad-Art Terbaru" :items="\App\Models\AdArt::latest()->take(10)->get()" empty="Belum ada data ad-art."
+                type="adart" />
             <x-dashboard-table title="Jadwal Terbaru" :items="\App\Models\Pelatihan::latest()->take(10)->get()" empty="Belum ada data ad-art."
                 type="pelatihan" />
             <x-dashboard-table title="Tata Cara Terbaru" :items="\App\Models\TataCara::latest()->take(10)->get()" empty="Belum ada data tata cara."

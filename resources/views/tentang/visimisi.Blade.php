@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <div class="max-w-5xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg text-justify">
+    <div class="max-w-5xl mx-auto px-6 py-12 mt-2 bg-white shadow-md rounded-lg text-justify">
         <h1 class="text-3xl font-bold mb-10 text-center text-gray-900">
             Visi & Misi
         </h1>

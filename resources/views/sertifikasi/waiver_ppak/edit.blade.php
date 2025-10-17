@@ -12,7 +12,6 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- ✅ Nama Universitas --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Nama Universitas</label>
                         <input type="text" name="nama_universitas"
@@ -24,7 +23,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Akreditasi --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Akreditasi</label>
                         <input type="text" name="akreditasi"
@@ -36,7 +34,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Jumlah Waiver --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Jumlah Waiver</label>
                         <input type="text" name="jumlah_waiver"
@@ -48,7 +45,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Update --}}
                     <div class="flex justify-end">
                         <a href="{{ route('waiver_ppak.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>

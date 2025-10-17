@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            ✏️ Edit Data Standar Profesional (SPAP)
+            Edit Data Standar Profesional (SPAP)
         </h2>
     </x-slot>
 
@@ -13,7 +13,6 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- ✅ Kategori --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">
                             Kategori
@@ -36,7 +35,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Judul --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">
                             Judul
@@ -49,7 +47,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Deskripsi --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">
                             Deskripsi
@@ -61,7 +58,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Thumbnail --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">
                             Thumbnail (Opsional)
@@ -80,7 +76,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ PDF 1 --}}
                     <div class="mb-4 border-t pt-4">
                         <h3 class="font-semibold text-gray-700 dark:text-gray-300 mb-2">PDF 1</h3>
 
@@ -105,7 +100,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ PDF 2 --}}
                     <div class="mb-4 border-t pt-4">
                         <h3 class="font-semibold text-gray-700 dark:text-gray-300 mb-2">PDF 2</h3>
 
@@ -130,7 +124,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ PDF 3 --}}
                     <div class="mb-6 border-t pt-4">
                         <h3 class="font-semibold text-gray-700 dark:text-gray-300 mb-2">PDF 3</h3>
 
@@ -155,7 +148,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Simpan --}}
                     <div class="flex justify-end border-t pt-4">
                         <a href="{{ route('peraturan_spap.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2 hover:bg-gray-600">

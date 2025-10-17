@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            ➕ Tambah Jalur Reguler
+            Tambah Jalur Reguler
         </h2>
     </x-slot>
 
@@ -11,7 +11,6 @@
                 <form action="{{ route('jalur_reguler.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    {{-- ✅ Kategori (Dropdown) --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Kategori</label>
                         <select name="kategori"
@@ -38,7 +37,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Judul --}}
                     <div class="mb-4">
                         <label for="judul" class="block font-medium text-gray-700 dark:text-gray-300">Judul</label>
                         <input type="text" id="judul" name="judul" value="{{ old('judul') }}"
@@ -49,7 +47,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Konten pakai CKEditor --}}
                     <div class="mb-4">
                         <label for="konten" class="block font-medium text-gray-700 dark:text-gray-300">Konten</label>
                         <textarea id="konten" name="konten" rows="6"
@@ -59,7 +56,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ File (PDF / Gambar opsional) --}}
                     <div class="mb-4">
                         <label for="file" class="block font-medium text-gray-700 dark:text-gray-300">
                             File (PDF/Gambar, opsional)
@@ -73,7 +69,6 @@
                         <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Format: PDF, JPG, PNG. Maks 20MB</p>
                     </div>
 
-                    {{-- ✅ Link (opsional, bisa Google Drive) --}}
                     <div class="mb-4">
                         <label for="link" class="block font-medium text-gray-700 dark:text-gray-300">
                             Link (opsional)
@@ -86,7 +81,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Simpan --}}
                     <div class="flex justify-end">
                         <a href="{{ route('jalur_reguler.index') }}"
                             class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded mr-2">Batal</a>
@@ -99,7 +93,6 @@
         </div>
     </div>
 
-    {{-- ✅ CKEditor --}}
     @push('scripts')
         <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
         <script>

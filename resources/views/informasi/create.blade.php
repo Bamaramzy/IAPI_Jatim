@@ -11,7 +11,6 @@
             <form action="{{ route('informasi.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <!-- Judul -->
                 <div class="mb-4">
                     <label for="judul" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Judul</label>
                     <input type="text" name="judul" id="judul"
@@ -21,7 +20,6 @@
                         required>
                 </div>
 
-                <!-- Gambar -->
                 <div class="mb-4">
                     <label for="gambar"
                         class="block text-sm font-medium text-gray-700 dark:text-gray-300">Gambar</label>
@@ -37,7 +35,6 @@
                         required>
                 </div>
 
-                <!-- Link -->
                 <div class="mb-4">
                     <label for="link" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Link
                         (opsional)</label>
@@ -47,7 +44,6 @@
                                   focus:ring-indigo-500 sm:text-sm">
                 </div>
 
-                <!-- Buttons -->
                 <div class="flex items-center space-x-2">
                     <button type="submit"
                         class="px-4 py-2 bg-green-600 text-white text-sm font-semibold rounded-md hover:bg-green-700">

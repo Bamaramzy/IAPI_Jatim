@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            ➕ Tambah Data Profesi
+            Tambah Data Profesi
         </h2>
     </x-slot>
 
@@ -11,7 +11,6 @@
                 <form action="{{ route('peraturan_profesi.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    {{-- ✅ Pilih Kategori --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">
                             Kategori
@@ -31,7 +30,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Judul --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">
                             Judul
@@ -44,7 +42,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Upload File (Opsional) --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">
                             Upload File (Opsional)
@@ -56,7 +53,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Link URL (Opsional) --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">
                             Link URL (Opsional)
@@ -69,7 +65,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Simpan --}}
                     <div class="flex justify-end">
                         <a href="{{ route('peraturan_profesi.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">

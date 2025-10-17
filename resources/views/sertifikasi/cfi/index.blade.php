@@ -7,22 +7,18 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            {{-- ✅ Pesan Sukses --}}
             @if (session('success'))
                 <div class="mb-4 bg-green-100 text-green-700 px-4 py-2 rounded">
                     {{ session('success') }}
                 </div>
             @endif
 
-            {{-- ✅ Tombol Tambah --}}
             <div class="mb-4 text-right">
                 <a href="{{ route('cfi.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
                     + Tambah CFI
                 </a>
             </div>
 
-            {{-- ✅ Tabel Data --}}
             <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow rounded">
                 <table class="min-w-full border border-gray-200 dark:border-gray-700">
                     <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
@@ -36,12 +32,10 @@
                     <tbody>
                         @forelse ($cfis as $cfi)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                                {{-- No --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     {{ $loop->iteration }}
                                 </td>
 
-                                {{-- ✅ Gambar Preview --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     @if ($cfi->gambar)
                                         <img src="{{ asset('storage/' . $cfi->gambar) }}"
@@ -51,7 +45,6 @@
                                     @endif
                                 </td>
 
-                                {{-- ✅ Link GDrive --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     @if ($cfi->link)
                                         <a href="{{ $cfi->link }}" target="_blank" class="text-blue-500 underline">
@@ -62,7 +55,6 @@
                                     @endif
                                 </td>
 
-                                {{-- ✅ Aksi --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     <div class="flex justify-center space-x-2">
                                         <a href="{{ route('cfi.edit', $cfi->id) }}"

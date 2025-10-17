@@ -4,17 +4,14 @@
     <section class="py-12 px-4 bg-gray-100 min-h-screen">
         <div class="max-w-6xl mx-auto">
 
-            {{-- ✅ Judul --}}
             <h2 class="text-2xl font-bold text-gray-800 text-center mb-8">
-                📑 Tata Tertib Pelaksanaan Ujian
+                Tata Tertib Pelaksanaan Ujian
             </h2>
 
-            {{-- ✅ Box Utama --}}
             <div class="bg-white rounded shadow p-6 space-y-8">
 
-                {{-- Bagian 1: Tata Tertib --}}
                 <div>
-                    <h3 class="text-xl font-semibold text-blue-700 mb-4">📘 Ketentuan Umum</h3>
+                    <h3 class="text-xl font-semibold text-blue-700 mb-4">Ketentuan Umum</h3>
                     <ol class="list-decimal ml-6 space-y-2 text-gray-700 leading-relaxed">
                         <li>Peserta wajib hadir 30 menit sebelum ujian dimulai sesuai dengan pemesanan waktu ujian. Testing
                             center tidak akan melayani Peserta yang datang terlambat. Bagi peserta terlambat akan dianggap
@@ -49,9 +46,8 @@
                     </ol>
                 </div>
 
-                {{-- Bagian 2: Sanksi --}}
                 <div>
-                    <h3 class="text-xl font-semibold text-red-700 mb-4">⚠️ Sanksi Kecurangan</h3>
+                    <h3 class="text-xl font-semibold text-red-700 mb-4">Sanksi Kecurangan</h3>
                     <ol class="list-decimal ml-6 space-y-2 text-gray-700 leading-relaxed">
                         <li>Sanksi tidak diperbolehkan mengikuti CPA of Indonesia Exam dalam batas waktu yang tidak
                             ditentukan.</li>
@@ -60,9 +56,8 @@
                     </ol>
                 </div>
 
-                {{-- Bagian 3: Kecurangan Pasca Ujian --}}
                 <div>
-                    <h3 class="text-xl font-semibold text-purple-700 mb-4">🔍 Kecurangan Pasca Ujian</h3>
+                    <h3 class="text-xl font-semibold text-purple-700 mb-4">Kecurangan Pasca Ujian</h3>
                     <h4 class="text-l font-semibold  mb-4">Apabila kecurangan ditemukan pasca ujian dan atau
                         peserta telah dinyatakan lulus, maka sanksi pelanggaran dapat mencakup:</h4>
                     <ol class="list-decimal ml-6 space-y-2 text-gray-700 leading-relaxed">

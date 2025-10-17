@@ -1,71 +1,62 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <div class="max-w-5xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg">
+    <div class="max-w-5xl mx-auto px-6 py-12 mt-2 bg-white shadow-md rounded-lg">
         <h1 class="text-3xl font-bold mb-10 text-center text-gray-900">
             Struktur Organisasi
         </h1>
 
         <section class="mb-16">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-8 text-center border-b pb-3">
-                Dewan Pengurus
-            </h2>
-
-            @if ($pengurus->isNotEmpty())
-                <div id="carousel-pengurus" class="relative w-full mb-10">
-                    <div class="relative h-80 overflow-hidden rounded-lg">
-
-                        @foreach ($pengurus->chunk(3) as $index => $group)
-                            <div class="absolute inset-0 flex justify-center items-center transition-all duration-500 ease-in-out 
-                                {{ $index === 0 ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none' }}"
-                                data-carousel-item>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-8 text-center border-b pb-3">Dewan Pengurus</h2>
+            <div class="relative">
+                <div class="overflow-hidden rounded-xl">
+                    <div id="carousel-track-pengurus"
+                        class="flex transition-transform duration-700 ease-in-out px-2 py-4 space-x-4 snap-x snap-mandatory">
+                        @forelse($pengurus as $item)
+                            <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center">
                                 <div
-                                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center w-full px-4">
-                                    @foreach ($group as $item)
-                                        <div class="flex flex-col items-center text-center">
-                                            @if ($item->gambar)
-                                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->nama }}"
-                                                    class="w-32 h-32 object-cover mx-auto rounded-full shadow mb-4">
-                                            @endif
-                                            <h3 class="text-lg font-semibold text-gray-900">{{ $item->nama }}</h3>
-                                            <p class="text-gray-600">{{ $item->jabatan }}</p>
-                                        </div>
-                                    @endforeach
+                                    class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-4">
+                                    <div class="relative w-full h-52 mb-4">
+                                        @if ($item->gambar)
+                                            <img src="{{ asset('storage/' . $item->gambar) }}"
+                                                alt="{{ $item->nama }} - {{ $item->jabatan }}"
+                                                class="w-full h-full object-cover rounded-lg border border-gray-100"
+                                                loading="lazy"
+                                                onerror="this.src='{{ asset('images/default-avatar.jpg') }}'; this.classList.add('opacity-75')">
+                                        @else
+                                            <div
+                                                class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+                                                <span class="text-gray-500 text-sm">No Image</span>
+                                            </div>
+                                        @endif
+                                    </div>
+
+                                    <div class="text-center">
+                                        <h3 class="text-lg font-semibold text-gray-900 line-clamp-1">{{ $item->nama }}
+                                        </h3>
+                                        <p class="text-gray-600 text-sm line-clamp-2">{{ $item->jabatan }}</p>
+                                    </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="w-full text-center py-8">
+                                <p class="text-gray-500 italic">Belum ada data pengurus tersedia.</p>
+                            </div>
+                        @endforelse
                     </div>
-
-                    <button type="button"
-                        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                        data-carousel-prev>
-                        <span
-                            class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60">
-                            <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 1 1 5l4 4" />
-                            </svg>
-                        </span>
-                    </button>
-                    <button type="button"
-                        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                        data-carousel-next>
-                        <span
-                            class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60">
-                            <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="m1 9 4-4-4-4" />
-                            </svg>
-                        </span>
-                    </button>
                 </div>
-            @else
-                <p class="text-center text-gray-500 italic mb-10">
-                    Belum ada data pengurus.
-                </p>
-            @endif
+                <button id="prev-pengurus"
+                    class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-md z-10"
+                    aria-label="Slide sebelumnya">
+                    <span class="text-xl">&#10094;</span>
+                </button>
+
+                <button id="next-pengurus"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-md z-10"
+                    aria-label="Slide berikutnya">
+                    <span class="text-xl">&#10095;</span>
+                </button>
+            </div>
 
             <div id="accordion-pengurus" data-accordion="collapse" class="mt-10">
                 <h2 id="accordion-pengurus-heading-1">
@@ -148,64 +139,59 @@
         </section>
 
         <section class="mb-16">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-8 text-center border-b pb-3">
-                Dewan Pengawas
-            </h2>
-
+            <h2 class="text-2xl font-semibold text-gray-800 mb-8 text-center border-b pb-3">Dewan Pengawas</h2>
             @if ($pengawas->isNotEmpty())
-                <div id="carousel-pengawas" class="relative w-full mb-10">
-                    <div class="relative h-80 overflow-hidden rounded-lg">
-
-                        @foreach ($pengawas->chunk(3) as $index => $group)
-                            <div class="absolute inset-0 flex justify-center items-center transition-all duration-500 ease-in-out 
-                                {{ $index === 0 ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none' }}"
-                                data-carousel-item>
-                                <div
-                                    class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center w-full px-4">
-                                    @foreach ($group as $item)
-                                        <div class="flex flex-col items-center text-center">
+                <div class="relative">
+                    <div class="overflow-hidden rounded-xl">
+                        <div id="carousel-track-pengawas"
+                            class="flex transition-transform duration-700 ease-in-out px-2 py-4 space-x-4 snap-x snap-mandatory">
+                            @forelse($pengawas as $item)
+                                <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center">
+                                    <div
+                                        class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-4">
+                                        <div class="relative w-full h-52 mb-4">
                                             @if ($item->gambar)
-                                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="{{ $item->nama }}"
-                                                    class="w-32 h-32 object-cover mx-auto rounded-full shadow mb-4">
+                                                <img src="{{ asset('storage/' . $item->gambar) }}"
+                                                    alt="{{ $item->nama }} - {{ $item->jabatan }}"
+                                                    class="w-full h-full object-cover rounded-lg" loading="lazy"
+                                                    onerror="this.src='{{ asset('images/default-avatar.jpg') }}'; this.classList.add('opacity-75')">
+                                            @else
+                                                <div
+                                                    class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
+                                                    <span class="text-gray-500 text-sm">No Image</span>
+                                                </div>
                                             @endif
-                                            <h3 class="text-lg font-semibold text-gray-900">{{ $item->nama }}</h3>
-                                            <p class="text-gray-600">{{ $item->jabatan }}</p>
                                         </div>
-                                    @endforeach
+
+                                        <div class="text-center">
+                                            <h3 class="text-lg font-semibold text-gray-900 line-clamp-1">
+                                                {{ $item->nama }}</h3>
+                                            <p class="text-gray-600 text-sm line-clamp-2">{{ $item->jabatan }}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            @empty
+                                <div class="w-full text-center py-8">
+                                    <p class="text-gray-500 italic">Belum ada data pengawas tersedia.</p>
+                                </div>
+                            @endforelse
+                        </div>
                     </div>
 
-                    <button type="button"
-                        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                        data-carousel-prev>
-                        <span
-                            class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60">
-                            <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M5 1 1 5l4 4" />
-                            </svg>
-                        </span>
+                    <button id="prev-pengawas"
+                        class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-md z-10"
+                        aria-label="Slide sebelumnya">
+                        <span class="text-xl">&#10094;</span>
                     </button>
-                    <button type="button"
-                        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
-                        data-carousel-next>
-                        <span
-                            class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-800/30 group-hover:bg-gray-800/60">
-                            <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 9 4-4-4-4" />
-                            </svg>
-                        </span>
+
+                    <button id="next-pengawas"
+                        class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-md z-10"
+                        aria-label="Slide berikutnya">
+                        <span class="text-xl">&#10095;</span>
                     </button>
                 </div>
             @else
-                <p class="text-center text-gray-500 italic mb-10">
-                    Belum ada data pengawas.
-                </p>
+                <p class="text-center text-gray-500 italic mb-10">Belum ada data pengawas.</p>
             @endif
 
             <div id="accordion-pengawas" data-accordion="collapse" class="mt-10">
@@ -268,45 +254,8 @@
                 </div>
             </div>
         </section>
+        @push('scripts')
+            @vite('resources/js/struktur.js')
+        @endpush
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const carousels = document.querySelectorAll('[id^="carousel-"]');
-
-            carousels.forEach(carousel => {
-                const items = carousel.querySelectorAll('[data-carousel-item]');
-                let current = 0;
-
-                const prevBtn = carousel.querySelector('[data-carousel-prev]');
-                const nextBtn = carousel.querySelector('[data-carousel-next]');
-
-                function show(index) {
-                    items.forEach((item, i) => {
-                        if (i === index) {
-                            item.classList.remove('opacity-0', 'invisible', 'pointer-events-none');
-                            item.classList.add('opacity-100', 'visible');
-                        } else {
-                            item.classList.remove('opacity-100', 'visible');
-                            item.classList.add('opacity-0', 'invisible', 'pointer-events-none');
-                        }
-                    });
-                }
-
-                prevBtn?.addEventListener('click', e => {
-                    e.preventDefault();
-                    current = (current - 1 + items.length) % items.length;
-                    show(current);
-                });
-
-                nextBtn?.addEventListener('click', e => {
-                    e.preventDefault();
-                    current = (current + 1) % items.length;
-                    show(current);
-                });
-
-                show(0);
-            });
-        });
-    </script>
 @endsection

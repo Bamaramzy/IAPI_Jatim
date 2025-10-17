@@ -7,23 +7,18 @@
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8 mt-6">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg p-6">
-
-            <!-- Tombol Tambah -->
             <div class="mb-4">
                 <a href="{{ route('informasi.create') }}"
                     class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-semibold rounded-md shadow hover:bg-indigo-700">
                     + Tambah Informasi
                 </a>
             </div>
-
-            <!-- Alert -->
             @if (session('success'))
                 <div class="mb-4 p-3 bg-green-100 text-green-800 rounded-md">
                     {{ session('success') }}
                 </div>
             @endif
 
-            <!-- Tabel -->
             <div class="overflow-x-auto">
                 <table class="min-w-full text-sm text-left text-gray-700 dark:text-gray-200">
                     <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 uppercase">

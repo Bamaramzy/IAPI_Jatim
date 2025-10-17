@@ -11,7 +11,6 @@
                 <form action="{{ route('brevets_c.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    {{-- ✅ Judul --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Judul</label>
                         <input type="text" name="judul" value="{{ old('judul') }}"
@@ -22,7 +21,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Brosur (Upload File Gambar) --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Upload Brosur</label>
                         <input type="file" name="brosur" accept="image/*"
@@ -32,7 +30,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Link Daftar --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Link Daftar</label>
                         <input type="text" name="link_daftar" value="{{ old('link_daftar') }}"
@@ -43,7 +40,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Status --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Status</label>
                         <select name="status"
@@ -56,7 +52,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Simpan --}}
                     <div class="flex justify-end">
                         <a href="{{ route('brevets_c.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>

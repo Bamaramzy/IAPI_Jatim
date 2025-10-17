@@ -4,20 +4,21 @@
     <section class="py-12 px-4 bg-gray-100 min-h-screen">
         <div class="max-w-6xl mx-auto">
 
-            {{-- ✅ Judul --}}
             <h2 class="text-2xl font-bold text-gray-800 text-center mb-8">
-                📚 Daftar Silabus
+                Daftar Silabus Ujian, Modul, dan Ilustrasi Soal
             </h2>
 
             <form method="GET" action="{{ route('visitor.silabus_ujian') }}"
-                class="mb-8 flex flex-wrap gap-4 justify-center">
+                class="mb-8 flex flex-wrap gap-4 justify-center items-center">
+
                 @if ($kategoriList->isNotEmpty())
                     <div>
                         <select name="kategori" class="px-3 py-2 border rounded shadow-sm text-sm w-48">
                             <option value="">Filter Kategori</option>
                             @foreach ($kategoriList as $kat)
                                 <option value="{{ $kat }}" {{ $kategori == $kat ? 'selected' : '' }}>
-                                    {{ $kat }}</option>
+                                    {{ $kat }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -28,96 +29,83 @@
                         <select name="sub" class="px-3 py-2 border rounded shadow-sm text-sm w-48">
                             <option value="">Filter Sub Kategori</option>
                             @foreach ($subList as $s)
-                                <option value="{{ $s }}" {{ $sub == $s ? 'selected' : '' }}>{{ $s }}
+                                <option value="{{ $s }}" {{ $sub == $s ? 'selected' : '' }}>
+                                    {{ $s }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
                 @endif
-
-                <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded shadow text-sm">
-                    🔍 Cari
+                <button type="submit" class="px-4 py-2 bg-[#071225] hover:bg-[#0C2C77] text-white rounded shadow text-sm">
+                    Cari
                 </button>
-                <a href="{{ route('visitor.silabus_ujian') }}"
-                    class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded shadow text-sm">
-                    Reset
-                </a>
+                @if (!empty($kategori) || !empty($sub))
+                    <a href="{{ route('visitor.silabus_ujian') }}"
+                        class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded shadow text-sm">
+                        Reset
+                    </a>
+                @endif
             </form>
 
-            {{-- ✅ Daftar Silabus --}}
             @forelse ($silabus as $kategori => $subkategoriGroup)
                 <div class="mb-10">
-                    {{-- Kategori Utama --}}
                     <h3 class="text-xl font-semibold text-blue-700 mb-4">{{ $kategori }}</h3>
 
                     @foreach ($subkategoriGroup as $sub => $items)
                         <div class="mb-6 pl-4 border-l-4 border-blue-300">
-                            {{-- Sub Kategori --}}
                             <h4 class="text-lg font-medium text-gray-700 mb-3">{{ $sub }}</h4>
 
                             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                                 @foreach ($items as $s)
-                                    <div class="bg-white rounded-lg shadow p-4 hover:shadow-md transition">
-                                        {{-- Judul --}}
+                                    @php
+                                        $cardLink =
+                                            $s->pdf_link ??
+                                            ($s->pdf_file
+                                                ? Storage::url($s->pdf_file)
+                                                : $s->gambar_link ??
+                                                    ($s->gambar
+                                                        ? Storage::url($s->gambar)
+                                                        : $s->ilustrasi_link ?? null));
+
+                                        $pdfUrl = null;
+                                        if ($s->pdf_link) {
+                                            $pdfUrl = $s->pdf_link;
+                                            if (preg_match('/\/d\/(.*?)\//', $pdfUrl, $m)) {
+                                                $fileId = $m[1];
+                                                $pdfUrl = "https://drive.google.com/file/d/{$fileId}/preview";
+                                            }
+                                        } elseif ($s->pdf_file) {
+                                            $pdfUrl = Storage::url($s->pdf_file);
+                                        }
+                                    @endphp
+
+                                    <a @if ($cardLink) href="{{ $cardLink }}" target="_blank" @endif
+                                        class="bg-white rounded-lg shadow p-4 flex flex-col justify-between min-h-[480px] hover:shadow-md transition">
+
                                         <h5 class="font-semibold text-gray-800 mb-2">{{ $s->judul }}</h5>
 
-                                        {{-- Deskripsi singkat --}}
                                         @if ($s->deskripsi)
                                             <p class="text-sm text-gray-600 mb-3 line-clamp-3">
                                                 {{ $s->deskripsi }}
                                             </p>
                                         @endif
 
-                                        {{-- Link terkait --}}
-                                        <div class="flex flex-col space-y-2 text-sm">
-                                            {{-- PDF --}}
-                                            @if ($s->pdf_file)
+                                        <div class="flex flex-col space-y-2 mt-auto text-sm">
+                                            @if ($pdfUrl)
                                                 <div class="mt-2">
-                                                    <iframe src="{{ Storage::url($s->pdf_file) }}"
-                                                        class="w-full h-64 border rounded" frameborder="0"></iframe>
-                                                    <a href="{{ Storage::url($s->pdf_file) }}" target="_blank"
-                                                        class="text-blue-600 hover:underline text-sm block mt-1">
-                                                        📄 Buka di Tab Baru
-                                                    </a>
-                                                </div>
-                                            @elseif($s->pdf_link)
-                                                @php
-                                                    $pdfLink = $s->pdf_link;
-                                                    if (preg_match('/\/d\/(.*?)\//', $pdfLink, $m)) {
-                                                        $fileId = $m[1];
-                                                        $pdfLink = "https://drive.google.com/file/d/{$fileId}/preview";
-                                                    }
-                                                @endphp
-                                                <div class="mt-2">
-                                                    <iframe src="{{ $pdfLink }}" class="w-full h-64 border rounded"
+                                                    <iframe src="{{ $pdfUrl }}" class="w-full h-96 border rounded"
                                                         frameborder="0"></iframe>
-                                                    <a href="{{ $s->pdf_link }}" target="_blank"
-                                                        class="text-blue-600 hover:underline text-sm block mt-1">
-                                                        📄 Buka PDF
-                                                    </a>
                                                 </div>
                                             @endif
 
-                                            {{-- Modul (gambar/link) --}}
                                             @if ($s->gambar)
-                                                <a href="{{ $s->gambar_link ?? Storage::url($s->gambar) }}"
-                                                    target="_blank">
-                                                    <img src="{{ Storage::url($s->gambar) }}"
-                                                        alt="Modul {{ $s->judul }}"
-                                                        class="w-full h-auto object-contain rounded shadow">
-                                                </a>
+                                                <img src="{{ Storage::url($s->gambar) }}" alt="Modul {{ $s->judul }}"
+                                                    class="w-full h-90 object-cover rounded shadow">
                                             @elseif($s->gambar_link)
-                                                <a href="{{ $s->gambar_link }}" target="_blank"
-                                                    class="text-blue-600 hover:underline">📘 Modul</a>
-                                            @endif
-
-                                            {{-- Ilustrasi Soal --}}
-                                            @if ($s->ilustrasi_link)
-                                                <a href="{{ $s->ilustrasi_link }}" target="_blank"
-                                                    class="text-blue-600 hover:underline">📝 Ilustrasi Soal</a>
+                                                <span class="text-blue-600 hover:underline">Modul</span>
                                             @endif
                                         </div>
-                                    </div>
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
@@ -125,10 +113,9 @@
                 </div>
             @empty
                 <div class="bg-white p-6 rounded shadow text-center">
-                    <p class="text-gray-600">Belum ada silabus tersedia.</p>
+                    <p class="text-gray-600">Belum ada data tersedia.</p>
                 </div>
             @endforelse
-
         </div>
     </section>
 @endsection

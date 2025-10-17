@@ -1,8 +1,8 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section class="max-w-5xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg text-justify">
-        <h1 class="text-3xl font-bold mb-6 text-center">Tentang Pelatihan</h1>
+    <section class="max-w-5xl mx-auto px-6 py-12 mt-2 bg-white shadow-md rounded-lg text-justify">
+        <h1 class="text-3xl font-bold mb-6 text-center">Tentang Pelatihan IAPI</h1>
 
         <p class="text-gray-700 leading-relaxed mb-6">
             Institut Akuntan Publik Indonesia (IAPI) merupakan Asosiasi Profesi Akuntan Publik Indonesia yang
@@ -17,7 +17,7 @@
             dan Peraturan Menteri Keuangan Nomor 186/PMK.01/2021.
         </p>
 
-        <h1 class="text-2xl font-semibold mb-4">📌 Pemenuhan Kewajiban PPL</h1>
+        <h1 class="text-2xl font-semibold mb-4">Pemenuhan Kewajiban PPL</h1>
         <p class="text-gray-700 leading-relaxed mb-4">
             Pemenuhan kewajiban kegiatan <strong>Pelatihan Profesional Berkelanjutan (PPL)</strong> merupakan
             tanggung jawab setiap anggota dan dilakukan melalui kegiatan terstruktur maupun tidak terstruktur.
@@ -39,7 +39,7 @@
             </li>
         </ul>
 
-        <h1 class="text-2xl font-semibold mb-4">📌 Perhitungan SKP</h1>
+        <h1 class="text-2xl font-semibold mb-4">Perhitungan SKP</h1>
         <p class="text-gray-700 leading-relaxed mb-4">
             Perhitungan SKP pada kegiatan PPL terstruktur dilakukan berdasarkan jumlah waktu yang ditempuh.
             Ketentuannya antara lain:
@@ -50,7 +50,7 @@
             <li>Pecahan menit dalam perhitungan dibulatkan ke angka satuan terdekat.</li>
         </ul>
 
-        <h1 class="text-2xl font-semibold mb-4">📌 PPL Tidak Terstruktur</h1>
+        <h1 class="text-2xl font-semibold mb-4">PPL Tidak Terstruktur</h1>
         <p class="text-gray-700 leading-relaxed mb-4">
             PPL tidak terstruktur mencakup kegiatan pengembangan kompetensi mandiri anggota, seperti:
         </p>
@@ -62,7 +62,7 @@
             <li>Menyusun dokumentasi kegiatan profesional untuk peningkatan kompetensi.</li>
         </ul>
 
-        <h1 class="text-2xl font-semibold mb-4">📊 Referensi Perhitungan SKP</h1>
+        <h1 class="text-2xl font-semibold mb-4">Referensi Perhitungan SKP</h1>
         <div class="overflow-x-auto mb-6">
             <table class="min-w-full border border-gray-300 text-sm text-gray-700">
                 <thead class="bg-gray-100">
@@ -126,7 +126,7 @@
             </table>
         </div>
 
-        <h1 class="text-2xl font-semibold mb-4">📜 Ketentuan Umum PPL</h1>
+        <h1 class="text-2xl font-semibold mb-4">Ketentuan Umum PPL</h1>
         <ol class="list-decimal pl-6 text-gray-700 leading-relaxed space-y-1">
             <li>Peraturan Asosiasi Nomor 1 Tahun 2014 Tentang PPL (<a
                     href="https://drive.google.com/file/d/1xjaNmn_aZcxIiQGgl5Ix9GmBTy2CamdR/preview"

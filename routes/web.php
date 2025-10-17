@@ -28,14 +28,9 @@ use App\Http\Controllers\{
     PeraturanProfesiController,
     PeraturanSpapController
 };
-use App\Models\{Informasi, Anggota, Direktori, AdArt, TataCara};
+use App\Models\{Anggota, Direktori, AdArt, TataCara};
 
-Route::get('/', function () {
-    $informasis = Informasi::latest()->take(3)->get();
-    return view('welcome', compact('informasis'));
-})->name('home');
-
-Route::get('/beranda', [InformasiController::class, 'index'])->name('beranda');
+Route::get('/', [InformasiController::class, 'welcome'])->name('welcome');
 
 Route::prefix('tentang')->group(function () {
     Route::view('/sejarah', 'tentang.sejarah')->name('tentang.sejarah');
@@ -118,20 +113,30 @@ Route::prefix('pelatihan')->group(function () {
     });
 });
 
-Route::get('/sertifikasi/test-center', [TestCenterController::class, 'indexVisitor'])->name('visitor.test_center');
-Route::get('/sertifikasi/waiver-ppak', [WaiverPpakController::class, 'indexVisitor'])->name('visitor.waiver_ppak');
-Route::get('/sertifikasi/cfi', [CFIController::class, 'indexVisitor'])->name('visitor.cfi');
-Route::get('/sertifikasi/workshop-a-b', [WorkshopABController::class, 'indexVisitor'])->name('visitor.workshop_ab');
-Route::get('/sertifikasi/ujian/jalur-reguler', [JalurRegulerController::class, 'indexVisitor'])->name('visitor.jalur_reguler');
-Route::get('/sertifikasi/ujian/jalur-workshop-penyetaraan', [JalurWorkshopController::class, 'index'])->name('visitor.jalur_workshop');
-Route::get('/sertifikasi/ujian/silabus', [SilabusController::class, 'indexVisitor'])->name('visitor.silabus_ujian');
-Route::get('/sertifikasi/ujian/proses-penerbitan', fn() => view('sertifikasi.ujian.proses_penerbitan.proses'))->name('visitor.proses_penerbitan');
-Route::get('/sertifikasi/ujian/tutorial/workshop-penyetaraan', [WorkshopPenyetaraanController::class, 'indexVisitor'])->name('visitor.workshop_penyetaraan');
-Route::get('/sertifikasi/ujian/tutorial/tata-tertib', fn() => view('sertifikasi.ujian.tutorial.tata_tertib.tatatertib'))->name('visitor.tata_tertib');
+Route::prefix('sertifikasi')->group(function () {
+    Route::get('/test-center', [TestCenterController::class, 'indexVisitor'])->name('visitor.test_center');
+    Route::get('/waiver-ppak', [WaiverPpakController::class, 'indexVisitor'])->name('visitor.waiver_ppak');
+    Route::get('/cfi', [CFIController::class, 'indexVisitor'])->name('visitor.cfi');
+    Route::get('/workshop-a-b', [WorkshopABController::class, 'indexVisitor'])->name('visitor.workshop_ab');
 
-Route::get('/peraturan/profesi', [PeraturanProfesiController::class, 'indexVisitor'])->name('visitor.peraturan_profesi');
-Route::get('/peraturan/spap', [PeraturanSpapController::class, 'indexVisitor'])->name('visitor.peraturan_spap');
-Route::get('/peraturan/kode-etik', fn() => view('peraturan.kode_etik.kode_etik'))->name('visitor.kode_etik');
+    Route::prefix('ujian')->group(function () {
+        Route::get('/jalur-reguler', [JalurRegulerController::class, 'indexVisitor'])->name('visitor.jalur_reguler');
+        Route::get('/jalur-workshop-penyetaraan', [JalurWorkshopController::class, 'index'])->name('visitor.jalur_workshop');
+        Route::get('/silabus', [SilabusController::class, 'indexVisitor'])->name('visitor.silabus');
+        Route::view('/proses-penerbitan', 'sertifikasi.ujian.proses_penerbitan.proses')->name('visitor.proses_penerbitan');
+    });
+
+    Route::prefix('ujian/tutorial')->group(function () {
+        Route::get('/workshop-penyetaraan', [WorkshopPenyetaraanController::class, 'indexVisitor'])->name('visitor.workshop_penyetaraan');
+        Route::view('/tata-tertib', 'sertifikasi.ujian.tutorial.tata_tertib.tatatertib')->name('visitor.tata_tertib');
+    });
+});
+
+Route::prefix('peraturan')->group(function () {
+    Route::get('/profesi', [PeraturanProfesiController::class, 'indexVisitor'])->name('visitor.peraturan_profesi');
+    Route::get('/spap', [PeraturanSpapController::class, 'indexVisitor'])->name('visitor.peraturan_spap');
+    Route::get('/kode-etik', fn() => view('peraturan.kode_etik.kode_etik'))->name('visitor.kode_etik');
+});
 
 Route::get('/dashboard', fn() => view('dashboard'))
     ->middleware(['auth', 'verified'])

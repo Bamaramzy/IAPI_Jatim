@@ -11,7 +11,6 @@
                 <form action="{{ route('cfi.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    {{-- ✅ Gambar --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Upload Gambar</label>
                         <input type="file" name="gambar" accept="image/*"
@@ -21,7 +20,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Link (Opsional) --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Link (Opsional)</label>
                         <input type="text" name="link" value="{{ old('link') }}"
@@ -32,7 +30,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Simpan --}}
                     <div class="flex justify-end">
                         <a href="{{ route('cfi.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>

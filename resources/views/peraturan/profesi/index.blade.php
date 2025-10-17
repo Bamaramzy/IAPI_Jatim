@@ -1,21 +1,18 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            📑 Daftar Peraturan Profesi
+            Daftar Peraturan Profesi
         </h2>
     </x-slot>
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            {{-- ✅ Pesan Sukses --}}
             @if (session('success'))
                 <div class="mb-4 bg-green-100 text-green-700 px-4 py-2 rounded">
                     {{ session('success') }}
                 </div>
             @endif
 
-            {{-- ✅ Tombol Tambah --}}
             <div class="mb-4 text-right">
                 <a href="{{ route('peraturan_profesi.create') }}"
                     class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
@@ -23,7 +20,6 @@
                 </a>
             </div>
 
-            {{-- ✅ Tabel Data --}}
             <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow rounded">
                 <table class="min-w-full border border-gray-200 dark:border-gray-700">
                     <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
@@ -38,22 +34,18 @@
                     <tbody>
                         @forelse ($peraturans as $peraturan)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                                {{-- No --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     {{ $loop->iteration }}
                                 </td>
 
-                                {{-- Judul --}}
                                 <td class="px-4 py-2 border dark:border-gray-600">
                                     {{ $peraturan->judul }}
                                 </td>
 
-                                {{-- Kategori --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center capitalize">
                                     {{ $peraturan->kategori }}
                                 </td>
 
-                                {{-- File atau Link --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     @if ($peraturan->file_path)
                                         <a href="{{ asset('storage/' . $peraturan->file_path) }}" target="_blank"
@@ -70,7 +62,6 @@
                                     @endif
                                 </td>
 
-                                {{-- Aksi --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     <div class="flex justify-center space-x-2">
                                         <a href="{{ route('peraturan_profesi.edit', $peraturan->id) }}"
@@ -100,7 +91,7 @@
                 </table>
             </div>
             <div class="mt-4">
-                {{ $peraturans->links() }}
+                {{ $peraturans->links('vendor.pagination.tailwind') }}
             </div>
         </div>
     </div>

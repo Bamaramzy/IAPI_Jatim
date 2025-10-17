@@ -1,41 +1,42 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section class="max-w-6xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg">
+    <section class="max-w-6xl mx-auto px-6 py-12 mt-2 bg-white shadow-md rounded-lg">
 
-        {{-- 🏛 Judul --}}
         <h1 class="text-3xl font-bold mb-6 text-center">Daftar Waiver PPAk</h1>
 
-        {{-- 📖 Informasi Singkat --}}
         <p class="text-gray-700 leading-relaxed mb-6 text-justify">
             Waiver PPAk adalah pengakuan mata uji tertentu yang tidak perlu diikuti oleh lulusan Program Pendidikan Profesi
             Akuntansi (PPAk) yang telah memenuhi syarat sesuai ketentuan IAPI.
         </p>
 
-        {{-- 🔍 Form Pencarian --}}
-        <div class="mb-6">
-            <form method="GET" action="{{ route('visitor.waiver_ppak') }}" class="flex items-center gap-2">
+        <div class="mb-8">
+            <form method="GET" action="{{ route('visitor.waiver_ppak') }}"
+                class="flex flex-col sm:flex-row sm:items-center gap-3">
                 <input type="text" name="search" value="{{ request('search') }}"
-                    class="w-full border rounded px-3 py-2 dark:bg-gray-700 dark:text-white"
-                    placeholder="Cari universitas...">
-                <button type="submit" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded">
-                    Cari
-                </button>
-                @if (request('search'))
-                    <a href="{{ route('visitor.waiver_ppak') }}"
-                        class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded">
-                        Reset
-                    </a>
-                @endif
+                    placeholder="Cari berdasarkan universitas atau akreditasi..."
+                    class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/2 focus:ring focus:ring-blue-300 focus:outline-none dark:bg-gray-700 dark:text-white dark:border-gray-600">
+
+                <div class="flex gap-3">
+                    <button type="submit"
+                        class="bg-[#071225] text-white px-5 py-2 rounded-lg hover:bg-[#0C2C77] transition">
+                        Cari
+                    </button>
+
+                    @if (request('search'))
+                        <a href="{{ route('visitor.waiver_ppak') }}"
+                            class="bg-gray-200 text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-300 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500 transition">
+                            Reset
+                        </a>
+                    @endif
+                </div>
             </form>
         </div>
 
-        {{-- 📊 Tabel Waiver --}}
         <div class="overflow-x-auto bg-white shadow rounded">
             <table class="min-w-full border border-gray-300">
                 <thead class="bg-gray-100 text-gray-700">
                     <tr>
-                        {{-- No --}}
                         <th class="border px-4 py-2 text-center w-16">
                             <a href="{{ route('visitor.waiver_ppak', array_merge(request()->query(), ['sort' => 'id', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
                                 class="flex items-center justify-center gap-1">
@@ -46,7 +47,6 @@
                             </a>
                         </th>
 
-                        {{-- Universitas --}}
                         <th class="border px-4 py-2 text-left">
                             <a href="{{ route('visitor.waiver_ppak', array_merge(request()->query(), ['sort' => 'nama_universitas', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
                                 class="flex items-center gap-1">
@@ -57,7 +57,6 @@
                             </a>
                         </th>
 
-                        {{-- Jumlah Waiver --}}
                         <th class="border px-4 py-2 text-center">
                             <a href="{{ route('visitor.waiver_ppak', array_merge(request()->query(), ['sort' => 'jumlah_waiver', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
                                 class="flex items-center justify-center gap-1">
@@ -68,7 +67,6 @@
                             </a>
                         </th>
 
-                        {{-- Akreditasi --}}
                         <th class="border px-4 py-2 text-left">
                             <a href="{{ route('visitor.waiver_ppak', array_merge(request()->query(), ['sort' => 'akreditasi', 'direction' => request('direction') === 'asc' ? 'desc' : 'asc'])) }}"
                                 class="flex items-center gap-1">
@@ -108,9 +106,8 @@
             peserta.
         </p>
 
-        {{-- 📌 Pagination --}}
         <div class="mt-6">
-            {{ $waivers->appends(request()->query())->links() }}
+            {{ $waivers->appends(request()->query())->links('vendor.pagination.tailwind') }}
         </div>
 
     </section>

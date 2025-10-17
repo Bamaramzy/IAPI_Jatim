@@ -12,13 +12,11 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- ✅ Gambar --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Upload Gambar</label>
                         <input type="file" name="gambar" accept="image/*"
                             class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
 
-                        {{-- Preview gambar lama --}}
                         @if ($cfi->gambar)
                             <div class="mt-2">
                                 <img src="{{ asset('storage/' . $cfi->gambar) }}"
@@ -31,7 +29,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Link (Opsional) --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Link (Opsional)</label>
                         <input type="text" name="link" value="{{ old('link', $cfi->link) }}"
@@ -42,7 +39,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Update --}}
                     <div class="flex justify-end">
                         <a href="{{ route('cfi.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>

@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  @apply font-sans antialiased;
+  font-feature-settings: "liga" 1, "kern" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#carousel-track {
+  display: flex;
+  overflow: hidden;
+  min-height: 300px;
+  scroll-snap-type: x mandatory;
+}
+
+#carousel-track > a {
+  flex-shrink: 0;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+}
+
+#carousel-track-pengurus,
+#carousel-track-pengawas {
+    scroll-snap-type: x mandatory;
+}
+
+@media (max-width: 640px) {
+    #prev,
+    #next {
+        display: none;
+    }
+}

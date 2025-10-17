@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            ➕ Tambah Workshop Penyetaraan
+            Tambah Workshop Penyetaraan
         </h2>
     </x-slot>
 
@@ -11,7 +11,6 @@
                 <form action="{{ route('workshop_penyetaraan.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
-                    {{-- ✅ Pilih Kategori --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Kategori</label>
                         <select name="kategori_id"
@@ -29,7 +28,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Judul Materi --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Judul Materi</label>
                         <input type="text" name="judul" value="{{ old('judul') }}"
@@ -40,8 +38,7 @@
                         @enderror
                     </div>
 
-                    {{-- 📄 Bagian PDF --}}
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 border-b pb-1">📘 Materi PDF
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 border-b pb-1">Materi PDF
                     </h3>
 
                     <div class="mb-4">
@@ -74,8 +71,7 @@
                         @enderror
                     </div>
 
-                    {{-- 🎥 Bagian Video --}}
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 border-b pb-1">🎬 Tutorial -
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 border-b pb-1">Tutorial -
                         Video</h3>
 
                     <div class="mb-4">
@@ -108,7 +104,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Aksi --}}
                     <div class="flex justify-end">
                         <a href="{{ route('workshop_penyetaraan.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>

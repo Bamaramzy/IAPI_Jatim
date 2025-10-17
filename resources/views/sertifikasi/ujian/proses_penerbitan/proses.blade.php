@@ -4,12 +4,10 @@
     <section class="py-12 px-4 bg-gray-100 min-h-screen">
         <div class="max-w-6xl mx-auto">
 
-            {{-- ✅ Judul --}}
             <h2 class="text-2xl font-bold text-gray-800 text-center mb-8">
-                📑 Proses Penerbitan Sertifikat dan Gelar Berdasarkan PA 10/2021
+                Proses Penerbitan Sertifikat dan Gelar Berdasarkan PA 10/2021
             </h2>
 
-            {{-- ✅ Tabs --}}
             <div x-data="{ tab: 'dasar' }" class="bg-white rounded shadow p-6">
                 <div class="flex border-b mb-6">
                     <button class="px-4 py-2 text-sm font-medium"
@@ -28,13 +26,11 @@
                     </button>
                 </div>
 
-                {{-- ✅ Tingkat Dasar --}}
                 <div x-show="tab === 'dasar'" class="space-y-8">
 
-                    {{-- Bagian 1: STLU-CPA --}}
                     <div class="bg-white rounded-lg shadow p-6">
                         <h3 class="text-xl font-semibold text-blue-700 mb-4">
-                            📘 Surat Tanda Lulus Ujian Profesi Akuntan Publik (STLU-CPA)
+                            Surat Tanda Lulus Ujian Profesi Akuntan Publik (STLU-CPA)
                         </h3>
                         <p class="text-gray-700 mb-4">
                             <strong>Institut menerbitkan STLU-CPA</strong> bagi peserta yang memenuhi seluruh persyaratan
@@ -57,10 +53,9 @@
                         </ol>
                     </div>
 
-                    {{-- Bagian 2: J-CPA --}}
                     <div class="bg-white rounded-lg shadow p-6">
                         <h3 class="text-xl font-semibold text-green-700 mb-4">
-                            🎓 Sertifikat J-CPA
+                            Sertifikat J-CPA
                         </h3>
                         <p class="text-gray-700 mb-4">
                             Sertifikat ujian tingkat dasar berupa <strong>J-CPA</strong> diterbitkan untuk Peserta dengan
@@ -82,10 +77,9 @@
                         </ol>
                     </div>
 
-                    {{-- Bagian 3: A-CPA --}}
                     <div class="bg-white rounded-lg shadow p-6">
                         <h3 class="text-xl font-semibold text-purple-700 mb-4">
-                            🏅 Sertifikat A-CPA
+                            Sertifikat A-CPA
                         </h3>
                         <p class="text-gray-700 mb-4">
                             Peserta yang telah lulus atau mendapatkan <i>waiver</i> untuk seluruh mata ujian tingkat dasar
@@ -108,18 +102,16 @@
                         </ol>
                     </div>
 
-                    {{-- Catatan --}}
                     <p class="text-gray-600 italic">
-                        ✨ J-CPA atau A-CPA merupakan sebutan resmi yang dapat digunakan pemegang sertifikat di belakang
+                        *J-CPA atau A-CPA merupakan sebutan resmi yang dapat digunakan pemegang sertifikat di belakang
                         namanya.
                     </p>
                 </div>
-                {{-- ✅ Tingkat Profesional --}}
                 <div x-show="tab === 'profesional'" class="space-y-8">
-                    {{-- Bagian 1: STLU-CPA Tingkat Profesional --}}
+
                     <div class="bg-white rounded-lg shadow p-6">
                         <h3 class="text-xl font-semibold text-blue-700 mb-4">
-                            📘 Surat Tanda Lulus Ujian Profesi Akuntan Publik (STLU-CPA) – Tingkat Profesional
+                            Surat Tanda Lulus Ujian Profesi Akuntan Publik (STLU-CPA) – Tingkat Profesional
                         </h3>
                         <p class="text-gray-700 mb-4">
                             Institut menerbitkan <strong>STLU-CPA</strong> bagi peserta Ujian Profesi Akuntan Publik yang
@@ -141,10 +133,10 @@
                             <li>Memenuhi kewajiban SKP sesuai ketentuan Institut.</li>
                         </ol>
                     </div>
-                    {{-- Bagian 2: Sertifikat CPA --}}
+
                     <div class="bg-white rounded-lg shadow p-6">
                         <h3 class="text-xl font-semibold text-green-700 mb-4">
-                            🏅 Sertifikat CPA
+                            Sertifikat CPA
                         </h3>
                         <p class="text-gray-700 mb-4">
                             <strong>Untuk memenuhi ketentuan Anggaran Rumah Tangga Pasal 72 ayat (3)</strong>, Institut
@@ -167,12 +159,11 @@
                         </ol>
                     </div>
                 </div>
-                {{-- ✅ Penilaian Pengalaman Audit --}}
+
                 <div x-show="tab === 'audit'" class="space-y-8">
-                    {{-- Bagian 1: STL-UPAP --}}
                     <div class="bg-white rounded-lg shadow p-6">
                         <h3 class="text-xl font-semibold text-blue-700 mb-4">
-                            📜 STL-UPAP (Surat Tanda Lulus Ujian Profesi Akuntan Publik)
+                            STL-UPAP (Surat Tanda Lulus Ujian Profesi Akuntan Publik)
                         </h3>
                         <p class="text-gray-700 mb-4">
                             Institut menerbitkan <strong>STL-UPAP</strong> yang dapat digunakan untuk pemenuhan persyaratan
@@ -192,7 +183,7 @@
                             <li>Merupakan Warga Negara Indonesia.</li>
                         </ol>
                         <p class="text-sm text-gray-600 mt-4">
-                            👉 <strong>STL-UPAP</strong> diidentifikasi sebagai sertifikat yang dapat digunakan untuk
+                            <strong>STL-UPAP</strong> diidentifikasi sebagai sertifikat yang dapat digunakan untuk
                             permohonan izin Akuntan Publik
                             sesuai peraturan perundang-undangan, serta sebagai bukti pengalaman praktik bidang audit dan
                             asurans
@@ -200,10 +191,9 @@
                         </p>
                     </div>
 
-                    {{-- Bagian 2: CPA License --}}
                     <div class="bg-white rounded-lg shadow p-6">
                         <h3 class="text-xl font-semibold text-green-700 mb-4">
-                            🏅 CPA (License)
+                            CPA (License)
                         </h3>
                         <p class="text-gray-700 mb-4">
                             Untuk memenuhi ketentuan <strong>PP-4</strong>, Institut menerbitkan <strong>sertifikat

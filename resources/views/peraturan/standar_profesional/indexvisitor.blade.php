@@ -2,16 +2,15 @@
 
 @section('content')
     <section x-data="{ tab: 'semua' }" class="max-w-6xl mx-auto px-6 py-12">
-        <h1 class="text-3xl font-bold mb-10 text-center text-gray-800">📘 Standar Profesional Akuntan Publik (SPAP)</h1>
+        <h1 class="text-3xl font-bold mb-10 text-center text-gray-800">Standar Profesional Akuntan Publik (SPAP)</h1>
 
-        {{-- ✅ Tabs Dinamis dari kategori --}}
         @php
             $kategoriList = $peraturans->pluck('kategori')->unique()->values();
         @endphp
 
         <div class="flex flex-wrap justify-center mb-10 gap-2">
             <button @click="tab = 'semua'"
-                :class="tab === 'semua' ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-700 hover:bg-blue-100'"
+                :class="tab === 'semua' ? 'bg-[#071225] text-white' : 'bg-gray-200 hover:bg-[#0C2C77]'"
                 class="px-3 py-2 rounded-full font-medium transition">
                 Semua
             </button>
@@ -20,7 +19,7 @@
                 <button @click="tab = '{{ Str::slug($kategori) }}'"
                     :class="tab === '{{ Str::slug($kategori) }}'
                         ?
-                        'bg-blue-600 text-white' :
+                        'bg-[#071225] text-white' :
                         'bg-gray-200 text-gray-700 hover:bg-blue-100'"
                     class="px-3 py-2 rounded-full font-medium transition">
                     {{ ucfirst($kategori) }}
@@ -28,26 +27,20 @@
             @endforeach
         </div>
 
-        {{-- ✅ Function untuk Render Konten --}}
         @php
             function renderSpapItem($item)
             {
                 $html =
                     '<div class="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100">';
 
-                // Thumbnail
                 if ($item->thumbnail) {
                     $html .=
                         '<img src="' .
                         asset('storage/' . $item->thumbnail) .
                         '" alt="thumbnail" class="w-full h-48 object-cover rounded-lg mb-4">';
                 }
-
-                // Judul dan Deskripsi
                 $html .= '<h3 class="text-xl font-semibold text-gray-800 mb-2">' . e($item->judul) . '</h3>';
                 $html .= '<p class="text-gray-600 mb-4">' . e(Str::limit(strip_tags($item->deskripsi), 300)) . '</p>';
-
-                // Link PDF
                 $pdfLinks = [];
                 for ($i = 1; $i <= 3; $i++) {
                     $judul = $item->{"pdf_{$i}_judul"};
@@ -58,7 +51,7 @@
                             e($url) .
                             '" target="_blank"
                         class="inline-block bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm hover:bg-blue-100 transition">
-                        📄 ' .
+                        ' .
                             e($judul) .
                             '</a>';
                     }
@@ -73,7 +66,6 @@
             }
         @endphp
 
-        {{-- ✅ Konten Semua --}}
         <div x-show="tab === 'semua'" x-transition class="space-y-6">
             @forelse ($peraturans as $item)
                 {!! renderSpapItem($item) !!}
@@ -82,7 +74,6 @@
             @endforelse
         </div>
 
-        {{-- ✅ Konten per kategori --}}
         @foreach ($kategoriList as $kategori)
             <div x-show="tab === '{{ Str::slug($kategori) }}'" x-transition class="space-y-6">
                 @php

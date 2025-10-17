@@ -8,14 +8,12 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            {{-- ✅ Pesan sukses --}}
             @if (session('success'))
                 <div class="mb-4 bg-green-100 text-green-700 px-4 py-2 rounded">
                     {{ session('success') }}
                 </div>
             @endif
 
-            {{-- ✅ Tombol Tambah --}}
             <div class="mb-4 text-right">
                 <a href="{{ route('peraturan_spap.create') }}"
                     class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
@@ -23,7 +21,6 @@
                 </a>
             </div>
 
-            {{-- ✅ Tabel Data --}}
             <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow rounded">
                 <table class="min-w-full border border-gray-200 dark:border-gray-700">
                     <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
@@ -39,27 +36,22 @@
                     <tbody>
                         @forelse ($peraturans as $peraturan)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                                {{-- No --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     {{ $loop->iteration }}
                                 </td>
 
-                                {{-- Judul --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 font-semibold">
                                     {{ $peraturan->judul }}
                                 </td>
 
-                                {{-- Kategori --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center capitalize">
                                     {{ $peraturan->kategori }}
                                 </td>
 
-                                {{-- Deskripsi --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-sm max-w-xs truncate">
                                     {{ Str::limit(strip_tags($peraturan->deskripsi), 80) }}
                                 </td>
 
-                                {{-- File / Link --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-sm space-y-1">
                                     @foreach ([1, 2, 3] as $i)
                                         @php
@@ -83,7 +75,6 @@
                                     @endif
                                 </td>
 
-                                {{-- Aksi --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     <div class="flex justify-center space-x-2">
                                         <a href="{{ route('peraturan_spap.edit', $peraturan->id) }}"

@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section class="max-w-5xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg text-justify">
+    <section class="max-w-5xl mx-auto px-6 py-12 mt-2 bg-white shadow-md rounded-lg text-justify">
         <h1 class="text-3xl font-bold mb-6 text-center">Sejarah IAPI</h1>
 
         <p class="text-gray-700 leading-relaxed mb-6">

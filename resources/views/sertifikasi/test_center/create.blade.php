@@ -11,7 +11,6 @@
                 <form action="{{ route('test_center.store') }}" method="POST">
                     @csrf
 
-                    {{-- ✅ Kode Test Center --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Kode Test Center</label>
                         <input type="text" name="kode" value="{{ old('kode') }}"
@@ -22,7 +21,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Nama --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Nama</label>
                         <input type="text" name="nama" value="{{ old('nama') }}"
@@ -33,7 +31,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Alamat --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Alamat</label>
                         <textarea name="alamat" rows="3" class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white"
@@ -43,7 +40,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Kota --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Kota</label>
                         <input type="text" name="kota" value="{{ old('kota') }}"
@@ -54,7 +50,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Telepon --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Telepon</label>
                         <input type="text" name="telepon" value="{{ old('telepon') }}"
@@ -65,7 +60,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Simpan --}}
                     <div class="flex justify-end">
                         <a href="{{ route('test_center.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>

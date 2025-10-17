@@ -12,7 +12,6 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- ✅ Judul --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Judul</label>
                         <input type="text" name="judul" value="{{ old('judul', $brevet->judul) }}"
@@ -23,7 +22,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Brosur (File Upload) --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Brosur</label>
                         @if ($brevet->brosur)
@@ -41,7 +39,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Link Pendaftaran --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Link Pendaftaran</label>
                         <input type="text" name="link_daftar" value="{{ old('link_daftar', $brevet->link_daftar) }}"
@@ -52,7 +49,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Status --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Status</label>
                         <select name="status"
@@ -67,7 +63,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Aksi --}}
                     <div class="flex justify-end">
                         <a href="{{ route('brevets.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>

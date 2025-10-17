@@ -1,10 +1,9 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section class="max-w-7xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg">
+    <section class="max-w-7xl mx-auto px-6 py-12 mt-2 bg-white shadow-md rounded-lg">
         <h1 class="text-3xl font-bold mb-6 text-center">Daftar Anggota</h1>
-
-        <form method="GET" action="{{ route('visitor.anggota') }}" class="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4">
+        <form method="GET" action="{{ route('visitor.anggota') }}" class="mb-6 grid grid-cols-1 md:grid-cols-5 gap-4">
             <select name="kategori" class="border rounded-lg px-3 py-2 w-full">
                 <option value="">-- Semua Kategori --</option>
                 <option value="anggota biasa" {{ request('kategori') == 'anggota biasa' ? 'selected' : '' }}>Anggota Biasa
@@ -14,8 +13,7 @@
                 <option value="anggota muda" {{ request('kategori') == 'anggota muda' ? 'selected' : '' }}>Anggota Muda
                 </option>
                 <option value="anggota pemula" {{ request('kategori') == 'anggota pemula' ? 'selected' : '' }}>Anggota
-                    Pemula
-                </option>
+                    Pemula</option>
                 <option value="anggota umum" {{ request('kategori') == 'anggota umum' ? 'selected' : '' }}>Anggota Umum
                 </option>
             </select>
@@ -30,9 +28,16 @@
             <input type="text" name="search" placeholder="Cari Nama Anggota / KAP" value="{{ request('search') }}"
                 class="border rounded-lg px-3 py-2 w-full">
 
-            <button type="submit" class="bg-blue-600 text-white rounded-lg px-4 py-2 hover:bg-blue-700">
+            <button type="submit" class="bg-[#071225] text-white rounded-lg px-4 py-2 hover:bg-[#0C2C77]">
                 Filter
             </button>
+
+            @if (request('kategori') || request('status') || request('search'))
+                <a href="{{ route('visitor.anggota') }}"
+                    class="bg-gray-400 text-white rounded-lg px-4 py-2 hover:bg-gray-500 text-center">
+                    Reset
+                </a>
+            @endif
         </form>
 
         <div class="overflow-x-auto">
@@ -79,7 +84,7 @@
         </div>
 
         <div class="mt-6">
-            {{ $anggota->appends(request()->query())->links() }}
+            {{ $anggota->appends(request()->query())->links('vendor.pagination.tailwind') }}
         </div>
     </section>
 @endsection

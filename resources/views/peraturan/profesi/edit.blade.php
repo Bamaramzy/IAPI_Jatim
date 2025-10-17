@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            ✏️ Edit Data Profesi
+            Edit Data Profesi
         </h2>
     </x-slot>
 
@@ -13,7 +13,6 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- ✅ Pilih Kategori --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Kategori</label>
                         <select name="kategori"
@@ -37,7 +36,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Judul --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Judul</label>
                         <input type="text" name="judul" value="{{ old('judul', $peraturanProfesi->judul) }}"
@@ -48,13 +46,12 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ File Lama + Upload Baru --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">File</label>
 
                         @if ($peraturanProfesi->file_path)
                             <p class="mb-2">
-                                📄 <a href="{{ asset('storage/' . $peraturanProfesi->file_path) }}" target="_blank"
+                                <a href="{{ asset('storage/' . $peraturanProfesi->file_path) }}" target="_blank"
                                     class="text-blue-500 underline">Lihat File Lama</a>
                             </p>
                         @endif
@@ -67,7 +64,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Link URL (Opsional) --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Link URL (Opsional)</label>
                         <input type="url" name="link_url" value="{{ old('link_url', $peraturanProfesi->link_url) }}"
@@ -78,7 +74,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Simpan --}}
                     <div class="flex justify-end">
                         <a href="{{ route('peraturan_profesi.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">

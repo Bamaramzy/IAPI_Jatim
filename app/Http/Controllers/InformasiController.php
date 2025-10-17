@@ -14,6 +14,12 @@ class InformasiController extends Controller
         return view('informasi.index', compact('informasis'));
     }
 
+    public function welcome()
+    {
+        $informasis = Informasi::latest()->get();
+        return view('welcome', compact('informasis'));
+    }
+
     public function create()
     {
         return view('informasi.create');
@@ -23,12 +29,11 @@ class InformasiController extends Controller
     {
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
-            'gambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar' => 'required|image|mimes:jpg,jpeg,png|max:10048',
             'link' => 'nullable|url',
         ]);
 
         if ($request->hasFile('gambar')) {
-            // Pastikan folder 'informasis' ada
             if (!Storage::disk('public')->exists('informasis')) {
                 Storage::disk('public')->makeDirectory('informasis');
             }
@@ -50,17 +55,15 @@ class InformasiController extends Controller
     {
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:10048',
             'link' => 'nullable|url',
         ]);
 
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
             if ($informasi->gambar && Storage::disk('public')->exists($informasi->gambar)) {
                 Storage::disk('public')->delete($informasi->gambar);
             }
 
-            // Pastikan folder 'informasis' ada
             if (!Storage::disk('public')->exists('informasis')) {
                 Storage::disk('public')->makeDirectory('informasis');
             }
@@ -75,7 +78,6 @@ class InformasiController extends Controller
 
     public function destroy(Informasi $informasi)
     {
-        // Hapus gambar lama jika ada
         if ($informasi->gambar && Storage::disk('public')->exists($informasi->gambar)) {
             Storage::disk('public')->delete($informasi->gambar);
         }

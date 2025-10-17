@@ -1,24 +1,23 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section x-data="{ show: false, imgSrc: '' }" class="max-w-5xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg">
+    <section x-data="{ show: false, imgSrc: '' }" class="max-w-5xl mx-auto px-6 py-12 mt-2 bg-white shadow-md rounded-lg">
         <h1 class="text-3xl font-bold mb-6 text-center">Certified Financial Investigator (CFI)</h1>
 
-        <div class="grid grid-cols-1 md:grid-cols-1 gap-6 flex-wrap justify-center">
+        <div class="flex flex-col items-center gap-6">
             @forelse ($cfis as $cfi)
                 @if ($cfi->gambar)
-                    <div class="bg-white dark:bg-gray-800 rounded shadow p-3 flex justify-center">
-                        <img src="{{ asset('storage/' . $cfi->gambar) }}" alt="Poster CFI"
-                            class="w-full h-64 object-contain rounded cursor-pointer hover:scale-105 transition"
-                            @click="show = true; imgSrc = '{{ asset('storage/' . $cfi->gambar) }}'">
-                    </div>
+                    <img src="{{ asset('storage/' . $cfi->gambar) }}" alt="Poster CFI"
+                        class="w-[500px] max-h-[600px] object-contain cursor-pointer hover:scale-105 transition"
+                        @click="show = true; imgSrc='{{ asset('storage/' . $cfi->gambar) }}'">
                 @endif
             @empty
-                <p class="col-span-2 text-center text-gray-500">
+                <p class="text-center text-gray-500">
                     Belum ada gambar Certified Financial Investigator.
                 </p>
             @endforelse
         </div>
+
         <div class="flex flex-wrap justify-center gap-3 mt-8">
             @forelse ($cfis as $cfi)
                 @if ($cfi->link)
@@ -28,7 +27,7 @@
                     </a>
                 @endif
             @empty
-                <p class="text-gray-500">Belum ada link Certified Financial Investigator.</p>
+                <p class="text-gray-500 text-center">Belum ada link Certified Financial Investigator.</p>
             @endforelse
         </div>
 
@@ -45,5 +44,6 @@
                 <img :src="imgSrc" alt="Popup Image" class="max-h-[90vh] max-w-[90vw] rounded shadow-lg">
             </div>
         </div>
+
     </section>
 @endsection

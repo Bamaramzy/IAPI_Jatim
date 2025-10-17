@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            ✏️ Edit Jalur Reguler
+            Edit Jalur Reguler
         </h2>
     </x-slot>
 
@@ -13,7 +13,6 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- ✅ Kategori (Dropdown) --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Kategori</label>
                         <select name="kategori"
@@ -40,7 +39,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Judul --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Judul</label>
                         <input type="text" name="judul" value="{{ old('judul', $jalur_reguler->judul) }}"
@@ -51,7 +49,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Konten pakai CKEditor --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Konten</label>
                         <textarea id="konten" name="konten" rows="6"
@@ -64,7 +61,6 @@
                         </p>
                     </div>
 
-                    {{-- ✅ File Upload --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">File (opsional)</label>
                         <input type="file" name="file"
@@ -82,7 +78,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Link --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Link (opsional)</label>
                         <input type="url" name="link" value="{{ old('link', $jalur_reguler->link) }}"
@@ -93,7 +88,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Simpan --}}
                     <div class="flex justify-end">
                         <a href="{{ route('jalur_reguler.index') }}"
                             class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded mr-2">Batal</a>
@@ -106,7 +100,6 @@
         </div>
     </div>
 
-    {{-- ✅ CKEditor --}}
     @push('scripts')
         <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
         <script>

@@ -7,15 +7,12 @@
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            {{-- ✅ Pesan Sukses --}}
             @if (session('success'))
                 <div class="mb-4 bg-green-100 text-green-700 px-4 py-2 rounded">
                     {{ session('success') }}
                 </div>
             @endif
 
-            {{-- ✅ Tombol Tambah --}}
             <div class="mb-4 text-right">
                 <a href="{{ route('workshop_ab.create') }}"
                     class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
@@ -23,7 +20,6 @@
                 </a>
             </div>
 
-            {{-- ✅ Tabel Data --}}
             <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow rounded">
                 <table class="min-w-full border border-gray-200 dark:border-gray-700">
                     <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
@@ -37,12 +33,10 @@
                     <tbody>
                         @forelse ($workshops as $w)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                                {{-- No --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     {{ $loop->iteration }}
                                 </td>
 
-                                {{-- ✅ Preview + Link PDF --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     @if ($w->pdf)
                                         <iframe src="{{ asset('storage/' . $w->pdf) }}"
@@ -57,7 +51,6 @@
                                     @endif
                                 </td>
 
-                                {{-- ✅ Link Form --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     @if ($w->link_form)
                                         <a href="{{ $w->link_form }}" target="_blank"
@@ -67,16 +60,13 @@
                                     @endif
                                 </td>
 
-                                {{-- ✅ Aksi --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     <div class="flex justify-center space-x-2">
-                                        {{-- Tombol Edit --}}
                                         <a href="{{ route('workshop_ab.edit', $w) }}"
                                             class="bg-yellow-400 hover:bg-yellow-500 text-white px-2 py-1 rounded text-sm">
                                             Edit
                                         </a>
 
-                                        {{-- Tombol Hapus --}}
                                         <form action="{{ route('workshop_ab.destroy', $w) }}" method="POST"
                                             onsubmit="return confirm('Yakin hapus data ini?')">
                                             @csrf

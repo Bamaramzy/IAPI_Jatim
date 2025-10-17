@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            ✏️ Edit Workshop Penyetaraan
+            Edit Workshop Penyetaraan
         </h2>
     </x-slot>
 
@@ -13,7 +13,6 @@
                     @csrf
                     @method('PUT')
 
-                    {{-- ✅ Pilih Kategori --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Kategori</label>
                         <select name="kategori_id"
@@ -31,7 +30,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Judul Materi --}}
                     <div class="mb-4">
                         <label class="block font-medium text-gray-700 dark:text-gray-300">Judul Materi</label>
                         <input type="text" name="judul" value="{{ old('judul', $workshop->judul) }}"
@@ -42,8 +40,7 @@
                         @enderror
                     </div>
 
-                    {{-- 📄 Bagian PDF --}}
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 border-b pb-1">📘 Materi PDF
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 border-b pb-1">Materi PDF
                     </h3>
 
                     <div class="mb-4">
@@ -53,7 +50,7 @@
                             class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
                         @if ($workshop->file_path)
                             <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                                📄 File saat ini:
+                                File saat ini:
                                 <a href="{{ asset('storage/' . $workshop->file_path) }}" target="_blank"
                                     class="text-blue-600 hover:underline">Lihat PDF</a>
                             </p>
@@ -80,7 +77,7 @@
                             class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
                         @if ($workshop->preview_thumbnail)
                             <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                                🖼️ Thumbnail saat ini:
+                                Thumbnail saat ini:
                                 <img src="{{ asset('storage/' . $workshop->preview_thumbnail) }}" alt="Thumbnail"
                                     class="h-24 mt-1 rounded border">
                             </p>
@@ -90,8 +87,7 @@
                         @enderror
                     </div>
 
-                    {{-- 🎥 Bagian Video --}}
-                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 border-b pb-1">🎬 Tutorial -
+                    <h3 class="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-2 border-b pb-1">Tutorial -
                         Video</h3>
 
                     <div class="mb-4">
@@ -128,7 +124,7 @@
                             class="w-full border rounded px-3 py-2 mt-1 dark:bg-gray-700 dark:text-white">
                         @if ($workshop->thumbnail_url)
                             <p class="mt-1 text-sm text-gray-600 dark:text-gray-300">
-                                🖼️ Thumbnail saat ini:
+                                Thumbnail saat ini:
                                 <img src="{{ asset('storage/' . $workshop->thumbnail_url) }}" alt="Video Thumbnail"
                                     class="h-24 mt-1 rounded border">
                             </p>
@@ -138,7 +134,6 @@
                         @enderror
                     </div>
 
-                    {{-- ✅ Tombol Aksi --}}
                     <div class="flex justify-end">
                         <a href="{{ route('workshop_penyetaraan.index') }}"
                             class="px-4 py-2 bg-gray-500 text-white rounded mr-2">Batal</a>

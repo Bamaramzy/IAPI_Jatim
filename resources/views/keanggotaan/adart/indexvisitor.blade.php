@@ -1,13 +1,12 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section class="max-w-7xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg">
-        <h1 class="text-3xl font-bold mb-6 text-center">📑 Daftar AD/ART</h1>
+    <section class="max-w-5xl mx-auto px-4 py-12 mt-2 bg-white shadow-md rounded-lg">
+        <h1 class="text-3xl font-bold mb-10 text-center">Daftar AD/ART</h1>
 
-        <div class="grid md:grid-cols-3 gap-6">
+        <div class="space-y-16">
             @forelse ($adarts as $adart)
                 @php
-                    $driveId = null;
                     $pdfUrl = null;
 
                     if ($adart->link_drive && preg_match('/\/d\/([a-zA-Z0-9_-]+)/', $adart->link_drive, $matches)) {
@@ -18,28 +17,23 @@
                     }
                 @endphp
 
-                <a href="{{ $pdfUrl ?? '#' }}" target="_blank"
-                    class="block border rounded-lg shadow hover:shadow-lg overflow-hidden bg-white transition transform hover:-translate-y-1">
-                    @if ($driveId)
-                        <iframe src="https://drive.google.com/file/d/{{ $driveId }}/preview" class="w-full h-64 border-0"
-                            allow="autoplay"></iframe>
-                    @elseif ($adart->file_pdf)
-                        <iframe src="{{ asset('storage/' . $adart->file_pdf) }}" class="w-full h-64 border-0"></iframe>
-                    @elseif ($adart->cover)
-                        <img src="{{ asset('storage/' . $adart->cover) }}" alt="Cover {{ $adart->judul }}"
-                            class="w-full h-64 object-cover">
-                    @else
-                        <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
-                            Tidak ada file tersedia
-                        </div>
-                    @endif
+                <div class="bg-white rounded-lg shadow overflow-hidden border p-6">
+                    <div class="w-full bg-gray-100 rounded-lg overflow-hidden">
+                        @if ($pdfUrl)
+                            <iframe src="{{ $pdfUrl }}" class="w-full h-[850px]" frameborder="0"></iframe>
+                        @else
+                            <div class="w-full h-[850px] bg-gray-200 flex items-center justify-center text-gray-500">
+                                PDF tidak tersedia
+                            </div>
+                        @endif
+                    </div>
 
                     <div class="p-4">
                         <h2 class="font-bold text-lg text-gray-800">{{ $adart->judul }}</h2>
                     </div>
-                </a>
+                </div>
             @empty
-                <p class="col-span-3 text-center text-gray-600">Belum ada AD/ART tersedia.</p>
+                <p class="text-center text-gray-600">Belum ada AD/ART tersedia.</p>
             @endforelse
         </div>
 

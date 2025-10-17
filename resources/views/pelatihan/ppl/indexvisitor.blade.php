@@ -1,8 +1,8 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section class="max-w-5xl mx-auto px-4 py-12 bg-white shadow-md rounded-lg">
-        <h1 class="text-3xl font-bold mb-10 text-center">📚 Panduan PPL</h1>
+    <section class="max-w-5xl mx-auto px-4 py-12 mt-2 bg-white shadow-md rounded-lg">
+        <h1 class="text-3xl font-bold mb-10 text-center">Panduan PPL</h1>
 
         <div class="space-y-16">
             @forelse ($ppls as $ppl)
@@ -14,7 +14,7 @@
                                 allowfullscreen></iframe>
                         @else
                             <div class="w-full h-[420px] bg-gray-200 flex items-center justify-center text-gray-500">
-                                🎞️ Video tidak tersedia
+                                Video tidak tersedia
                             </div>
                         @endif
                     </div>
@@ -25,7 +25,7 @@
                             <iframe src="{{ $ppl->pdf_url }}" class="w-full h-[850px]" frameborder="0"></iframe>
                         @else
                             <div class="w-full h-[850px] bg-gray-200 flex items-center justify-center text-gray-500">
-                                📄 PDF tidak tersedia
+                                PDF tidak tersedia
                             </div>
                         @endif
                     </div>

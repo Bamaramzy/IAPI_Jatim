@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section class="max-w-5xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg text-justify">
+    <section class="max-w-5xl mx-auto px-6 py-12 mt-2 bg-white shadow-md rounded-lg text-justify">
         <h1 class="text-3xl font-bold mb-6 text-center">Informasi Umum</h1>
 
         <p class="text-gray-700 leading-relaxed mb-6">
@@ -98,7 +98,7 @@
 
         <div class="text-center">
             <a href="https://member.iapi.or.id/daftar"
-                class="px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg shadow-md transition">
+                class="px-6 py-3 bg-[#071225] hover:bg-[#0C2C77] text-white font-semibold rounded-lg shadow-md transition">
                 Daftar menjadi Anggota IAPI
             </a>
         </div>

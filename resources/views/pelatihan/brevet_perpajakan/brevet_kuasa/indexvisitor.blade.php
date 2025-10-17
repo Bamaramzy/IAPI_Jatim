@@ -1,42 +1,34 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section x-data="{ show: false, imgSrc: '' }" class="max-w-7xl mx-auto px-6 py-12 bg-white shadow-md rounded-lg">
+    <section x-data="{ show: false, imgSrc: '' }" class="max-w-7xl mx-auto px-6 py-12 mt-2 bg-white shadow-md rounded-lg">
 
-        <h1 class="text-3xl font-bold mb-6 text-center">📑 Brevet Kuasa</h1>
-
-        {{-- 📑 List Brevet Kuasa --}}
-        <div class="space-y-8">
+        <h1 class="text-3xl font-bold text-center mb-6">Brevet Kuasa</h1>
+        <div class="flex flex-col items-center gap-8">
             @forelse ($brevets as $brevet)
-                <div class="border rounded-lg shadow hover:shadow-lg overflow-hidden bg-white">
-
-                    {{-- 🖼️ Gambar Besar --}}
+                <div class="flex flex-col items-center gap-3">
                     @if ($brevet->brosur)
                         <img src="{{ asset('storage/' . $brevet->brosur) }}" alt="{{ $brevet->judul }}"
-                            class="w-full max-h-[600px] object-contain cursor-pointer"
+                            class="w-[550px] max-h-[800px] object-contain cursor-pointer hover:scale-105 transition"
                             @click="imgSrc='{{ asset('storage/' . $brevet->brosur) }}'; show = true">
                     @else
-                        <div class="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
+                        <div class="w-[550px] h-[800px] bg-gray-200 flex items-center justify-center text-gray-500 rounded">
                             Tidak ada brosur
                         </div>
                     @endif
 
-                    {{-- 📑 Konten --}}
-                    <div class="p-4 text-center">
-                        <h2 class="font-bold text-lg mb-2">{{ $brevet->judul }}</h2>
-
-                        {{-- 🔗 Tombol Daftar --}}
+                    <h2 class="font-bold text-lg text-center">{{ $brevet->judul }}</h2>
+                    <div class="flex gap-3">
                         @if ($brevet->link_daftar)
                             <a href="{{ $brevet->link_daftar }}" target="_blank"
-                                class="inline-block px-4 py-2 bg-blue-600 text-white text-sm rounded hover:bg-blue-700">
-                                📝 Daftar Sekarang
+                                class="inline-block px-4 py-2 bg-[#071225] text-white text-sm rounded hover:bg-[#0C2C77] transition">
+                                Daftar Sekarang
                             </a>
-                        @else
-                            <span class="text-gray-400">Link pendaftaran belum tersedia</span>
                         @endif
+
                         <a href="https://drive.google.com/drive/folders/1h_QMfmjD0Is2tTkAJqZh5NZmcrBOyhIQ" target="_blank"
-                            class="inline-block px-4 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 ml-2">
-                            📘 Panduan
+                            class="inline-block px-4 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition">
+                            Panduan
                         </a>
                     </div>
                 </div>
@@ -45,23 +37,19 @@
             @endforelse
         </div>
 
-        {{-- 📌 Pagination --}}
-        <div class="mt-8">
-            {{ $brevets->links() }}
-        </div>
-
-        {{-- 🖼️ Modal Preview Gambar --}}
         <div x-show="show" x-transition.opacity.duration.300ms
-            class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-md flex items-center justify-center z-50"
+            class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
             @keydown.escape.window="show = false" @click.self="show = false">
-
-            <div x-transition.scale.duration.300ms
-                class="bg-white rounded-lg overflow-hidden shadow-lg max-w-5xl w-full relative">
-
-                <button class="absolute top-3 right-3 text-gray-700 text-2xl hover:text-red-600"
-                    @click="show = false">&times;</button>
-
-                <img :src="imgSrc" alt="Preview" class="w-full max-h-[90vh] object-contain">
+            <div class="relative" x-transition.scale.duration.300ms @click.stop>
+                <button @click="show = false"
+                    class="absolute -top-4 -right-4 bg-white rounded-full shadow-lg p-2 hover:bg-gray-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <img :src="imgSrc" alt="Preview Brosur"
+                    class="max-h-[90vh] max-w-[90vw] object-contain rounded shadow-lg">
             </div>
         </div>
     </section>

@@ -1,30 +1,24 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section class="py-12 px-4 bg-gray-100 min-h-screen" x-data="{ showModal: false, modalType: '', modalSrc: '' }">
+    <section class="py-12 px-4 min-h-screen" x-data="{ showModal: false, modalType: '', modalSrc: '' }">
 
         <div class="max-w-7xl mx-auto">
-            {{-- 🔹 Tabs Kategori --}}
             <div class="flex flex-wrap justify-center gap-4 mb-8">
                 @foreach ($kategoriList as $kat)
                     <a href="{{ route('visitor.workshop_penyetaraan', ['kategori' => $kat->id]) }}"
                         class="px-5 py-2 rounded-full text-sm font-semibold
-                    {{ $kategoriAktif == $kat->id ? 'bg-blue-900 text-yellow-300' : 'bg-gray-200 hover:bg-gray-300' }}">
+                    {{ $kategoriAktif == $kat->id ? 'bg-[#071225] text-white' : 'bg-gray-200 hover:bg-gray-300' }}">
                         {{ strtoupper($kat->nama_kategori) }}
                     </a>
                 @endforeach
             </div>
 
-            {{-- ===========================
-             🔹 BAGIAN PDF
-        ============================ --}}
             <h2 class="text-2xl font-bold text-gray-800 mb-6">Tutorial - PDF</h2>
-
             @if ($pdfList->isNotEmpty())
                 <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     @foreach ($pdfList as $pdf)
                         @php
-                            // Tentukan URL preview PDF
                             if ($pdf->file_path && !preg_match('/^https?:\/\//', $pdf->file_path)) {
                                 $targetUrl = asset('storage/' . $pdf->file_path);
                             } elseif ($pdf->link_url) {
@@ -45,7 +39,6 @@
                                 class="block w-full group focus:outline-none">
                                 <div
                                     class="bg-white rounded-xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 overflow-hidden">
-                                    {{-- Otomatis Preview PDF --}}
                                     <iframe src="{{ $targetUrl }}"
                                         class="w-full aspect-[4/3] border-0 pointer-events-none"
                                         title="Preview PDF"></iframe>
@@ -68,16 +61,12 @@
                 </div>
             @endif
 
-            {{-- ===========================
-             🔹 BAGIAN VIDEO
-        ============================ --}}
             <h2 class="text-2xl font-bold text-gray-800 mt-12 mb-6">Tutorial - Video</h2>
-
             @if ($videoList->isNotEmpty())
                 <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                     @foreach ($videoList as $video)
                         @php
-                            // Tentukan URL video
+
                             if ($video->video_path && !preg_match('/^https?:\/\//', $video->video_path)) {
                                 $videoUrl = asset('storage/' . $video->video_path);
                             } elseif ($video->video_url) {
@@ -102,7 +91,6 @@
                                 class="block w-full group focus:outline-none">
                                 <div
                                     class="bg-white rounded-xl shadow hover:shadow-2xl transition transform hover:-translate-y-1 overflow-hidden">
-                                    {{-- Otomatis Preview Video --}}
                                     @if (str_contains($videoUrl, 'youtube.com/embed'))
                                         <iframe src="{{ $videoUrl }}"
                                             class="w-full aspect-[16/9] border-0 pointer-events-none"
@@ -132,7 +120,6 @@
             @endif
         </div>
 
-        {{-- 🔹 Modal Preview --}}
         <div x-show="showModal" x-transition
             class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
             @click.self="showModal = false; modalSrc = ''" x-cloak>

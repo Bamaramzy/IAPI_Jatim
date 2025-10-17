@@ -2,29 +2,23 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            📘 Daftar Jalur Reguler
+            Daftar Jalur Reguler
         </h2>
     </x-slot>
 
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            {{-- ✅ Pesan Sukses --}}
             @if (session('success'))
                 <div class="mb-4 bg-green-100 text-green-700 px-4 py-2 rounded">
                     {{ session('success') }}
                 </div>
             @endif
-
-            {{-- ✅ Tombol Tambah --}}
             <div class="mb-4 text-right">
                 <a href="{{ route('jalur_reguler.create') }}"
                     class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">
                     + Tambah Jalur Reguler
                 </a>
             </div>
-
-            {{-- ✅ Tabel Data --}}
             <div class="overflow-x-auto bg-white dark:bg-gray-800 shadow rounded">
                 <table class="min-w-full border border-gray-200 dark:border-gray-700">
                     <thead class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200">
@@ -41,23 +35,14 @@
                     <tbody>
                         @forelse ($jalurRegulers as $jr)
                             <tr class="hover:bg-gray-50 dark:hover:bg-gray-700">
-                                {{-- Nomor --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     {{ $loop->iteration + ($jalurRegulers->currentPage() - 1) * $jalurRegulers->perPage() }}
                                 </td>
-
-                                {{-- Kategori --}}
                                 <td class="px-4 py-2 border dark:border-gray-600">{{ $jr->kategori }}</td>
-
-                                {{-- Judul --}}
                                 <td class="px-4 py-2 border dark:border-gray-600">{{ $jr->judul }}</td>
-
-                                {{-- Konten (dipotong biar rapi) --}}
                                 <td class="px-4 py-2 border dark:border-gray-600">
                                     {{ Str::limit(strip_tags($jr->konten), 50, '...') }}
                                 </td>
-
-                                {{-- File PDF --}}
                                 <td class="px-4 py-2 border dark:border-gray-600">
                                     @if ($jr->file)
                                         <a href="{{ asset('storage/' . $jr->file) }}" target="_blank"
@@ -67,7 +52,6 @@
                                     @endif
                                 </td>
 
-                                {{-- Link (Google Drive / lainnya) --}}
                                 <td class="px-4 py-2 border dark:border-gray-600">
                                     @if ($jr->link)
                                         <a href="{{ $jr->link }}" target="_blank"
@@ -77,7 +61,6 @@
                                     @endif
                                 </td>
 
-                                {{-- Aksi --}}
                                 <td class="px-4 py-2 border dark:border-gray-600 text-center">
                                     <div class="flex justify-center space-x-2">
                                         <a href="{{ route('jalur_reguler.edit', $jr->id) }}"
@@ -107,9 +90,8 @@
                 </table>
             </div>
 
-            {{-- ✅ Pagination --}}
             <div class="mt-4">
-                {{ $jalurRegulers->links() }}
+                {{ $jalurRegulers->links('vendor.pagination.tailwind') }}
             </div>
         </div>
     </div>

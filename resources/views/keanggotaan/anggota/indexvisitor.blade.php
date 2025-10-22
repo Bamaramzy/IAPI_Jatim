@@ -29,7 +29,7 @@
                 class="border rounded-lg px-3 py-2 w-full">
 
             <button type="submit" class="bg-[#071225] text-white rounded-lg px-4 py-2 hover:bg-[#0C2C77]">
-                Filter
+                Filter/Cari
             </button>
 
             @if (request('kategori') || request('status') || request('search'))

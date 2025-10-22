@@ -1,66 +1,57 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏢 [PROJECT_NAME]: IAPI Jatim Company Profile
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![Laravel v11.x](https://img.shields.io/badge/Laravel-11-FF2D20?style=flat-square&logo=laravel)
+![PHP 8.2+](https://img.shields.io/badge/PHP-8.2+-777BB4?style=flat-square&logo=php)
+![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)
 
-## About Laravel
+A digital platform and company profile built for **IAPI Jatim** to showcase their mission, services, member information, and latest news/events. Built using the **Laravel 11** framework with a focus on administrative control and content management.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 📚 Table of Contents
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1.  [Technology Stack](#1-technology-stack)
+2.  [Prerequisites](#2-prerequisites)
+3.  [Installation Guide](#3-installation-guide)
+4.  [Database Setup](#4-database-setup)
+5.  [Key Configuration](#5-key-configuration)
+6.  [Development Commands](#6-development-commands)
+7.  [Admin Panel Access](#7-admin-panel-access)
+8.  [Codebase Structure Notes](#8-codebase-structure-notes)
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 1. Technology Stack
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+| Component          | Version/Details                      | Notes                                           |
+| :----------------- | :----------------------------------- | :---------------------------------------------- |
+| **Framework**      | Laravel 11.x                         | Modern routing, minimal boilerplate.            |
+| **Language**       | PHP 8.2+                             | Required for Laravel 11.                        |
+| **Frontend**       | Blade & **Tailwind CSS** (via Vite)  | Styling framework for rapid development.        |
+| **Interactivity**  | Livewire 3 / Alpine.js               | Used for dynamic components in the Admin Panel. |
+| **Database**       | **[YOUR_DB_TYPE - e.g., MySQL 8.0]** | Primary database for application data.          |
+| **Asset Bundling** | Vite                                 | Used for fast compilation of CSS/JS.            |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## 2. Prerequisites
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Ensure you have the following software installed on your development machine:
 
-### Premium Partners
+-   **PHP:** Version 8.2 or higher
+-   **Composer:** Latest version
+-   **Node.js:** Version 18+ (for Vite/frontend assets)
+-   **Database:** A running instance of **[YOUR\_DB\_TYPE]**
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## 3. Installation Guide
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Follow these steps to set up the project locally for development.
 
-## Code of Conduct
+### A. Clone Repository
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```bash
+git clone [YOUR_REPOSITORY_URL]
+cd [PROJECT_FOLDER_NAME]
+```

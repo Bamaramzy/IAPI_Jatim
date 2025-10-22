@@ -55,3 +55,59 @@ Follow these steps to set up the project locally for development.
 git clone [YOUR_REPOSITORY_URL]
 cd [PROJECT_FOLDER_NAME]
 ```
+
+### B. Install Dependencies
+
+```bash
+composer install
+npm install
+```
+
+### C. Environtment Setup
+
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+
+### Database Setup
+
+### A. Environment Configuration
+
+Edit the newly created .env file and update the following variables to match your local database settings:
+
+```bash
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=[YOUR_DATABASE_NAME]
+DB_USERNAME=[YOUR_DB_USERNAME]
+DB_PASSWORD=[YOUR_DB_PASSWORD]
+```
+
+### B. Run Migrations & Seeding
+
+```bash
+php artisan migrate --seed
+```
+
+### Key Configuration
+
+```bash
+php artisan storage:link
+```
+
+### Development Commands
+
+### A. Start Loval Server
+
+```bash
+php artisan serve
+```
+
+### B. Frontend Asset Compilation
+
+```bash
+npm run dev
+npm run build
+```

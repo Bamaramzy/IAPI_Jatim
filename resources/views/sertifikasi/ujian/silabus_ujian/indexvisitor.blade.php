@@ -8,7 +8,7 @@
                 Daftar Silabus Ujian, Modul, dan Ilustrasi Soal
             </h2>
 
-            <form method="GET" action="{{ route('visitor.silabus_ujian') }}"
+            <form method="GET" action="{{ route('visitor.silabus') }}"
                 class="mb-8 flex flex-wrap gap-4 justify-center items-center">
 
                 @if ($kategoriList->isNotEmpty())
@@ -40,7 +40,7 @@
                     Cari
                 </button>
                 @if (!empty($kategori) || !empty($sub))
-                    <a href="{{ route('visitor.silabus_ujian') }}"
+                    <a href="{{ route('visitor.silabus') }}"
                         class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded shadow text-sm">
                         Reset
                     </a>

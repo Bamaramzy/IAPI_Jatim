@@ -46,7 +46,7 @@
                 <div class="relative">
                     <divabsolute -inset-4 bg-gradient-to-tr from-blue-200/40 to-transparent rounded-[24px] blur-3xl">
                 </div>
-                <img src="{{ asset('images/istana.png') }}" alt="IAPI Hero"
+                <img src="{{ asset('images/bgsementara.jpg') }}" alt="IAPI Hero"
                     class="relative rounded-[20px] shadow-xl hover:scale-[1.02] transition-transform duration-500"
                     loading="lazy">
             </div>

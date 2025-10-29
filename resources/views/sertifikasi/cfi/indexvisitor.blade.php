@@ -22,7 +22,7 @@
             @forelse ($cfis as $cfi)
                 @if ($cfi->link)
                     <a href="{{ $cfi->link }}" target="_blank"
-                        class="px-4 py-2 bg-blue-600 text-white rounded shadow hover:bg-blue-700 transition">
+                        class="px-4 py-2 bg-[#071225] text-white rounded shadow hover:bg-[#0C2C77] transition">
                         Tentang Sertifikasi Profesional Investigator
                     </a>
                 @endif

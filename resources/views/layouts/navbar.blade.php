@@ -228,10 +228,10 @@
         <div class="hidden md:block">
             @if (Route::has('login'))
                 @auth
-                    <a href="{{ url('/dashboard') }}"
+                    <a href="{{ url('#') }}"
                         class="px-4 py-1 rounded-md bg-gray-800 text-white text-sm">Dashboard</a>
                 @else
-                    <a href="{{ route('login') }}" class="px-4 py-1 rounded-md bg-gray-800 text-white text-sm">Login</a>
+                    <a href="" class="px-4 py-1 rounded-md bg-gray-800 text-white text-sm">Login</a>
                 @endauth
             @endif
         </div>

@@ -74,7 +74,7 @@ Route::prefix('keanggotaan')->group(function () {
     })->name('visitor.direktori');
 
     Route::get('/ad-art', function (Request $request) {
-        $query = AdArt::query()->where('status', 'aktif');
+        $query = AdArt::query()->where('status', 'publish');
 
         if ($request->filled('search')) {
             $query->where('judul', 'like', "%{$request->search}%");
@@ -147,28 +147,29 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resources([
-        'informasi'             => InformasiController::class,
-        'dewan_pengurus'        => DewanPengurusController::class,
-        'dewan_pengawas'        => DewanPengawasController::class,
-        'direktori'             => DirektoriController::class,
-        'adart'                 => AdArtController::class,
-        'tatacara'              => TataCaraController::class,
-        'pelatihan'             => PelatihanController::class,
-        'ppl'                   => PplController::class,
-        'brevets'               => BrevetController::class,
-        'brevets_c'             => BrevetCController::class,
-        'brevets_kuasa'         => BrevetKuasaController::class,
-        'test_center'           => TestCenterController::class,
-        'waiver_ppak'           => WaiverPpakController::class,
-        'cfi'                   => CFIController::class,
-        'workshop_ab'           => WorkshopABController::class,
-        'workshop_penyetaraan'  => WorkshopPenyetaraanController::class,
-        'jalur_reguler'         => JalurRegulerController::class,
-        'silabus_ujian'         => SilabusController::class,
-        'peraturan_profesi'     => PeraturanProfesiController::class,
-        'peraturan_spap'        => PeraturanSpapController::class,
-    ]);
+    //  Route::resources([
+    //      'informasi'             => InformasiController::class,
+    //      'dewan_pengurus'        => DewanPengurusController::class,
+    //      'dewan_pengawas'        => DewanPengawasController::class,
+    //      'direktori'             => DirektoriController::class,
+    //      'adart'                 => AdArtController::class,
+    //      'tatacara'              => TataCaraController::class,
+    //      'pelatihan'             => PelatihanController::class,
+    //      'ppl'                   => PplController::class,
+    //      'brevets'               => BrevetController::class,
+    //      'brevets_c'             => BrevetCController::class,
+    //      'brevets_kuasa'         => BrevetKuasaController::class,
+    //      'test_center'           => TestCenterController::class,
+    //      'waiver_ppak'           => WaiverPpakController::class,
+    //      'cfi'                   => CFIController::class,
+    //      'workshop_ab'           => WorkshopABController::class,
+    //      'workshop_penyetaraan'  => WorkshopPenyetaraanController::class,
+    //      'jalur_reguler'         => JalurRegulerController::class,
+    //      'silabus_ujian'         => SilabusController::class,
+    //      'peraturan_profesi'     => PeraturanProfesiController::class,
+    //      'peraturan_spap'        => PeraturanSpapController::class,
+    //  ]);
+
     Route::resource('anggota', AnggotaController::class)->parameters(['anggota' => 'anggota']);
 
     Route::prefix('workshop_penyetaraan')->group(function () {

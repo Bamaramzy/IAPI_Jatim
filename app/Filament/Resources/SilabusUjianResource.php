@@ -32,7 +32,10 @@ class SilabusUjianResource extends Resource
                 ->acceptedFileTypes(['application/pdf'])
                 ->nullable(),
 
-            Forms\Components\TextInput::make('pdf_link')->label('Link PDF')->url()->nullable(),
+            Forms\Components\TextInput::make('pdf_link')->label('Link PDF')
+                ->url()
+                ->nullable()
+                ->placeholder('https://drive.google.com/file/d/.../view?usp=preview'),
 
             Forms\Components\FileUpload::make('gambar')
                 ->label('Gambar')
@@ -41,7 +44,7 @@ class SilabusUjianResource extends Resource
                 ->nullable(),
 
             Forms\Components\TextInput::make('gambar_link')->label('Link Gambar')->url()->nullable(),
-            Forms\Components\TextInput::make('ilustrasi_link')->label('Link Ilustrasi')->url()->nullable(),
+            Forms\Components\TextInput::make('ilustrasi_link')->label('Link Ilustrasi Soal')->url()->nullable(),
         ]);
     }
 

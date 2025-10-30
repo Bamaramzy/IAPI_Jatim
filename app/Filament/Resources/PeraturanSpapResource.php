@@ -21,7 +21,22 @@ class PeraturanSpapResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\TextInput::make('kategori')->required(),
+            Forms\Components\Select::make('kategori')
+                ->required()
+                ->options([
+                    'SPM' => 'SPM',
+                    'SMM' => 'SMM',
+                    'KERANGKAN UNTUK PERIKATAN ASURANS' => 'KERANGKAN UNTUK PERIKATAN ASURANS',
+                    'SA' => 'SA',
+                    'SPR' => 'SPR',
+                    'SPA' => 'SPA',
+                    'SJT' => 'SJT',
+                    'SJI' => 'SJI',
+                    'SJK' => 'SJK',
+                    'SJL' => 'SJL',
+                    'SJS' => 'SJS',
+                ]),
+
             Forms\Components\TextInput::make('judul')->required(),
             Forms\Components\Textarea::make('deskripsi'),
 

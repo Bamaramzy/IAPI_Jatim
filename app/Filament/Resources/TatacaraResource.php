@@ -33,7 +33,8 @@ class TatacaraResource extends Resource
 
             Forms\Components\TextInput::make('link_drive')
                 ->label('Link Google Drive')
-                ->url(),
+                ->url()
+                ->placeholder('https://drive.google.com/file/d/.../view?usp=preview'),
 
             Forms\Components\FileUpload::make('cover')
                 ->label('Gambar Sampul')
@@ -41,9 +42,11 @@ class TatacaraResource extends Resource
                 ->image(),
 
             Forms\Components\Toggle::make('status')
-                ->label('Publish?')
+                ->label('Status Publikasi')
                 ->onIcon('heroicon-o-check')
                 ->offIcon('heroicon-o-x-mark')
+                ->onColor('success')
+                ->offColor('secondary')
                 ->default(true)
                 ->dehydrateStateUsing(fn(bool $state): string => $state ? 'aktif' : 'nonaktif')
                 ->afterStateHydrated(
@@ -72,13 +75,13 @@ class TatacaraResource extends Resource
                         default => ucfirst((string) $state),
                     })
                     ->colors([
-                        'success' => 'aktif',
-                        'secondary' => 'nonaktif',
+                        'success' => fn($state) => $state === 'aktif',
+                        'secondary' => fn($state) => $state === 'nonaktif',
                     ]),
 
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->label('Dibuat'),
+                    ->label('Dibuat')
+                    ->dateTime('d M Y H:i'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

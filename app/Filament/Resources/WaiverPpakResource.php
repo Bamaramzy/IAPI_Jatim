@@ -34,8 +34,8 @@ class WaiverPpakResource extends Resource
 
             Forms\Components\TextInput::make('jumlah_waiver')
                 ->label('Jumlah Waiver')
-                ->numeric()
-                ->required(),
+                ->required()
+                ->maxLength(255),
         ]);
     }
 

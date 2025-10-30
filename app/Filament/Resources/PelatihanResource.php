@@ -57,14 +57,18 @@ class PelatihanResource extends Resource
                     ->label('Upload Brosur')
                     ->directory('pelatihan/brosur'),
 
-                Forms\Components\Select::make('status')
-                    ->label('Status')
-                    ->options([
-                        'publish' => 'Publish',
-                        'draft' => 'Draft',
-                    ])
-                    ->default('draft')
-                    ->required(),
+                Forms\Components\Toggle::make('status')
+                    ->label('Publish?')
+                    ->onIcon('heroicon-o-check')
+                    ->offIcon('heroicon-o-x-mark')
+                    ->onColor('success')
+                    ->offColor('secondary')
+                    ->default(true)
+                    ->dehydrateStateUsing(fn(bool $state): string => $state ? 'publish' : 'draft')
+                    ->afterStateHydrated(
+                        fn($component, $record) =>
+                        $component->state($record?->status === 'publish')
+                    ),
             ]);
     }
 
@@ -98,11 +102,15 @@ class PelatihanResource extends Resource
 
                 Tables\Columns\BadgeColumn::make('status')
                     ->label('Status')
+                    ->formatStateUsing(fn(?string $state): string => match ($state) {
+                        'publish' => 'Publish',
+                        'draft' => 'Draft',
+                        default => ucfirst((string) $state),
+                    })
                     ->colors([
                         'success' => 'publish',
                         'secondary' => 'draft',
-                    ])
-                    ->formatStateUsing(fn(string $state): string => ucfirst($state)),
+                    ]),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

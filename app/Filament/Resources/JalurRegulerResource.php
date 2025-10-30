@@ -25,9 +25,10 @@ class JalurRegulerResource extends Resource
             Forms\Components\Select::make('kategori')
                 ->label('Kategori')
                 ->options([
-                    'Tatap Muka' => 'Tatap Muka',
-                    'Webinar' => 'Webinar',
-                    'Hybrid' => 'Hybrid',
+                    'Informasi Umum' => 'Informasi Umum',
+                    'Tingkat Dasar' => 'Tingkat Dasar',
+                    'Tingkat Profesional' => 'Tingkat Profesional',
+                    'Penilaian Pengalaman Audit' => 'Penilaian Pengalaman Audit',
                 ])
                 ->required(),
 

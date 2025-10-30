@@ -24,13 +24,14 @@ class WorkshopAbResource extends Resource
             Forms\Components\FileUpload::make('pdf')
                 ->label('File PDF')
                 ->directory('uploads/workshop_ab')
-                ->acceptedFileTypes(['application/pdf'])
-                ->required(),
+                ->acceptedFileTypes(['application/pdf']),
 
             Forms\Components\TextInput::make('link_pdf')
                 ->label('Link PDF')
                 ->url()
-                ->nullable(),
+                ->nullable()
+                ->placeholder('https://drive.google.com/file/d/.../view?usp=preview')
+                ->required(),
 
             Forms\Components\TextInput::make('link_form')
                 ->label('Link Form')

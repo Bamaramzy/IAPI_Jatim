@@ -27,7 +27,7 @@ class VideosRelationManager extends RelationManager
                 ->required(),
 
             Forms\Components\FileUpload::make('thumbnail_url')
-                ->label('Thumbnail (opsional)')
+                ->label('Thumbnail')
                 ->directory('uploads/penyetaraan/video_thumbnails')
                 ->image()
                 ->nullable(),

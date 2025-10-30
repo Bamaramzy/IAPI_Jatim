@@ -33,8 +33,8 @@ class DewanPengawasResource extends Resource
                     ->required()
                     ->maxLength(255),
 
-                Forms\Components\FileUpload::make('foto')
-                    ->label('Foto')
+                Forms\Components\FileUpload::make('gambar')
+                    ->label('Gambar')
                     ->image()
                     ->directory('dewan_pengawas')
                     ->visibility('public')
@@ -51,7 +51,7 @@ class DewanPengawasResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('foto')->label('Foto'),
+                Tables\Columns\ImageColumn::make('gambar')->label('Gambar'),
                 Tables\Columns\TextColumn::make('nama')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('jabatan')->searchable()->sortable(),
                 Tables\Columns\TextColumn::make('created_at')->dateTime()->label('Dibuat'),

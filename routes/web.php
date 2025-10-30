@@ -57,7 +57,7 @@ Route::prefix('keanggotaan')->group(function () {
     })->name('visitor.anggota');
 
     Route::get('/direktori', function (Request $request) {
-        $query = Direktori::query();
+        $query = Direktori::query()->where('status', 'aktif');
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
@@ -85,7 +85,7 @@ Route::prefix('keanggotaan')->group(function () {
     })->name('visitor.adart');
 
     Route::get('/tata-cara', function (Request $request) {
-        $query = TataCara::query();
+        $query = TataCara::query()->where('status', 'aktif');
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);

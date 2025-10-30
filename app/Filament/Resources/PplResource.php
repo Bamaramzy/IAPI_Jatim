@@ -24,21 +24,30 @@ class PplResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('video_url')
-                    ->label('URL Video')
+                    ->label('URL Video (YouTube / Drive)')
                     ->url()
-                    ->required(),
+                    ->nullable()
+                    ->maxLength(255)
+                    ->placeholder('https://www.youtube.com/...'),
 
-                Forms\Components\FileUpload::make('pdf_url')
-                    ->label('Materi PDF')
-                    ->directory('ppl/pdf'),
+                Forms\Components\TextInput::make('pdf_url')
+                    ->label('URL PDF (Google Drive / lainnya)')
+                    ->url()
+                    ->nullable()
+                    ->placeholder('https://drive.google.com/file/d/.../view?usp=preview'),
 
-                Forms\Components\Select::make('status')
-                    ->options([
-                        'Aktif' => 'publish',
-                        'Tidak Aktif' => 'draft',
-                    ])
-                    ->default('Aktif')
-                    ->label('Status'),
+                Forms\Components\Toggle::make('status')
+                    ->label('Publish?')
+                    ->onIcon('heroicon-o-check')
+                    ->offIcon('heroicon-o-x-mark')
+                    ->onColor('success')
+                    ->offColor('secondary')
+                    ->default(true)
+                    ->dehydrateStateUsing(fn(bool $state): string => $state ? 'publish' : 'draft')
+                    ->afterStateHydrated(
+                        fn($component, $record) =>
+                        $component->state($record?->status === 'publish')
+                    ),
             ]);
     }
 
@@ -47,17 +56,28 @@ class PplResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('video_url')
-                    ->label('Video')
-                    ->limit(40),
+                    ->label('Video URL')
+                    ->limit(40)
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('pdf_url')
-                    ->label('PDF')
-                    ->limit(40),
+                    ->label('PDF URL')
+                    ->limit(40)
+                    ->searchable(),
+
                 Tables\Columns\BadgeColumn::make('status')
+                    ->label('Status')
+                    ->formatStateUsing(fn(?string $state): string => match ($state) {
+                        'publish' => 'Publish',
+                        'draft' => 'Draft',
+                        default => ucfirst((string) $state),
+                    })
                     ->colors([
                         'success' => 'publish',
-                        'danger' => 'draft',
+                        'secondary' => 'draft',
                     ]),
             ])
+            ->filters([])
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),

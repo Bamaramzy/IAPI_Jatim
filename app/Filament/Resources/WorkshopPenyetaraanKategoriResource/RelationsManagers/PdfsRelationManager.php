@@ -25,16 +25,17 @@ class PdfsRelationManager extends RelationManager
                 ->label('File PDF')
                 ->directory('uploads/penyetaraan/pdf')
                 ->acceptedFileTypes(['application/pdf'])
-                ->maxSize(5120)
-                ->required(),
+                ->maxSize(5120),
 
             Forms\Components\TextInput::make('link_url')
-                ->label('Link (opsional)')
+                ->label('Link')
                 ->url()
-                ->nullable(),
+                ->nullable()
+                ->placeholder('https://drive.google.com/file/d/.../view?usp=preview')
+                ->required(),
 
             Forms\Components\FileUpload::make('preview_thumbnail')
-                ->label('Thumbnail (opsional)')
+                ->label('Thumbnail')
                 ->directory('uploads/penyetaraan/thumbnails')
                 ->image()
                 ->nullable(),

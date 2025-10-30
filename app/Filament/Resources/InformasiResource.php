@@ -52,7 +52,6 @@ class InformasiResource extends Resource
                 ->searchable()
                 ->sortable(),
 
-            // ✅ Pastikan disk diset agar URL gambar tampil
             Tables\Columns\ImageColumn::make('gambar')
                 ->label('Gambar')
                 ->disk('public')

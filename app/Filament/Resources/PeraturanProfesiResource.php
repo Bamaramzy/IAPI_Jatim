@@ -21,7 +21,14 @@ class PeraturanProfesiResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\TextInput::make('kategori')->required(),
+            Forms\Components\Select::make('kategori')
+                ->required()
+                ->options([
+                    'regulasi' => 'Regulasi',
+                    'asosiasi' => 'Peraturan Asosiasi',
+                    'pengurus' => 'Peraturan Pengurus',
+                ]),
+
             Forms\Components\TextInput::make('judul')->required(),
 
             Forms\Components\FileUpload::make('file_path')
@@ -30,7 +37,8 @@ class PeraturanProfesiResource extends Resource
 
             Forms\Components\TextInput::make('link_url')
                 ->url()
-                ->label('Link (opsional)'),
+                ->label('Link')
+                ->placeholder('https://drive.google.com/file/d/.../view?usp=preview'),
         ]);
     }
 

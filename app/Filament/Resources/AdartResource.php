@@ -18,7 +18,14 @@ class AdartResource extends Resource
     protected static ?string $navigationLabel = 'AD/ART';
     protected static ?string $pluralLabel = 'Daftar AD/ART';
     protected static ?string $slug = 'adart';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) Adart::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return Adart::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -43,7 +50,7 @@ class AdartResource extends Resource
                 ->image(),
 
             Forms\Components\Toggle::make('status')
-                ->label('Publish?')
+                ->label('Publish')
                 ->onIcon('heroicon-o-check')
                 ->offIcon('heroicon-o-x-mark')
                 ->default(true)
@@ -69,7 +76,6 @@ class AdartResource extends Resource
                 Tables\Columns\ImageColumn::make('cover')
                     ->label('Cover'),
 
-                // 🔍 Preview PDF atau Link Drive
                 Tables\Columns\ViewColumn::make('file_pdf')
                     ->label('Preview PDF / Link')
                     ->view('tables.columns.pdf-preview'),

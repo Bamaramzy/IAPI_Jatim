@@ -18,7 +18,14 @@ class DewanPengawasResource extends Resource
     protected static ?string $navigationLabel = 'Dewan Pengawas';
     protected static ?string $pluralLabel = 'Daftar Dewan Pengawas';
     protected static ?string $slug = 'dewan-pengawas';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) DewanPengawas::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return DewanPengawas::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form

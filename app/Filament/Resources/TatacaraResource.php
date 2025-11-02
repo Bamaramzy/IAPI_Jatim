@@ -18,7 +18,14 @@ class TatacaraResource extends Resource
     protected static ?string $navigationLabel = 'Tata Cara';
     protected static ?string $pluralLabel = 'Daftar Tata Cara';
     protected static ?string $slug = 'tatacara';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) Tatacara::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return Tatacara::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

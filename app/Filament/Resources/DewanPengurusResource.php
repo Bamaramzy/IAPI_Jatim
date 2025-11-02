@@ -18,7 +18,14 @@ class DewanPengurusResource extends Resource
     protected static ?string $navigationLabel = 'Dewan Pengurus';
     protected static ?string $pluralLabel = 'Daftar Dewan Pengurus';
     protected static ?string $slug = 'dewan-pengurus';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) DewanPengurus::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return DewanPengurus::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form

@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Model;
 
 class Silabus extends Model
 {
+    use HasActivityLog;
     protected $table = 'silabus';
     protected $fillable = [
         'kategori_utama',

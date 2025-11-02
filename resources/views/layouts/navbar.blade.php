@@ -223,19 +223,8 @@
                 </div>
             </div>
         </nav>
-
         {{-- Login / Dashboard --}}
-        <div class="hidden md:block">
-            @if (Route::has('login'))
-                @auth
-                    <a href="{{ url('#') }}"
-                        class="px-4 py-1 rounded-md bg-gray-800 text-white text-sm">Dashboard</a>
-                @else
-                    <a href="" class="px-4 py-1 rounded-md bg-gray-800 text-white text-sm">Login</a>
-                @endauth
-            @endif
-        </div>
-
+        <div class="hidden md:block"> </div>
         {{-- Hamburger Menu --}}
         <button @click="mobileOpen = !mobileOpen" class="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100">
             <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"

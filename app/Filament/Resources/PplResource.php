@@ -18,7 +18,14 @@ class PplResource extends Resource
     protected static ?string $navigationLabel = 'PPL';
     protected static ?string $pluralLabel = 'Daftar PPL';
     protected static ?string $slug = 'ppl';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) Ppl::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return Ppl::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form

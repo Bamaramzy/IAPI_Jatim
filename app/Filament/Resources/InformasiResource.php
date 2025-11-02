@@ -18,6 +18,14 @@ class InformasiResource extends Resource
     protected static ?string $navigationLabel = 'Informasi';
     protected static ?string $pluralLabel = 'Daftar Informasi';
     protected static ?string $slug = 'informasi';
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) Informasi::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return Informasi::count() > 0 ? 'success' : 'danger';
+    }
 
     public static function form(Form $form): Form
     {
@@ -27,13 +35,12 @@ class InformasiResource extends Resource
                 ->required()
                 ->maxLength(255),
 
-            // ✅ FileUpload dengan preview aktif & disk public
             Forms\Components\FileUpload::make('gambar')
                 ->label('Gambar')
                 ->image()
-                ->imagePreviewHeight('250') // tampilkan preview besar
+                ->imagePreviewHeight('250')
                 ->directory('informasi/gambar')
-                ->disk('public') // wajib agar URL tampil
+                ->disk('public')
                 ->visibility('public')
                 ->required(),
 

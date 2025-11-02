@@ -19,7 +19,14 @@ class TestCenterResource extends Resource
     protected static ?string $navigationLabel = 'Test Center';
     protected static ?string $pluralModelLabel = 'Test Center';
     protected static ?string $slug = 'test-centers';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) TestCenter::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return TestCenter::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

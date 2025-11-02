@@ -18,7 +18,14 @@ class CfiResource extends Resource
     protected static ?string $navigationGroup = 'Sertifikasi';
     protected static ?string $navigationLabel = 'CFI';
     protected static ?string $slug = 'cfi';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) Cfi::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return Cfi::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

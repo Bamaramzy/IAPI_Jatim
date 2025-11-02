@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Anggota extends Model
 {
     use HasFactory;
+    use HasActivityLog;
     protected $table = 'anggotas';
     protected $fillable = [
         'no_urut',

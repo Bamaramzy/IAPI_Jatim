@@ -17,7 +17,14 @@ class WorkshopAbResource extends Resource
     protected static ?string $navigationGroup = 'Sertifikasi';
     protected static ?string $navigationLabel = 'Workshop AB';
     protected static ?string $slug = 'workshop-ab';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) WorkshopAb::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return WorkshopAb::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

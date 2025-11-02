@@ -17,7 +17,14 @@ class PeraturanProfesiResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document';
     protected static ?string $navigationGroup = 'Peraturan';
     protected static ?string $navigationLabel = 'Peraturan Profesi';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) PeraturanProfesi::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return PeraturanProfesi::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

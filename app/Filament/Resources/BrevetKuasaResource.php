@@ -17,7 +17,14 @@ class BrevetKuasaResource extends Resource
     protected static ?string $navigationGroup = 'Pelatihan';
     protected static ?string $navigationLabel = 'Brevet Kuasa';
     protected static ?string $slug = 'brevets-kuasa';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) BrevetKuasa::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return BrevetKuasa::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

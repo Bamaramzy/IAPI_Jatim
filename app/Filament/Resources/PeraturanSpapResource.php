@@ -17,7 +17,14 @@ class PeraturanSpapResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationGroup = 'Peraturan';
     protected static ?string $navigationLabel = 'Peraturan SPAP';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) PeraturanSpap::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return PeraturanSpap::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

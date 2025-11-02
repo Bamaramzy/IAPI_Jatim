@@ -18,7 +18,14 @@ class PelatihanResource extends Resource
     protected static ?string $navigationLabel = 'Jadwal Pelatihan';
     protected static ?string $pluralLabel = 'Daftar Pelatihan';
     protected static ?string $slug = 'pelatihan';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) Pelatihan::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return Pelatihan::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form

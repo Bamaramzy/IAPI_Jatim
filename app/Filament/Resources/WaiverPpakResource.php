@@ -18,7 +18,14 @@ class WaiverPpakResource extends Resource
     protected static ?string $navigationGroup = 'Sertifikasi';
     protected static ?string $navigationLabel = 'Waiver PPAK';
     protected static ?string $slug = 'waiver-ppak';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) WaiverPpak::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return WaiverPpak::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

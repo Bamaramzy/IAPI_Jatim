@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class PeraturanSpap extends Model
 {
     use HasFactory;
+    use HasActivityLog;
     protected $table = 'peraturan_spap';
     protected $fillable = [
         'kategori',

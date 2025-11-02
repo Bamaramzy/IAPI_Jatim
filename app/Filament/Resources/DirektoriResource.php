@@ -18,7 +18,14 @@ class DirektoriResource extends Resource
     protected static ?string $navigationLabel = 'Direktori';
     protected static ?string $pluralLabel = 'Daftar Direktori';
     protected static ?string $slug = 'direktori';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) Direktori::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return Direktori::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

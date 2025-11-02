@@ -18,7 +18,14 @@ class JalurRegulerResource extends Resource
     protected static ?string $navigationGroup = 'Sertifikasi';
     protected static ?string $navigationLabel = 'Jalur Reguler';
     protected static ?string $slug = 'jalur-reguler';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) JalurReguler::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return JalurReguler::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

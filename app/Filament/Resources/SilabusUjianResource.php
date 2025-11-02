@@ -17,7 +17,14 @@ class SilabusUjianResource extends Resource
     protected static ?string $navigationGroup = 'Sertifikasi';
     protected static ?string $navigationLabel = 'Silabus Ujian';
     protected static ?string $slug = 'silabus-ujian';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) Silabus::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return Silabus::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

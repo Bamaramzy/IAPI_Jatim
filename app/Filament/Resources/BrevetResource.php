@@ -17,7 +17,14 @@ class BrevetResource extends Resource
     protected static ?string $navigationGroup = 'Pelatihan';
     protected static ?string $navigationLabel = 'Brevet A & B';
     protected static ?string $slug = 'brevets';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) Brevet::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return Brevet::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form->schema([

@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Kategori extends Model
 {
     use HasFactory;
-
+    use HasActivityLog;
     protected $table = 'workshop_penyetaraan_kategori';
-
     protected $fillable =
     [
         'nama_kategori',

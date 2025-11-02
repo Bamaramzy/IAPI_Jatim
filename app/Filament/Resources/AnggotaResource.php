@@ -18,7 +18,14 @@ class AnggotaResource extends Resource
     protected static ?string $navigationLabel = 'Anggota';
     protected static ?string $pluralLabel = 'Daftar Anggota';
     protected static ?string $slug = 'anggota';
-
+    public static function getNavigationBadge(): ?string
+    {
+        return (string) Anggota::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return Anggota::count() > 0 ? 'success' : 'danger';
+    }
     public static function form(Form $form): Form
     {
         return $form

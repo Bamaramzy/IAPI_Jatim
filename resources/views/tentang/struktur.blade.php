@@ -1,7 +1,7 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <div class="max-w-5xl mx-auto px-6 py-12 mt-2 bg-white shadow-md rounded-lg">
+    <div class="max-w-5xl mx-auto px-6 py-12 mt-2 bg-white shadow-md rounded-lg" x-data="{ openItem: null }">
         <h1 class="text-3xl font-bold mb-10 text-center text-gray-900">
             Struktur Organisasi
         </h1>
@@ -58,44 +58,41 @@
                 </button>
             </div>
 
-            <div id="accordion-pengurus" data-accordion="collapse" class="mt-10">
-                <h2 id="accordion-pengurus-heading-1">
-                    <button type="button"
-                        class="flex items-center justify-between w-full p-5 font-medium text-gray-800 border border-b-0 border-gray-200 rounded-t-xl hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 gap-3"
-                        data-accordion-target="#accordion-pengurus-body-1" aria-expanded="false"
-                        aria-controls="accordion-pengurus-body-1">
+            <div class="mt-10 space-y-4">
+                <div class="border rounded-lg overflow-hidden bg-white shadow-sm">
+                    <button @click="openItem === 1 ? openItem = null : openItem = 1"
+                        class="w-full text-left px-5 py-4 font-semibold text-gray-800 hover:bg-blue-50 flex justify-between items-center">
                         <span>Fungsi</span>
-                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5 5 1 1 5" />
+                        <svg :class="openItem === 1 ? 'rotate-180' : ''"
+                            class="w-5 h-5 text-gray-600 transform transition-transform" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                </h2>
-                <div id="accordion-pengurus-body-1" class="hidden" aria-labelledby="accordion-pengurus-heading-1">
-                    <div class="p-5 border border-b-0 border-gray-200 bg-gray-50 text-gray-700 leading-relaxed">
-                        Melaksanakan kegiatan untuk mencapai tujuan yang tertuang dalam Anggaran Dasar, Anggaran Rumah
-                        Tangga, keputusan Rapat Umum Anggota (RUA) atau Rapat Umum Anggota Luar Biasa (RUALB), dan semua
-                        peraturan Asosiasi yang berlaku.
+
+                    <div x-show="openItem === 1" x-collapse x-transition
+                        class="px-5 pb-5 text-gray-700 leading-relaxed space-y-4">
+                        <p>
+                            Melaksanakan kegiatan untuk mencapai tujuan yang tertuang dalam Anggaran Dasar, Anggaran Rumah
+                            Tangga, keputusan Rapat Umum Anggota (RUA) atau Rapat Umum Anggota Luar Biasa (RUALB), dan semua
+                            peraturan Asosiasi yang berlaku.
+                        </p>
                     </div>
                 </div>
 
-                <h2 id="accordion-pengurus-heading-2">
-                    <button type="button"
-                        class="flex items-center justify-between w-full p-5 font-medium text-gray-800 border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 gap-3"
-                        data-accordion-target="#accordion-pengurus-body-2" aria-expanded="false"
-                        aria-controls="accordion-pengurus-body-2">
+                <div class="border rounded-lg overflow-hidden bg-white shadow-sm">
+                    <button @click="openItem === 2 ? openItem = null : openItem = 2"
+                        class="w-full text-left px-5 py-4 font-semibold text-gray-800 hover:bg-blue-50 flex justify-between items-center">
                         <span>Wewenang dan Tanggung Jawab</span>
-                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5 5 1 1 5" />
+                        <svg :class="openItem === 2 ? 'rotate-180' : ''"
+                            class="w-5 h-5 text-gray-600 transform transition-transform" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                </h2>
-                <div id="accordion-pengurus-body-2" class="hidden" aria-labelledby="accordion-pengurus-heading-2">
-                    <div
-                        class="p-5 border border-t-0 border-gray-200 bg-gray-50 text-gray-700 text-justify leading-relaxed space-y-2">
+
+                    <div x-show="openItem === 2" x-collapse x-transition
+                        class="px-5 pb-5 text-gray-700 leading-relaxed space-y-4">
                         <ul class="list-decimal pl-6 space-y-1">
                             <li>Menetapkan dan mengesahkan peraturan Asosiasi.</li>
                             <li>Membentuk Perangkat Kepengurusan.</li>
@@ -194,43 +191,40 @@
                 <p class="text-center text-gray-500 italic mb-10">Belum ada data pengawas.</p>
             @endif
 
-            <div id="accordion-pengawas" data-accordion="collapse" class="mt-10">
-                <h2 id="accordion-pengawas-heading-1">
-                    <button type="button"
-                        class="flex items-center justify-between w-full p-5 font-medium text-gray-800 border border-b-0 border-gray-200 rounded-t-xl hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 gap-3"
-                        data-accordion-target="#accordion-pengawas-body-1" aria-expanded="false"
-                        aria-controls="accordion-pengawas-body-1">
+            <div class="mt-10 space-y-4">
+                <div class="border rounded-lg overflow-hidden bg-white shadow-sm">
+                    <button @click="openItem === 3 ? openItem = null : openItem = 3"
+                        class="w-full text-left px-5 py-4 font-semibold text-gray-800 hover:bg-blue-50 flex justify-between items-center">
                         <span>Fungsi</span>
-                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5 5 1 1 5" />
+                        <svg :class="openItem === 3 ? 'rotate-180' : ''"
+                            class="w-5 h-5 text-gray-600 transform transition-transform" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                </h2>
-                <div id="accordion-pengawas-body-1" class="hidden" aria-labelledby="accordion-pengawas-heading-1">
-                    <div class="p-5 border border-b-0 border-gray-200 bg-gray-50 text-gray-700 leading-relaxed">
-                        Melakukan pengawasan dan memberikan nasihat kepada Dewan Pengurus Asosiasi dalam menjalankan
-                        kegiatan kepengurusan.
+
+                    <div x-show="openItem === 3" x-collapse x-transition
+                        class="px-5 pb-5 text-gray-700 leading-relaxed space-y-4">
+                        <p>
+                            Melakukan pengawasan dan memberikan nasihat kepada Dewan Pengurus Asosiasi dalam menjalankan
+                            kegiatan kepengurusan.
+                        </p>
                     </div>
                 </div>
 
-                <h2 id="accordion-pengawas-heading-2">
-                    <button type="button"
-                        class="flex items-center justify-between w-full p-5 font-medium text-gray-800 border border-gray-200 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 gap-3"
-                        data-accordion-target="#accordion-pengawas-body-2" aria-expanded="false"
-                        aria-controls="accordion-pengawas-body-2">
+                <div class="border rounded-lg overflow-hidden bg-white shadow-sm">
+                    <button @click="openItem === 4 ? openItem = null : openItem = 4"
+                        class="w-full text-left px-5 py-4 font-semibold text-gray-800 hover:bg-blue-50 flex justify-between items-center">
                         <span>Wewenang dan Tanggung Jawab</span>
-                        <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 10 6">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5 5 1 1 5" />
+                        <svg :class="openItem === 4 ? 'rotate-180' : ''"
+                            class="w-5 h-5 text-gray-600 transform transition-transform" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
                     </button>
-                </h2>
-                <div id="accordion-pengawas-body-2" class="hidden" aria-labelledby="accordion-pengawas-heading-2">
-                    <div
-                        class="p-5 border border-t-0 border-gray-200 bg-gray-50 text-gray-700 text-justify leading-relaxed space-y-2">
+
+                    <div x-show="openItem === 4" x-collapse x-transition
+                        class="px-5 pb-5 text-gray-700 leading-relaxed space-y-4">
                         <ul class="list-decimal pl-6 space-y-1">
                             <li>Mengawasi pelaksanaan keputusan RUA dan/atau RUALB yang
                                 dilaksanakan oleh Dewan Pengurus;</li>

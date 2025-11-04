@@ -4,11 +4,12 @@
     <section class="py-12 px-4 min-h-screen" x-data="{ showModal: false, modalType: '', modalSrc: '' }">
 
         <div class="max-w-7xl mx-auto">
-            <div class="flex flex-wrap justify-center gap-4 mb-8">
+            <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 px-2">
                 @foreach ($kategoriList as $kat)
                     <a href="{{ route('visitor.workshop_penyetaraan', ['kategori' => $kat->id]) }}"
-                        class="px-5 py-2 rounded-full text-sm font-semibold
-                    {{ $kategoriAktif == $kat->id ? 'bg-[#071225] text-white' : 'bg-gray-200 hover:bg-gray-300' }}">
+                        class="px-4 sm:px-5 py-2 rounded-full text-sm font-semibold text-center transition-colors duration-200
+                        w-full sm:w-auto
+                        {{ $kategoriAktif == $kat->id ? 'bg-[#071225] text-white' : 'bg-gray-200 hover:bg-gray-300' }}">
                         {{ strtoupper($kat->nama_kategori) }}
                     </a>
                 @endforeach

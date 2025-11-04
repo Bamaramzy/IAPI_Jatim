@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\TataCaraResource;
 
 class TataCara extends Model
 {
@@ -16,4 +17,9 @@ class TataCara extends Model
         'link_drive',
         'cover',
     ];
+
+    public function getFilamentUrl()
+    {
+        return TataCaraResource::getUrl('edit', ['record' => $this]);
+    }
 }

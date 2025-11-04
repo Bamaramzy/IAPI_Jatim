@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\AnggotaResource;
 
 class Anggota extends Model
 {
@@ -21,4 +22,9 @@ class Anggota extends Model
         'status_id',
         'korwil'
     ];
+
+    public function getFilamentUrl(): string
+    {
+        return AnggotaResource::getUrl('edit', ['record' => $this]);
+    }
 }

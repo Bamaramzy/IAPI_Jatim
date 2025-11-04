@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\SilabusUjianResource;
 
 class Silabus extends Model
 {
@@ -20,4 +21,9 @@ class Silabus extends Model
         'gambar_link',
         'ilustrasi_link',
     ];
+
+    public function getFilamentUrl()
+    {
+        return SilabusUjianResource::getUrl('edit', ['record' => $this]);
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\WaiverPpakResource;
 
 class WaiverPpak extends Model
 {
@@ -13,4 +14,9 @@ class WaiverPpak extends Model
         'akreditasi',
         'jumlah_waiver'
     ];
+
+    public function getFilamentUrl()
+    {
+        return WaiverPpakResource::getUrl('edit', ['record' => $this]);
+    }
 }

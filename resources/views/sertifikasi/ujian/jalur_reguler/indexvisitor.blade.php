@@ -1,9 +1,10 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section class="max-w-6xl mx-auto px-6 py-12 mt-2 bg-white shadow-md rounded-lg">
-        <h1 class="text-3xl font-bold mb-6 text-center">Jalur Reguler</h1>
-        <div class="flex flex-wrap justify-center gap-2 mb-8">
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 mt-2 bg-white shadow-md rounded-lg">
+        <h1 class="text-2xl sm:text-3xl font-bold mb-6 text-center">Jalur Reguler</h1>
+
+        <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-3 mb-8">
             @php
                 $kategoriList = [
                     'Informasi Umum',
@@ -16,57 +17,96 @@
 
             @foreach ($kategoriList as $kategori)
                 <a href="{{ route('visitor.jalur_reguler', ['kategori' => $kategori]) }}"
-                    class="px-4 py-2 rounded border text-sm
-                    {{ $selectedKategori == $kategori ? 'bg-[#071225] text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' }}">
+                    class="px-4 py-2.5 rounded-md border text-sm text-center transition-colors duration-200
+                    {{ $selectedKategori == $kategori
+                        ? 'bg-[#071225] text-white border-[#071225]'
+                        : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border-gray-200' }}">
                     {{ $kategori }}
                 </a>
             @endforeach
         </div>
 
-        <div class="space-y-6">
+        <div class="space-y-8">
             @forelse ($jalurRegulers as $item)
-                <div class="p-6 border rounded-lg shadow-sm hover:shadow-md transition bg-gray-50">
-                    <span class="text-xs font-semibold text-blue-600 uppercase">{{ $item->kategori }}</span>
-                    <h2 class="text-xl font-bold text-gray-800 mt-2">{{ $item->judul }}</h2>
-                    <div class="prose prose-blue max-w-none mt-3 text-gray-700">
-                        {!! $item->konten !!}
+                <div class="p-4 sm:p-6 border rounded-lg shadow-sm hover:shadow-md transition bg-gray-50">
+                    <div class="space-y-3">
+                        <span class="inline-block text-xs font-semibold text-blue-600 uppercase tracking-wider">
+                            {{ $item->kategori }}
+                        </span>
+                        <h2 class="text-lg sm:text-xl font-bold text-gray-800">{{ $item->judul }}</h2>
+                        <div class="prose prose-blue max-w-none text-gray-700 text-sm sm:text-base">
+                            {!! $item->konten !!}
+                        </div>
                     </div>
 
-                    <div class="mt-4 space-y-3">
+                    <div class="mt-6 space-y-4">
                         @if ($item->file)
-                            <div>
-                                <p class="text-sm font-semibold text-gray-600">Preview File</p>
+                            <div class="space-y-2">
+                                <p class="text-sm font-semibold text-gray-600 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13">
+                                        </path>
+                                    </svg>
+                                    Preview File
+                                </p>
                                 @php
                                     $ext = pathinfo($item->file, PATHINFO_EXTENSION);
                                 @endphp
 
                                 @if (in_array(strtolower($ext), ['pdf']))
-                                    <iframe src="{{ asset('storage/' . $item->file) }}"
-                                        class="w-full h-96 border rounded"></iframe>
+                                    <div class="relative w-full overflow-hidden rounded-lg border bg-gray-100">
+                                        <iframe src="{{ asset('storage/' . $item->file) }}"
+                                            class="w-full h-[300px] sm:h-[400px] md:h-[500px]"></iframe>
+                                    </div>
                                 @elseif(in_array(strtolower($ext), ['jpg', 'jpeg', 'png']))
-                                    <img src="{{ asset('storage/' . $item->file) }}" alt="Preview Gambar"
-                                        class="max-h-96 rounded border mx-auto">
+                                    <img src="{{ asset('storage/' . $item->file) }}" alt="Preview {{ $item->judul }}"
+                                        class="w-full max-h-[400px] object-contain rounded-lg border">
                                 @else
                                     <a href="{{ asset('storage/' . $item->file) }}" target="_blank"
-                                        class="text-blue-500 underline">Download File</a>
+                                        class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4">
+                                            </path>
+                                        </svg>
+                                        Download File
+                                    </a>
                                 @endif
                             </div>
                         @endif
 
                         @if ($item->link)
-                            <div>
-                                <p class="text-sm font-semibold text-gray-600">🔗 Link</p>
-                                <iframe src="{{ $item->link }}" class="w-full h-96 border rounded"></iframe>
+                            <div class="space-y-2">
+                                <p class="text-sm font-semibold text-gray-600 flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1">
+                                        </path>
+                                    </svg>
+                                    Link Terkait
+                                </p>
+                                <div class="relative w-full overflow-hidden rounded-lg border bg-gray-100">
+                                    <iframe src="{{ $item->link }}"
+                                        class="w-full h-[300px] sm:h-[400px] md:h-[500px]"></iframe>
+                                </div>
                             </div>
                         @endif
                     </div>
                 </div>
             @empty
-                <p class="text-center text-gray-500">Belum ada data.</p>
+                <div class="text-center py-12">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                        </path>
+                    </svg>
+                    <p class="mt-4 text-gray-500 text-lg">Belum ada data yang tersedia.</p>
+                </div>
             @endforelse
         </div>
 
-        <div class="mt-6">
+        <div class="mt-8">
             {{ $jalurRegulers->links('vendor.pagination.tailwind') }}
         </div>
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\WorkshopABResource;
 
 class WorkshopAB extends Model
 {
@@ -14,4 +15,9 @@ class WorkshopAB extends Model
         'link_pdf',
         'link_form'
     ];
+
+    public function getFilamentUrl()
+    {
+        return WorkshopABResource::getUrl('edit', ['record' => $this]);
+    }
 }

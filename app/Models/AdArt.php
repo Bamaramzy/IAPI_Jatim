@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\AdArtResource;
 
 class AdArt extends Model
 {
@@ -16,4 +17,9 @@ class AdArt extends Model
         'link_drive',
         'cover',
     ];
+
+    public function getFilamentUrl(): string
+    {
+        return AdArtResource::getUrl('edit', ['record' => $this]);
+    }
 }

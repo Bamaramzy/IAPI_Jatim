@@ -40,8 +40,8 @@
 
                     @if ($workshop->link_form)
                         <a href="{{ $workshop->link_form }}" target="_blank"
-                            class="inline-block px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
-                            📝 Daftar Sekarang
+                            class="inline-block px-5 py-2 bg-[#071225] text-white rounded-lg hover:bg-[#0C2C77] transition">
+                            Daftar Sekarang
                         </a>
                     @else
                         <button disabled

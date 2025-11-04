@@ -8,43 +8,49 @@
                 Daftar Silabus Ujian, Modul, dan Ilustrasi Soal
             </h2>
 
-            <form method="GET" action="{{ route('visitor.silabus') }}"
-                class="mb-8 flex flex-wrap gap-4 justify-center items-center">
+            <form method="GET" action="{{ route('visitor.silabus') }}" class="mb-8">
+                <div class="flex flex-col sm:flex-row gap-3 items-center justify-center">
+                    @if ($kategoriList->isNotEmpty())
+                        <div class="w-full sm:w-auto">
+                            <select name="kategori"
+                                class="w-full sm:w-48 px-3 py-2 bg-white border rounded shadow-sm text-sm">
+                                <option value="">Filter Kategori</option>
+                                @foreach ($kategoriList as $kat)
+                                    <option value="{{ $kat }}" {{ $kategori == $kat ? 'selected' : '' }}>
+                                        {{ $kat }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
 
-                @if ($kategoriList->isNotEmpty())
-                    <div>
-                        <select name="kategori" class="px-3 py-2 border rounded shadow-sm text-sm w-48">
-                            <option value="">Filter Kategori</option>
-                            @foreach ($kategoriList as $kat)
-                                <option value="{{ $kat }}" {{ $kategori == $kat ? 'selected' : '' }}>
-                                    {{ $kat }}
-                                </option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endif
+                    @if ($subList->isNotEmpty())
+                        <div class="w-full sm:w-auto">
+                            <select name="sub"
+                                class="w-full sm:w-48 px-3 py-2 bg-white border rounded shadow-sm text-sm">
+                                <option value="">Filter Sub Kategori</option>
+                                @foreach ($subList as $s)
+                                    <option value="{{ $s }}" {{ $sub == $s ? 'selected' : '' }}>
+                                        {{ $s }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    @endif
 
-                @if ($subList->isNotEmpty())
-                    <div>
-                        <select name="sub" class="px-3 py-2 border rounded shadow-sm text-sm w-48">
-                            <option value="">Filter Sub Kategori</option>
-                            @foreach ($subList as $s)
-                                <option value="{{ $s }}" {{ $sub == $s ? 'selected' : '' }}>
-                                    {{ $s }}
-                                </option>
-                            @endforeach
-                        </select>
+                    <div class="flex gap-2 w-full sm:w-auto">
+                        <button type="submit"
+                            class="flex-1 sm:flex-initial px-4 py-2 bg-[#071225] hover:bg-[#0C2C77] text-white rounded shadow-sm text-sm">
+                            Cari
+                        </button>
+                        @if (!empty($kategori) || !empty($sub))
+                            <a href="{{ route('visitor.silabus') }}"
+                                class="flex-1 sm:flex-initial px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded shadow-sm text-sm text-center">
+                                Reset
+                            </a>
+                        @endif
                     </div>
-                @endif
-                <button type="submit" class="px-4 py-2 bg-[#071225] hover:bg-[#0C2C77] text-white rounded shadow text-sm">
-                    Cari
-                </button>
-                @if (!empty($kategori) || !empty($sub))
-                    <a href="{{ route('visitor.silabus') }}"
-                        class="px-4 py-2 bg-gray-500 hover:bg-gray-600 text-white rounded shadow text-sm">
-                        Reset
-                    </a>
-                @endif
+                </div>
             </form>
 
             @forelse ($silabus as $kategori => $subkategoriGroup)

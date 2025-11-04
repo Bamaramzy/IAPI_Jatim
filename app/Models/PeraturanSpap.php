@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\PeraturanSpapResource;
 
 class PeraturanSpap extends Model
 {
@@ -23,4 +24,9 @@ class PeraturanSpap extends Model
         'pdf_3_judul',
         'pdf_3_url',
     ];
+
+    public function getFilamentUrl()
+    {
+        return PeraturanSpapResource::getUrl('edit', ['record' => $this]);
+    }
 }

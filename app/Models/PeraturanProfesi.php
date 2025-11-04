@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\PeraturanProfesiResource;
 
 class PeraturanProfesi extends Model
 {
@@ -15,4 +16,9 @@ class PeraturanProfesi extends Model
         'file_path',
         'link_url',
     ];
+
+    public function getFilamentUrl()
+    {
+        return PeraturanProfesiResource::getUrl('edit', ['record' => $this]);
+    }
 }

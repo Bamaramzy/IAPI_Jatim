@@ -29,7 +29,7 @@ class InformasiController extends Controller
     {
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
-            'gambar' => 'required|image|mimes:jpg,jpeg,png|max:10048',
+            'gambar' => 'required|image|mimes:jpg,jpeg,png|max:2048',
             'link' => 'nullable|url',
         ]);
 
@@ -55,7 +55,7 @@ class InformasiController extends Controller
     {
         $validated = $request->validate([
             'judul' => 'required|string|max:255',
-            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:10048',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'link' => 'nullable|url',
         ]);
 

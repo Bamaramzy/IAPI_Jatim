@@ -37,8 +37,7 @@ class CfiResource extends Resource
 
             Forms\Components\TextInput::make('link')
                 ->label('Link')
-                ->url()
-                ->required(),
+                ->url(),
         ]);
     }
 

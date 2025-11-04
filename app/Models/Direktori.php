@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\DirektoriResource;
 
 class Direktori extends Model
 {
@@ -16,4 +17,9 @@ class Direktori extends Model
         'cover',
         'status'
     ];
+
+    public function getFilamentUrl(): string
+    {
+        return DirektoriResource::getUrl('edit', ['record' => $this]);
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\HasActivityLog;
 use Illuminate\Database\Eloquent\Model;
+use App\Filament\Resources\PelatihanResource;
 
 class Pelatihan extends Model
 {
@@ -24,4 +25,9 @@ class Pelatihan extends Model
         'tanggal_mulai' => 'date',
         'tanggal_selesai' => 'date',
     ];
+
+    public function getFilamentUrl()
+    {
+        return PelatihanResource::getUrl('edit', ['record' => $this]);
+    }
 }

@@ -11,21 +11,21 @@
         </p>
 
         <div class="mb-8">
-            <form method="GET" action="{{ route('visitor.waiver_ppak') }}"
-                class="flex flex-col sm:flex-row sm:items-center gap-3">
+            <form action="{{ route('visitor.waiver_ppak') }}" method="GET"
+                class="mb-6 flex flex-col sm:flex-row sm:items-center gap-3">
                 <input type="text" name="search" value="{{ request('search') }}"
-                    placeholder="Cari berdasarkan universitas atau akreditasi..."
-                    class="border border-gray-300 rounded-lg px-4 py-2 w-full sm:w-1/2 focus:ring focus:ring-blue-300 focus:outline-none dark:bg-gray-700 dark:text-white dark:border-gray-600">
+                    placeholder="Cari berdasarkan nama, kode, atau kota..."
+                    class="border border-gray-300 rounded-lg px-4 py-2 w-full focus:ring focus:ring-blue-300 focus:outline-none">
 
-                <div class="flex gap-3">
+                <div class="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
                     <button type="submit"
-                        class="bg-[#071225] text-white px-5 py-2 rounded-lg hover:bg-[#0C2C77] transition">
+                        class="w-full sm:w-auto bg-[#071225] text-white px-5 py-2 rounded-lg hover:bg-[#0C2C77] transition text-center">
                         Cari
                     </button>
 
                     @if (request('search'))
                         <a href="{{ route('visitor.waiver_ppak') }}"
-                            class="bg-gray-200 text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-300 dark:bg-gray-600 dark:text-white dark:hover:bg-gray-500 transition">
+                            class="w-full sm:w-auto bg-gray-200 text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-300 transition text-center">
                             Reset
                         </a>
                     @endif
@@ -33,7 +33,7 @@
             </form>
         </div>
 
-        <div class="overflow-x-auto bg-white shadow rounded">
+        <div class="hidden md:block overflow-x-auto bg-white shadow rounded">
             <table class="min-w-full border border-gray-300">
                 <thead class="bg-gray-100 text-gray-700">
                     <tr>
@@ -96,6 +96,23 @@
                     @endforelse
                 </tbody>
             </table>
+        </div>
+
+        <div class="md:hidden space-y-4">
+            @forelse ($waivers as $w)
+                <div class="border rounded-lg p-4 bg-white shadow-sm">
+                    <div class="flex justify-between items-start">
+                        <div class="text-sm text-gray-600">No.
+                            {{ $loop->iteration + ($waivers->currentPage() - 1) * $waivers->perPage() }}</div>
+                        <div class="text-sm text-gray-600">{{ $w->akreditasi ?? '-' }}</div>
+                    </div>
+                    <h3 class="font-semibold text-gray-800 mt-2">{{ $w->nama_universitas }}</h3>
+                    <p class="text-sm text-gray-600 mt-1">Jumlah Mata Uji Diwaiver: <span
+                            class="font-medium">{{ $w->jumlah_waiver }}</span></p>
+                </div>
+            @empty
+                <div class="text-center text-gray-500">Belum ada data Waiver PPAk.</div>
+            @endforelse
         </div>
 
         <p class="text-gray-700 mt-2 leading-relaxed mb-6 text-justify">

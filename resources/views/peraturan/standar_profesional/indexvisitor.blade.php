@@ -1,28 +1,35 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section x-data="{ tab: 'semua' }" class="max-w-6xl mx-auto px-6 py-12">
-        <h1 class="text-3xl font-bold mb-10 text-center text-gray-800">Standar Profesional Akuntan Publik (SPAP)</h1>
+    <section x-data="{ tab: 'semua' }" class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+        <h1 class="text-2xl sm:text-3xl font-bold mb-6 sm:mb-10 text-center text-gray-800">
+            Standar Profesional Akuntan Publik (SPAP)
+        </h1>
 
         @php
             $kategoriList = $peraturans->pluck('kategori')->unique()->values();
         @endphp
 
-        <div class="flex flex-wrap justify-center mb-10 gap-2">
+        <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-10 px-2">
             <button @click="tab = 'semua'"
-                :class="tab === 'semua' ? 'bg-[#071225] text-white' : 'bg-gray-200 hover:bg-[#0C2C77]'"
-                class="px-3 py-2 rounded-full font-medium transition">
-                Semua
+                class="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-full text-sm font-semibold 
+                    text-center transition-colors duration-200"
+                :class="tab === 'semua'
+                    ?
+                    'bg-[#071225] text-white' :
+                    'bg-gray-200 hover:bg-gray-300'">
+                SEMUA
             </button>
 
             @foreach ($kategoriList as $kategori)
                 <button @click="tab = '{{ Str::slug($kategori) }}'"
+                    class="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-full text-sm font-semibold 
+                        text-center transition-colors duration-200"
                     :class="tab === '{{ Str::slug($kategori) }}'
                         ?
                         'bg-[#071225] text-white' :
-                        'bg-gray-200 text-gray-700 hover:bg-blue-100'"
-                    class="px-3 py-2 rounded-full font-medium transition">
-                    {{ ucfirst($kategori) }}
+                        'bg-gray-200 hover:bg-gray-300'">
+                    {{ strtoupper($kategori) }}
                 </button>
             @endforeach
         </div>
@@ -30,17 +37,35 @@
         @php
             function renderSpapItem($item)
             {
-                $html =
-                    '<div class="p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition border border-gray-100">';
+                $html = '<div class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 
+                    border border-gray-100 overflow-hidden">';
 
                 if ($item->thumbnail) {
                     $html .=
                         '<img src="' .
                         asset('storage/' . $item->thumbnail) .
-                        '" alt="thumbnail" class="w-full h-48 object-cover rounded-lg mb-4">';
+                        '" 
+                        alt="' .
+                        e($item->judul) .
+                        '"
+                        class="w-full h-40 sm:h-48 object-cover">';
                 }
-                $html .= '<h3 class="text-xl font-semibold text-gray-800 mb-2">' . e($item->judul) . '</h3>';
-                $html .= '<p class="text-gray-600 mb-4">' . e(Str::limit(strip_tags($item->deskripsi), 300)) . '</p>';
+
+                $html .= '<div class="p-4 sm:p-6 space-y-4">';
+
+                // Title
+                $html .=
+                    '<h3 class="text-lg sm:text-xl font-semibold text-gray-800 line-clamp-2">' .
+                    e($item->judul) .
+                    '</h3>';
+
+                // Description
+                $html .=
+                    '<p class="text-sm sm:text-base text-gray-600 line-clamp-3">' .
+                    e(Str::limit(strip_tags($item->deskripsi), 200)) .
+                    '</p>';
+
+                // PDF Links
                 $pdfLinks = [];
                 for ($i = 1; $i <= 3; $i++) {
                     $judul = $item->{"pdf_{$i}_judul"};
@@ -50,18 +75,24 @@
                             '<a href="' .
                             e($url) .
                             '" target="_blank"
-                        class="inline-block bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-sm hover:bg-blue-100 transition">
-                        ' .
+                            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium
+                            bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors duration-200">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                    d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                            </svg>
+                            ' .
                             e($judul) .
-                            '</a>';
+                            '
+                        </a>';
                     }
                 }
 
                 if (!empty($pdfLinks)) {
-                    $html .= '<div class="flex flex-wrap gap-2 mt-2">' . implode('', $pdfLinks) . '</div>';
+                    $html .= '<div class="flex flex-wrap gap-2">' . implode('', $pdfLinks) . '</div>';
                 }
 
-                $html .= '</div>';
+                $html .= '</div></div>';
                 return $html;
             }
         @endphp

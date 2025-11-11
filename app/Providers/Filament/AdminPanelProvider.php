@@ -24,6 +24,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->brandName('IAPI Korda Jatim')
             ->id('admin')
             ->path('admin')
             ->homeUrl(fn() => route('filament.admin.pages.dashboard-admin'))

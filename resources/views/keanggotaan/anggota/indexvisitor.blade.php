@@ -17,17 +17,16 @@
                 <option value="anggota umum" {{ request('kategori') == 'anggota umum' ? 'selected' : '' }}>Anggota Umum
                 </option>
             </select>
-
             <select name="status" class="border rounded-lg px-3 py-2 w-full">
                 <option value="">-- Semua Status --</option>
                 <option value="aktif" {{ request('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
                 <option value="cuti sementara" {{ request('status') == 'cuti sementara' ? 'selected' : '' }}>Cuti Sementara
                 </option>
             </select>
-
-            <input type="text" name="search" placeholder="Cari Nama Anggota / KAP" value="{{ request('search') }}"
-                class="border rounded-lg px-3 py-2 w-full">
-
+            <div class="md:col-span-2">
+                <input type="text" name="search" placeholder="Cari Nama Anggota / KAP" value="{{ request('search') }}"
+                    class="border rounded-lg px-3 py-2 w-full">
+            </div>
             <button type="submit" class="bg-[#071225] text-white rounded-lg px-4 py-2 hover:bg-[#0C2C77]">
                 Filter/Cari
             </button>
@@ -51,6 +50,7 @@
                         <th class="px-4 py-2 border">Nama KAP</th>
                         <th class="px-4 py-2 border">Status</th>
                         <th class="px-4 py-2 border">Korwil</th>
+                        <th class="px-4 py-2 border">Terdaftar Pada</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -73,6 +73,7 @@
                                 </span>
                             </td>
                             <td class="px-4 py-2 border">{{ $a->korwil }}</td>
+                            <td class="px-4 py-2 border">{{ $a->terdaftar_pada }}</td>
                         </tr>
                     @empty
                         <tr>

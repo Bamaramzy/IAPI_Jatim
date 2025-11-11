@@ -4,15 +4,15 @@
             <div
                 class="flex flex-col md:flex-row items-start md:items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
                 <h2 class="text-base font-semibold text-gray-900 dark:text-gray-100 mb-4 md:mb-0">
-                    📢 Informasi Terbaru dari Semua Menu
+                    Log Aktivitas Terbaru
                 </h2>
                 <div class="flex items-center w-full md:w-auto">
                     <form method="GET" class="flex items-center w-full md:w-auto">
                         <input type="text" name="search" value="{{ request('search') }}"
-                            placeholder="Cari informasi..."
+                            placeholder="Cari aktivitas..."
                             class="border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-blue-500 dark:focus:border-blue-600 focus:ring-blue-500 dark:focus:ring-blue-600 rounded-lg shadow-sm block w-full">
                         <button type="submit"
-                            class="ml-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 transition duration-150 ease-in-out">
+                            class="ml-2 px-4 py-2 bg-blue-600 text-black dark:text-white rounded-lg hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-700 transition duration-150 ease-in-out">
                             Cari
                         </button>
                     </form>
@@ -50,7 +50,6 @@
                             $perPage = 10;
                             $search = request('search');
                             $query = \Spatie\Activitylog\Models\Activity::query()->orderBy('created_at', 'desc');
-
                             if ($search) {
                                 $query->where(function ($q) use ($search) {
                                     $q->where('description', 'like', "%{$search}%")->orWhere(
@@ -60,9 +59,7 @@
                                     );
                                 });
                             }
-
                             $rawActivityLogs = $query->paginate($perPage);
-
                             $activityLogs = $rawActivityLogs->map(function ($log) {
                                 $props = is_array($log->properties)
                                     ? $log->properties
@@ -70,21 +67,18 @@
                                 $attributes = $props['attributes'] ?? [];
                                 $old = $props['old'] ?? [];
                                 $sumber = class_basename($log->subject_type ?? 'TidakDiketahui');
-
                                 $eventLabel = match ($log->event) {
-                                    'created' => 'Dibuat Baru',
+                                    'created' => 'Dibuat',
                                     'updated' => 'Diperbarui',
                                     'deleted' => 'Dihapus',
                                     'restored' => 'Dipulihkan',
                                     'force-deleted' => 'Dihapus Permanen',
                                     default => ucfirst($log->event ?? 'Tidak Diketahui'),
                                 };
-
                                 $judul = $log->subject
                                     ? $log->subject->judul ?? ($log->subject->nama ?? $log->description)
                                     : $attributes['judul'] ??
                                         ($attributes['nama'] ?? ($log->description ?? '(tidak ada judul)'));
-
                                 $route = null;
                                 if ($log->subject && method_exists($log->subject, 'getFilamentUrl')) {
                                     try {
@@ -92,7 +86,6 @@
                                     } catch (\Throwable $e) {
                                     }
                                 }
-
                                 return [
                                     'tanggal' => $log->created_at,
                                     'log' => $eventLabel,
@@ -103,26 +96,23 @@
                                 ];
                             });
                         @endphp
-
                         @forelse($activityLogs as $item)
                             <tr>
                                 <td
                                     class="px-4 py-2 whitespace-nowrap text-sm text-gray-600 dark:text-gray-300 align-middle">
-                                    <span class="lg:inline">{{ $item['tanggal']->format('M d, Y') }}</span>
-                                    <span class="lg:hidden">{{ $item['tanggal']->format('d/m/y') }}</span>
+                                    {{ $item['tanggal']->format('M d, Y') }}
                                 </td>
                                 <td class="px-4 py-2 whitespace-nowrap align-middle">
                                     @php
                                         $badgeColor = match ($item['log']) {
-                                            'Dibuat Baru' => 'success',
+                                            'Dibuat' => 'success',
                                             'Diperbarui' => 'warning',
                                             'Dihapus', 'Dihapus Permanen' => 'danger',
                                             'Dipulihkan' => 'info',
                                             default => 'gray',
                                         };
-
                                         $badgeText = match ($item['log']) {
-                                            'Dibuat Baru' => 'New',
+                                            'Dibuat' => 'New',
                                             'Diperbarui' => 'Update',
                                             'Dihapus' => 'Del',
                                             'Dihapus Permanen' => 'PDel',
@@ -174,7 +164,6 @@
                         @endforelse
                     </tbody>
                 </table>
-
                 <div class="px-6 py-3 flex items-center justify-between border-t border-gray-200 dark:border-gray-700">
                     <div class="text-sm text-gray-600 dark:text-gray-300">
                         Showing

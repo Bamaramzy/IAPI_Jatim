@@ -7,7 +7,7 @@
         </h1>
 
         <section class="mb-16">
-            <h2 class="text-2xl font-semibold text-gray-800 mb-8 text-center border-b pb-3">Dewan Pengurus</h2>
+            <h2 class="text-2xl font-semibold text-gray-800 mb-8 text-center border-b pb-3">Dewan Pengurus Korda Jatim</h2>
             <div class="relative">
                 <div class="overflow-hidden rounded-xl">
                     <div id="carousel-track-pengurus"
@@ -20,7 +20,7 @@
                                         @if ($item->gambar)
                                             <img src="{{ asset('storage/' . $item->gambar) }}"
                                                 alt="{{ $item->nama }} - {{ $item->jabatan }}"
-                                                class="w-full h-full object-cover rounded-lg border border-gray-100"
+                                                class="w-full h-full object-cover object-top rounded-lg border border-gray-100"
                                                 loading="lazy"
                                                 onerror="this.src='{{ asset('images/default-avatar.jpg') }}'; this.classList.add('opacity-75')">
                                         @else
@@ -150,7 +150,8 @@
                                             @if ($item->gambar)
                                                 <img src="{{ asset('storage/' . $item->gambar) }}"
                                                     alt="{{ $item->nama }} - {{ $item->jabatan }}"
-                                                    class="w-full h-full object-cover rounded-lg" loading="lazy"
+                                                    class="w-full h-full object-cover object-top rounded-lg border border-gray-100"
+                                                    loading="lazy"
                                                     onerror="this.src='{{ asset('images/default-avatar.jpg') }}'; this.classList.add('opacity-75')">
                                             @else
                                                 <div

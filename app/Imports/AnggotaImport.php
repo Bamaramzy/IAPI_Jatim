@@ -32,6 +32,7 @@ class AnggotaImport implements ToCollection, WithHeadingRow, WithCalculatedFormu
                 'nama_kap'     => $row['nama_kap']     ?? null,
                 'status_id'    => $this->mapStatus($row['status_id'] ?? null),
                 'korwil'       => $row['korwil']       ?? null,
+                'terdaftar_pada' => $row['terdaftar_pada'] ?? null,
             ];
 
             if ($anggota) {
@@ -51,6 +52,7 @@ class AnggotaImport implements ToCollection, WithHeadingRow, WithCalculatedFormu
 
         if (Str::contains($v, 'aktif')) return 'Aktif';
         if (Str::contains($v, 'cuti'))  return 'Cuti Sementara';
+        if (Str::contains($v, 'tidak')) return 'Tidak Aktif';
 
         return 'Aktif';
     }

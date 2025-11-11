@@ -11,7 +11,8 @@
         {{-- Logo --}}
         <div class="flex items-center gap-4">
             <a href="{{ url('/') }}" class="block">
-                <img src="{{ asset('images/iapi_lengkap.png') }}" alt="IAPI" class="h-12 w-auto object-contain">
+                <img src="{{ asset('images/iapi_lengkap.webp') }}" alt="IAPI" class="h-12 w-auto object-contain"
+                    loading="lazy">
             </a>
         </div>
 

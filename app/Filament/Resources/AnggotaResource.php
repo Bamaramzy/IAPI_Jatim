@@ -50,7 +50,6 @@ class AnggotaResource extends Resource
                 Forms\Components\TextInput::make('nama_kap')
                     ->label('Nama KAP'),
 
-                // 🔽 Ubah dari TextInput ke Select Dropdown
                 Forms\Components\Select::make('status_id')
                     ->label('Status')
                     ->options([
@@ -63,6 +62,11 @@ class AnggotaResource extends Resource
 
                 Forms\Components\TextInput::make('korwil')
                     ->label('Korwil'),
+
+                Forms\Components\TextInput::make('terdaftar_pada')
+                    ->label('Terdaftar Pada')
+                    ->maxLength(100)
+                    ->nullable(),
             ]);
     }
 
@@ -77,15 +81,12 @@ class AnggotaResource extends Resource
                 Tables\Columns\TextColumn::make('nama_kap')->label('Nama KAP')->searchable(),
                 Tables\Columns\TextColumn::make('status_id')->label('Status')->sortable(),
                 Tables\Columns\TextColumn::make('korwil')->sortable(),
+                Tables\Columns\TextColumn::make('terdaftar_pada')->label('Terdaftar Pada')->searchable()->sortable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('kategori')
                     ->options(Anggota::select('kategori')->distinct()->pluck('kategori', 'kategori')->toArray()),
-
-                Tables\Filters\SelectFilter::make('korwil')
-                    ->options(Anggota::select('korwil')->distinct()->pluck('korwil', 'korwil')->toArray()),
-
-                // 🔽 Tambahkan filter berdasarkan Status
+                Tables\Filters\SelectFilter::make('terdaftar_pada')->label('Terdaftar Pada'),
                 Tables\Filters\SelectFilter::make('status_id')
                     ->label('Status')
                     ->options([

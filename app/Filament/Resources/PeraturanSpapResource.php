@@ -33,7 +33,7 @@ class PeraturanSpapResource extends Resource
                 ->options([
                     'SPM' => 'SPM',
                     'SMM' => 'SMM',
-                    'KERANGKAN UNTUK PERIKATAN ASURANS' => 'KERANGKAN UNTUK PERIKATAN ASURANS',
+                    'KERANGKA UNTUK PERIKATAN ASURANS' => 'KERANGKA UNTUK PERIKATAN ASURANS',
                     'SA' => 'SA',
                     'SPR' => 'SPR',
                     'SPA' => 'SPA',

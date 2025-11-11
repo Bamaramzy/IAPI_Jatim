@@ -46,7 +46,7 @@
                 <div class="relative">
                     <divabsolute -inset-4 bg-gradient-to-tr from-blue-200/40 to-transparent rounded-[24px] blur-3xl">
                 </div>
-                <img src="{{ asset('images/bgsementara.jpg') }}" alt="IAPI Hero"
+                <img src="{{ asset('images/bgsementara.webp') }}" alt="IAPI Hero"
                     class="relative rounded-[20px] shadow-xl hover:scale-[1.02] transition-transform duration-500"
                     loading="lazy">
             </div>
@@ -59,11 +59,12 @@
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-center mb-8 tracking-tight text-gray-900">Informasi</h2>
             <div class="relative">
-                <div class="overflow-hidden rounded-xl">
-                    <div id="carousel-track" class="flex px-2 py-4 space-x-4 snap-x snap-mandatory">
+                <div class="overflow-hidden rounded-xl relative pointer-events-auto">
+                    <div id="carousel-track"
+                        class="flex transition-transform duration-700 ease-in-out px-2 py-4 space-x-4 snap-x snap-mandatory pointer-events-auto">
                         @forelse($informasis as $info)
                             <a href="{{ $info->link }}" target="_blank"
-                                class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center">
+                                class="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 px-1 snap-center">
                                 <div
                                     class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                                     <img src="{{ asset('storage/' . $info->gambar) }}" alt="{{ $info->judul }}"
@@ -82,16 +83,17 @@
                         @endforelse
                     </div>
                 </div>
-
                 <button id="prev"
-                    class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-md z-10"
-                    aria-label="Slide sebelumnya">
+                    class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white 
+                        w-10 h-10 rounded-full flex items-center justify-center shadow-md 
+                        z-30 transition duration-200">
                     <span class="text-xl">&#10094;</span>
                 </button>
 
                 <button id="next"
-                    class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-md z-10"
-                    aria-label="Slide berikutnya">
+                    class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white 
+                        w-10 h-10 rounded-full flex items-center justify-center shadow-md 
+                        z-30 transition duration-200">
                     <span class="text-xl">&#10095;</span>
                 </button>
             </div>
@@ -195,7 +197,6 @@
             </div>
         </div>
     </section>
-
     @include('layouts.mitra')
     @include('layouts.footer')
 </body>

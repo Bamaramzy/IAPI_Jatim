@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const next = document.getElementById("next");
     const dotsContainer = document.getElementById("carousel-dots");
     const total = items.length;
+    if (prev) prev.style.zIndex = "30";
+    if (next) next.style.zIndex = "30";
 
     if (total === 0) {
         [prev, next, dotsContainer].forEach(

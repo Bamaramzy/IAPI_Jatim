@@ -16,7 +16,7 @@ class DewanPengurusResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Tentang Kami';
     protected static ?string $navigationLabel = 'Dewan Pengurus';
-    protected static ?string $pluralLabel = 'Daftar Dewan Pengurus';
+    protected static ?string $pluralLabel = 'Daftar Dewan Pengurus Korda Jatim';
     protected static ?string $slug = 'dewan-pengurus';
     public static function getNavigationBadge(): ?string
     {
@@ -46,11 +46,6 @@ class DewanPengurusResource extends Resource
                     ->directory('dewan_pengurus')
                     ->visibility('public')
                     ->maxSize(1024),
-
-                Forms\Components\Textarea::make('keterangan')
-                    ->label('Keterangan')
-                    ->rows(3)
-                    ->nullable(),
             ]);
     }
 

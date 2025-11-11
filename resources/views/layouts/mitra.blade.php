@@ -3,7 +3,7 @@
 
     <div class="flex flex-wrap justify-center items-center gap-6">
         @php
-            $partners = ['mitra-ifac.png', 'mitra-bi.png', 'mitra-kemenkeu.png', 'mitra-ojk.png'];
+            $partners = ['mitra-ifac.webp', 'mitra-bi.webp', 'mitra-kemenkeu.webp', 'mitra-ojk.webp'];
         @endphp
 
         @foreach ($partners as $logo)

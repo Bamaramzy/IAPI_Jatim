@@ -32,7 +32,7 @@ class JalurWorkshopController extends Controller
                 ',
             ],
             'RPL ACPA' => [
-                'gambar' => '/images/RPL_ACPA.png',
+                'gambar' => '/images/RPL_ACPA.webp',
                 'konten' => '
                 <p><em>Recognition Prior Learning Associate Certified Public Accountant</em> atau <strong>RPL ACPA</strong> merupakan program recognition yang setara dengan ujian tingkat dasar. RPL ACPA dilaksanakan secara daring selama 5 (lima) hari dengan pemaparan materi <em>workshop</em> oleh narasumber pada sesi pagi dan dilanjutkan dengan sesi <em>posttest</em> pada sesi siang.</p>
 
@@ -116,7 +116,7 @@ class JalurWorkshopController extends Controller
             ',
             ],
             'RPL RNA' => [
-                'gambar' => '/images/RPL_RNA.png',
+                'gambar' => '/images/RPL_RNA.webp',
                 'konten' => '
                 <p><em>Recognition Prior Learning for Register Negara Akuntan</em> atau <strong>RPL RNA</strong> merupakan program <em>recognition</em> yang dikhususkan bagi para pemegang Register Negara Akuntan (RNA) yang berminat memiliki sertifikat CPA. Dengan mengikuti program ini, para pemegang RNA dinyatakan lulus pada ujian tingkat dasar program reguler.</p>
 
@@ -205,7 +205,7 @@ class JalurWorkshopController extends Controller
             ',
             ],
             'RPL CTA' => [
-                'gambar' => '/images/RPL_CTA.png',
+                'gambar' => '/images/RPL_CTA.webp',
                 'konten' => '
                 <p>
                     Program <strong>Certificate in Teaching Auditing (CTA)</strong> merupakan sertifikasi keahlian di bidang akuntansi dan audit 
@@ -303,7 +303,7 @@ class JalurWorkshopController extends Controller
             ',
             ],
             'RPL PPAK' => [
-                'gambar' => '/images/RPL_PPAK.png',
+                'gambar' => '/images/RPL_PPAK.webp',
                 'konten' => '
                 <p>
                     Bagi peserta yang telah lulus program PPAk dari Universitas atau Perguruan Tinggi yang bekerja sama serta memiliki Surat Tanda Terdaftar dari IAPI, 
@@ -410,7 +410,7 @@ class JalurWorkshopController extends Controller
             ',
             ],
             'SERTIFIKASI BPK' => [
-                'gambar' => '/images/SERTIFIKASI_BPK.png',
+                'gambar' => '/images/SERTIFIKASI_BPK.webp',
                 'konten' => '
                 <p><strong>Informasi Tentang Sertifikasi BPK</strong></p>
                 <p>

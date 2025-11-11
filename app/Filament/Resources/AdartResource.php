@@ -45,7 +45,7 @@ class AdartResource extends Resource
                 ->url(),
 
             Forms\Components\FileUpload::make('cover')
-                ->label('Gambar Sampul')
+                ->label('Cover')
                 ->directory('adart/covers')
                 ->image(),
 

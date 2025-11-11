@@ -56,6 +56,7 @@ class AnggotaController extends Controller
             'nama_kap' => 'nullable|string|max:255',
             'status_id' => 'required|string',
             'korwil' => 'nullable|string|max:100',
+            'terdaftar_pada' => 'nullable|string|max:100',
         ]);
 
         Anggota::create($validated);
@@ -79,6 +80,7 @@ class AnggotaController extends Controller
             'nama_kap' => 'nullable|string|max:255',
             'status_id' => 'required|string',
             'korwil' => 'nullable|string|max:100',
+            'terdaftar_pada' => 'nullable|string|max:100',
         ]);
 
         $anggota->update($validated);

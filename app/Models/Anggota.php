@@ -20,7 +20,8 @@ class Anggota extends Model
         'kategori',
         'nama_kap',
         'status_id',
-        'korwil'
+        'korwil',
+        'terdaftar_pada',
     ];
 
     public function getFilamentUrl(): string

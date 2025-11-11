@@ -44,7 +44,7 @@ class TatacaraResource extends Resource
                 ->placeholder('https://drive.google.com/file/d/.../view?usp=preview'),
 
             Forms\Components\FileUpload::make('cover')
-                ->label('Gambar Sampul')
+                ->label('Cover')
                 ->directory('tatacara/covers')
                 ->image(),
 

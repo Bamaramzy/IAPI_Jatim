@@ -23,7 +23,7 @@
                 <div class="relative group rounded-lg overflow-hidden bg-gray-100">
                     <img src="{{ $content['gambar'] }}" alt="{{ $selectedKategori }}"
                         class="w-full max-h-[400px] sm:max-h-[600px] object-contain rounded-lg cursor-zoom-in"
-                        @click="show = true; imgSrc='{{ $content['gambar'] }}'">
+                        laoding="lazy" @click="show = true; imgSrc='{{ $content['gambar'] }}'">
                     <div
                         class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 
                         flex items-center justify-center opacity-0 group-hover:opacity-100">

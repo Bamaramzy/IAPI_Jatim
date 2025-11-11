@@ -47,10 +47,6 @@ class DewanPengawasResource extends Resource
                     ->visibility('public')
                     ->maxSize(1024),
 
-                Forms\Components\Textarea::make('keterangan')
-                    ->label('Keterangan')
-                    ->rows(3)
-                    ->nullable(),
             ]);
     }
 

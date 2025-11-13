@@ -33,9 +33,9 @@
                         @forelse ($informasis as $item)
                             <tr class="border-b dark:border-gray-600">
                                 <td class="px-4 py-2">{{ $item->judul }}</td>
-                                <td class="px-4 py-2">
+                                <td class="px-4 py-2 text-center">
                                     <img src="{{ asset('storage/' . $item->gambar) }}" width="100"
-                                        class="rounded shadow">
+                                        class="rounded shadow object-top inline-block">
                                 </td>
                                 <td class="px-4 py-2">
                                     @if ($item->link)

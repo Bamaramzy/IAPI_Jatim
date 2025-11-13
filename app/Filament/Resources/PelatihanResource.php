@@ -64,6 +64,9 @@ class PelatihanResource extends Resource
                     ->label('Upload Brosur')
                     ->directory('pelatihan/brosur'),
 
+                Forms\Components\TextInput::make('link')
+                    ->required(),
+
                 Forms\Components\Toggle::make('status')
                     ->label('Publish?')
                     ->onIcon('heroicon-o-check')

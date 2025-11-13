@@ -8,23 +8,17 @@
             </h2>
             <div x-data="{ tab: 'dasar' }">
                 <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-4 mb-6 sm:mb-8 px-2">
-                    <button
-                        class="w-full sm:w-auto px-4 sm:px-5 py-2 rounded-full text-sm font-semibold 
-                        text-center transition-colors duration-200"
+                    <button class="px-4 py-2.5 rounded-md border text-sm text-center transition-colors duration-200"
                         :class="tab === 'dasar' ? 'bg-[#071225] text-white' : 'bg-gray-200 hover:bg-gray-300'"
                         @click="tab = 'dasar'">
                         TINGKAT DASAR
                     </button>
-                    <button
-                        class="w-full sm:w-auto px-4 sm:px-5 py-2 rounded-full text-sm font-semibold 
-                        text-center transition-colors duration-200"
+                    <button class="px-4 py-2.5 rounded-md border text-sm text-center transition-colors duration-200"
                         :class="tab === 'profesional' ? 'bg-[#071225] text-white' : 'bg-gray-200 hover:bg-gray-300'"
                         @click="tab = 'profesional'">
                         TINGKAT PROFESIONAL
                     </button>
-                    <button
-                        class="w-full sm:w-auto px-4 sm:px-5 py-2 rounded-full text-sm font-semibold 
-                        text-center transition-colors duration-200"
+                    <button class="px-4 py-2.5 rounded-md border text-sm text-center transition-colors duration-200"
                         :class="tab === 'audit' ? 'bg-[#071225] text-white' : 'bg-gray-200 hover:bg-gray-300'"
                         @click="tab = 'audit'">
                         PENILAIAN PENGALAMAN AUDIT
@@ -33,7 +27,7 @@
                 <div class="bg-white rounded-lg p-6">
                     <div class="space-y-6">
                         <div x-show="tab === 'dasar'" class="space-y-6 p-4 sm:p-6">
-                            <div class="bg-gray-50 rounded-lg border border-gray-200 p-4 sm:p-6">
+                            <div class="bg-white rounded-lg border border-gray-200 p-4 sm:p-6">
                                 <h3 class="text-lg sm:text-xl font-semibold text-blue-700 mb-3">
                                     Surat Tanda Lulus Ujian Profesi Akuntan Publik (STLU-CPA)
                                 </h3>

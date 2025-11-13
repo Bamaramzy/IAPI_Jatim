@@ -20,9 +20,9 @@
                     </span>
                 </h1>
 
-                <h3 class="text-2xl font-semibold text-[#0C2C77] mt-2 tracking-wide uppercase">
+                <h2 class="text-2xl font-semibold text-[#0C2C77] mt-2 tracking-wide uppercase">
                     Korda Jawa Timur
-                </h3>
+                </h2>
 
                 <p class="text-lg text-gray-600 max-w-xl leading-relaxed">
                     Ayo Gabung di LMS, CPA Indonesia Academy – wadah pengembangan dan peningkatan kompetensi akuntan
@@ -46,8 +46,8 @@
                 <div class="relative">
                     <divabsolute -inset-4 bg-gradient-to-tr from-blue-200/40 to-transparent rounded-[24px] blur-3xl">
                 </div>
-                <img src="{{ asset('images/bgsementara.webp') }}" alt="IAPI Hero"
-                    class="relative rounded-[20px] shadow-xl hover:scale-[1.02] transition-transform duration-500"
+                <img src="{{ asset('images/kiri1.webp') }}" alt="" role="presentation"
+                    class="relative rounded-[20px] shadow-xl hover:scale-[1.02] transition-transform duration-500 w-full max-w-lg"
                     loading="lazy">
             </div>
         </div>
@@ -67,8 +67,8 @@
                                 class="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 px-1 snap-center">
                                 <div
                                     class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                                    <img src="{{ asset('storage/' . $info->gambar) }}" alt="{{ $info->judul }}"
-                                        class="w-full h-56 object-cover" loading="lazy">
+                                    <img src="{{ asset('storage/' . $info->gambar) }}" alt=""
+                                        class="w-full h-56 object-cover object-top inline-block" loading="lazy">
                                     <div class="p-4">
                                         <h3 class="text-base font-semibold line-clamp-2 text-gray-800">
                                             {{ $info->judul }}
@@ -111,8 +111,8 @@
                 <div class="rounded-xl overflow-hidden h-80 lg:h-[28rem] shadow-lg hover:shadow-xl transition">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3957.5678032036744!2d112.7663188!3d-7.2899137000000005!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fa4b9b86e0ad%3A0x5a374e985c610881!2sGraha%20Widya%20Bhakti!5e0!3m2!1sid!2sid!4v1758182495300!5m2!1sid!2sid"
-                        class="w-full h-full border-0" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        class="w-full h-full border-0" title="Peta lokasi Test Center IAPI Jawa Timur"
+                        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
 

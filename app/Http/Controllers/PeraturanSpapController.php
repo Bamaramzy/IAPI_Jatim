@@ -16,7 +16,7 @@ class PeraturanSpapController extends Controller
 
     public function indexVisitor()
     {
-        $peraturans = PeraturanSpap::orderBy('created_at', 'desc')->get();
+        $peraturans = PeraturanSpap::orderBy('created_at', 'asc')->get();
         return view('peraturan.standar_profesional.indexvisitor', compact('peraturans'));
     }
 

@@ -52,6 +52,7 @@ class PelatihanController extends Controller
             'waktu_selesai'   => 'required',
             'lokasi'          => 'required|string|max:255',
             'brosur'          => 'nullable|image|max:2048',
+            'link'       => 'required|string',
             'status'          => 'required|in:draft,publish',
         ]);
 
@@ -80,6 +81,7 @@ class PelatihanController extends Controller
             'waktu_selesai'   => 'required',
             'lokasi'          => 'required|string|max:255',
             'brosur'          => 'nullable|image|max:2048',
+            'link'       => 'required|string',
             'status'          => 'required|in:draft,publish',
         ]);
 

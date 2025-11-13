@@ -1,9 +1,8 @@
 @extends('layouts.visitor')
 
 @section('content')
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 mt-2 bg-white shadow-md rounded-lg">
+    <section x-data="{ show: false, imgSrc: '' }" class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 mt-2 bg-white shadow-md rounded-lg">
         <h1 class="text-2xl sm:text-3xl font-bold mb-6 text-center">Jalur Reguler</h1>
-
         <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-3 mb-8">
             @php
                 $kategoriList = [
@@ -14,31 +13,25 @@
                 ];
                 $selectedKategori = request('kategori') ?? 'Informasi Umum';
             @endphp
-
             @foreach ($kategoriList as $kategori)
                 <a href="{{ route('visitor.jalur_reguler', ['kategori' => $kategori]) }}"
                     class="px-4 py-2.5 rounded-md border text-sm text-center transition-colors duration-200
-                    {{ $selectedKategori == $kategori
-                        ? 'bg-[#071225] text-white border-[#071225]'
-                        : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border-gray-200' }}">
+                {{ $selectedKategori == $kategori
+                    ? 'bg-[#071225] text-white border-[#071225]'
+                    : 'bg-gray-50 text-gray-700 hover:bg-gray-100 border-gray-200' }}">
                     {{ $kategori }}
                 </a>
             @endforeach
         </div>
-
         <div class="space-y-8">
             @forelse ($jalurRegulers as $item)
-                <div class="p-4 sm:p-6 border rounded-lg shadow-sm hover:shadow-md transition bg-gray-50">
+                <div class="p-4 sm:p-6 border rounded-lg shadow-sm hover:shadow-md transition bg-white">
                     <div class="space-y-3">
-                        <span class="inline-block text-xs font-semibold text-blue-600 uppercase tracking-wider">
-                            {{ $item->kategori }}
-                        </span>
                         <h2 class="text-lg sm:text-xl font-bold text-gray-800">{{ $item->judul }}</h2>
-                        <div class="prose prose-blue max-w-none text-gray-700 text-sm sm:text-base">
+                        <div class="prose prose-blue max-w-none text-gray-700 text-justify text-sm sm:text-base">
                             {!! $item->konten !!}
                         </div>
                     </div>
-
                     <div class="mt-6 space-y-4">
                         @if ($item->file)
                             <div class="space-y-2">
@@ -53,15 +46,15 @@
                                 @php
                                     $ext = pathinfo($item->file, PATHINFO_EXTENSION);
                                 @endphp
-
                                 @if (in_array(strtolower($ext), ['pdf']))
                                     <div class="relative w-full overflow-hidden rounded-lg border bg-gray-100">
                                         <iframe src="{{ asset('storage/' . $item->file) }}"
                                             class="w-full h-[300px] sm:h-[400px] md:h-[500px]"></iframe>
                                     </div>
-                                @elseif(in_array(strtolower($ext), ['jpg', 'jpeg', 'png']))
+                                @elseif(in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif', 'webp']))
                                     <img src="{{ asset('storage/' . $item->file) }}" alt="Preview {{ $item->judul }}"
-                                        class="w-full max-h-[400px] object-contain rounded-lg border">
+                                        class="w-full max-h-[400px] object-contain rounded-lg border cursor-pointer hover:scale-105 transition"
+                                        @click="show = true; imgSrc='{{ asset('storage/' . $item->file) }}'">
                                 @else
                                     <a href="{{ asset('storage/' . $item->file) }}" target="_blank"
                                         class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium">
@@ -75,7 +68,6 @@
                                 @endif
                             </div>
                         @endif
-
                         @if ($item->link)
                             <div class="space-y-2">
                                 <p class="text-sm font-semibold text-gray-600 flex items-center gap-2">
@@ -105,10 +97,21 @@
                 </div>
             @endforelse
         </div>
-
         <div class="mt-8">
             {{ $jalurRegulers->links('vendor.pagination.tailwind') }}
         </div>
-
+        <div x-show="show" x-transition class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+            @click="show = false" @keydown.escape.window="show = false">
+            <div class="relative" @click.stop>
+                <button @click="show = false"
+                    class="absolute -top-4 -right-4 bg-white rounded-full shadow-lg p-2 hover:bg-gray-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <img :src="imgSrc" alt="Popup Image" class="max-h-[90vh] max-w-[90vw] rounded shadow-lg">
+            </div>
+        </div>
     </section>
 @endsection

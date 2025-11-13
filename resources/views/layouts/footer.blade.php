@@ -91,7 +91,8 @@
             <div class="font-semibold mb-3">Test Center</div>
             <div class="rounded-xl overflow-hidden border border-gray-700 shadow-lg">
                 <iframe src="https://www.google.com/maps/d/embed?mid=1hBdqsyC5JZid6w9--07QCKukAkW9jUs&ehbc=2E312F"
-                    class="w-full h-[300px] sm:h-[300px] lg:h-[380px]" allowfullscreen="" loading="lazy"
+                    title="Peta lokasi Test Center IAPI Jawa Timur" class="w-full h-[300px] sm:h-[300px] lg:h-[380px]"
+                    allowfullscreen loading="lazy" allowfullscreen="" loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>

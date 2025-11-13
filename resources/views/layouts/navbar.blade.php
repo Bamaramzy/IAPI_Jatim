@@ -11,15 +11,13 @@
         {{-- Logo --}}
         <div class="flex items-center gap-4">
             <a href="{{ url('/') }}" class="block">
-                <img src="{{ asset('images/iapi_lengkap.webp') }}" alt="IAPI" class="h-12 w-auto object-contain"
+                <img src="{{ asset('images/iapi_jatim.webp') }}" alt="IAPI Korda Jatim" class="h-12 w-auto object-contain"
                     loading="lazy">
             </a>
         </div>
-
         {{-- Desktop Menu --}}
         <nav class="hidden md:flex gap-6 text-sm text-gray-600">
             <a href="{{ url('/') }}" class="hover:text-gray-900">Beranda</a>
-
             {{-- Tentang Kami --}}
             <div class="relative group">
                 <a href="#" class="hover:text-gray-900 flex items-center">
@@ -42,7 +40,6 @@
                         Organisasi</a>
                 </div>
             </div>
-
             {{-- Keanggotaan --}}
             <div class="relative group">
                 <a href="#" class="hover:text-gray-900 flex items-center">
@@ -68,7 +65,6 @@
                         Akuntan Publik dan Akuntan Publik </a>
                 </div>
             </div>
-
             {{-- Pelatihan --}}
             <div class="relative" x-data="{ open: false }">
                 <a href="#" @mouseenter="open = true" @mouseleave="open = false"
@@ -126,7 +122,6 @@
                     </div>
                 </div>
             </div>
-
             {{-- Sertifikasi --}}
             <div x-data="{ openCert: false }" @mouseenter="openCert = true" @mouseleave="openCert = false"
                 class="relative">
@@ -200,7 +195,6 @@
                     </div>
                 </div>
             </div>
-
             {{-- Peraturan --}}
             <div class="relative group">
                 <a href="#" class="hover:text-gray-900 flex items-center">
@@ -224,8 +218,6 @@
                 </div>
             </div>
         </nav>
-        {{-- Login / Dashboard --}}
-        <div class="hidden md:block"> </div>
         {{-- Hamburger Menu --}}
         <button @click="mobileOpen = !mobileOpen" class="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-100">
             <svg x-show="!mobileOpen" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
@@ -238,7 +230,6 @@
             </svg>
         </button>
     </div>
-
     {{-- Mobile Menu --}}
     <div x-show="mobileOpen" x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
@@ -247,10 +238,8 @@
         class="fixed inset-x-0 top-[64px] md:hidden bg-white border-t shadow-lg z-50
            max-h-[80vh] overflow-y-auto overscroll-contain rounded-b-xl">
         <nav class="flex flex-col p-4 text-gray-700 space-y-2">
-
             <!-- Beranda -->
             <a href="{{ url('/') }}" class="py-2 border-b hover:text-gray-900 font-medium">Beranda</a>
-
             <!-- Tentang Kami -->
             <div x-data="{ open: false }">
                 <button @click="open = !open" class="flex justify-between w-full py-2 border-b hover:text-gray-900">
@@ -269,7 +258,6 @@
                         Organisasi</a>
                 </div>
             </div>
-
             <!-- Keanggotaan -->
             <div x-data="{ open: false }">
                 <button @click="open = !open" class="flex justify-between w-full py-2 border-b hover:text-gray-900">
@@ -293,7 +281,6 @@
                         Kantor & Akuntan Publik</a>
                 </div>
             </div>
-
             <!-- Pelatihan -->
             <div x-data="{ open: false }">
                 <button @click="open = !open" class="flex justify-between w-full py-2 border-b hover:text-gray-900">
@@ -304,7 +291,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-
                 <!-- Level 1 -->
                 <div x-show="open" x-collapse class="ml-4 border-l pl-4 text-sm space-y-2">
                     <a href="{{ url('/pelatihan/tentang') }}" class="block py-1 hover:text-gray-900">
@@ -316,7 +302,6 @@
                     <a href="{{ url('/pelatihan/panduan-ppl') }}" class="block py-1 hover:text-gray-900">
                         Panduan PPL
                     </a>
-
                     <!-- Brevet Perpajakan -->
                     <div x-data="{ openBrevet: false }">
                         <button @click="openBrevet = !openBrevet"
@@ -329,7 +314,6 @@
                                     d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
-
                         <!-- Level 2 -->
                         <div x-show="openBrevet" x-collapse class="ml-4 border-l pl-4 space-y-1">
                             <a href="{{ url('/pelatihan/brevet/a-b') }}" class="block py-1 hover:text-gray-900">
@@ -348,7 +332,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Sertifikasi -->
             <div x-data="{ open: false }">
                 <button @click="open = !open" class="flex justify-between w-full py-2 border-b hover:text-gray-900">
@@ -359,7 +342,6 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-
                 <!-- Isi submenu Sertifikasi -->
                 <div x-show="open" x-collapse class="ml-4 border-l pl-4 text-sm space-y-2">
 
@@ -372,7 +354,6 @@
                     <a href="{{ url('/sertifikasi/workshop-a-b') }}" class="block py-1 hover:text-gray-900">
                         Workshop A & B
                     </a>
-
                     <!-- Ujian Profesi Akuntan Publik -->
                     <div x-data="{ openUjian: false }">
                         <button @click="openUjian = !openUjian"
@@ -385,7 +366,6 @@
                                     d="M19 9l-7 7-7-7" />
                             </svg>
                         </button>
-
                         <!-- Submenu Ujian -->
                         <div x-show="openUjian" x-collapse class="ml-4 border-l pl-4 space-y-1">
                             <a href="{{ url('/sertifikasi/ujian/jalur-reguler') }}"
@@ -403,7 +383,6 @@
                                 class="block py-1 hover:text-gray-900">
                                 Proses Penerbitan Sertifikasi & Gelar
                             </a>
-
                             <!-- Tutorial Pendaftaran -->
                             <div x-data="{ openTutorial: false }">
                                 <button @click="openTutorial = !openTutorial"
@@ -416,7 +395,6 @@
                                             d="M19 9l-7 7-7-7" />
                                     </svg>
                                 </button>
-
                                 <div x-show="openTutorial" x-collapse class="ml-4 border-l pl-4 space-y-1">
                                     <a href="{{ url('#') }}" class="block py-1 hover:text-gray-900">
                                         Tutorial Jalur Reguler
@@ -435,7 +413,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Peraturan -->
             <div x-data="{ open: false }">
                 <button @click="open = !open" class="flex justify-between w-full py-2 border-b hover:text-gray-900">

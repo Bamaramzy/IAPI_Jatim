@@ -45,7 +45,10 @@ class PeraturanSpapResource extends Resource
                 ]),
 
             Forms\Components\TextInput::make('judul')->required(),
-            Forms\Components\Textarea::make('deskripsi'),
+            Forms\Components\RichEditor::make('deskripsi')
+                ->label('Deskripsi')
+                ->required()
+                ->toolbarButtons(['bold', 'italic', 'underline', 'link', 'bulletList', 'orderedList']),
 
             Forms\Components\FileUpload::make('thumbnail')
                 ->image()
@@ -53,19 +56,19 @@ class PeraturanSpapResource extends Resource
                 ->label('Thumbnail'),
 
             Forms\Components\TextInput::make('pdf_1_judul')->label('Judul PDF 1'),
-            Forms\Components\FileUpload::make('pdf_1_url')
-                ->directory('peraturan_spap/pdfs')
-                ->label('File PDF 1'),
+            Forms\Components\TextInput::make('pdf_1_url')
+                ->label('URL PDF 1')
+                ->placeholder('https://drive.google.com/file/d/.../view?usp=preview'),
 
             Forms\Components\TextInput::make('pdf_2_judul')->label('Judul PDF 2'),
-            Forms\Components\FileUpload::make('pdf_2_url')
-                ->directory('peraturan_spap/pdfs')
-                ->label('File PDF 2'),
+            Forms\Components\TextInput::make('pdf_2_url')
+                ->label('URL PDF 2')
+                ->placeholder('https://drive.google.com/file/d/.../view?usp=preview'),
 
             Forms\Components\TextInput::make('pdf_3_judul')->label('Judul PDF 3'),
-            Forms\Components\FileUpload::make('pdf_3_url')
-                ->directory('peraturan_spap/pdfs')
-                ->label('File PDF 3'),
+            Forms\Components\TextInput::make('pdf_3_url')
+                ->label('URL PDF 3')
+                ->placeholder('https://drive.google.com/file/d/.../view?usp=preview'),
         ]);
     }
 

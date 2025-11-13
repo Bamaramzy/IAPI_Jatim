@@ -17,14 +17,11 @@ class JalurRegulerController extends Controller
     public function indexVisitor(Request $request)
     {
         $query = JalurReguler::query();
-
-        if ($request->has('kategori') && $request->kategori != '') {
-            $query->where('kategori', $request->kategori);
-        }
-
+        $kategori = $request->get('kategori', 'Informasi Umum');
+        $query->where('kategori', $kategori);
         $jalurRegulers = $query->latest()->paginate(10);
 
-        return view('sertifikasi.ujian.jalur_reguler.indexvisitor', compact('jalurRegulers'));
+        return view('sertifikasi.ujian.jalur_reguler.indexvisitor', compact('jalurRegulers', 'kategori'));
     }
 
     public function create()

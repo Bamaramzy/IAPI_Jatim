@@ -49,12 +49,20 @@ class JalurRegulerResource extends Resource
                 ->toolbarButtons(['bold', 'italic', 'underline', 'link', 'bulletList', 'orderedList']),
 
             Forms\Components\FileUpload::make('file')
-                ->label('File (opsional)')
+                ->label('File / Gambar')
                 ->directory('uploads/jalur_reguler')
-                ->acceptedFileTypes(['application/pdf']),
+                ->acceptedFileTypes([
+                    'application/pdf',
+                    'image/jpeg',
+                    'image/png',
+                    'image/webp',
+                ])
+                ->maxSize(5120)
+                ->helperText('Unggah file PDF atau gambar (JPG, PNG, WEBP) maksimal 5MB.'),
 
             Forms\Components\TextInput::make('link')
-                ->label('Link')
+                ->label('Link PDF')
+                ->placeholder('https://drive.google.com/file/d/.../view?usp=preview')
                 ->url()
                 ->nullable(),
         ]);

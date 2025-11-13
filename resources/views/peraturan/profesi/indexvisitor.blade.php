@@ -7,8 +7,7 @@
         <div class="mb-6 sm:mb-10 px-2">
             <nav class="flex flex-col sm:flex-row flex-wrap justify-center gap-2 sm:gap-4">
                 <button @click="tab = 'regulasi'"
-                    class="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-full text-sm font-semibold 
-                        text-center transition-colors duration-200"
+                    class="px-4 py-2.5 rounded-md border text-sm text-center transition-colors duration-200"
                     :class="tab === 'regulasi'
                         ?
                         'bg-[#071225] text-white' :
@@ -17,8 +16,7 @@
                 </button>
 
                 <button @click="tab = 'asosiasi'"
-                    class="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-full text-sm font-semibold 
-                        text-center transition-colors duration-200"
+                    class="px-4 py-2.5 rounded-md border text-sm text-center transition-colors duration-200"
                     :class="tab === 'asosiasi'
                         ?
                         'bg-[#071225] text-white' :
@@ -27,8 +25,7 @@
                 </button>
 
                 <button @click="tab = 'pengurus'"
-                    class="w-full sm:w-auto px-4 sm:px-5 py-2.5 rounded-full text-sm font-semibold 
-                        text-center transition-colors duration-200"
+                    class="px-4 py-2.5 rounded-md border text-sm text-center transition-colors duration-200"
                     :class="tab === 'pengurus'
                         ?
                         'bg-[#071225] text-white' :

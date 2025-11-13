@@ -79,7 +79,20 @@ class AnggotaResource extends Resource
                 Tables\Columns\TextColumn::make('nama_anggota')->searchable(),
                 Tables\Columns\TextColumn::make('kategori')->sortable(),
                 Tables\Columns\TextColumn::make('nama_kap')->label('Nama KAP')->searchable(),
-                Tables\Columns\TextColumn::make('status_id')->label('Status')->sortable(),
+                Tables\Columns\BadgeColumn::make('status_id')
+                    ->label('Status')
+                    ->formatStateUsing(fn(?string $state): string => match ($state) {
+                        'Aktif' => 'Aktif',
+                        'Cuti Sementara' => 'Cuti Sementara',
+                        'Tidak Aktif' => 'Tidak Aktif',
+                        default => ucfirst((string) $state),
+                    })
+                    ->colors([
+                        'success' => 'Aktif',
+                        'warning' => 'Cuti Sementara',
+                        'danger' => 'Tidak Aktif',
+                    ])
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('korwil')->sortable(),
                 Tables\Columns\TextColumn::make('terdaftar_pada')->label('Terdaftar Pada')->searchable()->sortable(),
             ])

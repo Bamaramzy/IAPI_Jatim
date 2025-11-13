@@ -17,10 +17,12 @@
                 <option value="anggota umum" {{ request('kategori') == 'anggota umum' ? 'selected' : '' }}>Anggota Umum
                 </option>
             </select>
-            <select name="status" class="border rounded-lg px-3 py-2 w-full">
+            <select name="status_id" class="border rounded-lg px-3 py-2 w-full">
                 <option value="">-- Semua Status --</option>
-                <option value="aktif" {{ request('status') == 'aktif' ? 'selected' : '' }}>Aktif</option>
-                <option value="cuti sementara" {{ request('status') == 'cuti sementara' ? 'selected' : '' }}>Cuti Sementara
+                <option value="Aktif" {{ request('status_id') == 'Aktif' ? 'selected' : '' }}>Aktif</option>
+                <option value="Cuti Sementara" {{ request('status_id') == 'Cuti Sementara' ? 'selected' : '' }}>Cuti
+                    Sementara</option>
+                <option value="Tidak Aktif" {{ request('status_id') == 'Tidak Aktif' ? 'selected' : '' }}>Tidak Aktif
                 </option>
             </select>
             <div class="md:col-span-2">
@@ -46,10 +48,10 @@
                         <th class="px-4 py-2 border">No</th>
                         <th class="px-4 py-2 border">No Reg IAPI</th>
                         <th class="px-4 py-2 border">Nama Anggota</th>
+                        <th class="px-4 py-2 border">Izin AP</th>
                         <th class="px-4 py-2 border">Kategori</th>
                         <th class="px-4 py-2 border">Nama KAP</th>
                         <th class="px-4 py-2 border">Status</th>
-                        <th class="px-4 py-2 border">Korwil</th>
                         <th class="px-4 py-2 border">Terdaftar Pada</th>
                     </tr>
                 </thead>
@@ -59,20 +61,20 @@
                             <td class="px-4 py-2 border">{{ $anggota->firstItem() + $index }}</td>
                             <td class="px-4 py-2 border">{{ $a->no_reg_iapi }}</td>
                             <td class="px-4 py-2 border">{{ $a->nama_anggota }}</td>
+                            <td class="px-4 py-2 border">{{ $a->izin_ap }}</td>
                             <td class="px-4 py-2 border">{{ $a->kategori }}</td>
                             <td class="px-4 py-2 border">{{ $a->nama_kap }}</td>
                             <td class="px-4 py-2 border">
                                 <span
-                                    class="px-2 py-1 rounded text-white
-                                    @if ($a->status_id === 'Aktif') bg-green-500
-                                    @elseif ($a->status_id === 'Cuti Sementara') 
-                                        bg-yellow-500 text-black
-                                    @else
-                                        bg-red-500 @endif">
+                                    class="inline-block min-w-[100px] px-2 py-1 rounded text-center font-medium
+                                        @if ($a->status_id === 'Aktif') bg-green-500 text-white
+                                        @elseif ($a->status_id === 'Cuti Sementara')
+                                            bg-yellow-400 text-gray-900
+                                        @else
+                                            bg-red-500 text-white @endif">
                                     {{ $a->status_id }}
                                 </span>
                             </td>
-                            <td class="px-4 py-2 border">{{ $a->korwil }}</td>
                             <td class="px-4 py-2 border">{{ $a->terdaftar_pada }}</td>
                         </tr>
                     @empty

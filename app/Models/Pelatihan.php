@@ -18,6 +18,7 @@ class Pelatihan extends Model
         'waktu_selesai',
         'lokasi',
         'brosur',
+        'link',
         'status',
     ];
 

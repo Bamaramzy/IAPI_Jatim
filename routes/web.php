@@ -45,6 +45,9 @@ Route::prefix('keanggotaan')->group(function () {
         if ($request->filled('kategori')) {
             $query->where('kategori', $request->kategori);
         }
+        if ($request->filled('status_id')) {
+            $query->where('status_id', $request->status_id);
+        }
         if ($request->filled('search')) {
             $query->where(function ($q) use ($request) {
                 $q->where('nama_anggota', 'like', "%{$request->search}%")
@@ -138,9 +141,9 @@ Route::prefix('peraturan')->group(function () {
     Route::get('/kode-etik', fn() => view('peraturan.kode_etik.kode_etik'))->name('visitor.kode_etik');
 });
 
-Route::get('/dashboard', fn() => view('dashboard'))
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// Route::get('/dashboard', fn() => view('dashboard'))
+//     ->middleware(['auth', 'verified'])
+//     ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -45,7 +45,7 @@ class InformasiResource extends Resource
                 ->required(),
 
             Forms\Components\TextInput::make('link')
-                ->label('Tautan (Opsional)')
+                ->label('Link')
                 ->url()
                 ->nullable(),
         ]);

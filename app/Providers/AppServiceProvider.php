@@ -55,11 +55,11 @@ class AppServiceProvider extends ServiceProvider
         // Default heading format for Excel imports
         HeadingRowFormatter::default('slug');
         // Force HTTPS when using ngrok or in production
-        if (
-            $this->app->environment('production') ||
-            str_contains(config('app.url'), 'ngrok-free.dev')
-        ) {
-            URL::forceScheme('https');
-        }
+        // if (
+        //     $this->app->environment('production') ||
+        //     str_contains(config('app.url'), 'ngrok-free.dev')
+        // ) {
+        //     URL::forceScheme('https');
+        // }
     }
 }

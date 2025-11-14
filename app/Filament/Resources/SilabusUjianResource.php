@@ -39,7 +39,8 @@ class SilabusUjianResource extends Resource
                 ->acceptedFileTypes(['application/pdf'])
                 ->nullable(),
 
-            Forms\Components\TextInput::make('pdf_link')->label('Link PDF')
+            Forms\Components\TextInput::make('pdf_link')
+                ->label('Link Google Drive')
                 ->url()
                 ->nullable()
                 ->placeholder('https://drive.google.com/file/d/.../view?usp=preview'),

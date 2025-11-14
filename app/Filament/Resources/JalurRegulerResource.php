@@ -61,7 +61,7 @@ class JalurRegulerResource extends Resource
                 ->helperText('Unggah file PDF atau gambar (JPG, PNG, WEBP) maksimal 5MB.'),
 
             Forms\Components\TextInput::make('link')
-                ->label('Link PDF')
+                ->label('Link Google Drive')
                 ->placeholder('https://drive.google.com/file/d/.../view?usp=preview')
                 ->url()
                 ->nullable(),

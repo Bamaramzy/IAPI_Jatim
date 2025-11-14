@@ -44,7 +44,7 @@ class PeraturanProfesiResource extends Resource
 
             Forms\Components\TextInput::make('link_url')
                 ->url()
-                ->label('Link')
+                ->label('Link Google Drive')
                 ->placeholder('https://drive.google.com/file/d/.../view?usp=preview'),
         ]);
     }

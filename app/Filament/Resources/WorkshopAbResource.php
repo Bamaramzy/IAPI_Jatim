@@ -34,7 +34,7 @@ class WorkshopAbResource extends Resource
                 ->acceptedFileTypes(['application/pdf']),
 
             Forms\Components\TextInput::make('link_pdf')
-                ->label('Link PDF')
+                ->label('Link Google Drive')
                 ->url()
                 ->nullable()
                 ->placeholder('https://drive.google.com/file/d/.../view?usp=preview')

@@ -15,7 +15,7 @@
                     @else
                         <div
                             class="w-full sm:w-32 md:w-40 h-48 sm:h-32 md:h-40 bg-gray-100 flex items-center justify-center text-gray-700 mx-auto sm:mx-0 font-medium">
-                            Tidak ada brosur
+                            Belum ada brosur
                         </div>
                     @endif
 
@@ -53,7 +53,7 @@
                                 <a href="#"
                                     class="w-full sm:w-auto px-4 py-2 sm:py-1.5 bg-gray-500 text-white text-sm font-semibold rounded cursor-not-allowed text-center inline-block"
                                     title="Link pendaftaran belum tersedia">
-                                    Daftar
+                                    Daftar (Belum Tersedia)
                                 </a>
                             @endif
                         </div>

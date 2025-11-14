@@ -11,7 +11,7 @@
             <div class="relative">
                 <div class="overflow-hidden rounded-xl">
                     <div id="carousel-track-pengurus"
-                        class="flex transition-transform duration-700 ease-in-out px-2 py-4 space-x-4 snap-x snap-mandatory">
+                        class="flex px-2 py-4 space-x-4 snap-x snap-mandatory overflow-x-auto scrollbar-hide">
                         @forelse($pengurus as $item)
                             <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center">
                                 <div
@@ -141,7 +141,7 @@
                 <div class="relative">
                     <div class="overflow-hidden rounded-xl">
                         <div id="carousel-track-pengawas"
-                            class="flex transition-transform duration-700 ease-in-out px-2 py-4 space-x-4 snap-x snap-mandatory">
+                            class="flex px-2 py-4 space-x-4 snap-x snap-mandatory overflow-x-auto scrollbar-hide">
                             @forelse($pengawas as $item)
                                 <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center">
                                     <div

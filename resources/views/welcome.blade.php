@@ -19,16 +19,13 @@
                         Institut Akuntan Publik Indonesia
                     </span>
                 </h1>
-
                 <h2 class="text-2xl font-semibold text-[#0C2C77] mt-2 tracking-wide uppercase">
                     Korda Jawa Timur
                 </h2>
-
                 <p class="text-lg text-gray-600 max-w-xl leading-relaxed">
                     Ayo Gabung di LMS, CPA Indonesia Academy – wadah pengembangan dan peningkatan kompetensi akuntan
                     publik di Indonesia.
                 </p>
-
                 <a href="{{ url('https://member.iapi.or.id/login') }}"
                     class="inline-flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#071225] to-[#0C2C77]
                          text-white font-semibold rounded-xl shadow-md hover:shadow-lg transition-transform
@@ -41,7 +38,6 @@
                     </svg>
                 </a>
             </div>
-
             <div class="flex justify-center lg:justify-end relative">
                 <div class="relative">
                     <divabsolute -inset-4 bg-gradient-to-tr from-blue-200/40 to-transparent rounded-[24px] blur-3xl">
@@ -51,51 +47,121 @@
                     loading="lazy">
             </div>
         </div>
-
         </div>
     </section>
-
     <section class="py-16">
         <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center mb-8 tracking-tight text-gray-900">Informasi</h2>
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#071225] tracking-tight">
+                Jadwal Pelatihan Terbaru
+            </h2>
             <div class="relative">
-                <div class="overflow-hidden rounded-xl relative pointer-events-auto">
-                    <div id="carousel-track"
-                        class="flex transition-transform duration-700 ease-in-out px-2 py-4 space-x-4 snap-x snap-mandatory pointer-events-auto">
-                        @forelse($informasis as $info)
-                            <a href="{{ $info->link }}" target="_blank"
-                                class="flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 px-1 snap-center">
-                                <div
-                                    class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                                    <img src="{{ asset('storage/' . $info->gambar) }}" alt=""
-                                        class="w-full h-56 object-cover object-top inline-block" loading="lazy">
-                                    <div class="p-4">
-                                        <h3 class="text-base font-semibold line-clamp-2 text-gray-800">
-                                            {{ $info->judul }}
+                <div id="jadwal-track"
+                    class="flex overflow-x-auto space-x-6 snap-x snap-mandatory px-2 py-4 scrollbar-hide">
+
+                    @forelse ($jadwals as $jadwal)
+                        <div class="min-w-[320px] sm:min-w-[360px] lg:min-w-[380px] snap-center block">
+                            <div
+                                class="rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg
+                            hover:-translate-y-1 transition-all duration-300 flex flex-col text-center">
+                                @if ($jadwal->brosur)
+                                    <img src="{{ asset('storage/' . $jadwal->brosur) }}" alt="{{ $jadwal->judul }}"
+                                        class="w-full h-56 object-cover object-top" loading="lazy">
+                                @else
+                                    <div class="w-full h-56 bg-gray-200 flex items-center justify-center">
+                                        <span class="text-gray-500 text-sm">Belum ada brosur</span>
+                                    </div>
+                                @endif
+                                <div class="p-4 flex-1 flex flex-col justify-between">
+                                    <div>
+                                        <h3 class="text-lg font-bold text-[#0C2C77] mb-1 line-clamp-2">
+                                            {{ $jadwal->judul }} [{{ $jadwal->kategori }}]
                                         </h3>
+                                        <p class="text-sm text-gray-700">
+                                            {{ $jadwal->tanggal_mulai->format('d M Y') }}
+                                            @if ($jadwal->tanggal_selesai)
+                                                - {{ $jadwal->tanggal_selesai->format('d M Y') }}
+                                            @endif
+                                        </p>
+                                        <p class="text-sm text-gray-700">
+                                            {{ $jadwal->waktu_mulai }} - {{ $jadwal->waktu_selesai }} WIB
+                                        </p>
+                                        <p class="text-sm text-gray-700 mb-4">
+                                            {{ $jadwal->lokasi }}
+                                        </p>
+                                    </div>
+                                    <div class="flex gap-2 justify-center mt-auto">
+                                        @if ($jadwal->brosur)
+                                            <a href="{{ asset('storage/' . $jadwal->brosur) }}" target="_blank"
+                                                class="px-4 py-2 bg-[#071225] text-white text-xs font-semibold rounded hover:bg-[#0C2C77] transition">
+                                                Lihat Brosur
+                                            </a>
+                                        @endif
+
+                                        @if ($jadwal->link)
+                                            <a href="{{ $jadwal->link }}" target="_blank"
+                                                class="px-4 py-2 bg-green-600 text-white text-xs font-semibold rounded hover:bg-green-800 transition">
+                                                Daftar
+                                            </a>
+                                        @else
+                                            <span
+                                                class="px-4 py-2 bg-gray-400 text-white text-xs font-semibold rounded">
+                                                Daftar (Belum Tersedia)
+                                            </span>
+                                        @endif
                                     </div>
                                 </div>
-                            </a>
-                        @empty
-                            <div class="w-full text-center py-8">
-                                <p class="text-gray-500 italic">Belum ada informasi tersedia.</p>
-                            </div>
-                        @endforelse
-                    </div>
-                </div>
-                <button id="prev"
-                    class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white 
-                        w-10 h-10 rounded-full flex items-center justify-center shadow-md 
-                        z-30 transition duration-200">
-                    <span class="text-xl">&#10094;</span>
-                </button>
 
-                <button id="next"
-                    class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white 
-                        w-10 h-10 rounded-full flex items-center justify-center shadow-md 
-                        z-30 transition duration-200">
-                    <span class="text-xl">&#10095;</span>
-                </button>
+                            </div>
+                        </div>
+                    @empty
+                        <div class="w-full text-center py-8">
+                            <p class="text-gray-500 italic">Belum ada jadwal pelatihan.</p>
+                        </div>
+                    @endforelse
+                </div>
+                <div id="jadwal-dots" class="flex justify-center mt-4"></div>
+            </div>
+        </div>
+        <div class="text-center mt-6">
+            <a href="{{ route('visitor.pelatihan.jadwal') }}"
+                class="px-6 py-2 bg-[#071225] text-white font-semibold rounded hover:bg-[#0C2C77] transition">
+                Lihat Semua Jadwal
+            </a>
+        </div>
+    </section>
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#071225] tracking-tight">
+                Informasi
+            </h2>
+            <div class="relative">
+                <div id="info-track"
+                    class="flex overflow-x-auto space-x-6 snap-x snap-mandatory px-2 py-4 scrollbar-hide">
+
+                    @forelse($informasis as $info)
+                        <a href="{{ $info->link }}" target="_blank"
+                            class="min-w-[320px] sm:min-w-[360px] lg:min-w-[380px] snap-center block text-center">
+                            <div
+                                class="rounded-xl overflow-hidden border border-gray-300
+                            shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                                <img src="{{ asset('storage/' . $info->gambar) }}" alt="{{ $info->judul }}"
+                                    class="w-full h-56 object-cover object-top" loading="lazy">
+
+                                <div class="p-4">
+                                    <h3 class="text-lg font-semibold line-clamp-2 text-gray-900">
+                                        {{ $info->judul }}
+                                    </h3>
+                                </div>
+                            </div>
+                        </a>
+                    @empty
+                        <div class="w-full text-center py-8">
+                            <p class="text-gray-500 italic">Belum ada informasi tersedia.</p>
+                        </div>
+                    @endforelse
+
+                </div>
+                <div id="info-dots" class="flex justify-center mt-4"></div>
             </div>
         </div>
     </section>
@@ -115,10 +181,8 @@
                         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
-
             <div class="bg-white rounded-xl p-8 shadow-lg hover:shadow-xl transition">
                 <div class="text-sm text-gray-600 space-y-6">
-
                     <div class="flex items-start gap-4">
                         <svg class="w-6 h-6 shrink-0 text-blue-600" fill="none" stroke="currentColor"
                             stroke-width="2" viewBox="0 0 24 24">
@@ -133,7 +197,6 @@
                             </a>
                         </div>
                     </div>
-
                     <div class="flex items-start gap-4">
                         <svg class="w-6 h-6 shrink-0 text-green-500" fill="none" stroke="currentColor"
                             stroke-width="2" viewBox="0 0 24 24">
@@ -148,10 +211,9 @@
                             </a>
                         </div>
                     </div>
-
                     <div class="flex items-start gap-4">
-                        <svg class="w-6 h-6 shrink-0 text-red-500" fill="none" stroke="currentColor" stroke-width="2"
-                            viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 shrink-0 text-red-500" fill="none" stroke="currentColor"
+                            stroke-width="2" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M3 8l9 6 9-6M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
@@ -163,7 +225,6 @@
                             </a>
                         </div>
                     </div>
-
                     <div class="flex items-start gap-4">
                         <svg class="w-6 h-6 shrink-0 text-blue-600" fill="none" stroke="currentColor"
                             stroke-width="2" viewBox="0 0 24 24">
@@ -180,7 +241,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="flex items-start gap-4">
                         <svg class="w-6 h-6 shrink-0 text-yellow-500" fill="none" stroke="currentColor"
                             stroke-width="2" viewBox="0 0 24 24">

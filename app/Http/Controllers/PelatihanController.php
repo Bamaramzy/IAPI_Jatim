@@ -36,6 +36,15 @@ class PelatihanController extends Controller
         return view('pelatihan.jadwal.indexvisitor', compact('jadwals'));
     }
 
+    public function welcome()
+    {
+        $jadwals = Pelatihan::where('status', 'publish')
+            ->orderBy('tanggal_mulai', 'asc')
+            ->get();
+
+        return view('welcome', compact('jadwals'));
+    }
+
     public function create()
     {
         return view('pelatihan.jadwal.create');

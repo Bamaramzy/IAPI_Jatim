@@ -31,14 +31,14 @@ class PplResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('video_url')
-                    ->label('URL Video (YouTube / Drive)')
+                    ->label('Link Video (YouTube / Drive)')
                     ->url()
                     ->nullable()
                     ->maxLength(255)
                     ->placeholder('https://www.youtube.com/...'),
 
                 Forms\Components\TextInput::make('pdf_url')
-                    ->label('URL PDF (Google Drive / lainnya)')
+                    ->label('Link PDF (Google Drive / lainnya)')
                     ->url()
                     ->nullable()
                     ->placeholder('https://drive.google.com/file/d/.../view?usp=preview'),

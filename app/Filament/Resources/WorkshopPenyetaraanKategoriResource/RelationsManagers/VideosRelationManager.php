@@ -22,7 +22,7 @@ class VideosRelationManager extends RelationManager
                 ->maxLength(255),
 
             Forms\Components\TextInput::make('video_url')
-                ->label('Video URL')
+                ->label('Link Video')
                 ->url()
                 ->required(),
 

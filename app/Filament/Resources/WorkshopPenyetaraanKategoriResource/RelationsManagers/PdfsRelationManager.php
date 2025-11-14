@@ -28,7 +28,7 @@ class PdfsRelationManager extends RelationManager
                 ->maxSize(5120),
 
             Forms\Components\TextInput::make('link_url')
-                ->label('Link')
+                ->label('Link Google Drive')
                 ->url()
                 ->nullable()
                 ->placeholder('https://drive.google.com/file/d/.../view?usp=preview')

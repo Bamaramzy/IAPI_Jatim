@@ -65,7 +65,7 @@ class PelatihanResource extends Resource
                     ->directory('pelatihan/brosur'),
 
                 Forms\Components\TextInput::make('link')
-                    ->required(),
+                    ->label('Link Pelatihan'),
 
                 Forms\Components\Toggle::make('status')
                     ->label('Publish?')

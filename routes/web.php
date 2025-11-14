@@ -26,11 +26,12 @@ use App\Http\Controllers\{
     JalurWorkshopController,
     SilabusController,
     PeraturanProfesiController,
-    PeraturanSpapController
+    PeraturanSpapController,
+    HomeController
 };
 use App\Models\{Anggota, Direktori, AdArt, TataCara};
 
-Route::get('/', [InformasiController::class, 'welcome'])->name('welcome');
+Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
 Route::prefix('tentang')->group(function () {
     Route::view('/sejarah', 'tentang.sejarah')->name('tentang.sejarah');

@@ -67,7 +67,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 dot.setAttribute("aria-label", `Slide ${i + 1}`);
                 dot.addEventListener("click", () => {
                     currentIndex = i * itemsPerSlide;
-                    updateCarousel();
+                    scrollToIndex(currentIndex);
                 });
                 dotsContainer.appendChild(dot);
             }
@@ -85,36 +85,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let currentIndex = 0;
 
-        const updateCarousel = () => {
-            const normalizedIndex = ((currentIndex % total) + total) % total;
-            const translateX = -(normalizedIndex * itemWidth);
-            track.style.transform = `translateX(${translateX}px)`;
+        const scrollToIndex = (index) => {
+            const normalizedIndex = ((index % total) + total) % total;
+            const scrollPos = normalizedIndex * itemWidth;
+            track.scrollTo({ left: scrollPos, behavior: "smooth" });
+            currentIndex = normalizedIndex;
             updateDots(normalizedIndex);
         };
 
         const scrollCarousel = (direction) => {
             let newIndex = currentIndex + direction * itemsPerSlide;
-
-            if (newIndex >= total) {
-                newIndex = 0;
-            } else if (newIndex < 0) {
+            if (newIndex >= total) newIndex = 0;
+            if (newIndex < 0)
                 newIndex = total - (total % itemsPerSlide || itemsPerSlide);
-            }
-
-            currentIndex = newIndex;
-            updateCarousel();
+            scrollToIndex(newIndex);
         };
 
-        next?.addEventListener("click", () => {
-            console.log("Next clicked", currentIndex, itemsPerSlide);
-            scrollCarousel(1);
-        });
+        // Tombol next/prev
+        next?.addEventListener("click", () => scrollCarousel(1));
+        prev?.addEventListener("click", () => scrollCarousel(-1));
 
-        prev?.addEventListener("click", () => {
-            console.log("Prev clicked", currentIndex, itemsPerSlide);
-            scrollCarousel(-1);
-        });
-
+        // Touch/drag scroll sudah native karena scrollLeft
         track.addEventListener("touchstart", (e) => {
             const touchStartX = e.touches[0].clientX;
             track.addEventListener(
@@ -122,26 +113,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 (e2) => {
                     const touchEndX = e2.changedTouches[0].clientX;
                     const swipeDistance = touchStartX - touchEndX;
-                    if (swipeDistance > 50) {
-                        console.log("Swipe left", currentIndex, itemsPerSlide);
-                        scrollCarousel(1);
-                    } else if (swipeDistance < -50) {
-                        console.log("Swipe right", currentIndex, itemsPerSlide);
-                        scrollCarousel(-1);
-                    }
+                    if (swipeDistance > 50) scrollCarousel(1);
+                    if (swipeDistance < -50) scrollCarousel(-1);
                 },
                 { once: true }
             );
         });
 
+        // Resize
         window.addEventListener("resize", () => {
             itemsPerSlide = getItemsPerSlide();
             itemWidth = getItemWidth();
             createDots();
-            updateCarousel();
+            scrollToIndex(currentIndex);
         });
 
         createDots();
-        updateCarousel();
+        scrollToIndex(currentIndex);
     });
 });

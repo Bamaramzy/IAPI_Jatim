@@ -50,9 +50,9 @@ class AnggotaImport implements ToCollection, WithHeadingRow, WithCalculatedFormu
         if (is_null($value)) return 'Aktif';
         $v = Str::lower(trim($value));
 
+        if (Str::contains($v, 'tidak')) return 'Tidak Aktif';
         if (Str::contains($v, 'aktif')) return 'Aktif';
         if (Str::contains($v, 'cuti'))  return 'Cuti Sementara';
-        if (Str::contains($v, 'tidak')) return 'Tidak Aktif';
 
         return 'Aktif';
     }

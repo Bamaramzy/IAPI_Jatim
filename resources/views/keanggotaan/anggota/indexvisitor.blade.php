@@ -52,7 +52,6 @@
                         <th class="px-4 py-2 border">Kategori</th>
                         <th class="px-4 py-2 border">Nama KAP</th>
                         <th class="px-4 py-2 border">Status</th>
-                        <th class="px-4 py-2 border">Terdaftar Pada</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -75,7 +74,6 @@
                                     {{ $a->status_id }}
                                 </span>
                             </td>
-                            <td class="px-4 py-2 border">{{ $a->terdaftar_pada }}</td>
                         </tr>
                     @empty
                         <tr>

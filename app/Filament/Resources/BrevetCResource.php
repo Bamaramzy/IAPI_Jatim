@@ -29,8 +29,7 @@ class BrevetCResource extends Resource
     {
         return $form->schema([
             Forms\Components\TextInput::make('judul')
-                ->label('Judul')
-                ->required(),
+                ->label('Judul'),
 
             Forms\Components\FileUpload::make('brosur')
                 ->directory('brevets_c')

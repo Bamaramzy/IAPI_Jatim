@@ -104,7 +104,7 @@
                                             </a>
                                         @else
                                             <span
-                                                class="px-4 py-2 bg-gray-400 text-white text-xs font-semibold rounded">
+                                                class="px-4 py-2 bg-gray-500 text-white text-xs font-semibold rounded">
                                                 Daftar (Belum Tersedia)
                                             </span>
                                         @endif

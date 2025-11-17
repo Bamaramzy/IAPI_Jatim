@@ -33,6 +33,10 @@ use App\Models\{Anggota, Direktori, AdArt, TataCara};
 
 Route::get('/', [HomeController::class, 'welcome'])->name('welcome');
 
+Route::fallback(function () {
+    return response()->view('errors.404', [], 404);
+});
+
 Route::prefix('tentang')->group(function () {
     Route::view('/sejarah', 'tentang.sejarah')->name('tentang.sejarah');
     Route::view('/visimisi', 'tentang.visimisi')->name('tentang.visimisi');
@@ -109,11 +113,28 @@ Route::prefix('pelatihan')->group(function () {
     Route::get('/tentang', fn() => view('pelatihan.tentang_pelatihan.tentang'))->name('visitor.pelatihan');
     Route::get('/jadwal', [PelatihanController::class, 'indexVisitor'])->name('visitor.pelatihan.jadwal');
     Route::get('/panduan-ppl', [PplController::class, 'indexVisitor'])->name('visitor.ppl');
-
     Route::prefix('brevet')->group(function () {
-        Route::get('/a-b', [BrevetController::class, 'indexVisitor'])->name('visitor.brevet_a_b');
-        Route::get('/c', [BrevetCController::class, 'indexVisitor'])->name('visitor.brevet_c');
-        Route::get('/kuasa', [BrevetKuasaController::class, 'indexVisitor'])->name('visitor.brevet_kuasa');
+        Route::get('/a-b', function () {
+            $brevets = \App\Models\Brevet::where('status', 'publish')
+                ->orderBy('created_at', 'asc')
+                ->get();
+
+            return view('pelatihan.brevet_perpajakan.brevet_a_dan_b.indexvisitor', compact('brevets'));
+        });
+        Route::get('/c', function () {
+            $brevetsC = \App\Models\BrevetC::where('status', 'publish')
+                ->orderBy('created_at', 'asc')
+                ->get();
+
+            return view('pelatihan.brevet_perpajakan.brevet_c.indexvisitor', compact('brevetsC'));
+        });
+        Route::get('/kuasa', function () {
+            $brevetsKuasa = \App\Models\BrevetKuasa::where('status', 'publish')
+                ->orderBy('created_at', 'asc')
+                ->get();
+
+            return view('pelatihan.brevet_perpajakan.brevet_kuasa.indexvisitor', compact('brevetsKuasa'));
+        });
     });
 });
 

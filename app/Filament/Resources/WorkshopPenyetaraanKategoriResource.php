@@ -16,6 +16,7 @@ class WorkshopPenyetaraanKategoriResource extends Resource
 {
     protected static ?string $model = Kategori::class;
     protected static ?string $navigationGroup = 'Sertifikasi';
+    protected static ?string $navigationLabel = 'Tutorial Workshop Penyetaraan';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     public static function getNavigationBadge(): ?string
     {

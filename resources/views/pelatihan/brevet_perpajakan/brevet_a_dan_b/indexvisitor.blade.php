@@ -29,13 +29,19 @@
         @endforelse
 
         <div x-show="show" x-transition.opacity.duration.300ms
-            class="fixed inset-0 bg-black bg-opacity-70 backdrop-blur-md flex items-center justify-center z-50"
+            class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
             @keydown.escape.window="show = false" @click.self="show = false">
-            <div x-transition.scale.duration.300ms
-                class="bg-white rounded-lg overflow-hidden shadow-lg max-w-5xl w-full relative">
-                <button class="absolute top-3 right-3 text-gray-700 text-2xl hover:text-red-600"
-                    @click="show = false">&times;</button>
-                <img :src="imgSrc" alt="Preview" class="w-full max-h-[90vh] object-contain">
+
+            <div class="relative" x-transition.scale.duration.300ms @click.stop>
+                <button @click="show = false"
+                    class="absolute -top-4 -right-4 bg-white rounded-full shadow-lg p-2 hover:bg-gray-200 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <img :src="imgSrc" alt="Preview Brosur"
+                    class="max-h-[90vh] max-w-[90vw] object-contain rounded shadow-lg">
             </div>
         </div>
     </section>

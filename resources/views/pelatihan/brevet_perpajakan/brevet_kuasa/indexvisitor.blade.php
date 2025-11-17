@@ -5,7 +5,7 @@
 
         <h1 class="text-3xl font-bold text-center mb-6">Brevet Kuasa</h1>
         <div class="flex flex-col items-center gap-8">
-            @forelse ($brevets as $brevet)
+            @forelse ($brevetsKuasa as $brevet)
                 <div class="flex flex-col items-center gap-3">
                     @if ($brevet->brosur)
                         <img src="{{ asset('storage/' . $brevet->brosur) }}" alt="{{ $brevet->judul }}"
@@ -25,16 +25,15 @@
                                 Daftar Sekarang
                             </a>
                         @endif
-
-                        <a href="https://drive.google.com/drive/folders/1h_QMfmjD0Is2tTkAJqZh5NZmcrBOyhIQ" target="_blank"
-                            class="inline-block px-4 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition">
-                            Panduan
-                        </a>
                     </div>
                 </div>
             @empty
                 <p class="text-center text-gray-600">Belum ada brosur tersedia.</p>
             @endforelse
+            <a href="https://drive.google.com/drive/folders/1h_QMfmjD0Is2tTkAJqZh5NZmcrBOyhIQ" target="_blank"
+                class="inline-block px-4 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition">
+                Panduan
+            </a>
         </div>
 
         <div x-show="show" x-transition.opacity.duration.300ms

@@ -8,18 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class SilabusController extends Controller
 {
-    /**
-     * Daftar Silabus (Admin)
-     */
-    public function index()
-    {
-        $silabus = Silabus::orderBy('created_at', 'asc')->get();
-        return view('sertifikasi.ujian.silabus_ujian.index', compact('silabus'));
-    }
 
-    /**
-     * Daftar Silabus (Visitor/Public)
-     */
     public function indexVisitor(Request $request)
     {
         $kategori = $request->get('kategori');
@@ -43,17 +32,6 @@ class SilabusController extends Controller
         );
     }
 
-    /**
-     * Form Tambah Silabus
-     */
-    public function create()
-    {
-        return view('sertifikasi.ujian.silabus_ujian.create');
-    }
-
-    /**
-     * Simpan Silabus Baru
-     */
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -83,19 +61,6 @@ class SilabusController extends Controller
             ->with('success', 'Data Silabus berhasil ditambahkan.');
     }
 
-    /**
-     * Form Edit Silabus
-     */
-    public function edit(Silabus $silabus_ujian)
-    {
-        $kategoriList = Silabus::select('kategori_utama')->distinct()->pluck('kategori_utama');
-        $subList      = Silabus::select('sub_kategori')->distinct()->pluck('sub_kategori');
-
-        return view('sertifikasi.ujian.silabus_ujian.edit', compact('silabus_ujian', 'kategoriList', 'subList'));
-    }
-    /**
-     * Update Silabus
-     */
     public function update(Request $request, Silabus $silabus_ujian)
     {
         $validated = $request->validate([
@@ -127,9 +92,6 @@ class SilabusController extends Controller
             ->with('success', 'Data Silabus berhasil diperbarui.');
     }
 
-    /**
-     * Hapus Silabus
-     */
     public function destroy(Silabus $silabus_ujian)
     {
         if ($silabus_ujian->pdf_file) Storage::disk('public')->delete($silabus_ujian->pdf_file);

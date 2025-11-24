@@ -8,21 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class CFIController extends Controller
 {
-    public function index()
-    {
-        $cfis = Cfi::orderBy('created_at', 'asc')->get();
-        return view('sertifikasi.cfi.index', compact('cfis'));
-    }
 
     public function indexVisitor()
     {
         $cfis = Cfi::orderBy('created_at', 'asc')->get();
         return view('sertifikasi.cfi.indexvisitor', compact('cfis'));
-    }
-
-    public function create()
-    {
-        return view('sertifikasi.cfi.create');
     }
 
     public function store(Request $request)

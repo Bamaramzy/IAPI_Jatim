@@ -66,43 +66,19 @@ Route::prefix('keanggotaan')->group(function () {
 
     Route::get('/direktori', function (Request $request) {
         $query = Direktori::query()->where('status', 'aktif');
-
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-        if ($request->filled('search')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('judul', 'like', "%{$request->search}%")
-                    ->orWhere('deskripsi', 'like', "%{$request->search}%");
-            });
-        }
-
-        $direktoris = $query->orderBy('created_at', 'desc')->paginate(9);
+        $direktoris = $query->orderBy('created_at', 'asc')->get();
         return view('keanggotaan.direktori.indexvisitor', compact('direktoris'));
     })->name('visitor.direktori');
 
     Route::get('/ad-art', function (Request $request) {
         $query = AdArt::query()->where('status', 'publish');
-
-        if ($request->filled('search')) {
-            $query->where('judul', 'like', "%{$request->search}%");
-        }
-
-        $adarts = $query->orderBy('created_at', 'desc')->paginate(9);
+        $adarts = $query->orderBy('created_at', 'asc')->get();
         return view('keanggotaan.adart.indexvisitor', compact('adarts'));
     })->name('visitor.adart');
 
     Route::get('/tata-cara', function (Request $request) {
         $query = TataCara::query()->where('status', 'aktif');
-
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-        if ($request->filled('search')) {
-            $query->where('judul', 'like', "%{$request->search}%");
-        }
-
-        $tatacaras = $query->orderBy('created_at', 'desc')->paginate(9);
+        $tatacaras = $query->orderBy('created_at', 'asc')->get();
         return view('keanggotaan.tatacara.indexvisitor', compact('tatacaras'));
     })->name('visitor.tatacara');
 
@@ -195,19 +171,19 @@ Route::middleware('auth')->group(function () {
     //      'peraturan_spap'        => PeraturanSpapController::class,
     //  ]);
 
-    Route::resource('anggota', AnggotaController::class)->parameters(['anggota' => 'anggota']);
+    // Route::resource('anggota', AnggotaController::class)->parameters(['anggota' => 'anggota']);
 
-    Route::prefix('workshop_penyetaraan')->group(function () {
-        Route::get('{kategori}/pdf/create', [WorkshopPenyetaraanController::class, 'createPdf'])->name('workshop_penyetaraan.createPdf');
-        Route::get('{kategori}/video/create', [WorkshopPenyetaraanController::class, 'createVideo'])->name('workshop_penyetaraan.createVideo');
-        Route::post('{kategori}/pdf', [WorkshopPenyetaraanController::class, 'storePdf'])->name('workshop_penyetaraan.storePdf');
-        Route::post('{kategori}/video', [WorkshopPenyetaraanController::class, 'storeVideo'])->name('workshop_penyetaraan.storeVideo');
-        Route::delete('pdf/{pdf}', [WorkshopPenyetaraanController::class, 'destroyPdf'])->name('workshop_penyetaraan.destroyPdf');
-        Route::delete('video/{video}', [WorkshopPenyetaraanController::class, 'destroyVideo'])->name('workshop_penyetaraan.destroyVideo');
-    });
+    // Route::prefix('workshop_penyetaraan')->group(function () {
+    //     Route::get('{kategori}/pdf/create', [WorkshopPenyetaraanController::class, 'createPdf'])->name('workshop_penyetaraan.createPdf');
+    //     Route::get('{kategori}/video/create', [WorkshopPenyetaraanController::class, 'createVideo'])->name('workshop_penyetaraan.createVideo');
+    //     Route::post('{kategori}/pdf', [WorkshopPenyetaraanController::class, 'storePdf'])->name('workshop_penyetaraan.storePdf');
+    //     Route::post('{kategori}/video', [WorkshopPenyetaraanController::class, 'storeVideo'])->name('workshop_penyetaraan.storeVideo');
+    //     Route::delete('pdf/{pdf}', [WorkshopPenyetaraanController::class, 'destroyPdf'])->name('workshop_penyetaraan.destroyPdf');
+    //     Route::delete('video/{video}', [WorkshopPenyetaraanController::class, 'destroyVideo'])->name('workshop_penyetaraan.destroyVideo');
+    // });
 
-    Route::get('anggota/import', [AnggotaController::class, 'showImportForm'])->name('anggota.import.form');
-    Route::post('anggota/import', [AnggotaController::class, 'import'])->name('anggota.import');
+    // Route::get('anggota/import', [AnggotaController::class, 'showImportForm'])->name('anggota.import.form');
+    // Route::post('anggota/import', [AnggotaController::class, 'import'])->name('anggota.import');
 });
 
 require __DIR__ . '/auth.php';

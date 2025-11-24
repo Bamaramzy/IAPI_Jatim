@@ -8,24 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class PelatihanController extends Controller
 {
-    public function index(Request $request)
-    {
-        $query = Pelatihan::query();
-        if ($request->filled('search')) {
-            $query->where('judul', 'like', '%' . $request->search . '%');
-        }
-        if ($request->filled('kategori')) {
-            $query->where('kategori', $request->kategori);
-        }
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-
-        $pelatihans = $query->orderBy('tanggal_mulai', 'asc')->paginate(10);
-        $kategoriList = Pelatihan::select('kategori')->distinct()->pluck('kategori');
-
-        return view('pelatihan.jadwal.index', compact('pelatihans', 'kategoriList'));
-    }
 
     public function indexVisitor()
     {
@@ -34,20 +16,6 @@ class PelatihanController extends Controller
             ->paginate(6);
 
         return view('pelatihan.jadwal.indexvisitor', compact('jadwals'));
-    }
-
-    public function welcome()
-    {
-        $jadwals = Pelatihan::where('status', 'publish')
-            ->orderBy('tanggal_mulai', 'asc')
-            ->get();
-
-        return view('welcome', compact('jadwals'));
-    }
-
-    public function create()
-    {
-        return view('pelatihan.jadwal.create');
     }
 
     public function store(Request $request)
@@ -72,11 +40,6 @@ class PelatihanController extends Controller
         Pelatihan::create($data);
 
         return redirect()->route('pelatihan.index')->with('success', 'Pelatihan berhasil ditambahkan.');
-    }
-
-    public function edit(Pelatihan $pelatihan)
-    {
-        return view('pelatihan.jadwal.edit', compact('pelatihan'));
     }
 
     public function update(Request $request, Pelatihan $pelatihan)

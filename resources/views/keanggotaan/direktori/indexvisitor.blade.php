@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="max-w-5xl mx-auto px-4 py-12 mt-2 bg-white shadow-md rounded-lg">
-        <h1 class="text-3xl font-bold mb-10 text-center">Daftar Direktori</h1>
+        <h1 class="text-3xl font-bold mb-10 text-center">Direktori</h1>
 
         <div class="space-y-16">
             @forelse ($direktoris as $direktori)
@@ -34,17 +34,13 @@
                     <div class="p-4">
                         <h2 class="font-bold text-lg text-gray-800">{{ $direktori->judul }}</h2>
                         @if ($direktori->deskripsi)
-                            <p class="text-sm text-gray-600">{{ $direktori->deskripsi }}</p>
+                            <p class="text-sm text-justify py-2 text-gray-600">{{ $direktori->deskripsi }}</p>
                         @endif
                     </div>
                 </div>
             @empty
                 <p class="text-center text-gray-600">Belum ada direktori tersedia.</p>
             @endforelse
-        </div>
-
-        <div class="mt-8">
-            {{ $direktoris->links('vendor.pagination.tailwind') }}
         </div>
     </section>
 @endsection

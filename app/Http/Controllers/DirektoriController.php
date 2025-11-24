@@ -19,11 +19,6 @@ class DirektoriController extends Controller
         return view('keanggotaan.direktori.index', compact('direktoris'));
     }
 
-    public function create()
-    {
-        return view('keanggotaan.direktori.create');
-    }
-
     public function store(Request $request)
     {
         $request->validate([

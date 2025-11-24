@@ -62,11 +62,6 @@ class AnggotaResource extends Resource
 
                 Forms\Components\TextInput::make('korwil')
                     ->label('Korwil'),
-
-                Forms\Components\TextInput::make('terdaftar_pada')
-                    ->label('Terdaftar Pada')
-                    ->maxLength(100)
-                    ->nullable(),
             ]);
     }
 
@@ -99,7 +94,6 @@ class AnggotaResource extends Resource
             ->filters([
                 Tables\Filters\SelectFilter::make('kategori')
                     ->options(Anggota::select('kategori')->distinct()->pluck('kategori', 'kategori')->toArray()),
-                Tables\Filters\SelectFilter::make('terdaftar_pada')->label('Terdaftar Pada'),
                 Tables\Filters\SelectFilter::make('status_id')
                     ->label('Status')
                     ->options([

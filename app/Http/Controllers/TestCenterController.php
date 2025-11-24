@@ -7,22 +7,6 @@ use Illuminate\Http\Request;
 
 class TestCenterController extends Controller
 {
-    public function index(Request $request)
-    {
-        $query = TestCenter::query();
-
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
-                $q->where('nama', 'like', "%{$search}%")
-                    ->orWhere('kode', 'like', "%{$search}%")
-                    ->orWhere('kota', 'like', "%{$search}%");
-            });
-        }
-
-        $testcenters = $query->latest()->paginate(10);
-        return view('sertifikasi.test_center.index', compact('testcenters'));
-    }
 
     public function indexVisitor(Request $request)
     {
@@ -42,11 +26,6 @@ class TestCenterController extends Controller
         return view('sertifikasi.test_center.indexvisitor', compact('testcenters'));
     }
 
-    public function create()
-    {
-        return view('sertifikasi.test_center.create');
-    }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -60,11 +39,6 @@ class TestCenterController extends Controller
         TestCenter::create($request->only(['kode', 'nama', 'alamat', 'kota', 'telepon']));
 
         return redirect()->route('test_center.index')->with('success', 'Test Center berhasil ditambahkan');
-    }
-
-    public function edit(TestCenter $test_center)
-    {
-        return view('sertifikasi.test_center.edit', compact('test_center'));
     }
 
     public function update(Request $request, TestCenter $test_center)

@@ -38,9 +38,5 @@
                 <p class="text-center text-gray-600">Belum ada Tata Cara tersedia.</p>
             @endforelse
         </div>
-
-        <div class="mt-8">
-            {{ $tatacaras->links('vendor.pagination.tailwind') }}
-        </div>
     </section>
 @endsection

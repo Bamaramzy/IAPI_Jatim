@@ -7,21 +7,11 @@ use Illuminate\Http\Request;
 
 class PplController extends Controller
 {
-    public function index()
-    {
-        $ppls = Ppl::latest()->paginate(10);
-
-        return view('pelatihan.ppl.index', compact('ppls'));
-    }
     public function indexVisitor()
     {
         $ppls = Ppl::where('status', 'publish')->latest()->paginate(10);
 
         return view('pelatihan.ppl.indexvisitor', compact('ppls'));
-    }
-    public function create()
-    {
-        return view('pelatihan.ppl.create');
     }
 
     public function store(Request $request)
@@ -70,7 +60,6 @@ class PplController extends Controller
         return redirect()->route('ppl.index')->with('success', 'PPL berhasil dihapus.');
     }
 
-    // 🔹 helper untuk ubah link google drive ke preview
     private function convertDriveLink($url)
     {
         if (!$url) return null;

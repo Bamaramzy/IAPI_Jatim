@@ -12,7 +12,7 @@ class HomeController extends Controller
         $informasis = Informasi::latest()->get();
         $jadwals = Pelatihan::where('status', 'publish')
             ->orderBy('tanggal_mulai', 'desc')
-            ->limit(6)
+            ->limit(5)
             ->get();
 
         return view('welcome', compact('informasis', 'jadwals'));

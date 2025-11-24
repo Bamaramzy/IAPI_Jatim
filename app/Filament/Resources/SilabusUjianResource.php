@@ -15,7 +15,7 @@ class SilabusUjianResource extends Resource
     protected static ?string $model = Silabus::class;
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
     protected static ?string $navigationGroup = 'Sertifikasi';
-    protected static ?string $navigationLabel = 'Silabus Ujian';
+    protected static ?string $navigationLabel = 'Silabus Ujian Modul dan Ilustrasi Soal';
     protected static ?string $slug = 'silabus-ujian';
     public static function getNavigationBadge(): ?string
     {
@@ -28,14 +28,29 @@ class SilabusUjianResource extends Resource
     public static function form(Form $form): Form
     {
         return $form->schema([
-            Forms\Components\TextInput::make('kategori_utama')->required(),
-            Forms\Components\TextInput::make('sub_kategori')->nullable(),
+            Forms\Components\Select::make('kategori_utama')
+                ->label('Kategori Utama')
+                ->options([
+                    'Tingkat Dasar' => 'Tingkat Dasar',
+                    'Tingkat Profesional' => 'Tingkat Profesional',
+                    'Penilaian Pengalaman Audit' => 'Penilaian Pengalaman Audit',
+                ])
+                ->required(),
+
+            Forms\Components\Select::make('sub_kategori')
+                ->label('Sub Kategori')
+                ->options([
+                    'Silabus' => 'Silabus',
+                    'Modul Soal' => 'Modul Soal',
+                    'Ilustrasi Soal' => 'Ilustrasi Soal',
+                ])
+                ->required(),
             Forms\Components\TextInput::make('judul')->required(),
             Forms\Components\Textarea::make('deskripsi')->rows(3)->nullable(),
 
             Forms\Components\FileUpload::make('pdf_file')
                 ->label('File PDF')
-                ->directory('uploads/silabus/pdf')
+                ->directory('silabus/pdf')
                 ->acceptedFileTypes(['application/pdf'])
                 ->nullable(),
 
@@ -50,9 +65,7 @@ class SilabusUjianResource extends Resource
                 ->directory('uploads/silabus/gambar')
                 ->image()
                 ->nullable(),
-
             Forms\Components\TextInput::make('gambar_link')->label('Link Gambar')->url()->nullable(),
-            Forms\Components\TextInput::make('ilustrasi_link')->label('Link Ilustrasi Soal')->url()->nullable(),
         ]);
     }
 

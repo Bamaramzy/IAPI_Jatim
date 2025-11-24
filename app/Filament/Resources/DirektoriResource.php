@@ -52,7 +52,7 @@ class DirektoriResource extends Resource
                 ->image(),
 
             Forms\Components\Toggle::make('status')
-                ->label('Status Publikasi')
+                ->label('Publish?')
                 ->onIcon('heroicon-o-check')
                 ->offIcon('heroicon-o-x-mark')
                 ->onColor('success')

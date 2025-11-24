@@ -7,13 +7,6 @@ use Illuminate\Http\Request;
 
 class WaiverPpakController extends Controller
 {
-    public function index()
-    {
-        $waivers = WaiverPpak::latest()->paginate(10);
-
-        return view('sertifikasi.waiver_ppak.index', compact('waivers'));
-    }
-
     public function indexVisitor(Request $request)
     {
         $sort      = $request->get('sort', 'id');
@@ -29,11 +22,6 @@ class WaiverPpakController extends Controller
         return view('sertifikasi.waiver_ppak.indexvisitor', compact('waivers'));
     }
 
-    public function create()
-    {
-        return view('sertifikasi.waiver_ppak.create');
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -47,11 +35,6 @@ class WaiverPpakController extends Controller
         return redirect()
             ->route('waiver_ppak.index')
             ->with('success', 'Data Waiver berhasil ditambahkan');
-    }
-
-    public function edit(WaiverPpak $waiver_ppak)
-    {
-        return view('sertifikasi.waiver_ppak.edit', compact('waiver_ppak'));
     }
 
     public function update(Request $request, WaiverPpak $waiver_ppak)

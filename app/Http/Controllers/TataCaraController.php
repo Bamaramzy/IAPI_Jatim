@@ -8,16 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class TataCaraController extends Controller
 {
-    public function index()
-    {
-        $tatacaras = TataCara::latest()->paginate(10);
-        return view('keanggotaan.tatacara.index', compact('tatacaras'));
-    }
-
-    public function create()
-    {
-        return view('keanggotaan.tatacara.create');
-    }
 
     public function store(Request $request)
     {
@@ -42,11 +32,6 @@ class TataCaraController extends Controller
         TataCara::create($data);
 
         return redirect()->route('tatacara.index')->with('success', 'Tata Cara berhasil ditambahkan');
-    }
-
-    public function edit(TataCara $tatacara)
-    {
-        return view('keanggotaan.tatacara.edit', compact('tatacara'));
     }
 
     public function update(Request $request, TataCara $tatacara)

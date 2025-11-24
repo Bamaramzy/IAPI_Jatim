@@ -8,16 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class AdArtController extends Controller
 {
-    public function index()
-    {
-        $adarts = AdArt::latest()->paginate(10);
-        return view('keanggotaan.adart.index', compact('adarts'));
-    }
-
-    public function create()
-    {
-        return view('keanggotaan.adart.create');
-    }
 
     public function store(Request $request)
     {

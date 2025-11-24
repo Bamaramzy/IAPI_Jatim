@@ -8,22 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class PeraturanProfesiController extends Controller
 {
-    public function index()
-    {
-        $peraturans = PeraturanProfesi::latest()->paginate(10);
-
-        return view('peraturan.profesi.index', compact('peraturans'));
-    }
 
     public function indexVisitor()
     {
         $peraturans = PeraturanProfesi::orderBy('created_at', 'desc')->get();
         return view('peraturan.profesi.indexvisitor', compact('peraturans'));
-    }
-
-    public function create()
-    {
-        return view('peraturan.profesi.create');
     }
 
     public function store(Request $request)
@@ -42,11 +31,6 @@ class PeraturanProfesiController extends Controller
         PeraturanProfesi::create($data);
 
         return redirect()->route('peraturan_profesi.index')->with('success', 'Peraturan berhasil ditambahkan.');
-    }
-
-    public function edit(PeraturanProfesi $peraturanProfesi)
-    {
-        return view('peraturan.profesi.edit', compact('peraturanProfesi'));
     }
 
     public function update(Request $request, PeraturanProfesi $peraturanProfesi)

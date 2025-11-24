@@ -8,21 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class PeraturanSpapController extends Controller
 {
-    public function index()
-    {
-        $peraturans = PeraturanSpap::latest()->paginate(10);
-        return view('peraturan.standar_profesional.index', compact('peraturans'));
-    }
 
     public function indexVisitor()
     {
         $peraturans = PeraturanSpap::orderBy('created_at', 'asc')->get();
         return view('peraturan.standar_profesional.indexvisitor', compact('peraturans'));
-    }
-
-    public function create()
-    {
-        return view('peraturan.standar_profesional.create');
     }
 
     public function store(Request $request)
@@ -40,7 +30,6 @@ class PeraturanSpapController extends Controller
             'pdf_3_url'   => 'nullable|url',
         ]);
 
-        // Upload thumbnail jika ada
         if ($request->hasFile('thumbnail')) {
             $data['thumbnail'] = $request->file('thumbnail')->store('spap/thumbnails', 'public');
         }
@@ -48,11 +37,6 @@ class PeraturanSpapController extends Controller
         PeraturanSpap::create($data);
 
         return redirect()->route('peraturan_spap.index')->with('success', 'Data SPAP berhasil ditambahkan.');
-    }
-
-    public function edit(PeraturanSpap $peraturanSpap)
-    {
-        return view('peraturan.standar_profesional.edit', compact('peraturanSpap'));
     }
 
     public function update(Request $request, PeraturanSpap $peraturanSpap)

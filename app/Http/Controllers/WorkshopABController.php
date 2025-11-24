@@ -8,21 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class WorkshopABController extends Controller
 {
-    public function index()
-    {
-        $workshops = WorkshopAB::orderBy('created_at', 'asc')->get();
-        return view('sertifikasi.workshop_ab.index', compact('workshops'));
-    }
 
     public function indexVisitor()
     {
         $workshops = WorkshopAB::orderBy('created_at', 'asc')->get();
         return view('sertifikasi.workshop_ab.indexvisitor', compact('workshops'));
-    }
-
-    public function create()
-    {
-        return view('sertifikasi.workshop_ab.create');
     }
 
     public function store(Request $request)
@@ -42,11 +32,6 @@ class WorkshopABController extends Controller
         return redirect()
             ->route('workshop_ab.index')
             ->with('success', 'Data berhasil ditambahkan.');
-    }
-
-    public function edit(WorkshopAB $workshop_ab)
-    {
-        return view('sertifikasi.workshop_ab.edit', compact('workshop_ab'));
     }
 
     public function update(Request $request, WorkshopAB $workshop_ab)

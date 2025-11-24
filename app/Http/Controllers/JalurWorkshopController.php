@@ -19,7 +19,7 @@ class JalurWorkshopController extends Controller
 
         $selectedKategori = $request->get('kategori', 'INFORMASI');
 
-        $data = [
+        $dataByKategori = [
             'INFORMASI' => [
                 'gambar' => '',
                 'konten' => '
@@ -504,8 +504,12 @@ class JalurWorkshopController extends Controller
             ],
         ];
 
-        $content = $data[$selectedKategori] ?? $data['INFORMASI'];
-
-        return view('sertifikasi.ujian.jalur_workshop.jalur_workshop', compact('kategoriList', 'selectedKategori', 'content'));
+        $content = $dataByKategori[$selectedKategori] ?? null;
+        return view('sertifikasi.ujian.jalur_workshop.jalur_workshop', [
+            'kategoriList' => $kategoriList,
+            'dataByKategori' => $dataByKategori,
+            'selectedKategori' => $selectedKategori,
+            'content' => $content,
+        ]);
     }
 }

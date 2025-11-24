@@ -2,7 +2,7 @@
 
 @section('content')
     <section class="max-w-5xl mx-auto px-4 py-12 mt-2 bg-white shadow-md rounded-lg">
-        <h1 class="text-3xl font-bold mb-10 text-center">Daftar AD/ART</h1>
+        <h1 class="text-3xl font-bold mb-10 text-center">AD/ART</h1>
 
         <div class="space-y-16">
             @forelse ($adarts as $adart)
@@ -35,10 +35,6 @@
             @empty
                 <p class="text-center text-gray-600">Belum ada AD/ART tersedia.</p>
             @endforelse
-        </div>
-
-        <div class="mt-8">
-            {{ $adarts->links('vendor.pagination.tailwind') }}
         </div>
     </section>
 @endsection

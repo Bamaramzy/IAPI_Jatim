@@ -7,23 +7,12 @@ use Illuminate\Http\Request;
 
 class BrevetCController extends Controller
 {
-    public function index()
-    {
-        $brevets = BrevetC::latest()->paginate(10);
-
-        return view('pelatihan.brevet_perpajakan.brevet_c.index', compact('brevets'));
-    }
 
     public function indexVisitor()
     {
         $brevets = BrevetC::where('status', 'publish')->latest()->paginate(10);
 
         return view('pelatihan.brevet_perpajakan.brevet_c.indexvisitor', compact('brevets'));
-    }
-
-    public function create()
-    {
-        return view('pelatihan.brevet_perpajakan.brevet_c.create');
     }
 
     public function store(Request $request)

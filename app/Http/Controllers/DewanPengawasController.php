@@ -8,17 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class DewanPengawasController extends Controller
 {
-    public function index()
-    {
-        $pengawas = DewanPengawas::all();
-        return view('dewan_pengawas.index', compact('pengawas'));
-    }
-
-    public function create()
-    {
-        return view('dewan_pengawas.create');
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -35,11 +24,6 @@ class DewanPengawasController extends Controller
 
         return redirect()->route('dewan_pengawas.index')
             ->with('success', 'Data berhasil ditambahkan.');
-    }
-
-    public function edit(DewanPengawas $dewan_pengawa)
-    {
-        return view('dewan_pengawas.edit', ['dewan_pengawas' => $dewan_pengawa]);
     }
 
     public function update(Request $request, DewanPengawas $dewan_pengawa)

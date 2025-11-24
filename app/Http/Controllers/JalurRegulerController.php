@@ -16,12 +16,18 @@ class JalurRegulerController extends Controller
 
     public function indexVisitor(Request $request)
     {
-        $query = JalurReguler::query();
-        $kategori = $request->get('kategori', 'Informasi Umum');
-        $query->where('kategori', $kategori);
-        $jalurRegulers = $query->latest()->paginate(10);
-
-        return view('sertifikasi.ujian.jalur_reguler.indexvisitor', compact('jalurRegulers', 'kategori'));
+        $kategoriList = [
+            'Informasi Umum',
+            'Tingkat Dasar',
+            'Tingkat Profesional',
+            'Penilaian Pengalaman Audit',
+        ];
+        $jalurRegulers = JalurReguler::all();
+        return view('sertifikasi.ujian.jalur_reguler.indexvisitor', [
+            'kategoriList' => $kategoriList,
+            'jalurRegulers' => $jalurRegulers,
+            'selectedKategori' => $kategoriList[0],
+        ]);
     }
 
     public function create()

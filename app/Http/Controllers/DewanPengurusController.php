@@ -8,16 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class DewanPengurusController extends Controller
 {
-    public function index()
-    {
-        $pengurus = DewanPengurus::all();
-        return view('dewan_pengurus.index', compact('pengurus'));
-    }
-
-    public function create()
-    {
-        return view('dewan_pengurus.create');
-    }
 
     public function store(Request $request)
     {
@@ -34,11 +24,6 @@ class DewanPengurusController extends Controller
         DewanPengurus::create($validated);
 
         return redirect()->route('dewan_pengurus.index')->with('success', 'Data berhasil ditambahkan.');
-    }
-
-    public function edit(DewanPengurus $dewan_penguru)
-    {
-        return view('dewan_pengurus.edit', ['dewan_pengurus' => $dewan_penguru]);
     }
 
     public function update(Request $request, DewanPengurus $dewan_penguru)

@@ -10,15 +10,6 @@ use Illuminate\Support\Facades\Storage;
 
 class WorkshopPenyetaraanController extends Controller
 {
-    public function index()
-    {
-        $kategoris = Kategori::with(['pdfs', 'videos'])
-            ->orderBy('created_at', 'asc')
-            ->get();
-
-        return view('sertifikasi.ujian.tutorial.workshop_penyetaraan.index', compact('kategoris'));
-    }
-
     public function indexVisitor(Request $request)
     {
         $kategoriList = Kategori::orderBy('nama_kategori')->get();
@@ -46,12 +37,6 @@ class WorkshopPenyetaraanController extends Controller
         ));
     }
 
-    public function create()
-    {
-        $kategoris = Kategori::all();
-        return view('sertifikasi.ujian.tutorial.workshop_penyetaraan.create', compact('kategoris'));
-    }
-
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -70,13 +55,13 @@ class WorkshopPenyetaraanController extends Controller
             'thumbnail_url'      => 'nullable|image|max:2048',
         ]);
 
-        // ✅ Buat / temukan kategori
+        // Buat / temukan kategori
         $kategori = $request->filled('kategori_id')
             ? Kategori::find($request->kategori_id)
             : Kategori::create(['nama_kategori' => $request->nama_kategori ?? $request->judul]);
 
         /**
-         * ✅ Simpan PDF
+         * Simpan PDF
          */
         if ($request->hasFile('file_path') || $request->filled('link_url')) {
             $filePath = $request->hasFile('file_path')
@@ -97,7 +82,7 @@ class WorkshopPenyetaraanController extends Controller
         }
 
         /**
-         * ✅ Simpan Video
+         * Simpan Video
          */
         if ($request->hasFile('video_file') || $request->filled('video_url')) {
             $videoPath = $request->hasFile('video_file')
@@ -118,21 +103,6 @@ class WorkshopPenyetaraanController extends Controller
 
         return redirect()->route('workshop_penyetaraan.index')
             ->with('success', 'Workshop Penyetaraan berhasil ditambahkan.');
-    }
-
-    public function edit($id, Request $request)
-    {
-        $type = $request->query('type', 'kategori');
-        $kategoris = Kategori::all();
-
-        $workshop = match ($type) {
-            'kategori' => Kategori::findOrFail($id),
-            'pdf' => Pdf::findOrFail($id),
-            'video' => Video::findOrFail($id),
-            default => null,
-        };
-
-        return view('sertifikasi.ujian.tutorial.workshop_penyetaraan.edit', compact('workshop', 'kategoris', 'type'));
     }
 
     public function update(Request $request, $id)

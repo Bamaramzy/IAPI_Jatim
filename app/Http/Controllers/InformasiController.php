@@ -8,21 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class InformasiController extends Controller
 {
-    public function index()
-    {
-        $informasis = Informasi::latest()->get();
-        return view('informasi.index', compact('informasis'));
-    }
 
     public function welcome()
     {
         $informasis = Informasi::latest()->get();
         return view('welcome', compact('informasis'));
-    }
-
-    public function create()
-    {
-        return view('informasi.create');
     }
 
     public function store(Request $request)
@@ -44,11 +34,6 @@ class InformasiController extends Controller
         Informasi::create($validated);
 
         return redirect()->route('informasi.index')->with('success', 'Informasi berhasil ditambahkan!');
-    }
-
-    public function edit(Informasi $informasi)
-    {
-        return view('informasi.edit', compact('informasi'));
     }
 
     public function update(Request $request, Informasi $informasi)

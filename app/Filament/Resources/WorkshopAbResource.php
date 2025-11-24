@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\WorkshopAbResource\Pages;
-use App\Models\WorkshopAb;
+use App\Models\WorkshopAB;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\Resource;
@@ -12,18 +12,18 @@ use Filament\Tables\Table;
 
 class WorkshopAbResource extends Resource
 {
-    protected static ?string $model = WorkshopAb::class;
+    protected static ?string $model = WorkshopAB::class;
     protected static ?string $navigationIcon = 'heroicon-o-document-arrow-down';
     protected static ?string $navigationGroup = 'Sertifikasi';
     protected static ?string $navigationLabel = 'Workshop AB';
     protected static ?string $slug = 'workshop-ab';
     public static function getNavigationBadge(): ?string
     {
-        return (string) WorkshopAb::count();
+        return (string) WorkshopAB::count();
     }
     public static function getNavigationBadgeColor(): ?string
     {
-        return WorkshopAb::count() > 0 ? 'success' : 'danger';
+        return WorkshopAB::count() > 0 ? 'success' : 'danger';
     }
     public static function form(Form $form): Form
     {

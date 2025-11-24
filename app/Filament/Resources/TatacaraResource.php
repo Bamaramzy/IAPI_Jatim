@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Tatacara;
+use App\Models\TataCara;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\Resource;
@@ -12,7 +12,7 @@ use App\Filament\Resources\TatacaraResource\Pages;
 
 class TatacaraResource extends Resource
 {
-    protected static ?string $model = Tatacara::class;
+    protected static ?string $model = TataCara::class;
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
     protected static ?string $navigationGroup = 'Keanggotaan';
     protected static ?string $navigationLabel = 'Tata Cara';
@@ -20,11 +20,11 @@ class TatacaraResource extends Resource
     protected static ?string $slug = 'tatacara';
     public static function getNavigationBadge(): ?string
     {
-        return (string) Tatacara::count();
+        return (string) TataCara::count();
     }
     public static function getNavigationBadgeColor(): ?string
     {
-        return Tatacara::count() > 0 ? 'success' : 'danger';
+        return TataCara::count() > 0 ? 'success' : 'danger';
     }
     public static function form(Form $form): Form
     {

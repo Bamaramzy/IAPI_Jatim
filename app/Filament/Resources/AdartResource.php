@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources;
 
-use App\Models\Adart;
+use App\Models\AdArt;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\Resource;
@@ -12,7 +12,7 @@ use App\Filament\Resources\AdartResource\Pages;
 
 class AdartResource extends Resource
 {
-    protected static ?string $model = Adart::class;
+    protected static ?string $model = AdArt::class;
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static ?string $navigationGroup = 'Keanggotaan';
     protected static ?string $navigationLabel = 'AD/ART';
@@ -20,11 +20,11 @@ class AdartResource extends Resource
     protected static ?string $slug = 'adart';
     public static function getNavigationBadge(): ?string
     {
-        return (string) Adart::count();
+        return (string) AdArt::count();
     }
     public static function getNavigationBadgeColor(): ?string
     {
-        return Adart::count() > 0 ? 'success' : 'danger';
+        return AdArt::count() > 0 ? 'success' : 'danger';
     }
     public static function form(Form $form): Form
     {

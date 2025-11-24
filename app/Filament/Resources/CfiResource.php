@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\CfiResource\Pages;
-use App\Models\Cfi;
+use App\Models\CFI;
 use Filament\Forms;
 use Filament\Tables;
 use Filament\Resources\Resource;
@@ -12,7 +12,7 @@ use Filament\Forms\Form;
 
 class CfiResource extends Resource
 {
-    protected static ?string $model = Cfi::class;
+    protected static ?string $model = CFI::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
     protected static ?string $navigationGroup = 'Sertifikasi';
@@ -20,11 +20,11 @@ class CfiResource extends Resource
     protected static ?string $slug = 'cfi';
     public static function getNavigationBadge(): ?string
     {
-        return (string) Cfi::count();
+        return (string) CFI::count();
     }
     public static function getNavigationBadgeColor(): ?string
     {
-        return Cfi::count() > 0 ? 'success' : 'danger';
+        return CFI::count() > 0 ? 'success' : 'danger';
     }
     public static function form(Form $form): Form
     {

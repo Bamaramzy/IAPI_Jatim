@@ -12,6 +12,7 @@
                 sebagai profesi yang relevan dan berkelanjutan sekarang dan di masa depan.
             </p>
         </section>
+
         <section>
             <h2 class="text-2xl font-semibold text-gray-800 mb-4">Misi</h2>
             <ul class="list-disc list-inside space-y-3 text-gray-700 leading-relaxed text-justify">

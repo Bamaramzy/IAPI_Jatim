@@ -71,7 +71,7 @@
                                         <span class="text-gray-500 text-sm">Belum ada brosur</span>
                                     </div>
                                 @endif
-                                <div class="p-4 flex-1 flex flex-col justify-between">
+                                <div class="p-4 flex-1 flex flex-col justify-between bg-white">
                                     <div>
                                         <h3 class="text-lg font-bold text-[#0C2C77] mb-1 line-clamp-2">
                                             {{ $jadwal->judul }} [{{ $jadwal->kategori }}]
@@ -142,7 +142,7 @@
                         <a href="{{ $info->link }}" target="_blank"
                             class="min-w-[320px] sm:min-w-[360px] lg:min-w-[380px] snap-center block text-center">
                             <div
-                                class="rounded-xl overflow-hidden border border-gray-300
+                                class="rounded-xl overflow-hidden border border-gray-300 bg-white
                             shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                                 <img src="{{ asset('storage/' . $info->gambar) }}" alt="{{ $info->judul }}"
                                     class="w-full h-56 object-cover object-top" loading="lazy">

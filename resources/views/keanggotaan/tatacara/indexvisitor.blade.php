@@ -22,7 +22,7 @@
                             <iframe src="{{ $pdfUrl }}" class="w-full h-[850px]" frameborder="0"></iframe>
                         @elseif ($tatacara->cover)
                             <img src="{{ asset('storage/' . $tatacara->cover) }}" alt="Cover {{ $tatacara->judul }}"
-                                class="w-full h-[850px] object-cover">
+                                class="w-full h-[850px] object-cover" loading="lazy">
                         @else
                             <div class="w-full h-[850px] bg-gray-200 flex items-center justify-center text-gray-500">
                                 📄 PDF tidak tersedia

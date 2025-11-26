@@ -9,7 +9,7 @@
             <div class="flex flex-col items-center gap-3 mb-8">
                 @if ($brevet->brosur)
                     <img src="{{ asset('storage/' . $brevet->brosur) }}" alt="{{ $brevet->judul }}"
-                        class="w-[550px] max-h-[800px] object-contain cursor-pointer"
+                        class="w-[550px] max-h-[800px] object-contain cursor-pointer" loading="lazy"
                         @click="imgSrc='{{ asset('storage/' . $brevet->brosur) }}'; show = true">
                 @else
                     <div class="w-[550px] h-[800px] bg-gray-200 flex items-center justify-center text-gray-500">
@@ -41,7 +41,7 @@
                     </svg>
                 </button>
                 <img :src="imgSrc" alt="Preview Brosur"
-                    class="max-h-[90vh] max-w-[90vw] object-contain rounded shadow-lg">
+                    class="max-h-[90vh] max-w-[90vw] object-contain rounded shadow-lg" loading="lazy">
             </div>
         </div>
     </section>

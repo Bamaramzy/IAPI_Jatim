@@ -27,7 +27,7 @@
                         @if ($item->thumbnail)
                             <img src="{{ asset('storage/' . $item->thumbnail) }}" alt="{{ $item->judul }}"
                                 class="w-full h-40 sm:h-48 object-cover cursor-pointer hover:scale-105 transition"
-                                @click="show = true; imgSrc='{{ asset('storage/' . $item->thumbnail) }}'">
+                                loading="lazy" @click="show = true; imgSrc='{{ asset('storage/' . $item->thumbnail) }}'">
                         @endif
                         <div class="p-4 sm:p-6 space-y-4">
                             <h3 class="text-lg sm:text-xl font-semibold text-gray-800 line-clamp-2">
@@ -84,7 +84,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <img :src="imgSrc" alt="Popup Image" class="max-h-[90vh] max-w-[90vw] rounded shadow-lg">
+                <img :src="imgSrc" alt="Popup Image" class="max-h-[90vh] max-w-[90vw] rounded shadow-lg"
+                    loading="lazy">
             </div>
         </div>
 

@@ -23,7 +23,7 @@
                             <iframe src="{{ $pdfUrl }}" class="w-full h-[850px]" frameborder="0"></iframe>
                         @elseif ($direktori->cover)
                             <img src="{{ asset('storage/' . $direktori->cover) }}" alt="Cover {{ $direktori->judul }}"
-                                class="w-full h-[850px] object-cover">
+                                class="w-full h-[850px] object-cover" loading="lazy">
                         @else
                             <div class="w-full h-[850px] bg-gray-200 flex items-center justify-center text-gray-500">
                                 📄 File tidak tersedia

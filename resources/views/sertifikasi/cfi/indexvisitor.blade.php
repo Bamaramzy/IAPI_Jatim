@@ -9,7 +9,7 @@
                 @if ($cfi->gambar)
                     <img src="{{ asset('storage/' . $cfi->gambar) }}" alt="Poster CFI"
                         class="w-[500px] max-h-[600px] object-contain cursor-pointer hover:scale-105 transition"
-                        @click="show = true; imgSrc='{{ asset('storage/' . $cfi->gambar) }}'">
+                        loading="lazy" @click="show = true; imgSrc='{{ asset('storage/' . $cfi->gambar) }}'">
                 @endif
             @empty
                 <p class="text-center text-gray-500">

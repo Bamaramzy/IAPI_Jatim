@@ -106,9 +106,9 @@
 
                                             @if ($s->gambar)
                                                 <img src="{{ Storage::url($s->gambar) }}" alt="Modul {{ $s->judul }}"
-                                                    class="w-full h-90 object-cover rounded shadow">
+                                                    class="w-full h-90 object-cover rounded shadow" loading="lazy">
                                             @elseif($s->gambar_link)
-                                                <span class="text-blue-600 hover:underline">Modul</span>
+                                                <span class="text-blue-600 hover:underline" loading="lazy">Modul</span>
                                             @endif
                                         </div>
                                     </a>

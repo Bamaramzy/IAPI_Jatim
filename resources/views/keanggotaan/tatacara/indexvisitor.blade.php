@@ -19,7 +19,7 @@
                 <div class="bg-white rounded-lg shadow overflow-hidden border p-6">
                     <div class="w-full bg-gray-100 rounded-lg overflow-hidden">
                         @if ($pdfUrl)
-                            <iframe src="{{ $pdfUrl }}" class="w-full h-[850px]" frameborder="0"></iframe>
+                            <iframe src="{{ $pdfUrl }}" class="w-full h-[850px]" frameborder="0" loading="lazy"></iframe>
                         @elseif ($tatacara->cover)
                             <img src="{{ asset('storage/' . $tatacara->cover) }}" alt="Cover {{ $tatacara->judul }}"
                                 class="w-full h-[850px] object-cover" loading="lazy">

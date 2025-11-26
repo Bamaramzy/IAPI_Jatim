@@ -10,7 +10,7 @@
 
                     <div class="w-full bg-black rounded-lg overflow-hidden">
                         @if ($ppl->video_url)
-                            <iframe src="{{ $ppl->video_url }}" class="w-full h-[420px]" frameborder="0"
+                            <iframe src="{{ $ppl->video_url }}" class="w-full h-[420px]" frameborder="0" loading="lazy"
                                 allowfullscreen></iframe>
                         @else
                             <div class="w-full h-[420px] bg-gray-200 flex items-center justify-center text-gray-500">
@@ -22,7 +22,8 @@
 
                     <div class="w-full bg-gray-100 rounded-lg overflow-hidden">
                         @if ($ppl->pdf_url)
-                            <iframe src="{{ $ppl->pdf_url }}" class="w-full h-[850px]" frameborder="0"></iframe>
+                            <iframe src="{{ $ppl->pdf_url }}" class="w-full h-[850px]" frameborder="0"
+                                loading="lazy"></iframe>
                         @else
                             <div class="w-full h-[850px] bg-gray-200 flex items-center justify-center text-gray-500">
                                 PDF tidak tersedia

@@ -9,7 +9,7 @@
                 <div class="flex flex-col items-center gap-6 mb-12">
                     <div class="w-full bg-gray-100 rounded-lg overflow-hidden">
                         @if ($workshop->pdf)
-                            <iframe src="{{ asset('storage/' . $workshop->pdf) }}" class="w-full h-[850px]"
+                            <iframe src="{{ asset('storage/' . $workshop->pdf) }}" class="w-full h-[850px]" loading="lazy"
                                 frameborder="0"></iframe>
                         @elseif($workshop->link_pdf)
                             @php
@@ -25,7 +25,8 @@
                                 <img src="{{ $link }}" alt="{{ $workshop->judul ?? 'Workshop' }}"
                                     class="w-full h-[850px] object-contain bg-white">
                             @else
-                                <iframe src="{{ $link }}" class="w-full h-[850px]" frameborder="0"></iframe>
+                                <iframe src="{{ $link }}" class="w-full h-[850px]" loading="lazy"
+                                    frameborder="0"></iframe>
                             @endif
                         @else
                             <div class="w-full h-[850px] bg-gray-200 flex items-center justify-center text-gray-500">

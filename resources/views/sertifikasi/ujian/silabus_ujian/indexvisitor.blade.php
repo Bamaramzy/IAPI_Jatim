@@ -100,7 +100,7 @@
                                             @if ($pdfUrl)
                                                 <div class="mt-2">
                                                     <iframe src="{{ $pdfUrl }}" class="w-full h-96 border rounded"
-                                                        frameborder="0"></iframe>
+                                                        loading="lazy" frameborder="0"></iframe>
                                                 </div>
                                             @endif
 

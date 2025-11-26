@@ -34,7 +34,8 @@
                             </p>
                             <template x-if="item.file.endsWith('.pdf')">
                                 <iframe :src="'/storage/' + item.file"
-                                    class="w-full h-[300px] sm:h-[400px] md:h-[500px] rounded border bg-gray-100"></iframe>
+                                    class="w-full h-[300px] sm:h-[400px] md:h-[500px] rounded border bg-gray-100"
+                                    loading="lazy"></iframe>
                             </template>
                             <template x-if="['jpg','jpeg','png','gif','webp'].includes(item.file.split('.').pop())">
                                 <img :src="'/storage/' + item.file"
@@ -53,7 +54,8 @@
                         <div class="mt-6 space-y-2">
                             <p class="text-sm font-semibold text-gray-600">Link Terkait</p>
                             <iframe :src="item.link"
-                                class="w-full h-[300px] sm:h-[400px] md:h-[500px] rounded border bg-gray-100">
+                                class="w-full h-[300px] sm:h-[400px] md:h-[500px] rounded border bg-gray-100"
+                                loading="lazy">
                             </iframe>
                         </div>
                     </template>

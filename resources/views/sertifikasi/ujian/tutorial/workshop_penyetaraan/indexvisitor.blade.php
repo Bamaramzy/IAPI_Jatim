@@ -41,7 +41,7 @@
                                                     1] + '/preview' :
                                                 pdf.link_url) :
                                             ('/storage/' + pdf.file_path)"
-                                        class="w-full aspect-[4/3] border-0"></iframe>
+                                        class="w-full aspect-[4/3] border-0" loading="lazy"></iframe>
 
                                     <div class="bg-[#071225] text-white text-center py-3 text-sm font-semibold"
                                         x-text="pdf.judul ?? 'Tanpa Judul'">
@@ -77,7 +77,7 @@
                             ">
                                 <iframe
                                     :src="'https://www.youtube.com/embed/' + video.video_url.match(/([A-Za-z0-9_-]+)$/)[1]"
-                                    class="w-full aspect-[16/9] border-0" allowfullscreen></iframe>
+                                    class="w-full aspect-[16/9] border-0" loading="lazy" allowfullscreen></iframe>
                             </template>
                             <template
                                 x-if="!(

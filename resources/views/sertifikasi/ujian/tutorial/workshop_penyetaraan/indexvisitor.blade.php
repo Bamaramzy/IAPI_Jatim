@@ -43,7 +43,7 @@
                                             ('/storage/' + pdf.file_path)"
                                         class="w-full aspect-[4/3] border-0"></iframe>
 
-                                    <div class="bg-blue-900 text-white text-center py-3 text-sm font-semibold"
+                                    <div class="bg-[#071225] text-white text-center py-3 text-sm font-semibold"
                                         x-text="pdf.judul ?? 'Tanpa Judul'">
                                     </div>
 
@@ -88,7 +88,7 @@
                                         type="video/mp4">
                                 </video>
                             </template>
-                            <div class="bg-blue-900 text-white text-center py-3 text-sm font-semibold"
+                            <div class="bg-[#071225] text-white text-center py-3 text-sm font-semibold"
                                 x-text="video.judul ?? 'Tanpa Judul'">
                             </div>
                         </div>

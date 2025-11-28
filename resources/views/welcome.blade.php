@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>IAPI - Korda Jawa Timur</title>
     <!-- Favicon -->
-    <link rel="icon" type="image/webp" href="{{ asset('favicon.webp') }}">
-    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
-    <link rel="icon" href="{{ asset('favicon.ico') }}">
+    <link rel="icon" type="image/webp" href="{{ asset('favicon1.webp') }}">
+    <link rel="icon" type="image/png" href="{{ asset('favicon1.png') }}">
+    <link rel="icon" href="{{ asset('favicon1.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "url": "https://ramzet.dev",
-  "logo": "https://ramzet.dev/favicon.webp",
-}
-</script>
+    {
+    "@"context": "https://schema.org",
+    "@type": "Organization",
+    "url": "https://ramzet.dev",
+    "logo": "https://ramzet.dev/favicon1.webp"
+    }
+    </script>
 </head>
 
 <body class="font-sans antialiased bg-gradient-to-b from-gray-100 via-gray-50 to-white text-black">

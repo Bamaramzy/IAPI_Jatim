@@ -5,19 +5,73 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>IAPI - Korda Jawa Timur</title>
+    <meta name="description"
+        content="IAPI Korda Jawa Timur: Pelatihan, sertifikasi, informasi akuntan publik Indonesia." />
+    <link rel="canonical" href="{{ url()->current() }}" />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="IAPI Korda Jawa Timur" />
+    <meta property="og:description" content="Pelatihan, sertifikasi, dan informasi akuntan publik di Jawa Timur." />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:image" content="{{ asset('images/kiriiapi.webp') }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="IAPI Korda Jawa Timur" />
+    <meta name="twitter:description" content="Pelatihan, sertifikasi, dan informasi akuntan publik di Jawa Timur." />
+    <meta name="twitter:image" content="{{ asset('images/kiriiapi.webp') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <!-- Favicon -->
     <link rel="icon" type="image/webp" href="{{ asset('favicon1.webp') }}">
     <link rel="icon" type="image/png" href="{{ asset('favicon1.png') }}">
     <link rel="icon" href="{{ asset('favicon1.ico') }}">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script type="application/ld+json">
-    {
-    "@"context": "https://schema.org",
-    "@type": "Organization",
-    "url": "https://ramzet.dev",
-    "logo": "https://ramzet.dev/favicon1.webp"
-    }
-    </script>
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "IAPI Korda Jawa Timur",
+            "url": "{{ url('/') }}",
+            "logo": "{{ asset('favicon1.webp') }}",
+            "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+62-31-5913334",
+                "contactType": "customer service",
+                "areaServed": "ID",
+                "availableLanguage": ["id"]
+            },
+            "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Gedung Graha Widya Bhakti Stiesia, Jl. Menur Pumpungan No.30",
+                "addressLocality": "Surabaya",
+                "addressRegion": "Jawa Timur",
+                "postalCode": "60118",
+                "addressCountry": "ID"
+            }
+        }
+        </script>
+    @if (isset($jadwals) && count($jadwals))
+        <script type="application/ld+json">
+        {!! json_encode($jadwals->map(function($j){
+                return [
+                        '@context' => 'https://schema.org',
+                        '@type' => 'Event',
+                        'name' => $j->judul,
+                        'startDate' => $j->tanggal_mulai->toIso8601String(),
+                        'endDate' => $j->tanggal_selesai ? $j->tanggal_selesai->toIso8601String() : $j->tanggal_mulai->toIso8601String(),
+                        'eventAttendanceMode' => 'https://schema.org/OfflineEventAttendanceMode',
+                        'eventStatus' => 'https://schema.org/EventScheduled',
+                        'location' => [
+                                '@type' => 'Place',
+                                'name' => $j->lokasi,
+                                'address' => $j->lokasi
+                        ],
+                        'image' => $j->brosur ? asset('storage/'.$j->brosur) : asset('images/kiriiapi.webp'),
+                        'url' => $j->link ?? url()->current()
+                ];
+        })->values(), JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) !!}
+        </script>
+    @endif
 </head>
 
 <body class="font-sans antialiased bg-gradient-to-b from-gray-100 via-gray-50 to-white text-black">

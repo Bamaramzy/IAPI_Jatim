@@ -4,7 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $title ?? 'IAPI' }}</title>
+    <title>{{ $title ?? 'IAPI Korda Jawa Timur' }}</title>
+    <meta name="description" content="IAPI Korda Jawa Timur: Pelatihan, sertifikasi, dan informasi akuntan publik." />
+    <link rel="canonical" href="{{ $canonical ?? url()->current() }}" />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ $title ?? 'IAPI Korda Jawa Timur' }}" />
+    <meta property="og:description" content="Pelatihan, sertifikasi, dan informasi akuntan publik." />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:image" content="{{ asset('images/kiriiapi.webp') }}" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{{ $title ?? 'IAPI Korda Jawa Timur' }}" />
+    <meta name="twitter:description" content="Pelatihan, sertifikasi, dan informasi akuntan publik." />
+    <meta name="twitter:image" content="{{ asset('images/kiriiapi.webp') }}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
@@ -22,8 +36,9 @@
     @include('layouts.mitra')
     @include('layouts.footer')
 
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
+    <!-- Alpine bundled via Vite; removed duplicate CDN. Flowbite deferred -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js" integrity=""
+        crossorigin="anonymous"></script>
 
     @stack('scripts')
 </body>

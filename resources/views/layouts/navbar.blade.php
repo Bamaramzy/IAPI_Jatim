@@ -6,7 +6,7 @@
 
 <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 
-<header class="sticky top-0 z-50 border-b bg-white shadow-sm" x-data="{ mobileOpen: false }">
+<header class="sticky top-0 z-50 border-b bg-white shadow-sm" x-data="{ mobileOpen: false }" role="banner">
     <div class="max-w-7xl mx-auto px-4 lg:px-8 flex items-center justify-between py-3">
         {{-- Logo --}}
         <div class="flex items-center gap-4">
@@ -16,7 +16,7 @@
             </a>
         </div>
         {{-- Desktop Menu --}}
-        <nav class="hidden md:flex gap-6 text-sm text-gray-600">
+        <nav class="hidden md:flex gap-6 text-sm text-gray-600" role="navigation" aria-label="Main">
             <a href="{{ url('/') }}" class="hover:text-gray-900">Beranda</a>
             {{-- Tentang Kami --}}
             <div class="relative group">
@@ -68,7 +68,8 @@
             {{-- Pelatihan --}}
             <div class="relative" x-data="{ open: false }">
                 <a href="#" @mouseenter="open = true" @mouseleave="open = false"
-                    class="hover:text-gray-900 flex items-center">
+                    class="hover:text-gray-900 flex items-center" aria-haspopup="true"
+                    x-bind:aria-expanded="open.toString()">
                     Pelatihan
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1 text-gray-500" fill="none"
                         viewBox="0 0 24 24" stroke="currentColor">
@@ -92,7 +93,8 @@
                     <div x-data="{ openBrevet: false }" @mouseenter="openBrevet = true" @mouseleave="openBrevet = false"
                         class="relative">
                         <a href="#"
-                            class="flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900">
+                            class="flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                            aria-haspopup="true" x-bind:aria-expanded="openBrevet.toString()">
                             Brevet Perpajakan
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 ml-1 text-gray-500" fill="none"
                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -125,7 +127,8 @@
             {{-- Sertifikasi --}}
             <div x-data="{ openCert: false }" @mouseenter="openCert = true" @mouseleave="openCert = false"
                 class="relative">
-                <button type="button" class="flex items-center gap-1 hover:text-gray-900">
+                <button type="button" class="flex items-center gap-1 hover:text-gray-900" aria-haspopup="true"
+                    x-bind:aria-expanded="openCert.toString()">
                     Sertifikasi
                     <svg class="h-4 w-4 text-gray-500" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -170,7 +173,8 @@
                             <div x-data="{ openTutorial: false }" @mouseenter="openTutorial = true"
                                 @mouseleave="openTutorial = false" class="relative">
                                 <button type="button"
-                                    class="w-full flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:bg-gray-100">
+                                    class="w-full flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:bg-gray-100"
+                                    aria-haspopup="true" x-bind:aria-expanded="openTutorial.toString()">
                                     Tutorial Pendaftaran
                                     <svg class="h-3 w-3 text-gray-500" viewBox="0 0 24 24" fill="none"
                                         stroke="currentColor">

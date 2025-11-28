@@ -24,6 +24,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->favicon(asset('favicon.webp'))
             ->brandName('IAPI Korda Jatim')
             ->id('admin')
             ->path('admin')

@@ -1,6 +1,7 @@
 import "./bootstrap";
 import "./carousel.js";
 
+import "flowbite";
 import Alpine from "alpinejs";
 import collapse from "@alpinejs/collapse";
 

@@ -36,9 +36,7 @@
     @include('layouts.mitra')
     @include('layouts.footer')
 
-    <!-- Alpine bundled via Vite; removed duplicate CDN. Flowbite deferred -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js" integrity=""
-        crossorigin="anonymous"></script>
+    crossorigin="anonymous"></script>
 
     @stack('scripts')
 </body>

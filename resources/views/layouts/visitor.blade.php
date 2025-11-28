@@ -27,9 +27,13 @@
 
 <body class="bg-gradient-to-b from-gray-100 to-white text-gray-800">
 
+    <a href="#main-content" class="sr-only focus:not-sr-only px-3 py-2 bg-blue-600 text-white rounded">
+        Lewati ke konten
+    </a>
+
     @include('layouts.navbar')
 
-    <main class="min-h-screen">
+    <main id="main-content" class="min-h-screen">
         @yield('content')
     </main>
 

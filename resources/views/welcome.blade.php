@@ -108,9 +108,10 @@
                 <div class="relative">
                     <divabsolute -inset-4 bg-gradient-to-tr from-blue-200/40 to-transparent rounded-[24px] blur-3xl">
                 </div>
-                <img src="{{ asset('images/kiriiapi.webp') }}" alt="" role="presentation"
+                <img src="{{ asset('images/kiriiapi.webp') }}" alt="Ilustrasi IAPI Korda Jawa Timur" width="800"
+                    height="500"
                     class="relative rounded-[20px] shadow-xl hover:scale-[1.02] transition-transform duration-500 w-full max-w-lg"
-                    loading="lazy">
+                    decoding="async" fetchpriority="high">
             </div>
         </div>
         </div>
@@ -130,10 +131,12 @@
                                 class="rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg
                             hover:-translate-y-1 transition-all duration-300 flex flex-col text-center">
                                 @if ($jadwal->brosur)
-                                    <img src="{{ asset('storage/' . $jadwal->brosur) }}" alt="{{ $jadwal->judul }}"
-                                        class="w-full h-56 object-cover object-top" loading="lazy">
+                                    <img src="{{ asset('storage/' . $jadwal->brosur) }}"
+                                        alt="Brosur {{ $jadwal->judul }}" width="640" height="224"
+                                        class="w-full h-56 object-cover object-top" loading="lazy" decoding="async">
                                 @else
-                                    <div class="w-full h-56 bg-gray-200 flex items-center justify-center">
+                                    <div class="w-full h-56 bg-gray-200 flex items-center justify-center" role="img"
+                                        aria-label="Belum ada brosur">
                                         <span class="text-gray-500 text-sm">Belum ada brosur</span>
                                     </div>
                                 @endif
@@ -211,7 +214,8 @@
                                 class="rounded-xl overflow-hidden border border-gray-300 bg-white
                             shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                                 <img src="{{ asset('storage/' . $info->gambar) }}" alt="{{ $info->judul }}"
-                                    class="w-full h-56 object-cover object-top" loading="lazy">
+                                    width="640" height="224" class="w-full h-56 object-cover object-top"
+                                    loading="lazy" decoding="async">
 
                                 <div class="p-4">
                                     <h3 class="text-lg font-semibold line-clamp-2 text-gray-900">

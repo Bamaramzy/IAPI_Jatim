@@ -7,7 +7,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'IAPI Korda Jatim') }}</title>
-
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/webp" href="{{ asset('favicon1.webp') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon1.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon1.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon1.png') }}">
+    <meta name="theme-color" content="#071225">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />

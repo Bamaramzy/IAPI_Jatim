@@ -22,6 +22,12 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/webp" href="{{ asset('favicon1.webp') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('favicon1.png') }}">
+    <link rel="shortcut icon" href="{{ asset('favicon1.ico') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('favicon1.png') }}">
+    <meta name="theme-color" content="#071225">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 

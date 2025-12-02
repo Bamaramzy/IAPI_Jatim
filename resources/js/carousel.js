@@ -1,16 +1,28 @@
 document.addEventListener("DOMContentLoaded", function () {
-    function initCarousel(trackId, prevId, nextId, dotsId = null) {
-        const track = document.getElementById(trackId);
-        const prev = document.getElementById(prevId);
-        const next = document.getElementById(nextId);
-        const dotsContainer = dotsId ? document.getElementById(dotsId) : null;
+    const carousels = [
+        {
+            trackId: "jadwal-track",
+            prevId: "jadwal-prev",
+            nextId: "jadwal-next",
+            dotsId: "jadwal-dots",
+        },
+        {
+            trackId: "info-track",
+            prevId: "info-prev",
+            nextId: "info-next",
+            dotsId: "info-dots",
+        },
+    ];
 
+    carousels.forEach((carousel) => {
+        const track = document.getElementById(carousel.trackId);
         if (!track) return;
-        const items = track.querySelectorAll(".flex-shrink-0");
-        const total = items.length;
 
-        if (prev) prev.style.zIndex = "30";
-        if (next) next.style.zIndex = "30";
+        const items = track.querySelectorAll(".flex-shrink-0");
+        const prev = document.getElementById(carousel.prevId);
+        const next = document.getElementById(carousel.nextId);
+        const dotsContainer = document.getElementById(carousel.dotsId);
+        const total = items.length;
 
         if (total === 0) {
             [prev, next, dotsContainer].forEach(
@@ -27,12 +39,14 @@ document.addEventListener("DOMContentLoaded", function () {
         let itemsPerSlide = getItemsPerSlide();
 
         const getItemWidth = () => {
-            if (!items[0]) return 0;
-            const style = getComputedStyle(items[0]);
-            return (
-                items[0].getBoundingClientRect().width +
-                parseInt(style.marginRight)
-            );
+            if (items[0]) {
+                const style = getComputedStyle(items[0]);
+                return (
+                    items[0].getBoundingClientRect().width +
+                    parseInt(style.marginRight)
+                );
+            }
+            return 0;
         };
         let itemWidth = getItemWidth();
 
@@ -80,15 +94,11 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         const scrollCarousel = (direction) => {
-            const maxScroll = track.scrollWidth - track.offsetWidth;
-            let newScrollLeft = track.scrollLeft + direction * itemWidth;
-
-            if (newScrollLeft > maxScroll - 5) newScrollLeft = 0;
-            else if (newScrollLeft < 0) newScrollLeft = maxScroll;
-
-            track.scrollTo({ left: newScrollLeft, behavior: "smooth" });
-            currentIndex = Math.round(newScrollLeft / itemWidth) % total;
-            updateDots(currentIndex);
+            let newIndex = currentIndex + direction * itemsPerSlide;
+            if (newIndex >= total) newIndex = 0;
+            if (newIndex < 0)
+                newIndex = total - (total % itemsPerSlide || itemsPerSlide);
+            scrollToIndex(newIndex);
         };
 
         next?.addEventListener("click", () => scrollCarousel(1));
@@ -102,16 +112,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     const touchEndX = e2.changedTouches[0].clientX;
                     const swipeDistance = touchStartX - touchEndX;
                     if (swipeDistance > 50) scrollCarousel(1);
-                    else if (swipeDistance < -50) scrollCarousel(-1);
+                    if (swipeDistance < -50) scrollCarousel(-1);
                 },
                 { once: true }
             );
-        });
-
-        track.addEventListener("scroll", () => {
-            const approxIndex = Math.round(track.scrollLeft / itemWidth);
-            currentIndex = approxIndex;
-            updateDots(currentIndex);
         });
 
         window.addEventListener("resize", () => {
@@ -123,8 +127,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
         createDots();
         scrollToIndex(currentIndex);
-    }
-
-    initCarousel("jadwal-track", "jadwal-prev", "jadwal-next");
-    initCarousel("info-track", "info-prev", "info-next");
+    });
 });

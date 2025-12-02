@@ -122,72 +122,85 @@
                 Jadwal Pelatihan Terbaru
             </h2>
             <div class="relative">
-                <div id="jadwal-track"
-                    class="flex overflow-x-auto space-x-6 snap-x snap-mandatory px-2 py-4 scrollbar-hide">
+                <div class="overflow-hidden rounded-xl">
+                    <div id="jadwal-track"
+                        class="flex items-stretch px-2 py-4 space-x-4 snap-x snap-mandatory overflow-x-auto scrollbar-hide">
 
-                    @forelse ($jadwals as $jadwal)
-                        <div class="min-w-[320px] sm:min-w-[360px] lg:min-w-[380px] snap-center block">
-                            <div
-                                class="rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg
-                            hover:-translate-y-1 transition-all duration-300 flex flex-col text-center">
-                                @if ($jadwal->brosur)
-                                    <img src="{{ asset('storage/' . $jadwal->brosur) }}"
-                                        alt="Brosur {{ $jadwal->judul }}" width="640" height="224"
-                                        class="w-full h-56 object-cover object-top" loading="lazy" decoding="async">
-                                @else
-                                    <div class="w-full h-56 bg-gray-200 flex items-center justify-center" role="img"
-                                        aria-label="Belum ada brosur">
-                                        <span class="text-gray-500 text-sm">Belum ada brosur</span>
-                                    </div>
-                                @endif
-                                <div class="p-4 flex-1 flex flex-col justify-between bg-white">
-                                    <div>
-                                        <h3 class="text-lg font-bold text-[#0C2C77] mb-1 line-clamp-2">
-                                            {{ $jadwal->judul }} [{{ $jadwal->kategori }}]
-                                        </h3>
-                                        <p class="text-sm text-gray-700">
-                                            {{ $jadwal->tanggal_mulai->format('d M Y') }}
-                                            @if ($jadwal->tanggal_selesai)
-                                                - {{ $jadwal->tanggal_selesai->format('d M Y') }}
+                        @forelse ($jadwals as $jadwal)
+                            <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center flex">
+                                <div
+                                    class="w-full rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col text-center bg-white">
+                                    @if ($jadwal->brosur)
+                                        <img src="{{ asset('storage/' . $jadwal->brosur) }}"
+                                            alt="Brosur {{ $jadwal->judul }}" width="640" height="224"
+                                            class="w-full h-56 object-cover object-top" loading="lazy" decoding="async">
+                                    @else
+                                        <div class="w-full h-56 bg-gray-200 flex items-center justify-center"
+                                            role="img" aria-label="Belum ada brosur">
+                                            <span class="text-gray-500 text-sm">Belum ada brosur</span>
+                                        </div>
+                                    @endif
+                                    <div class="p-4 flex-1 flex flex-col justify-between bg-white">
+                                        <div>
+                                            <h3 class="text-lg font-bold text-[#0C2C77] mb-1 line-clamp-2">
+                                                {{ $jadwal->judul }} [{{ $jadwal->kategori }}]
+                                            </h3>
+                                            <p class="text-sm text-gray-700">
+                                                {{ $jadwal->tanggal_mulai->format('d M Y') }}
+                                                @if ($jadwal->tanggal_selesai)
+                                                    - {{ $jadwal->tanggal_selesai->format('d M Y') }}
+                                                @endif
+                                            </p>
+                                            <p class="text-sm text-gray-700">
+                                                {{ $jadwal->waktu_mulai }} - {{ $jadwal->waktu_selesai }} WIB
+                                            </p>
+                                            <p class="text-sm text-gray-700 mb-4">
+                                                {{ $jadwal->lokasi }}
+                                            </p>
+                                        </div>
+                                        <div class="flex gap-2 justify-center mt-auto">
+                                            @if ($jadwal->brosur)
+                                                <a href="{{ asset('storage/' . $jadwal->brosur) }}" target="_blank"
+                                                    class="px-4 py-2 bg-[#071225] text-white text-xs font-semibold rounded hover:bg-[#0C2C77] transition">
+                                                    Lihat Brosur
+                                                </a>
                                             @endif
-                                        </p>
-                                        <p class="text-sm text-gray-700">
-                                            {{ $jadwal->waktu_mulai }} - {{ $jadwal->waktu_selesai }} WIB
-                                        </p>
-                                        <p class="text-sm text-gray-700 mb-4">
-                                            {{ $jadwal->lokasi }}
-                                        </p>
-                                    </div>
-                                    <div class="flex gap-2 justify-center mt-auto">
-                                        @if ($jadwal->brosur)
-                                            <a href="{{ asset('storage/' . $jadwal->brosur) }}" target="_blank"
-                                                class="px-4 py-2 bg-[#071225] text-white text-xs font-semibold rounded hover:bg-[#0C2C77] transition">
-                                                Lihat Brosur
-                                            </a>
-                                        @endif
 
-                                        @if ($jadwal->link)
-                                            <a href="{{ $jadwal->link }}" target="_blank"
-                                                class="px-4 py-2 bg-green-600 text-white text-xs font-semibold rounded hover:bg-green-800 transition">
-                                                Daftar
-                                            </a>
-                                        @else
-                                            <span
-                                                class="px-4 py-2 bg-gray-500 text-white text-xs font-semibold rounded">
-                                                Daftar (Belum Tersedia)
-                                            </span>
-                                        @endif
+                                            @if ($jadwal->link)
+                                                <a href="{{ $jadwal->link }}" target="_blank"
+                                                    class="px-4 py-2 bg-green-600 text-white text-xs font-semibold rounded hover:bg-green-800 transition">
+                                                    Daftar
+                                                </a>
+                                            @else
+                                                <span
+                                                    class="px-4 py-2 bg-gray-500 text-white text-xs font-semibold rounded">
+                                                    Daftar (Belum Tersedia)
+                                                </span>
+                                            @endif
+                                        </div>
                                     </div>
+
                                 </div>
-
                             </div>
-                        </div>
-                    @empty
-                        <div class="w-full text-center py-8">
-                            <p class="text-gray-500 italic">Belum ada jadwal pelatihan.</p>
-                        </div>
-                    @endforelse
+                        @empty
+                            <div class="w-full text-center py-8">
+                                <p class="text-gray-500 italic">Belum ada jadwal pelatihan.</p>
+                            </div>
+                        @endforelse
+                    </div>
                 </div>
+                <button id="jadwal-prev"
+                    class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-md z-10"
+                    aria-label="Slide sebelumnya">
+                    <span class="text-xl">&#10094;</span>
+                </button>
+
+                <button id="jadwal-next"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-md z-10"
+                    aria-label="Slide berikutnya">
+                    <span class="text-xl">&#10095;</span>
+                </button>
+
                 <div id="jadwal-dots" class="flex justify-center mt-4"></div>
             </div>
         </div>
@@ -204,33 +217,46 @@
                 Informasi
             </h2>
             <div class="relative">
-                <div id="info-track"
-                    class="flex overflow-x-auto space-x-6 snap-x snap-mandatory px-2 py-4 scrollbar-hide">
+                <div class="overflow-hidden rounded-xl">
+                    <div id="info-track"
+                        class="flex items-stretch px-2 py-4 space-x-4 snap-x snap-mandatory overflow-x-auto scrollbar-hide">
 
-                    @forelse($informasis as $info)
-                        <a href="{{ $info->link }}" target="_blank"
-                            class="min-w-[320px] sm:min-w-[360px] lg:min-w-[380px] snap-center block text-center">
-                            <div
-                                class="rounded-xl overflow-hidden border border-gray-300 bg-white
-                            shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                                <img src="{{ asset('storage/' . $info->gambar) }}" alt="{{ $info->judul }}"
-                                    width="640" height="224" class="w-full h-56 object-cover object-top"
-                                    loading="lazy" decoding="async">
+                        @forelse($informasis as $info)
+                            <a href="{{ $info->link }}" target="_blank"
+                                class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center block text-center flex">
+                                <div
+                                    class="w-full rounded-xl overflow-hidden border border-gray-300 bg-white shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col">
+                                    <img src="{{ asset('storage/' . $info->gambar) }}" alt="{{ $info->judul }}"
+                                        width="640" height="224" class="w-full h-56 object-cover object-top"
+                                        loading="lazy" decoding="async">
 
-                                <div class="p-4">
-                                    <h3 class="text-lg font-semibold line-clamp-2 text-gray-900">
-                                        {{ $info->judul }}
-                                    </h3>
+                                    <div class="p-4 flex-1 flex items-center justify-center">
+                                        <h3 class="text-lg font-semibold line-clamp-2 text-gray-900">
+                                            {{ $info->judul }}
+                                        </h3>
+                                    </div>
                                 </div>
+                            </a>
+                        @empty
+                            <div class="w-full text-center py-8">
+                                <p class="text-gray-500 italic">Belum ada informasi tersedia.</p>
                             </div>
-                        </a>
-                    @empty
-                        <div class="w-full text-center py-8">
-                            <p class="text-gray-500 italic">Belum ada informasi tersedia.</p>
-                        </div>
-                    @endforelse
+                        @endforelse
 
+                    </div>
                 </div>
+                <button id="info-prev"
+                    class="absolute left-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-md z-10"
+                    aria-label="Slide sebelumnya">
+                    <span class="text-xl">&#10094;</span>
+                </button>
+
+                <button id="info-next"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white w-10 h-10 rounded-full flex items-center justify-center shadow-md z-10"
+                    aria-label="Slide berikutnya">
+                    <span class="text-xl">&#10095;</span>
+                </button>
+
                 <div id="info-dots" class="flex justify-center mt-4"></div>
             </div>
         </div>

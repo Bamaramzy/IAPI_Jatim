@@ -46,8 +46,6 @@
     @include('layouts.mitra')
     @include('layouts.footer')
 
-    crossorigin="anonymous"></script>
-
     @stack('scripts')
 </body>
 

@@ -11,11 +11,11 @@
             <div class="relative">
                 <div class="overflow-hidden rounded-xl">
                     <div id="carousel-track-pengurus"
-                        class="flex px-2 py-4 space-x-4 snap-x snap-mandatory overflow-x-auto scrollbar-hide">
+                        class="flex items-stretch px-2 py-4 space-x-4 snap-x snap-mandatory overflow-x-auto scrollbar-hide">
                         @forelse($pengurus as $item)
-                            <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center">
+                            <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center flex">
                                 <div
-                                    class="bg-white rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-4">
+                                    class="w-full bg-white rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col text-center p-4">
                                     <div class="relative w-full h-52 mb-4">
                                         @if ($item->gambar)
                                             <img src="{{ asset('storage/' . $item->gambar) }}"
@@ -141,11 +141,11 @@
                 <div class="relative">
                     <div class="overflow-hidden rounded-xl">
                         <div id="carousel-track-pengawas"
-                            class="flex px-2 py-4 space-x-4 snap-x snap-mandatory overflow-x-auto scrollbar-hide">
+                            class="flex items-stretch px-2 py-4 space-x-4 snap-x snap-mandatory overflow-x-auto scrollbar-hide">
                             @forelse($pengawas as $item)
-                                <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center">
+                                <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center flex">
                                     <div
-                                        class="bg-white rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-4">
+                                        class="w-full bg-white rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col text-center p-4">
                                         <div class="relative w-full h-52 mb-4">
                                             @if ($item->gambar)
                                                 <img src="{{ asset('storage/' . $item->gambar) }}"

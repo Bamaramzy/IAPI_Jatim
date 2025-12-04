@@ -15,7 +15,7 @@
                         @forelse($pengurus as $item)
                             <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center">
                                 <div
-                                    class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-4">
+                                    class="bg-white rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-4">
                                     <div class="relative w-full h-52 mb-4">
                                         @if ($item->gambar)
                                             <img src="{{ asset('storage/' . $item->gambar) }}"
@@ -145,7 +145,7 @@
                             @forelse($pengawas as $item)
                                 <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center">
                                     <div
-                                        class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-4">
+                                        class="bg-white rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 p-4">
                                         <div class="relative w-full h-52 mb-4">
                                             @if ($item->gambar)
                                                 <img src="{{ asset('storage/' . $item->gambar) }}"

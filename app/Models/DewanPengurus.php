@@ -12,7 +12,11 @@ class DewanPengurus extends Model
     use HasFactory;
     use HasActivityLog;
     protected $table = 'dewan_pengurus';
-    protected $fillable = ['nama', 'jabatan', 'gambar',];
+    protected $fillable = [
+        'nama',
+        'jabatan',
+        'gambar',
+    ];
 
     public function getFilamentUrl(): string
     {

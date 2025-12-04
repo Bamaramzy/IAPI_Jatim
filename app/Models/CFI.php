@@ -11,9 +11,7 @@ class CFI extends Model
 {
     use HasFactory;
     use HasActivityLog;
-
     protected $table = 'cfis';
-
     protected $fillable = [
         'gambar',
         'link',

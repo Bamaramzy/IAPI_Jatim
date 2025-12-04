@@ -15,24 +15,22 @@
                         @forelse($pengurus as $item)
                             <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center flex">
                                 <div
-                                    class="w-full bg-white rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col text-center p-4">
-                                    <div class="relative w-full h-52 mb-4">
-                                        @if ($item->gambar)
-                                            <img src="{{ asset('storage/' . $item->gambar) }}"
-                                                alt="{{ $item->nama }} - {{ $item->jabatan }}"
-                                                class="w-full h-full object-cover object-top rounded-lg border border-gray-100"
-                                                loading="lazy"
-                                                onerror="this.src='{{ asset('images/default-avatar.jpg') }}'; this.classList.add('opacity-75')">
-                                        @else
-                                            <div
-                                                class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
-                                                <span class="text-gray-500 text-sm">No Image</span>
-                                            </div>
-                                        @endif
-                                    </div>
+                                    class="w-full bg-white rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col text-center">
+                                    @if ($item->gambar)
+                                        <img src="{{ asset('storage/' . $item->gambar) }}"
+                                            alt="{{ $item->nama }} - {{ $item->jabatan }}" width="640" height="224"
+                                            class="w-full h-56 object-cover object-top" loading="lazy" decoding="async"
+                                            onerror="this.src='{{ asset('images/default-avatar.jpg') }}'; this.classList.add('opacity-75')">
+                                    @else
+                                        <div class="w-full h-56 bg-gray-200 flex items-center justify-center" role="img"
+                                            aria-label="Belum ada foto">
+                                            <span class="text-gray-500 text-sm">No Image</span>
+                                        </div>
+                                    @endif
 
-                                    <div class="text-center">
-                                        <h3 class="text-lg font-semibold text-gray-900 line-clamp-1">{{ $item->nama }}
+                                    <div class="p-4 flex-1 flex flex-col justify-center">
+                                        <h3 class="text-lg font-semibold text-gray-900 line-clamp-1 mb-1">
+                                            {{ $item->nama }}
                                         </h3>
                                         <p class="text-gray-600 text-sm line-clamp-2">{{ $item->jabatan }}</p>
                                     </div>
@@ -145,24 +143,22 @@
                             @forelse($pengawas as $item)
                                 <div class="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 snap-center flex">
                                     <div
-                                        class="w-full bg-white rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col text-center p-4">
-                                        <div class="relative w-full h-52 mb-4">
-                                            @if ($item->gambar)
-                                                <img src="{{ asset('storage/' . $item->gambar) }}"
-                                                    alt="{{ $item->nama }} - {{ $item->jabatan }}"
-                                                    class="w-full h-full object-cover object-top rounded-lg border border-gray-100"
-                                                    loading="lazy"
-                                                    onerror="this.src='{{ asset('images/default-avatar.jpg') }}'; this.classList.add('opacity-75')">
-                                            @else
-                                                <div
-                                                    class="w-full h-full bg-gray-200 rounded-lg flex items-center justify-center">
-                                                    <span class="text-gray-500 text-sm">No Image</span>
-                                                </div>
-                                            @endif
-                                        </div>
+                                        class="w-full bg-white rounded-xl overflow-hidden border border-gray-300 shadow hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col text-center">
+                                        @if ($item->gambar)
+                                            <img src="{{ asset('storage/' . $item->gambar) }}"
+                                                alt="{{ $item->nama }} - {{ $item->jabatan }}" width="640"
+                                                height="224" class="w-full h-56 object-cover object-top" loading="lazy"
+                                                decoding="async"
+                                                onerror="this.src='{{ asset('images/default-avatar.jpg') }}'; this.classList.add('opacity-75')">
+                                        @else
+                                            <div class="w-full h-56 bg-gray-200 flex items-center justify-center"
+                                                role="img" aria-label="Belum ada foto">
+                                                <span class="text-gray-500 text-sm">No Image</span>
+                                            </div>
+                                        @endif
 
-                                        <div class="text-center">
-                                            <h3 class="text-lg font-semibold text-gray-900 line-clamp-1">
+                                        <div class="p-4 flex-1 flex flex-col justify-center">
+                                            <h3 class="text-lg font-semibold text-gray-900 line-clamp-1 mb-1">
                                                 {{ $item->nama }}</h3>
                                             <p class="text-gray-600 text-sm line-clamp-2">{{ $item->jabatan }}</p>
                                         </div>

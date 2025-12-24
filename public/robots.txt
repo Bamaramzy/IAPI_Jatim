@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://ramzet.dev/sitemap.xml
+Sitemap: https://iapikordajatim.cloud/sitemap.xml
